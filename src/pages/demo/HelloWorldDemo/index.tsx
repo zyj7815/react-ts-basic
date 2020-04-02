@@ -11,17 +11,7 @@ const Index: React.FC<RouteComponentProps> = (routeProps: RouteComponentProps) =
         <div className="App">
             <header className="App-header">
                 <Logo className="App-logo" />
-                <p>
-                    Edit <code>saaarc/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
+                <p className="App-content">Webpack - React - Typescript - TSLint 基础架构搭建</p>
             </header>
         </div>
     )

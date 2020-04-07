@@ -5,17 +5,17 @@ import { RenderRoutes } from '@/router/RenderRoutes'
 
 export const RouteDemoA = (routeProps: routeProps) => {
     const { routes } = routeProps
-    console.log(routeProps)
     const authed = false
 
     return routes ? (
         <div>
-            <h1>B</h1>
+            <h1>B123</h1>
+            {/* 子路由控制 */}
             {RenderRoutes(routes, authed)}
         </div>
     ) : null
 }
 
 export const RouteDemoB = (props: routeProps) => {
-    return <h1>B1</h1>
+    return <h1>B345</h1>
 }

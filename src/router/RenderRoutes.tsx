@@ -8,8 +8,8 @@ export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath
     if (routes) {
         return (
             <Switch>
-                {routes.map((route: RouteInterface, i) => {
-                    return RouteWithSubRoutes(route, i, authed, authPath)
+                {routes.map((route: RouteInterface, index) => {
+                    return RouteWithSubRoutes(route, index, authed, authPath)
                 })}
             </Switch>
         )

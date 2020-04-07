@@ -5,14 +5,13 @@ import Logo from './react-logo.svg'
 import './index.less'
 
 const Index: React.FC<RouteComponentProps> = (routeProps: RouteComponentProps) => {
-    console.log(routeProps)
-
     return (
         <div className="App">
-            <header className="App-header">
+            <section className="App-section">
                 <Logo className="App-logo" />
                 <p className="App-content">Webpack - React - Typescript - TSLint 基础架构搭建</p>
-            </header>
+                <div className="App-desc">123</div>
+            </section>
         </div>
     )
 }

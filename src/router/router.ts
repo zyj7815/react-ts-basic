@@ -34,7 +34,7 @@ export const routes: RouteInterface[] = [
                 exact: true,
                 name: 'demoB',
                 title: 'DemoB',
-                auth: true,
+                auth: false,
             },
         ],
     },

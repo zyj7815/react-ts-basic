@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { RouteInterface } from '@/types/route'
+import { useDocTitle } from '@/hooks/useDocTitle'
 
 /**
  * @route RouteInterface对象
@@ -13,18 +14,14 @@ export const RouteWithSubRoutes = (
     authed: boolean,
     authPath: string
 ) => {
+    console.log('route', route)
+    console.log('authed', authed, '\n\n')
     return (
         <Route
             key={index}
             path={route.path}
             exact={route.exact}
             render={(props: RouteComponentProps) => {
-                console.log(
-                    `route.auth=${
-                        route.auth
-                    }, authed=${authed}, route.path===authPath：${route.path ===
-                        authPath}，route.path=${route.path}`
-                )
                 if (!route.auth || authed || route.path === authPath) {
                     console.log('ok')
                     // 向下传递子路由，保持嵌套

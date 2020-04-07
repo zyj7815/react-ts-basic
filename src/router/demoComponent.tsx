@@ -2,6 +2,7 @@
 import React from 'react'
 import { routeProps } from '@/types/route'
 import { RenderRoutes } from '@/router/RenderRoutes'
+import { useDocTitle } from '@/hooks/useDocTitle'
 
 export const RouteDemoA = (routeProps: routeProps) => {
     const { routes } = routeProps
@@ -17,5 +18,28 @@ export const RouteDemoA = (routeProps: routeProps) => {
 }
 
 export const RouteDemoB = (props: routeProps) => {
-    return <h1>B345</h1>
+    return <CountHooks age={1} />
+}
+
+type Person = {
+    age: number
+}
+
+export const CountHooks: React.FC<Person> = (props: Person) => {
+    const [person, setPerson] = React.useState<Person>({ age: props.age })
+
+    return (
+        <div>
+            <p>Count: {person.age}</p>
+            <button
+                onClick={() =>
+                    setPerson({
+                        age: person.age + 1,
+                    })
+                }
+            >
+                增加年龄
+            </button>
+        </div>
+    )
 }

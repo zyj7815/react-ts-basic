@@ -14,8 +14,6 @@ export const RouteWithSubRoutes = (
     authed: boolean,
     authPath: string
 ) => {
-    console.log('route', route)
-    console.log('authed', authed, '\n\n')
     return (
         <Route
             key={index}
@@ -23,7 +21,6 @@ export const RouteWithSubRoutes = (
             exact={route.exact}
             render={(props: RouteComponentProps) => {
                 if (!route.auth || authed || route.path === authPath) {
-                    console.log('ok')
                     // 向下传递子路由，保持嵌套
                     return <route.component {...props} routes={route.routes} />
                 }

@@ -2,11 +2,10 @@ import React from 'react'
 import { Redirect, Switch, Route } from 'react-router-dom'
 import { RouteInterface } from '@/types/route'
 import { RouteWithSubRoutes } from './RouteWithSubRoutes'
-import { Auth } from '@/auth'
-import Login from '@/pages/login'
+import NotFound from '@/pages/status/404'
 
 export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath = '/login') => {
-    if (Auth.getAuth) {
+    if (authed) {
         return (
             <Switch>
                 {routes.map((route: RouteInterface, index) => {
@@ -17,7 +16,7 @@ export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath
     } else {
         return (
             <Switch>
-                <Route path="*" component={Login} />
+                <NotFound />
             </Switch>
         )
     }

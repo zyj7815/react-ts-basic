@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Input, Button } from 'antd'
+import { Auth } from '@/auth'
 
 type Account = {
     username: string
@@ -44,14 +45,13 @@ const useAccount = (props: FormData) => {
         })
 
         setTimeout(() => {
-            setAccount({
-                ...formData,
-                loading: false,
-            })
+            window.location.reload()
         }, 1000)
     }
 
     const onSubmit = () => {
+        const date = new Date()
+        Auth.setAuth(date.valueOf())
         setLoading()
     }
 

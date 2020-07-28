@@ -2,7 +2,6 @@
 import React from 'react'
 import { routeProps } from '@/types/route'
 import { RenderRoutes } from '@/router/RenderRoutes'
-import { useDocTitle } from '@/hooks/useDocTitle'
 
 export const RouteDemoA = (routeProps: routeProps) => {
     const { routes } = routeProps

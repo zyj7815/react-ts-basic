@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { RouteInterface } from '@/types/route'
-import { useDocTitle } from '@/hooks/useDocTitle'
 
 /**
  * @route RouteInterface对象

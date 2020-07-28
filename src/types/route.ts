@@ -5,10 +5,9 @@ export interface RouteInterface {
     component: any
     routes?: RouteInterface[]
     exact?: boolean
-    // strict?: boolean
     title?: string
     name?: string
-    auth?: boolean  // 权限判断
+    auth?: boolean // 权限判断
 }
 
 export interface RoutesInterface {

@@ -142,6 +142,12 @@ module.exports = merge(webpackConfig, {
             template: config.indexPath,
             showErrors: true
         }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: config.enIndexPath,
+            filename: 'en/index.html',
+            showErrors: true
+        }),
         // 在html模板中能够使用环境变量
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         new InterpolateHtmlPlugin(env.raw),

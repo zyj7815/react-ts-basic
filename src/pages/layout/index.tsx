@@ -1,22 +1,47 @@
 import * as React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router, withRouter } from 'react-router-dom'
 import { routes } from '@/router/router'
-import ScrollToTop from '@/components/Base/ScrollToTop'
+import { Layout } from 'antd'
+import { LeftCircleOutlined } from '@ant-design/icons'
 import { RenderRoutes } from '@/router/RenderRoutes'
+import ScrollToTop from '@/components/Base/ScrollToTop'
+import { useEffect } from 'react'
+import './index.less'
 
-const authed = false
-const authPath = '/'
+const { Sider, Header, Content, Footer } = Layout
+
+const authed = true
+const authPath = '/home'
 
 const AppLayout: React.FC = () => {
+    const [collapsed, setCollapsed] = React.useState(false)
+
     return (
-        <section>
-            请勿断开欧佩克 前雾灯OK迫切哦我的
-            <Router>
-                <ScrollToTop />
-                {RenderRoutes(routes, authed, authPath)}
-            </Router>
-        </section>
+        <Layout>
+            <Sider trigger={null} collapsible={true} collapsed={collapsed}>
+                <Layout className="layout-sidebar">
+                    <Header>Icon</Header>
+                    <Content>Sider</Content>
+                    <Footer>
+                        <a onClick={() => setCollapsed(!collapsed)}>
+                            <LeftCircleOutlined />
+                        </a>
+                    </Footer>
+                </Layout>
+            </Sider>
+
+            <Layout>
+                <Header>qoiwjd</Header>
+
+                <Content>
+                    <Router>
+                        <ScrollToTop />
+                        {RenderRoutes(routes, authed, authPath)}
+                    </Router>
+                </Content>
+            </Layout>
+        </Layout>
     )
 }
 
-export default AppLayout
+export default withRouter(AppLayout)

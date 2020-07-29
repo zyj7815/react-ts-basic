@@ -6,6 +6,7 @@ module.exports = {
 	publicPath: '/',
 	indexPath: path.resolve(__dirname, '../public/index.html'),
 	productionJsSourceMap: false,
+    enIndexPath: path.resolve(__dirname, '../public/en/index.html'),
 
 	devServer: {
 		port: 8080,

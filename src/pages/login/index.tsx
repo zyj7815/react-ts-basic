@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Input, Button } from 'antd'
 import { Auth } from '@/auth'
+import './index.less'
 
 type Account = {
     username: string
@@ -58,15 +59,24 @@ const useAccount = (props: FormData) => {
     return { formData, setAccount: { setUsername, setPassword, onSubmit } }
 }
 
-const Login: React.FC<FormData> = (props: FormData) => {
-    const { formData, setAccount } = useAccount(props)
+const Login: React.FC = () => {
+    // 自定义Hook
+    const { formData, setAccount } = useAccount({
+        account: { username: '', password: '' },
+        loading: false,
+    })
+
+    // 相当于 componentDidMount 和 componentDidUpdate:
+    React.useEffect(() => {
+        console.log('Login Page')
+    })
 
     return (
         <div>
             <Input onChange={setAccount.setUsername} />
             <Input onChange={setAccount.setPassword} />
 
-            <Button loading={formData.loading} onClick={setAccount.onSubmit}>
+            <Button type="primary" loading={formData.loading} onClick={setAccount.onSubmit}>
                 Submit
             </Button>
         </div>

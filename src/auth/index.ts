@@ -6,4 +6,8 @@ export const Auth = {
     setAuth: (auth: string | number) => {
         window.localStorage.setItem(AUTH_KEY, `${auth}`)
     },
+
+    cleanAuth: () => {
+        window.localStorage.setItem(AUTH_KEY, '')
+    },
 }

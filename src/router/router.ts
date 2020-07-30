@@ -14,6 +14,18 @@ export const routes: RouteInterface[] = [
         auth: true,
     },
     {
+        path: RouteUri.PageSub1,
+        component: loadable(() => import('@/pages/page1/page1-sub1')),
+        exact: true,
+        name: 'page sub1',
+    },
+    {
+        path: RouteUri.PageSub2,
+        component: loadable(() => import('@/pages/page1/page1-sub2')),
+        exact: true,
+        name: 'page sub2',
+    },
+    {
         path: RouteUri.NotFound,
         component: loadable(() => import('@/pages/status/404')),
         name: '404',

@@ -1,6 +1,12 @@
 import { RouteUri } from '@/router/config'
 
-export const MenuNav = [
+export interface IMenuNav {
+    title: string
+    uri?: RouteUri | string
+    children?: IMenuNav[]
+}
+
+export const menuNav: IMenuNav[] = [
     {
         title: '首页',
         uri: RouteUri.Home,

@@ -4,6 +4,8 @@ interface IProps {
     params: string
 }
 
-export const PageSub1: React.FC<IProps> = (props: IProps) => {
+const PageSub1: React.FC<IProps> = (props: IProps) => {
     return <div>PageSub1</div>
 }
+
+export default PageSub1

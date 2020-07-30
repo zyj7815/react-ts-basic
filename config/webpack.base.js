@@ -30,7 +30,7 @@ module.exports = merge(webpackConfig, {
     devtool: 'cheap-module-eval-source-map',
     entry: {
         app: './src/index.tsx',
-        vendor: ['react', 'react-dom', 'antd'] // 不变的代码分包
+        // vendor: ['react', 'react-dom', 'antd'] // 不变的代码分包
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -160,7 +160,10 @@ module.exports = merge(webpackConfig, {
                 from: 'public',
                 ignore: ['index.html']
             }
-        ])
+        ]),
+        new webpack.DllReferencePlugin({
+            manifest: require('../public/vendor.json')
+        })
     ],
     optimization: {}
 });

@@ -15,7 +15,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js --env=dev",
     "build": "cross-env NODE_ENV=production node config/build.js --env=prod --report",
-    "mock": "node mock/mock-service.js"
+    "mock": "node mock/mock-service.js",
+    "dll": "webpack --config ./config/webpack.dll.config.js --env=prod"
   },
   "browserslist": [
     "> 1%",

@@ -1,4 +1,3 @@
-const path = require('path');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -108,12 +107,14 @@ module.exports = merge.smart(baseWebpackConfig, {
             filename: 'css/[name].[contenthash:8].css'
             // chunkFilename: '[name].[contenthash:8].chunk.css'
         }),
+        // 静态压缩，需要在Nginx配置支持gzip
         new CompressionWebpackPlugin({
             filename: '[path].gz[query]',
             algorithm: 'gzip',
             test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
             threshold: 10240,
-            minRatio: 0.8
+            minRatio: 0.8,
+            // exclude: ['vendor.dll.js']
         }),
     ],
     optimization: {

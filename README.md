@@ -1116,4 +1116,55 @@ export default HelloWorldDemoPage;
 ```
 
 
+
+## 优化 webpack 构建速度
+
+使用 `DllPlugin`和`DllReferencePlugin`，将静态库(如`react`、'antd`、....)先提取出来，因为这些库不常变动，如果每次都
+打包会浪费构建时间。
+
+- `DllPlugin`可以把我们需要打包的第三方库打包成一个 js 文件和一个 json 文件，这个 json 文件中会映射每个打包的模块地址和 id；
+- `DllReferencePlugin` 通过读取这个json文件来使用打包的这些模块。
+
+##### 配置文件
+
+新建`webpack.dll.config.js`，将dll.js文件压缩到`index.html`同一个目录，
+
+```js
+// webpack.dll.config.js
+const path = require('path')
+const webpack = require('webpack')
+
+module.exports = {
+    entry: {
+        vendor: ['react', "react-dom", "react-router-dom", "antd"]
+    },
+    output:{
+        filename:'[name].dll.js',
+        path:path.resolve(__dirname,'../public'),
+        library:'_dll_[name]'
+    },
+    plugins:[
+        new webpack.DllPlugin({
+            entryOnly: true,
+            name:'_dll_[name]',
+            path: path.join(__dirname,'../public','[name].json')
+        })
+    ]
+}
+```
+
+在`webpack.config.js`中添加`json`
+
+```js
+module.exports = {
+    plugins: [
+        new webpack.DllReferencePlugin({
+            manifest: require('../public/vendor.json')
+        })
+    ]
+}
+```
+
+
+
 [参考](https://segmentfault.com/a/1190000020332804?_ea=18760055)

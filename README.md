@@ -1,4 +1,4 @@
-参考教程[https://segmentfault.com/a/1190000020332804?_ea=18760055](https://segmentfault.com/a/1190000020332804?_ea=18760055)
+## 脚手架要达到的需求
 
 - webpack的配置
 - 对静态资源（图片，模板等）的处理
@@ -877,7 +877,7 @@ module: {
 
 
 
-## prettier
+## prettier 自动格式化代码
 
 提交代码时自动格式化代码，只处理当前提交的代码，通过[prettier](https://github.com/prettier/prettier)和[lint-staged](https://github.com/okonet/lint-staged)可以完成。
 
@@ -1062,7 +1062,7 @@ export const routes = [
 ];
 ```
 
-改造index.tsc，启用路由：
+改造index.tsx，启用路由：
 
 ```ts
 import React from 'react';
@@ -1115,3 +1115,5 @@ const HelloWorldDemoPage: React.FC<Routes> = (routes) => {
 export default HelloWorldDemoPage;
 ```
 
+
+[参考](https://segmentfault.com/a/1190000020332804?_ea=18760055)

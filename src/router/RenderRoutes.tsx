@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch } from 'react-router-dom'
 import { RouteInterface } from '@/types/route'
 import { RouteWithSubRoutes } from './RouteWithSubRoutes'
-import NotFound from '@/pages/status/404'
+import NoAuth from '@/pages/status/no-auth'
 
 export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath = '/login') => {
     if (authed) {
@@ -16,7 +16,7 @@ export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath
     } else {
         return (
             <Switch>
-                <NotFound />
+                <NoAuth />
             </Switch>
         )
     }

@@ -6,9 +6,10 @@ import { LeftCircleOutlined, RightCircleOutlined, MenuOutlined } from '@ant-desi
 import { RenderRoutes } from '@/router/RenderRoutes'
 import ScrollToTop from '@/components/Base/ScrollToTop'
 import { IMenuNav, menuNav } from '@/pages/layout/menu'
+import { Logo } from '@/assets/images'
 import './index.less'
 
-const { Sider, Header, Content, Footer } = Layout
+const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
 
 const authed = true
@@ -40,30 +41,25 @@ const AppLayout: React.FC = () => {
 
     return (
         <Layout>
-            <Sider trigger={null} collapsible={true} collapsed={collapsed}>
-                <Layout className="layout-sidebar">
-                    <Header>
-                        <MenuOutlined />
-                    </Header>
+            <Sider
+                collapsible={true}
+                collapsed={collapsed}
+                onCollapse={collapsed => setCollapsed(collapsed)}
+                className="layout-sidebar"
+            >
+                <header className="layout-sidebar__header">
+                    <Logo />
+                </header>
 
-                    <Content>
-                        <Menu mode="inline" theme="dark" multiple={false}>
-                            {menuNav.map((nav: IMenuNav) => {
-                                if (nav.children) {
-                                    return NavSubMenu(nav)
-                                } else {
-                                    return NavMenu(nav)
-                                }
-                            })}
-                        </Menu>
-                    </Content>
-
-                    <Footer>
-                        <a onClick={() => setCollapsed(!collapsed)}>
-                            {collapsed ? <RightCircleOutlined /> : <LeftCircleOutlined />}
-                        </a>
-                    </Footer>
-                </Layout>
+                <Menu mode="inline" theme="dark" multiple={false}>
+                    {menuNav.map((nav: IMenuNav) => {
+                        if (nav.children) {
+                            return NavSubMenu(nav)
+                        } else {
+                            return NavMenu(nav)
+                        }
+                    })}
+                </Menu>
             </Sider>
 
             <Layout className="layout-warpper-content">

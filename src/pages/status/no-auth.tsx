@@ -4,6 +4,8 @@ interface IProps {
     params: string
 }
 
-export const NoAuth: React.FC<IProps> = (props: IProps) => {
+const NoAuth: React.FC = () => {
     return <div>NoAuth</div>
 }
+
+export default NoAuth

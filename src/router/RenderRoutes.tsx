@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import { RouteInterface } from '@/types/route'
 import { RouteWithSubRoutes } from './RouteWithSubRoutes'
 import NotFound from '@/pages/status/404'

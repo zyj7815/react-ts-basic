@@ -9,9 +9,7 @@ const App: React.FC = () => {
     return (
         <Provider {...stores}>
             <StoresContext.Provider value={stores}>
-                <Router>
-                    <Switch>{RenderRoutes(routes, true, '/')}</Switch>
-                </Router>
+                <Router>{RenderRoutes(routes, true, '/')}</Router>
             </StoresContext.Provider>
         </Provider>
     )

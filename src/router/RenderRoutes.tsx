@@ -5,7 +5,6 @@ import { RouteWithSubRoutes } from './RouteWithSubRoutes'
 import NoAuth from '@/pages/status/no-auth'
 
 export const RenderRoutes = (routes: RouteInterface[], authed: boolean, authPath = '/login') => {
-    console.log('123')
     if (authed) {
         return (
             <Switch>

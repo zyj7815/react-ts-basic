@@ -1,6 +1,6 @@
 export enum RouteUri {
     Login = '/login',
-    Main = '/root',
+    Root = '/root',
 
     Layout = '/root',
     Home = '/root',

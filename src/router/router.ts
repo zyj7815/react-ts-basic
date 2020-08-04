@@ -13,7 +13,7 @@ export const routes: RouteInterface[] = [
         name: 'login',
     },
     {
-        path: RouteUri.Main,
+        path: RouteUri.Root,
         component: loadable(() => import('@/pages/root')),
         name: 'root',
         routes: [

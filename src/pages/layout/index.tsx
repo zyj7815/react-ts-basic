@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { HashRouter as Router, withRouter, Link } from 'react-router-dom'
-import { routes } from '@/router/router'
 import { Layout, Menu, Button } from 'antd'
 import { LeftCircleOutlined, RightCircleOutlined, MenuOutlined } from '@ant-design/icons'
 import { RenderRoutes } from '@/router/RenderRoutes'
-import ScrollToTop from '@/components/Base/ScrollToTop'
 import { IMenuNav, menuNav } from '@/pages/layout/menu'
 import { Logo } from '@/assets/images'
-import './index.less'
 import { Auth } from '@/auth'
+import './index.less'
+import { routeProps } from '@/types/route'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
@@ -16,9 +15,10 @@ const SubMenu = Menu.SubMenu
 const authed = true
 const authPath = '/#/home'
 
-const AppLayout: React.FC = () => {
+const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
     const [collapsed, setCollapsed] = React.useState(false)
-
+    const { routes } = routeProps
+    console.log(routes)
     const NavMenu = (nav: IMenuNav) => {
         return (
             <Menu.Item key={nav.title}>
@@ -73,12 +73,7 @@ const AppLayout: React.FC = () => {
                     <Button onClick={() => logout()}>Logout</Button>
                 </Header>
 
-                <Content>
-                    <Router>
-                        <ScrollToTop />
-                        {RenderRoutes(routes, authed, authPath)}
-                    </Router>
-                </Content>
+                <Content>{routes && RenderRoutes(routes, true)}</Content>
             </Layout>
         </Layout>
     )

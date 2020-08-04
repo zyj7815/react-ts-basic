@@ -7,44 +7,65 @@ export const basename = ''
 
 export const routes: RouteInterface[] = [
     {
-        path: RouteUri.Home,
-        component: loadable(() => import('@/pages/home')),
+        path: RouteUri.Login,
+        component: loadable(() => import('@/pages/login')),
         exact: true,
-        name: 'home',
-        auth: true,
+        name: 'login',
     },
     {
-        path: RouteUri.PageSub1,
-        component: loadable(() => import('@/pages/page1/page1-sub1')),
-        exact: true,
-        name: 'Todo Hook',
+        path: RouteUri.Main,
+        component: loadable(() => import('@/pages/root')),
+        name: 'root',
+        routes: [
+            {
+                path: RouteUri.Layout,
+                component: loadable(() => import('@/pages/layout')),
+                name: 'layout',
+                routes: [
+                    {
+                        path: RouteUri.Home,
+                        component: loadable(() => import('@/pages/home')),
+                        exact: true,
+                        name: 'home',
+                        auth: true,
+                    },
+                    {
+                        path: RouteUri.PageSub1,
+                        component: loadable(() => import('@/pages/page1/page1-sub1')),
+                        exact: true,
+                        name: 'Todo Hook',
+                    },
+                    {
+                        path: RouteUri.PageSub2,
+                        component: loadable(() => import('@/pages/page1/page1-sub2')),
+                        exact: true,
+                        name: 'Todo Class',
+                    },
+                    {
+                        path: RouteUri.PageSub3,
+                        component: loadable(() => import('@/pages/page1/page1-sub3')),
+                        exact: true,
+                        name: 'Page Context',
+                    },
+                    {
+                        path: RouteUri.PageSub4,
+                        component: loadable(() => import('@/pages/page1/page1-sub4')),
+                        exact: true,
+                        name: 'Page Reducer',
+                    },
+                ],
+            },
+        ],
     },
     {
-        path: RouteUri.PageSub2,
-        component: loadable(() => import('@/pages/page1/page1-sub2')),
+        path: RouteUri.NotAuth,
+        component: loadable(() => import('@/pages/status/no-auth')),
         exact: true,
-        name: 'Todo Class',
-    },
-    {
-        path: RouteUri.PageSub3,
-        component: loadable(() => import('@/pages/page1/page1-sub3')),
-        exact: true,
-        name: 'Page Context',
-    },
-    {
-        path: RouteUri.PageSub4,
-        component: loadable(() => import('@/pages/page1/page1-sub4')),
-        exact: true,
-        name: 'Page Reducer',
+        name: 'auth',
     },
     {
         path: RouteUri.NotFound,
         component: loadable(() => import('@/pages/status/404')),
         name: '404',
-    },
-    {
-        path: RouteUri.NotAuth,
-        component: loadable(() => import('@/pages/status/no-auth')),
-        name: 'auth',
     },
 ]

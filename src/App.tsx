@@ -1,23 +1,16 @@
 import React from 'react'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
-import Login from '@/pages/login'
-import { Auth } from '@/auth'
-import AppLayout from '@/pages/layout'
+import { HashRouter as Router, Switch } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import { stores, StoresContext } from '@/store'
+import { RenderRoutes } from '@/router/RenderRoutes'
+import { routes } from '@/router/router'
 
 const App: React.FC = () => {
     return (
         <Provider {...stores}>
             <StoresContext.Provider value={stores}>
                 <Router>
-                    <Switch>
-                        {Auth.getAuth ? (
-                            <Route path="/" component={AppLayout} />
-                        ) : (
-                            <Route path="*" component={Login} />
-                        )}
-                    </Switch>
+                    <Switch>{RenderRoutes(routes, true, '/')}</Switch>
                 </Router>
             </StoresContext.Provider>
         </Provider>

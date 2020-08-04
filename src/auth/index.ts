@@ -9,5 +9,6 @@ export const Auth = {
 
     cleanAuth: () => {
         window.localStorage.setItem(AUTH_KEY, '')
+        window.location.reload()
     },
 }

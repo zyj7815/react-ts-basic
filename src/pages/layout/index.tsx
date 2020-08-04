@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { HashRouter as Router, withRouter, Link } from 'react-router-dom'
 import { routes } from '@/router/router'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Button } from 'antd'
 import { LeftCircleOutlined, RightCircleOutlined, MenuOutlined } from '@ant-design/icons'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import ScrollToTop from '@/components/Base/ScrollToTop'
 import { IMenuNav, menuNav } from '@/pages/layout/menu'
 import { Logo } from '@/assets/images'
 import './index.less'
+import { Auth } from '@/auth'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
@@ -39,6 +40,10 @@ const AppLayout: React.FC = () => {
         )
     }
 
+    function logout() {
+        Auth.cleanAuth()
+    }
+
     return (
         <Layout>
             <Sider
@@ -63,7 +68,10 @@ const AppLayout: React.FC = () => {
             </Sider>
 
             <Layout className="layout-warpper-content">
-                <Header>xxx xxxx xxxx</Header>
+                <Header>
+                    <span>xxx xxxx xxxx</span>
+                    <Button onClick={() => logout()}>Logout</Button>
+                </Header>
 
                 <Content>
                     <Router>

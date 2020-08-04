@@ -1,11 +1,12 @@
 import * as React from 'react'
+import './index.less'
 
-interface IProps {
-    params: string
-}
-
-const Home: React.FC<IProps> = (props: IProps) => {
-    return <div>Home</div>
+const Home: React.FC = () => {
+    return (
+        <div>
+            <div className="page-tag" />
+        </div>
+    )
 }
 
 export default Home

@@ -7,8 +7,6 @@ import { Button } from 'antd'
 @inject(STORE_TODO)
 @observer
 class PageSub2 extends React.Component<{ [STORE_TODO]: TodoStore }> {
-    public componentDidMount(): void {}
-
     public addNewTodo = () => {
         this.props[STORE_TODO].addNewTodo()
     }
@@ -19,6 +17,7 @@ class PageSub2 extends React.Component<{ [STORE_TODO]: TodoStore }> {
         return (
             <div>
                 <header>
+                    <h4>Class</h4>
                     <Button onClick={this.addNewTodo}>Add New</Button>
 
                     <div>Done: {doneCount}</div>

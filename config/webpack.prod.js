@@ -40,29 +40,6 @@ module.exports = merge.smart(baseWebpackConfig, {
                                 }
                             }
                         ]
-                    },
-                    {
-                        test: /\.svg$/,
-                        use: ['@svgr/webpack']
-                    },
-                    {
-                        test: /\.(jpg|jpeg|bmp|png|webp|gif)$/,
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8 * 1024,
-                            name: 'img/[name].[contenthash:8].[ext]',
-                            outputPath: config.assetsDirectory,
-                            publicPath: config.assetsRoot
-                        }
-                    },
-                    {
-                        exclude: [/\.(js|mjs|ts|tsx|less|css|jsx)$/, /\.html$/, /\.json$/],
-                        loader: 'file-loader',
-                        options: {
-                            name: 'media/[path][name].[contenthash:8].[ext]',
-                            outputPath: config.assetsDirectory,
-                            publicPath: config.assetsRoot
-                        }
                     }
                 ]
             }

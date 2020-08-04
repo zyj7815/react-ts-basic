@@ -30,7 +30,7 @@ module.exports = merge(webpackConfig, {
     devtool: 'cheap-module-eval-source-map',
     entry: {
         app: './src/index.tsx',
-        // vendor: ['react', 'react-dom', 'antd'] // 不变的代码分包
+        // vendor: ['react', 'react-dom', 'antd', 'mobx', 'mobx-react'] // 不变的代码分包
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -109,20 +109,21 @@ module.exports = merge(webpackConfig, {
                         test: /\.(jpg|jpeg|bmp|png|webp|gif)$/,
                         loader: 'url-loader',
                         options: {
-                            limit: 8 * 1024,
-                            name: 'img/[name].[hash:8].[ext]',
-                            outputPath: config.assetsDirectory,
-                            publicPath: config.assetsRoot
+                            limit: 6 * 1024,
+                            name: 'static/media/[name].[hash:8].[ext]',
                         }
                     },
                     {
                         exclude: [/\.(js|mjs|ts|tsx|less|css|jsx)$/, /\.html$/, /\.json$/],
                         loader: 'file-loader',
                         options: {
-                            name: 'media/[path][name].[hash:8].[ext]',
-                            outputPath: config.assetsDirectory,
-                            publicPath: config.assetsRoot
+                            name: 'static/media/[path][name].[hash:8].[ext]',
                         }
+                    },
+                    {
+                        test: /\.(jpe?g|png|gif|svg)$/,
+                        loader: 'image-webpack-loader',
+                        enforce: "pre"
                     }
                 ]
             }

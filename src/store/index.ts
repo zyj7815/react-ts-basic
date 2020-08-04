@@ -8,9 +8,7 @@ function createStores() {
 }
 
 const stores = createStores()
-
 const StoresContext = createContext(stores)
-
 const useStores = () => useContext(StoresContext)
 
 function useTodoStore() {

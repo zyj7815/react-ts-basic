@@ -17,13 +17,25 @@ export const routes: RouteInterface[] = [
         path: RouteUri.PageSub1,
         component: loadable(() => import('@/pages/page1/page1-sub1')),
         exact: true,
-        name: 'page sub1',
+        name: 'Todo Hook',
     },
     {
         path: RouteUri.PageSub2,
         component: loadable(() => import('@/pages/page1/page1-sub2')),
         exact: true,
-        name: 'page sub2',
+        name: 'Todo Class',
+    },
+    {
+        path: RouteUri.PageSub3,
+        component: loadable(() => import('@/pages/page1/page1-sub3')),
+        exact: true,
+        name: 'Page Context',
+    },
+    {
+        path: RouteUri.PageSub4,
+        component: loadable(() => import('@/pages/page1/page1-sub4')),
+        exact: true,
+        name: 'Page Reducer',
     },
     {
         path: RouteUri.NotFound,

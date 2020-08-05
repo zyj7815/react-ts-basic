@@ -3,6 +3,7 @@ import { Input, Button, Space } from 'antd'
 import { Auth } from '@/auth'
 import './index.less'
 import { bg_img } from '@/assets/images'
+import { RouteUri } from '@/router/config'
 
 type Account = {
     username: string
@@ -61,6 +62,11 @@ const useAccount = (props: FormData) => {
 }
 
 const Login: React.FC = () => {
+    if (Auth.authContent) {
+        window.location.href = `#${RouteUri.Root}`
+        return <div />
+    }
+
     // 自定义Hook
     const { formData, setAccount } = useAccount({
         account: { username: '', password: '' },

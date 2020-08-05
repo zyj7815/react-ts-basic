@@ -27,13 +27,13 @@ export const routes: RouteInterface[] = [
                         component: loadable(() => import('@/pages/home')),
                         exact: true,
                         name: 'home',
-                        auth: true,
                     },
                     {
                         path: RouteUri.PageSub1,
                         component: loadable(() => import('@/pages/page1/page1-sub1')),
                         exact: true,
                         name: 'Todo Hook',
+                        auth: false,
                     },
                     {
                         path: RouteUri.PageSub2,
@@ -53,15 +53,21 @@ export const routes: RouteInterface[] = [
                         exact: true,
                         name: 'Page Reducer',
                     },
+                    {
+                        path: RouteUri.PageSub5,
+                        component: loadable(() => import('@/pages/page1/page1-sub5')),
+                        exact: true,
+                        name: 'authorized',
+                        auth: true,
+                    },
+                    {
+                        path: RouteUri.NotAuth,
+                        component: loadable(() => import('@/pages/status/no-auth')),
+                        exact: true,
+                    },
                 ],
             },
         ],
-    },
-    {
-        path: RouteUri.NotAuth,
-        component: loadable(() => import('@/pages/status/no-auth')),
-        exact: true,
-        name: 'auth',
     },
     {
         path: RouteUri.NotFound,

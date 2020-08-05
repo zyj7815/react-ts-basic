@@ -30,6 +30,10 @@ export const menuNav: IMenuNav[] = [
                 title: 'useReducer',
                 uri: RouteUri.PageSub4,
             },
+            {
+                title: 'authorized',
+                uri: RouteUri.PageSub5,
+            },
         ],
     },
 ]

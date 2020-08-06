@@ -4334,6 +4334,11 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+dynamic-antd-theme@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/dynamic-antd-theme/-/dynamic-antd-theme-0.6.1.tgz#72e228560c879de97b8b6fc937dc69ba5334d146"
+  integrity sha512-U2jt6dp+tGysKbuFj2+pyeWK8NlXez8WYGgX45KbxX5DSoQT5EioB0fwkhjVAlWlVOzfF73LydHuAYAhwZrYvw==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/ecc-jsbn/download/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"

@@ -1,4 +1,4 @@
 import Logo from './logo.svg'
-import bg_img from '@/assets/images/bg_img.png'
+import Loading from './loading.gif'
 
-export { Logo, bg_img }
+export { Logo, Loading }

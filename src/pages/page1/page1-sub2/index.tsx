@@ -7,6 +7,18 @@ import { Button } from 'antd'
 @inject(STORE_TODO)
 @observer
 class PageSub2 extends React.Component<{ [STORE_TODO]: TodoStore }> {
+    public componentDidMount(): void {
+        const styleDom = document.createElement('style')
+        console.log(styleDom)
+        styleDom.innerHTML = `
+            .ant-btn-primary {
+            border-color: #FFB6C1;
+            background-color: #FFB6C1;
+        }
+        `
+        document.getElementsByTagName('body')[0].appendChild(styleDom)
+    }
+
     public addNewTodo = () => {
         this.props[STORE_TODO].addNewTodo()
     }

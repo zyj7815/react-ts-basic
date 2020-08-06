@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Input, Button, Space } from 'antd'
 import { Auth } from '@/auth'
-import './index.less'
-import { bg_img } from '@/assets/images'
 import { RouteUri } from '@/router/config'
+import './index.less'
 
 type Account = {
     username: string
@@ -81,17 +80,26 @@ const Login: React.FC = () => {
     return (
         <section className="login-wrapper">
             <div className="login-content">
-                <Input placeholder="Enter username" onChange={setAccount.setUsername} />
-                <Input placeholder="Enter password" onChange={setAccount.setPassword} />
+                <aside>
+                    <div />
+                </aside>
 
-                <Button
-                    block={true}
-                    type="primary"
-                    loading={formData.loading}
-                    onClick={setAccount.onSubmit}
-                >
-                    Login in
-                </Button>
+                <section>
+                    <Input
+                        bordered={false}
+                        placeholder="Enter username"
+                        onChange={setAccount.setUsername}
+                    />
+                    <Input
+                        bordered={false}
+                        placeholder="Enter password"
+                        onChange={setAccount.setPassword}
+                    />
+
+                    <Button block={true} loading={formData.loading} onClick={setAccount.onSubmit}>
+                        Login in
+                    </Button>
+                </section>
             </div>
         </section>
     )

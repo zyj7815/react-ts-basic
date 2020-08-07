@@ -5,7 +5,8 @@ import { stores, StoresContext } from '@/store'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { routes } from '@/router/router'
 import { Loading } from '@/assets/images'
-import DynamicColor from 'dynamic-antd-theme'
+// import DynamicColor from 'dynamic-antd-theme'
+import '@/assets/style/theme.css'
 
 const App: React.FC = () => {
     const [loading, setLoading] = React.useState(true)

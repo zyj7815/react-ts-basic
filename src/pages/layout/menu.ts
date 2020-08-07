@@ -15,11 +15,11 @@ export const menuNav: IMenuNav[] = [
         title: 'Page1',
         children: [
             {
-                title: 'Todo hook',
+                title: 'Mobx hook',
                 uri: RouteUri.PageSub1,
             },
             {
-                title: 'Todo class',
+                title: 'Mobx class',
                 uri: RouteUri.PageSub2,
             },
             {

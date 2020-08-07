@@ -8,18 +8,18 @@ import { Logo } from '@/assets/images'
 import { Auth } from '@/auth'
 import { routeProps } from '@/types/route'
 import './index.less'
+import { RouteUri } from '@/router/config'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
 
 const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
     const [collapsed, setCollapsed] = React.useState(false)
-
     const { routes } = routeProps
 
     const NavMenu = (nav: IMenuNav) => {
         return (
-            <Menu.Item key={nav.title}>
+            <Menu.Item key={nav.uri}>
                 <Link to={nav.uri ? nav.uri : '/'}>
                     <span>{nav.title}</span>
                 </Link>
@@ -29,7 +29,7 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
 
     const NavSubMenu = (nav: IMenuNav) => {
         return (
-            <SubMenu key={nav.title} title={nav.title}>
+            <SubMenu key={nav.uri} title={nav.title}>
                 {nav.children &&
                     nav.children.map(value => {
                         return NavMenu(value)
@@ -54,7 +54,12 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
                     <Logo />
                 </header>
 
-                <Menu mode="inline" theme="dark" multiple={false}>
+                <Menu
+                    defaultSelectedKeys={[RouteUri.Home]}
+                    mode="inline"
+                    theme="dark"
+                    multiple={false}
+                >
                     {menuNav.map((nav: IMenuNav) => {
                         if (nav.children) {
                             return NavSubMenu(nav)

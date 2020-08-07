@@ -738,7 +738,7 @@ module.exports = getClientEnvironment;
 
 修改`webpack`配置，向`react`应用和index.html注入环境变量
 
-```js
+```
 // webpack.base.js
 const InterpolateHtmlPlugin = require('interpolate-html-plugin');
 const getClientEnvironment = require('./env');
@@ -759,11 +759,13 @@ plugins: [
 配置都做好了，修改打包命令，加上env参数：
 
 ```json
-"scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js --env=dev",
-    "build:prod": "cross-env NODE_ENV=production node config/build.js --env=prod --report",
-    "build:t1": "cross-env NODE_ENV=production node config/build.js --env=t1 --report",
-    "build:dev": "cross-env NODE_ENV=production node config/build.js --env=dev --report"
+{
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js --env=dev",
+        "build:prod": "cross-env NODE_ENV=production node config/build.js --env=prod --report",
+        "build:t1": "cross-env NODE_ENV=production node config/build.js --env=t1 --report",
+        "build:dev": "cross-env NODE_ENV=production node config/build.js --env=dev --report"
+    }
 }
 ```
 
@@ -815,7 +817,7 @@ npm i -D @babel/plugin-syntax-dynamic-import
 
 修改webpack.base.js
 
-```js
+```
 rules: {
     test: /\.(j|t)sx?$/,
     include: APP_PATH,
@@ -854,7 +856,7 @@ $ npm i -D eslint-plugin-react @typescript-eslint/parser @typescript-eslint/esli
 
 检查或不检查某些特定的文件，可以在根目录新建`.eslintignore`，以下配置不检查src目录以外的js文件：
 
-```js
+```
 // webpack.base.js
 module: {
     rules: [
@@ -923,17 +925,19 @@ module.exports = {
 修改`package.json`：
 
 ```json
-"husky": {
-    "hooks": {
-        "pre-commit": "lint-staged"
+{
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "src/**/*.{jsx,js,tsx,ts}": [
+            "prettier --write",
+            "eslint --fix",
+            "git add"
+        ]
     }
-},
-"lint-staged": {
-    "src/**/*.{jsx,js,tsx,ts}": [
-        "prettier --write",
-        "eslint --fix",
-        "git add"
-    ]
 }
 ```
 
@@ -1165,3 +1169,9 @@ module.exports = {
 }
 ```
 
+
+## 项目讲解
+
+- [hook、mobx+hook的使用](doc/react-hook.md)
+- [路由鉴权](doc/auth.md)
+- [主题替换](doc/theme.md)

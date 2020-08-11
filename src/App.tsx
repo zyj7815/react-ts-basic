@@ -25,12 +25,8 @@ const App: React.FC = () => {
         }
     })
 
-    const promis = new Promise(resolve => {
-        resolve('期望地区为的')
-    })
-
-    promis.then(data => {
-        console.log(data)
+    new Promise(resolve => {
+        resolve()
     })
 
     return (

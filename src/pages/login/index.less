@@ -13,8 +13,7 @@
         box-shadow: 8px 8px 15px 1px #444;
         border-radius: 30px;
         
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
         overflow: hidden;
 
         
@@ -25,12 +24,12 @@
         }
     
         aside {
-            grid-column: 1 / 2;
+            flex: 1;
             background-image: linear-gradient(33deg, #231434 0%, #6C3148 75%);
         }
     
         section {
-            grid-column: 2 / 3;
+            flex: 1;
             background-image: linear-gradient(53deg, #903E51 0%, #B84D57 50%, #D7595C 75%);
             
             display: flex;

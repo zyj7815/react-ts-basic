@@ -65,21 +65,24 @@ module.exports = merge(webpackConfig, {
                             {
                                 loader: 'babel-loader',
                                 options: {
-                                    presets: [
-                                        '@babel/preset-react',  // jsx支持
-                                        ['@babel/preset-env', { useBuiltIns: 'usage', corejs: 2 }] // 按需使用polyfill
-                                    ],
+                                    presets: [["@babel/preset-env", {
+                                        targets: {
+                                            edge: "17",
+                                            firefox: "60",
+                                            chrome: "67",
+                                            safari: "11.1",
+                                            ie: "11"
+                                        },
+                                        useBuiltIns: 'usage',
+                                        corejs: 2
+                                    }]],
                                     plugins: [
                                         '@babel/plugin-syntax-dynamic-import',
-                                        ['@babel/plugin-proposal-class-properties', { 'loose': true }] // class中的箭头函数中的this指向组件
+                                        "@babel/plugin-proposal-object-rest-spread",
+                                        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                                        ['@babel/plugin-proposal-class-properties', { 'loose': true }], // class中的箭头函数中的this指向组件
                                     ],
-                                    cacheDirectory: true // 加快编译速度
-                                }
-                            },
-                            {
-                                loader: 'awesome-typescript-loader',
-                                options: {
-                                    silent: true
+                                    cacheDirectory: true
                                 }
                             }
                         ]

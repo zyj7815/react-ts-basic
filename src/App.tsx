@@ -5,7 +5,6 @@ import { stores, StoresContext } from '@/store'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { routes } from '@/router/router'
 import { Loading } from '@/assets/images'
-// import DynamicColor from 'dynamic-antd-theme'
 import '@/assets/style/theme.css'
 
 const App: React.FC = () => {
@@ -26,13 +25,15 @@ const App: React.FC = () => {
         }
     })
 
+    new Promise(resolve => {
+        resolve()
+    })
+
     return (
         <>
-            {/*<DynamicColor style={{ display: 'none' }} primaryColor="#77dd66" />*/}
             <section id="loading-wrapper" style={{ opacity: loading ? 1 : 0 }}>
                 <img src={Loading} alt="" />
             </section>
-
             <Provider {...stores}>
                 <StoresContext.Provider value={stores}>
                     <Router>{RenderRoutes(routes, true)}</Router>

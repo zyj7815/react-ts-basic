@@ -8,6 +8,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+
 const config = require('./config');
 const getClientEnvironment = require('./env');
 
@@ -83,6 +85,9 @@ module.exports = merge.smart(baseWebpackConfig, {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:8].css'
             // chunkFilename: '[name].[contenthash:8].chunk.css'
+        }),
+        new AntdDayjsWebpackPlugin({
+            preset: 'antdv4'
         }),
         // 静态压缩，需要在Nginx配置支持gzip
         new CompressionWebpackPlugin({

@@ -7,8 +7,8 @@ import { IMenuNav, menuNav } from '@/pages/layout/menu'
 import { Logo } from '@/assets/images'
 import { Auth } from '@/auth'
 import { routeProps } from '@/types/route'
-import './index.less'
 import { RouteUri } from '@/router/config'
+import './index.less'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu

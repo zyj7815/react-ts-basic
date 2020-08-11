@@ -26,7 +26,7 @@ export const routes: RouteInterface[] = [
                         path: RouteUri.Home,
                         component: loadable(() => import('@/pages/home')),
                         exact: true,
-                        name: 'home',
+                        name: 'main',
                     },
                     {
                         path: RouteUri.PageSub1,
@@ -59,6 +59,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                         name: 'authorized',
                         auth: true,
+                    },
+                    {
+                        path: RouteUri.PageSub6,
+                        component: loadable(() => import('@/pages/page1/page1-sub6')),
+                        exact: true,
+                        name: 'theme',
                     },
                     {
                         path: RouteUri.NotAuth,

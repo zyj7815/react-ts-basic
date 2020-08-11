@@ -1,3 +1,7 @@
 declare global {
-    interface Window {}
+    interface Window {
+        MyNamespace: any
+    }
 }
+
+window.MyNamespace = window.MyNamespace || {}

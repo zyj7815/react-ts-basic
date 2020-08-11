@@ -10,11 +10,12 @@ module.exports = {
 
 	devServer: {
 		port: 8080,
-		host: 'localhost',
+		host: '0.0.0.0',
 		contentBase: path.join(__dirname, '../public'),
-		watchContentBase: true,
-		publicPath: '/',
-		compress: true,
+        useLocalIp: true,
+        watchContentBase: true,
+        publicPath: '/',
+        compress: true,
 		historyApiFallback: true,
 		hot: true,
 		clientLogLevel: 'error',
@@ -25,6 +26,7 @@ module.exports = {
 		watchOptions: {
 			ignored: /node_modules/
 		},
-		proxy: {}
+		proxy: {},
+        disableHostCheck: true
 	}
 };

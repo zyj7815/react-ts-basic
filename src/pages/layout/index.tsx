@@ -29,7 +29,7 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
 
     const NavSubMenu = (nav: IMenuNav) => {
         return (
-            <SubMenu key={nav.uri} title={nav.title}>
+            <SubMenu key={nav.title} title={nav.title}>
                 {nav.children &&
                     nav.children.map(value => {
                         return NavMenu(value)
@@ -47,7 +47,7 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
             <Sider
                 collapsible={true}
                 collapsed={collapsed}
-                onCollapse={collapsed => setCollapsed(collapsed)}
+                onCollapse={(collapsed: any) => setCollapsed(collapsed)}
                 className="layout-sidebar"
             >
                 <header className="layout-sidebar__header">

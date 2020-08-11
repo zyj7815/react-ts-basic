@@ -8,8 +8,8 @@
     "antd": "^4.5.0",
     "core-js": "^2.6.9",
     "dynamic-antd-theme": "^0.6.1",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.2.5",
+    "mobx": "^4.15.5",
+    "mobx-react": "^5.4.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-loadable": "^5.5.0",
@@ -19,7 +19,8 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js --env=dev",
     "build": "cross-env NODE_ENV=production node config/build.js --env=prod --report",
     "mock": "node mock/mock-service.js",
-    "dll": "webpack --config ./config/webpack.dll.config.js --env=prod"
+    "dll": "webpack --config ./config/webpack.dll.config.js --env=prod",
+    "server": "http-server build"
   },
   "browserslist": [
     "> 1%",
@@ -32,10 +33,13 @@
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.10.4",
     "@commitlint/cli": "^8.3.5",
     "@svgr/webpack": "^5.2.0",
     "@types/jest": "^25.1.4",
@@ -69,6 +73,7 @@
     "file-loader": "^5.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.12.3",
     "husky": "^4.2.3",
     "image-webpack-loader": "^6.0.0",
     "interpolate-html-plugin": "^3.0.0",

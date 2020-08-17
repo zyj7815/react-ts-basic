@@ -1,106 +1,98 @@
 import * as React from 'react'
-import { Input, Button, Space } from 'antd'
-import { Auth } from '@/auth'
+import { Input, Button, Checkbox, Radio, Form, message } from 'antd'
+import { sha256 } from 'js-sha256'
 import { RouteUri } from '@/router/config'
+import { LoginImg, Logo } from '@/assets/images'
+import { Token } from '@/server/token'
+import axios from 'axios'
+import { Api } from '@/server/api'
 import './index.less'
 
-type Account = {
-    username: string
-    password: string
-}
-
-type FormData = {
-    account: Account
-    loading: boolean
-}
-
-const useAccount = (props: FormData) => {
-    const [formData, setAccount] = React.useState<FormData>({
-        account: props.account,
-        loading: props.loading,
-    })
-
-    const setUsername = (e: any) => {
-        setAccount({
-            ...formData,
-            account: {
-                ...formData.account,
-                username: e.target.value,
-            },
-        })
-    }
-
-    const setPassword = (e: any) => {
-        setAccount({
-            ...formData,
-            account: {
-                ...formData.account,
-                password: e.target.value,
-            },
-        })
-    }
-
-    const setLoading = () => {
-        setAccount({
-            ...formData,
-            loading: true,
-        })
-
-        setTimeout(() => {
-            window.location.reload()
-        }, 1000)
-    }
-
-    const onSubmit = () => {
-        const date = new Date()
-        Auth.setAuth(date.valueOf())
-        setLoading()
-    }
-
-    return { formData, setAccount: { setUsername, setPassword, onSubmit } }
-}
-
 const Login: React.FC = () => {
-    if (Auth.authContent) {
+    if (Token.auth) {
         window.location.href = `#${RouteUri.Root}`
         return <div />
     }
 
-    // 自定义Hook
-    const { formData, setAccount } = useAccount({
-        account: { username: '', password: '' },
-        loading: false,
-    })
+    const [loading, setLoading] = React.useState(false)
 
-    // 相当于 componentDidMount 和 componentDidUpdate:
-    React.useEffect(() => {
-        console.log('Login Page')
-    })
+    /**
+     * 提交数据
+     * @param values
+     */
+    const onSubmit = (values: any) => {
+        const data = {
+            username: values.username,
+            password: sha256(`${values.username} + druid + ${values.password} + heifeng`),
+        }
+
+        setLoading(true)
+        axios
+            .post(Api.login, data)
+            .then(res => {
+                message.success((window as any).language.login_success)
+
+                const token = res.headers['x-druid-authentication']
+                Token.setToken(token, values.remember)
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
+            })
+            .catch(err => {
+                setLoading(false)
+            })
+    }
 
     return (
         <section className="login-wrapper">
-            <div className="login-content">
-                <aside>
-                    <div />
-                </aside>
+            <header className="login-header">
+                <img src={Logo} alt="" />
 
-                <section>
-                    <Input
-                        bordered={false}
-                        placeholder="Enter username"
-                        onChange={setAccount.setUsername}
-                    />
-                    <Input
-                        bordered={false}
-                        placeholder="Enter password"
-                        onChange={setAccount.setPassword}
-                    />
+                <Radio.Group>
+                    <Radio.Button value="0">中</Radio.Button>
+                    <Radio.Button value="1">En</Radio.Button>
+                </Radio.Group>
+            </header>
 
-                    <Button block={true} loading={formData.loading} onClick={setAccount.onSubmit}>
-                        Login in
-                    </Button>
-                </section>
-            </div>
+            <section className="login-content">
+                <img src={LoginImg} alt="" className="login-img" />
+
+                <div className="login-content__action">
+                    <h2>{(window as any).language.login}</h2>
+
+                    <Form
+                        name="basic"
+                        initialValues={{
+                            remember: true,
+                            username: 'newuser',
+                            password: 'newuser1',
+                        }}
+                        onFinish={onSubmit}
+                    >
+                        <Form.Item name="username">
+                            <Input placeholder="Enter username" style={{ height: 45 }} />
+                        </Form.Item>
+
+                        <Form.Item name="password">
+                            <Input.Password style={{ height: 45 }} placeholder="Enter password" />
+                        </Form.Item>
+
+                        <Form.Item name="remember" valuePropName="checked">
+                            <Checkbox>{(window as any).language.remember_password}</Checkbox>
+                        </Form.Item>
+
+                        <Button block={true} type="primary" htmlType="submit" loading={loading}>
+                            {(window as any).language.login}
+                        </Button>
+                    </Form>
+                </div>
+            </section>
+
+            <footer className="login-footer">
+                <span>成都德鲁伊科技有限公司</span>
+                <span>Druid Technology Co. Ltd.</span>
+            </footer>
         </section>
     )
 }

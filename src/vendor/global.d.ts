@@ -1,7 +1,7 @@
 declare global {
     interface Window {
-        MyNamespace: any
+        isEn: boolean
+        language: any
+        timeZome: number
     }
 }
-
-window.MyNamespace = window.MyNamespace || {}

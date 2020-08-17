@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { observer } from 'mobx-react'
-import { useTodoStore } from '@/store'
+import { useTodoStore } from '@/provider'
 import { Todo } from '@/components/todo'
 import { ITodo } from '@/pages/page1/store/todo'
 import { Button } from 'antd'

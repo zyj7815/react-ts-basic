@@ -58,7 +58,7 @@ export const routes: RouteInterface[] = [
                         component: loadable(() => import('@/pages/page1/page1-sub5')),
                         exact: true,
                         name: 'authorized',
-                        auth: true,
+                        auth: false,
                     },
                     {
                         path: RouteUri.PageSub6,

@@ -89,15 +89,15 @@ module.exports = merge.smart(baseWebpackConfig, {
         new AntdDayjsWebpackPlugin({
             preset: 'antdv4'
         }),
-        // 静态压缩，需要在Nginx配置支持gzip
-        new CompressionWebpackPlugin({
-            filename: '[path].gz[query]',
-            algorithm: 'gzip',
-            test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-            threshold: 10240,
-            minRatio: 0.8,
-            // exclude: ['vendor.dll.js']
-        }),
+        // // 静态压缩，需要在Nginx配置支持gzip
+        // new CompressionWebpackPlugin({
+        //     filename: '[path].gz[query]',
+        //     algorithm: 'gzip',
+        //     test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        //     threshold: 10240,
+        //     minRatio: 0.8,
+        //     // exclude: ['vendor.dll.js']
+        // }),
     ],
     optimization: {
         splitChunks: {

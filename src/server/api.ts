@@ -9,10 +9,10 @@ let base: string = ''
 if (host.includes('localhost') || host.includes('192.168') || host.includes('127.0.0.1')) {
     base = test
 } else {
-    base = `${origin}/api/v1`
+    base = `${origin}/api/v1/`
 }
 
-const base2 = base.replace('/v1', '/v2')
+const base2 = base.replace('/v1/', '/v2/')
 
 export const Api = {
     login: base + 'login',

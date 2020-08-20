@@ -27,6 +27,7 @@ const Login: React.FC = () => {
         }
 
         setLoading(true)
+
         axios
             .post(Api.login, data)
             .then(res => {

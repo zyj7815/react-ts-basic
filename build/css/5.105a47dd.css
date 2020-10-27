@@ -1,0 +1,1 @@
+#loading-wrapper{position:fixed;left:0;top:0;width:100%;height:100%;z-index:1000;-webkit-transition:all .5s;transition:all .5s}#loading-wrapper img{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}

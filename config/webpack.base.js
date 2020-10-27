@@ -7,8 +7,9 @@ const InterpolateHtmlPlugin = require('interpolate-html-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const config = require('./config');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const getClientEnvironment = require('./env');
+const config = require('./config');
 
 const APP_PATH = path.resolve(__dirname, '../src');
 
@@ -135,7 +136,8 @@ module.exports = merge(webpackConfig, {
     resolve: {
         extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
         alias: {
-            '@': path.resolve(__dirname, '../src/')
+            '@': path.resolve(__dirname, '../src/'),
+            "moment": "dayjs"
         }
     },
     plugins: [
@@ -151,6 +153,9 @@ module.exports = merge(webpackConfig, {
             template: config.enIndexPath,
             filename: 'en/index.html',
             showErrors: true
+        }),
+        new AntdDayjsWebpackPlugin({
+            preset: 'antdv4'
         }),
         // 在html模板中能够使用环境变量
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

@@ -1,29 +1,33 @@
 import * as React from 'react'
-import { Button } from 'antd'
-import { cssVar, cssContent } from '@/pages/home/theme'
+import { observer } from 'mobx-react'
+import { useRootStore } from '@/provider'
+import { Layout, Row, Col } from 'antd'
+import { homeConfig } from '@/pages/home/config'
 import './index.less'
 
 const Home: React.FC = () => {
-    const onChangeColor = () => {
-        let styleNode = document.getElementById('dynamic_antd_theme_custom_style')
-        if (!styleNode) {
-            styleNode = document.createElement('style')
-            styleNode.id = 'dynamic_antd_theme_custom_style'
-            styleNode.innerHTML = `${cssVar}\n${cssContent}`
-            const dom = document.getElementById('custom-style-dom')
-            dom && dom.appendChild(styleNode)
-        } else {
-            styleNode.innerHTML = `${cssVar}\n${cssContent}`
-        }
-    }
+    const { myself } = useRootStore()
+    // React.useEffect(() => {
+    //     console.log(window, myself)
+    // })
 
     return (
-        <div className="home-wrapper">
-            <Button type="primary" onClick={() => onChangeColor()}>
-                Change theme
-            </Button>
-        </div>
+        <Layout className="dr-layout-wrapper">
+            <Row gutter={16}>
+                <Col lg={24} xl={16}>
+                    {<homeConfig.statistic.component />}
+                    {<homeConfig.map.component />}
+                    {<homeConfig.chart.component />}
+                </Col>
+
+                <Col lg={24} xl={8}>
+                    {<homeConfig.weather.component />}
+                    {<homeConfig.gateway.component />}
+                    {<homeConfig.calendar.component />}
+                </Col>
+            </Row>
+        </Layout>
     )
 }
 
-export default Home
+export default observer(Home)

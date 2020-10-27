@@ -5,11 +5,11 @@ import { RouteWithSubRoutes } from './RouteWithSubRoutes'
 import NoMatch from '@/pages/status/404'
 import Login from '@/pages/login'
 import { RouteUri } from '@/router/config'
-import { Auth } from '@/auth'
+import { Token } from '@/server/token'
 
 export const RenderRoutes = (routes: RouteInterface[] | undefined, authed: boolean) => {
     // 判断是否登录
-    if (!Auth.authContent) {
+    if (!Token.auth) {
         return (
             <Switch>
                 <Login />

@@ -16,6 +16,14 @@ html,body{
     height: 100%;
 }
 
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Microsoft Yahei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
 body{
     /* 有些背景默认为浅灰色，所以统一设置为纯白 */
     background: #fff;
@@ -60,6 +68,12 @@ a{
     transition: color 0.3s ease;
 }
 
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 ol,
 ul{
     /* 去除自带的ugly样式。 */
@@ -68,12 +82,6 @@ ul{
 
 /* 这些节点部分属性没有继承父节点样式，所有继承一下，并取消outline，外轮廓的效果 */
 a,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 input,
 select,
 button,
@@ -123,3 +131,5 @@ template {
     /* 有些浏览器会显示template 不过template标签用的也少，自行取舍。 */
     display: none;
 }
+
+

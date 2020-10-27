@@ -1,14 +1,20 @@
 import * as React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { Layout, Menu, Button } from 'antd'
-import { LeftCircleOutlined, RightCircleOutlined, MenuOutlined } from '@ant-design/icons'
+import {
+    LeftCircleOutlined,
+    RightCircleOutlined,
+    MenuOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+} from '@ant-design/icons'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { IMenuNav, menuNav } from '@/pages/layout/menu'
-import { Logo } from '@/assets/images'
-import { Auth } from '@/auth'
+import { Logo, DruidLogo } from '@/assets/images'
 import { routeProps } from '@/types/route'
-import './index.less'
 import { RouteUri } from '@/router/config'
+import { Token } from '@/server/token'
+import './index.less'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
@@ -39,7 +45,7 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
     }
 
     function logout() {
-        Auth.cleanAuth()
+        Token.cleanAuth()
     }
 
     return (
@@ -51,8 +57,12 @@ const AppLayout: React.FC<routeProps> = (routeProps: routeProps) => {
                 className="layout-sidebar"
             >
                 <header className="layout-sidebar__header">
-                    <Logo />
+                    <img src={!collapsed ? DruidLogo : Logo} alt="" />
                 </header>
+
+                <div className="sider-trigger" onClick={() => setCollapsed(!collapsed)}>
+                    {collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+                </div>
 
                 <Menu
                     defaultSelectedKeys={[RouteUri.Home]}

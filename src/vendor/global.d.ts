@@ -1,3 +1,7 @@
 declare global {
-    interface Window {}
+    interface Window {
+        isEn: boolean
+        language: any
+        timeZome: number
+    }
 }

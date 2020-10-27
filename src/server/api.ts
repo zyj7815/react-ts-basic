@@ -6,7 +6,7 @@ const develop = 'http://cattle.test.druidtech.net/api/v1/' // 开发
 const production = 'https://cattle.druidtech.cn/api/v1/' // 线上
 
 let base: string = ''
-if (host.includes('localhost') || host.includes('192.168') || host.includes('127.0.0.1')) {
+if (host.indexOf('localhost') > -1 || host.indexOf('192.168') > -1) {
     base = test
 } else {
     base = `${origin}/api/v1/`

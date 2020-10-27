@@ -74,7 +74,7 @@ module.exports = merge(webpackConfig, {
                                             safari: "11.1",
                                             ie: "11"
                                         },
-                                        useBuiltIns: 'usage',
+                                        useBuiltIns: 'entry',
                                         corejs: 2
                                     }]],
                                     plugins: [

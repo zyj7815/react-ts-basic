@@ -12,10 +12,6 @@ const App: React.FC = () => {
         Language.init()
     }, [])
 
-    new Promise(resolve => {
-        resolve()
-    })
-
     return (
         <>
             <Provider {...stores}>

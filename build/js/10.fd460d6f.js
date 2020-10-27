@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{92:function(t,e,s){"use strict";s.r(e);var n=s(0),o=s(4);e.default=function(){return n.createElement(o.Result,{status:"403",title:"403",subTitle:"Sorry, you are not authorized to access this page."})}}}]);

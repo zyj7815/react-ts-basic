@@ -34,6 +34,10 @@ export const menuNav: IMenuNav[] = [
                 title: 'authorized',
                 uri: RouteUri.PageSub5,
             },
+            {
+                title: 'hookMemo',
+                uri: RouteUri.PageSub6,
+            },
         ],
     },
 ]

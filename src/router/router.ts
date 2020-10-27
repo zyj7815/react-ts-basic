@@ -61,6 +61,12 @@ export const routes: RouteInterface[] = [
                         auth: true,
                     },
                     {
+                        path: RouteUri.PageSub6,
+                        component: loadable(() => import('@/pages/page1/page1-sub6')),
+                        exact: true,
+                        name: 'memo',
+                    },
+                    {
                         path: RouteUri.NotAuth,
                         component: loadable(() => import('@/pages/status/no-auth')),
                         exact: true,

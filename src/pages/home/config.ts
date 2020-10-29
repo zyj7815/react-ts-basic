@@ -39,25 +39,25 @@ export const homeConfig = {
 
 export const statisticConfig = [
     {
-        title: window.language.inventory,
+        title: (window as any).language.inventory,
         component: HomeInventory,
         permission: 'pasture:<.*>|pasture:pandian',
     },
     {
-        title: window.language.gender_ratio,
+        title: (window as any).language.gender_ratio,
         component: HomeStatisticPie,
     },
     {
-        title: window.language.breeding,
+        title: (window as any).language.breeding,
         component: HomeStatisticPie,
     },
     {
-        title: window.language.immune,
+        title: (window as any).language.immune,
         permission: 'pasture:<.*>|pasture:immunity',
         component: HomeStatisticPie,
     },
     {
-        title: window.language.insurance,
+        title: (window as any).language.insurance,
         permission: 'pasture:<.*>|pasture:insurance',
         component: HomeStatisticPie,
     },

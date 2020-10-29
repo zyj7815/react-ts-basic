@@ -1,3 +1,5 @@
+export const ROUTE_ID = ':id'
+
 export enum RouteUri {
     Login = '/login',
     Root = '/root',
@@ -13,4 +15,20 @@ export enum RouteUri {
 
     NotFound = '*',
     NotAuth = '/root/auth',
+}
+
+export const RouteUris = {
+    Login: '/login',
+
+    Root: '/root',
+
+    NotFound: '*',
+
+    NotAuth: '/root/auth',
+
+    MainWrapper: '/root',
+
+    MainPasture: '/root',
+
+    MainDevice: '/root/device',
 }

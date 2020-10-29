@@ -1,75 +1,33 @@
 import loadable from '@loadable/component'
 import { RouteInterface } from '@/types/route'
-import { RouteUri } from '@/router/config'
-
-// TODO: public路径从buildConfig里读取，注入环境变量使用
-export const basename = ''
+import { RouteUri, RouteUris } from '@/router/config'
 
 export const routes: RouteInterface[] = [
     {
-        path: RouteUri.Login,
+        path: RouteUris.Login,
         component: loadable(() => import('@/pages/login')),
         exact: true,
         name: 'login',
     },
     {
-        path: RouteUri.Root,
+        path: RouteUris.Root,
         component: loadable(() => import('@/pages/root')),
         name: 'root',
         routes: [
             {
-                path: RouteUri.Layout,
-                component: loadable(() => import('@/pages/layout')),
-                name: 'layout',
+                path: RouteUris.MainWrapper,
+                component: loadable(() => import('@/pages/main-wrapper')),
+                name: 'main-wrapper',
                 routes: [
                     {
-                        path: RouteUri.Home,
-                        component: loadable(() => import('@/pages/home')),
-                        exact: true,
-                        name: 'main',
+                        path: RouteUris.MainPasture,
+                        component: loadable(() => import('@/pages/main-wrapper/pasture')),
+                        name: 'main-wrapper-pasture',
                     },
                     {
-                        path: RouteUri.PageSub1,
-                        component: loadable(() => import('@/pages/page1/page1-sub1')),
-                        exact: true,
-                        name: 'Todo Hook',
-                        auth: false,
-                    },
-                    {
-                        path: RouteUri.PageSub2,
-                        component: loadable(() => import('@/pages/page1/page1-sub2')),
-                        exact: true,
-                        name: 'Todo Class',
-                    },
-                    {
-                        path: RouteUri.PageSub3,
-                        component: loadable(() => import('@/pages/page1/page1-sub3')),
-                        exact: true,
-                        name: 'Page Context',
-                    },
-                    {
-                        path: RouteUri.PageSub4,
-                        component: loadable(() => import('@/pages/page1/page1-sub4')),
-                        exact: true,
-                        name: 'Page Reducer',
-                    },
-                    {
-                        path: RouteUri.PageSub5,
-                        component: loadable(() => import('@/pages/page1/page1-sub5')),
-                        exact: true,
-                        name: 'authorized',
-                        auth: false,
-                    },
-                    {
-                        path: RouteUri.PageSub6,
-                        component: loadable(() => import('@/pages/page1/page1-sub6')),
-                        exact: true,
-                        name: 'theme',
-                    },
-                    {
-                        path: RouteUri.NotAuth,
-                        component: loadable(() => import('@/pages/status/no-auth')),
-                        exact: true,
+                        path: RouteUris.MainDevice,
+                        component: loadable(() => import('@/pages/main-wrapper/device')),
+                        name: 'main-wraper-device',
                     },
                 ],
             },
@@ -77,7 +35,7 @@ export const routes: RouteInterface[] = [
     },
     {
         path: RouteUri.NotFound,
-        component: loadable(() => import('@/pages/status/404')),
+        component: loadable(() => import('@/pages/status-wrapper/404')),
         name: '404',
     },
 ]

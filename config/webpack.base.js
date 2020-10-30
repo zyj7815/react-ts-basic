@@ -9,6 +9,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const getClientEnvironment = require('./env');
+
 const config = require('./config');
 
 const APP_PATH = path.resolve(__dirname, '../src');

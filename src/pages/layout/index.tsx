@@ -1,13 +1,12 @@
 import React from 'react'
+import LayoutHeader from './header'
 import { Link } from 'react-router-dom'
 import { IMenuNav } from '@/types/route'
-import { Layout, Menu, Dropdown, message } from 'antd'
+import { Layout, Menu } from 'antd'
 import { Logo, DruidLogo } from '@/assets/images'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { currentOpenKey, currentSubOpenKey } from '@/pages/layout/utils'
 import { Utils } from '@/utils'
-import { Token } from '@/server/token'
-import { AweIcon } from '@/assets/iconfont'
 import { useRootStore } from '@/provider'
 import { observer } from 'mobx-react'
 import {
@@ -18,8 +17,9 @@ import {
     MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import './index.less'
+import { AweIcon } from '@/assets/iconfont'
 
-const { Sider, Header, Content } = Layout
+const { Sider, Content } = Layout
 const SubMenu = Menu.SubMenu
 
 interface IProps {
@@ -63,7 +63,13 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                         title={
                             <span>
                                 {nav.icon && <AweIcon type={nav.icon} />}
-                                <span>{nav.title}</span>
+                                <span
+                                    className={`awe-menu-title ${
+                                        collapsed ? 'awe-hide-title' : ''
+                                    }`}
+                                >
+                                    {nav.title}
+                                </span>
                             </span>
                         }
                     >
@@ -77,7 +83,9 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                     <Menu.Item key={nav.uri} {...click}>
                         {nav.icon && <AweIcon type={nav.icon} />}
                         <Link to={nav.uri ? nav.uri : '/'}>
-                            <span>{nav.title}</span>
+                            <span className={`awe-menu-title ${collapsed ? 'awe-hide-title' : ''}`}>
+                                {nav.title}
+                            </span>
                         </Link>
                     </Menu.Item>
                 )
@@ -85,21 +93,9 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
         })
     }
 
-    const logout = () => {
-        message.success('退出成功')
-        Token.cleanAuth()
-    }
-
-    const userMenu = (
-        <Menu>
-            <Menu.Item onClick={logout}>退出登录</Menu.Item>
-        </Menu>
-    )
-
     return (
         <Layout className="awe-layout-wrapper">
             <Sider
-                // collapsible={true}
                 collapsed={collapsed}
                 onCollapse={(collapsed: any) => setCollapsed(collapsed)}
                 className="layout-sidebar"
@@ -115,7 +111,6 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                 <div className="sider-trigger" onClick={() => setCollapsed(!collapsed)}>
                     {collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
                 </div>
-
                 <Menu
                     mode="inline"
                     theme={'dark'}
@@ -128,16 +123,8 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                 </Menu>
             </Sider>
 
-            <Layout className="layout-warpper-content">
-                <Header>
-                    <nav className="awe-user-info">
-                        <Dropdown overlay={userMenu} trigger={['click']}>
-                            <a>
-                                <span>{myself.username}</span>
-                            </a>
-                        </Dropdown>
-                    </nav>
-                </Header>
+            <Layout className="layout-wrapper-content">
+                <LayoutHeader myself={myself} />
 
                 <Content className="awe-layout-content">{RenderRoutes(routes, true)}</Content>
             </Layout>

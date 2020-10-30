@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Input, Button, Checkbox, Radio, Form, message } from 'antd'
 import { sha256 } from 'js-sha256'
-import { RouteUri } from '@/router/config'
+import { RouteUris } from '@/router/config'
 import { LoginImg, Logo } from '@/assets/images'
 import { Token } from '@/server/token'
 import axios from 'axios'
@@ -10,7 +10,7 @@ import './index.less'
 
 const Login: React.FC = () => {
     if (Token.auth) {
-        window.location.href = `#${RouteUri.Root}`
+        window.location.href = `#${RouteUris.Root}`
         return <div />
     }
 

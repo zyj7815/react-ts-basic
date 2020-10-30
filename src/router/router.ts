@@ -1,6 +1,6 @@
 import loadable from '@loadable/component'
 import { RouteInterface } from '@/types/route'
-import { RouteUri, RouteUris } from '@/router/config'
+import { RouteUris } from '@/router/config'
 
 export const routes: RouteInterface[] = [
     {
@@ -14,6 +14,31 @@ export const routes: RouteInterface[] = [
         component: loadable(() => import('@/pages/root')),
         name: 'root',
         routes: [
+            {
+                path: RouteUris.PastureWrapper(),
+                component: loadable(() => import('@/pages/pasture-wrapper')),
+                name: 'pasture-wrapper',
+                routes: [
+                    {
+                        path: RouteUris.PastureAnimal(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/biological')),
+                        name: 'pasture-wrapper-biological',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureGroup(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/group')),
+                        name: 'pasture-wrapper-group',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureFence(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/fence')),
+                        name: 'pasture-wrapper-fence',
+                        exact: true,
+                    },
+                ],
+            },
             {
                 path: RouteUris.MainWrapper,
                 component: loadable(() => import('@/pages/main-wrapper')),
@@ -36,7 +61,7 @@ export const routes: RouteInterface[] = [
         ],
     },
     {
-        path: RouteUri.NotFound,
+        path: RouteUris.NotFound,
         component: loadable(() => import('@/pages/status-wrapper/404')),
         name: '404',
     },

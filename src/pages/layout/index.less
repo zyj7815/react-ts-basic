@@ -2,6 +2,10 @@
 
 .layout-sidebar {
     
+    .ant-layout-sider-children {
+        background: @slider-color;
+    }
+    
     .sider-trigger {
         cursor: pointer;
         padding: 10px;
@@ -23,27 +27,37 @@
         justify-content: center;
     }
     
-    .ant-layout-content {
-        background: papayawhip;
-        
-    }
     
-    .ant-layout-footer {
-        background: #001529;
-        padding: 15px;
-        text-align: center;
+    // 菜单
+    .ant-menu {
+        background: @slider-color;
         
-        a {
-            color: #fff;
+        .ant-menu-item {
+            display: flex;
+            align-items: center;
         }
+        
+        .anticon {
+            color: #fff;
+            font-size: 25px;
+            margin-right: 15px;
+        }
+        
+        .awe-menu-title {
+            font-size: 16px;
+        }
+        
+        .awe-hide-title {
+            padding-left: 25px;
+        }
+        
     }
-    
 }
 
 
-.layout-warpper-content {
+.layout-wrapper-content {
     
-    .ant-layout-header {
+    .layout-wrapper-header {
         padding: 0 20px;
         box-shadow: 2px 2px 5px 2px #ddd;
         background: #fff;
@@ -57,5 +71,22 @@
     .ant-layout-content {
         background: #fff;
         z-index: 2;
+    }
+    
+    .layout-header-nav {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        
+        .layout-header-user {
+            margin-right: 20px;
+            & > * {
+                margin-right: 10px;
+            }
+        }
+        
+        .ant-radio-group {
+            line-height: 1;
+        }
     }
 }

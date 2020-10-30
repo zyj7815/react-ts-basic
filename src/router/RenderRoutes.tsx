@@ -4,7 +4,7 @@ import { RouteInterface } from '@/types/route'
 import { RouteWithSubRoutes } from './RouteWithSubRoutes'
 import NoMatch from '@/pages/status-wrapper/404'
 import Login from '@/pages/login'
-import { RouteUri, RouteUris } from '@/router/config'
+import { RouteUris } from '@/router/config'
 import { Token } from '@/server/token'
 
 export const RenderRoutes = (routes: RouteInterface[] | undefined, authed: boolean) => {

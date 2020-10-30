@@ -1,0 +1,8 @@
+/**
+ * 通过Symbol引入的图标，svg标签都有fill属性，会导致修改不了图标颜色
+ * 解决：部分iconfont的图标手动设置颜色
+ */
+
+svg path {
+    fill: currentColor;
+}

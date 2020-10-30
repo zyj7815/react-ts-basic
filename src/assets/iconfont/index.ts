@@ -1,10 +1,15 @@
 import { createFromIconfontCN } from '@ant-design/icons'
 
-// 项目图表地址
-// https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.12&manage_type=myprojects&projectId=749453&keyword=&project_type=&page=
+// 项目图表地址：智能放牧
+// https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.12&manage_type=myprojects&projectId=367759&keyword=&project_type=&page=
 
 export const AweIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_749453_bpixa0r4kbv.js',
+    scriptUrl: '//at.alicdn.com/t/font_367759_m53vyisng7.js',
 })
 
-export const aweIconType = {}
+export const aweIconType = {
+    'icon-geofence': 'icon-geofence',
+    'icon-device': 'icon-device',
+    'icon-biological': 'icon-biological',
+    'icon-group_empty': 'icon-group_empty',
+}

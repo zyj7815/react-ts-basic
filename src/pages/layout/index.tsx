@@ -125,7 +125,6 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
 
             <Layout className="layout-wrapper-content">
                 <LayoutHeader myself={myself} />
-
                 <Content className="awe-layout-content">{RenderRoutes(routes, true)}</Content>
             </Layout>
         </Layout>

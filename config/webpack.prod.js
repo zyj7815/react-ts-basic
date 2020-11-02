@@ -48,6 +48,7 @@ module.exports = merge.smart(baseWebpackConfig, {
         ]
     },
     plugins: [
+        new AntdDayjsWebpackPlugin(),
         // 清理打包目录
         new CleanWebpackPlugin(),
         new PreloadWebpackPlugin({
@@ -86,9 +87,7 @@ module.exports = merge.smart(baseWebpackConfig, {
             filename: 'css/[name].[contenthash:8].css'
             // chunkFilename: '[name].[contenthash:8].chunk.css'
         }),
-        new AntdDayjsWebpackPlugin({
-            preset: 'antdv4'
-        }),
+
         // // 静态压缩，需要在Nginx配置支持gzip
         // new CompressionWebpackPlugin({
         //     filename: '[path].gz[query]',

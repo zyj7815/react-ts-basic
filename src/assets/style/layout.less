@@ -1,3 +1,7 @@
+@import "./color";
+@menu-height: 48px;
+@radio-height: 52px;
+
 .dr-layout-wrapper {
     padding: 10px;
     
@@ -10,4 +14,120 @@
 
 .awe-page-breadcrumb {
     padding: 5px 0;
+}
+
+
+// 列表页面，有展示信息，无图表
+.awe-page-wrapper {
+    
+    height: 100%;
+    border: 1px dashed darkkhaki;
+    display: flex;
+    flex-direction: column;
+    
+    .awe-page-content {
+        flex: 1;
+        border: 1px dashed red;
+        
+        .awe-page-list__layout {
+            background: #FFF;
+            height: 100%;
+            position: relative;
+            
+            .awe-page-list__layout-header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                
+                background: inherit;
+                padding: 0 10px;
+                height: @radio-height;
+                display: flex;
+                align-items: center;
+                
+                .ant-radio-group {
+                    display: inherit;
+                }
+            }
+            
+            .awe-page-list__layout-content {
+                height: 100%;
+                padding: @radio-height 10px 10px 10px;
+    
+                .ant-table-thead > tr > th {
+                    padding: 13px 16px 12px;
+                }
+    
+                .ant-table-tbody > tr > td {
+                    padding: 8px 16px;
+                    height: @menu-height;
+                }
+    
+            }
+            
+            .awe-page-list__layout-footer {
+                padding: 10px 0;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    
+    
+        .awe-page-card__layout {
+            height: 100%;
+            background: indianred;
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+.animal-nickname-icon {
+    display: flex;
+    justify-content: space-between;
+    
+    .select {
+        cursor: pointer;
+    }
+    
+    .unbind-text {
+        color: #999;
+        background: #e8e8e8;
+        padding: 2px;
+        margin-left: 3px;
+        font-size: 13px;
+    }
+    
+    .single-battery-wrapper {
+        img {
+            margin-left: 5px;
+        }
+        
+        .single-battery__battery {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+
+.action-box {
+    display: flex;
+    justify-content: space-between;
+    
+    span, i {
+        cursor: pointer;
+    }
+    
+    span:hover {
+        color: @primary-color;
+    }
 }

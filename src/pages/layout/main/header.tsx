@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown, Layout, message, Radio, Menu, Avatar } from 'antd'
-import { Token } from '@/server/token'
-import { MySelf } from '@/store'
+import { Token } from '../../../server/token'
+import { MySelf } from '../../../store'
 
 const { Header } = Layout
 

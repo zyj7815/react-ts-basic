@@ -1,11 +1,10 @@
 import React from 'react'
 import LayoutHeader from './header'
 import { Link } from 'react-router-dom'
-import { IMenuNav } from '@/types/route'
 import { Layout, Menu } from 'antd'
 import { Logo, DruidLogo } from '@/assets/images'
 import { RenderRoutes } from '@/router/RenderRoutes'
-import { currentOpenKey, currentSubOpenKey } from '@/pages/layout/utils'
+import { currentOpenKey, currentSubOpenKey } from './utils'
 import { Utils } from '@/utils'
 import { useRootStore } from '@/provider'
 import { observer } from 'mobx-react'
@@ -18,6 +17,7 @@ import {
 } from '@ant-design/icons'
 import './index.less'
 import { AweIcon } from '@/assets/iconfont'
+import { IMenuNav } from '@/types/route'
 
 const { Sider, Content } = Layout
 const SubMenu = Menu.SubMenu

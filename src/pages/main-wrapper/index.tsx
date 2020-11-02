@@ -1,5 +1,5 @@
 import React from 'react'
-import AweLayout from '@/pages/layout'
+import AweLayout from '@/pages/layout/main'
 import { RouteProps } from '@/types/route'
 import { withRouter } from 'react-router-dom'
 import { mainMenuNav } from './menu'

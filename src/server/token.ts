@@ -25,15 +25,13 @@ export const Token = {
         window.location.reload()
     },
 
-    pageToken: function(
-        pageSize: number = 10,
-        page: number = 0,
-        sort: string = '-updated_at'
-    ): any {
-        return Object.assign(this.data.headers, {
-            'x-result-limit': pageSize,
-            'x-result-offset': page,
-            'x-result-sort': sort,
-        })
+    pageToken(pageSize: number = 10, page: number = 0, sort: string = '-updated_at'): any {
+        return {
+            headers: Object.assign(this.data.headers, {
+                'x-result-limit': pageSize,
+                'x-result-offset': page,
+                'x-result-sort': sort,
+            }),
+        }
     },
 }

@@ -547,7 +547,6 @@ const zh = {
     group_total: '分组总数',
     created_date: '创建日期',
     view: '查看',
-    viwe_location: '查看位置',
     associated_biological_number: '关联生物数',
     herd_management: '牧群管理',
     view_animal_vaccine: '查看免疫记录',

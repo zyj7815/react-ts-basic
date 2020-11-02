@@ -142,6 +142,7 @@ module.exports = merge(webpackConfig, {
         }
     },
     plugins: [
+        new AntdDayjsWebpackPlugin(),
         // 清理打包目录
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -155,9 +156,7 @@ module.exports = merge(webpackConfig, {
             filename: 'en/index.html',
             showErrors: true
         }),
-        new AntdDayjsWebpackPlugin({
-            preset: 'antdv4'
-        }),
+
         // 在html模板中能够使用环境变量
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         new InterpolateHtmlPlugin(env.raw),

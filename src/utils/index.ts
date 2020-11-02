@@ -1,11 +1,8 @@
-import dayjs from 'dayjs'
 import { encode, decode } from 'js-base64'
-
-dayjs.extend(require('dayjs/plugin/utc'))
 
 export const Utils = {
     /**
-     * 判断是否存在
+     * 判断参数是否存在
      * @param params
      */
     hasExist: function(params: string | number) {
@@ -82,9 +79,9 @@ export const Utils = {
     },
 
     /**
-     * 增改多个参数
+     * 向url中添加多个数据，如果有重复的就替换
      */
-    operateUrlMultiParam: function(params: any) {
+    pushParams2Url: function(params: any) {
         Object.keys(params).forEach(key => {
             this.operateUrlParam(key, params[key])
         })
@@ -189,7 +186,10 @@ export const Utils = {
         return newArr
     },
 
-    // 秒转化成 时分
+    /**
+     * 秒转化成 时分
+     * @param second
+     */
     second2Time: (second: number | string) => {
         if (typeof second === 'string') {
             second = parseInt(second)

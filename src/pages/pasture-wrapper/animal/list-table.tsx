@@ -19,7 +19,7 @@ const AnimalListTable: React.FC = props => {
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [dataSource, setDataSource] = React.useState<any[]>([])
-    const scrollY = useWindowSize() - 420
+    const scrollY = useWindowSize() - 410
 
     React.useEffect(() => {
         fetchData()
@@ -55,7 +55,7 @@ const AnimalListTable: React.FC = props => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushParams2Url({
+        Utils.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

@@ -19,6 +19,8 @@ export const RouteUris = {
 
     PastureAnimal: (id = ROUTE_ID) => `/root/pasture/${id}/animal`,
 
+    PastureAnimalNew: (id = ROUTE_ID) => `/root/pasture/${id}/animal/new`,
+
     PastureGroup: (id = ROUTE_ID) => `/root/pasture/${id}/group`,
 
     PastureFence: (id = ROUTE_ID) => `/root/pasture/${id}/fence`,

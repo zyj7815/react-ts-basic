@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown, Layout, message, Radio, Menu, Avatar } from 'antd'
-import { Token } from '../../../server/token'
-import { MySelf } from '../../../store'
+import { Token } from '@/server/token'
+import { MySelf } from '@/store'
 
 const { Header } = Layout
 
@@ -10,6 +10,36 @@ interface HeaderProps {
 }
 
 const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
+    const [grid, setGrid] = React.useState('')
+
+    React.useEffect(() => {
+        getGrid()
+
+        window.onresize = () => getGrid()
+
+        return () => {
+            window.onresize = null
+        }
+    }, [])
+
+    const getGrid = () => {
+        const width = window.innerWidth
+
+        if (width < 576) {
+            setGrid('xs')
+        } else if (width >= 1600) {
+            setGrid('xxl')
+        } else if (width >= 1200) {
+            setGrid('xl')
+        } else if (width >= 992) {
+            setGrid('lg')
+        } else if (width >= 768) {
+            setGrid('md')
+        } else if (width >= 576) {
+            setGrid('sm')
+        }
+    }
+
     /**
      * 修改语言
      */
@@ -34,15 +64,13 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
 
     return (
         <Header className="layout-wrapper-header">
-            <div />
+            <div>{grid}</div>
 
             <nav className="layout-header-nav">
                 <Dropdown overlay={userMenu} trigger={['click']}>
                     <div className="layout-header-user">
-                        <Avatar style={{ background: '#16B351' }}>
-                            {props.myself.username[0]}
-                        </Avatar>
-                        <span>{props.myself.username}</span>
+                        <Avatar style={{ background: '#16B351' }}>{props.myself.name[0]}</Avatar>
+                        <span>{props.myself.name}</span>
                     </div>
                 </Dropdown>
 

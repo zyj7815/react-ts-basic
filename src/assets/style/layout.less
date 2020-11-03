@@ -22,11 +22,17 @@
     
     height: 100%;
     border: 1px dashed darkkhaki;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    //display: flex;
+    //flex-direction: column;
+    
+    .awe-page-header-info {
+        position: absolute;
+        width: 100%;
+    }
     
     .awe-page-content {
-        flex: 1;
+        height: 100%;
         border: 1px dashed red;
         
         .awe-page-list__layout {
@@ -45,6 +51,7 @@
                 height: @radio-height;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
                 
                 .ant-radio-group {
                     display: inherit;
@@ -53,8 +60,10 @@
             
             .awe-page-list__layout-content {
                 height: 100%;
-                padding: @radio-height 10px 10px 10px;
-    
+                padding: @radio-height 0 10px 0;
+                overflow-y: auto;
+                background: @basic-color;
+                
                 .ant-table-thead > tr > th {
                     padding: 13px 16px 12px;
                 }
@@ -73,10 +82,10 @@
             }
         }
     
-    
+        
         .awe-page-card__layout {
             height: 100%;
-            background: indianred;
+            overflow-y: auto;
         }
         
     }
@@ -94,6 +103,15 @@
     display: flex;
     justify-content: space-between;
     
+    .animal-nickname {
+        transition: all 300ms;
+        cursor: pointer;
+        
+        &:hover {
+            color: @primary-color;
+        }
+    }
+    
     .select {
         cursor: pointer;
     }
@@ -105,19 +123,21 @@
         margin-left: 3px;
         font-size: 13px;
     }
-    
-    .single-battery-wrapper {
-        img {
-            margin-left: 5px;
-        }
-        
-        .single-battery__battery {
-            width: 20px;
-            height: 20px;
-        }
-    }
 }
 
+
+
+
+.single-battery-wrapper {
+    img {
+        margin-left: 5px;
+    }
+    
+    .single-battery__battery {
+        width: 20px;
+        height: 20px;
+    }
+}
 
 .action-box {
     display: flex;

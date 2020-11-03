@@ -11,6 +11,7 @@ interface Profile {
 
 export interface MySelf {
     id: string
+    name: string
     username: string
     company_name: string
     company_id: string
@@ -20,6 +21,7 @@ export interface MySelf {
 
 const initMyself: MySelf = {
     id: '',
+    name: '',
     username: '',
     role: 'user',
     company_id: '',

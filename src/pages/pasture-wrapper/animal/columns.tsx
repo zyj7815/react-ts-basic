@@ -10,7 +10,7 @@ export const animalColumns = () => {
         {
             title: useLanguage.picture,
             dataIndex: 'photo',
-            width: 120,
+            width: 100,
             render(photo: string, record: any) {
                 return (
                     <div>
@@ -33,7 +33,8 @@ export const animalColumns = () => {
             render(nickname: string, record: any) {
                 return (
                     <div className="animal-nickname-icon">
-                        <span>{nickname}</span>
+                        <span className="animal-nickname">{nickname}</span>
+
                         {!record.device_id && (
                             <span className="unbind-text">{useLanguage.not_installed}</span>
                         )}

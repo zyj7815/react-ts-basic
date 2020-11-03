@@ -1,4 +1,7 @@
 import { encode, decode } from 'js-base64'
+import dayjs from 'dayjs'
+
+dayjs.extend(require('dayjs/plugin/utc'))
 
 export const Utils = {
     /**
@@ -47,11 +50,11 @@ export const Utils = {
     },
 
     /**
-     * 操作 URL 参数（增、改）
+     * 操作 URL 单个参数（增、改）
      * @param name
      * @param value
      */
-    operateUrlParam: function(name: string, value: string | number) {
+    pushParamsToUrl: function(name: string, value: string | number) {
         let href = location.href
         // 如果URL中有参数，就在后面添加
         if (name !== 'pageSize') {
@@ -81,9 +84,9 @@ export const Utils = {
     /**
      * 向url中添加多个数据，如果有重复的就替换
      */
-    pushParams2Url: function(params: any) {
+    pushMultiParamsToUrl: function(params: any) {
         Object.keys(params).forEach(key => {
-            this.operateUrlParam(key, params[key])
+            this.pushParamsToUrl(key, params[key])
         })
     },
 
@@ -187,6 +190,21 @@ export const Utils = {
     },
 
     /**
+     * utc时间转当地时区
+     * @param dateTime
+     * @param format
+     */
+    utc2Time(dateTime?: string, format = 'YYYY-MM-DD HH:mm:ss'): string {
+        return (
+            dayjs(dateTime)
+                //@ts-ignore
+                .utc()
+                .add((window as any).timeZone, 'm')
+                .format(format)
+        )
+    },
+
+    /**
      * 秒转化成 时分
      * @param second
      */
@@ -202,15 +220,38 @@ export const Utils = {
         const seconds = Math.floor(((second % 86400) % 3600) % 60)
 
         if (days > 0) {
-            duration = `${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`
+            duration = `${days} 天`
         } else if (hours > 0) {
-            duration = `${hours} 小时 ${minutes} 分 ${seconds} 秒`
+            duration = `${hours} 小时 `
         } else if (minutes > 0) {
             duration = `${minutes} 分 ${seconds} 秒`
         } else if (seconds > 0) {
             duration = `${seconds} 秒`
         }
         return duration
+    },
+
+    /**
+     * 时间差规则
+     * @param dataTime
+     * @param text
+     */
+    getTimeDiff(dataTime: string, text: string) {
+        if (dataTime) {
+            const utcNow = dayjs()
+                // @ts-ignore
+                .utc()
+                .format()
+
+            const nowTimestamp = dayjs(utcNow).valueOf()
+            const timestamp = dayjs(dataTime).valueOf()
+
+            const diff = Math.floor(nowTimestamp / 1000 - timestamp / 1000)
+
+            return this.second2Time(diff)
+        } else {
+            return '-'
+        }
     },
 
     /**

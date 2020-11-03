@@ -1,10 +1,10 @@
 import { singleIcon } from '@/assets/images/signal'
 import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
-import dayjs from 'dayjs'
 import { Utils } from '@/utils/index'
 import { urlParams } from '@/types/url'
-dayjs.extend(require('dayjs/plugin/utc'))
+import { AnimalProps } from '@/types/animal'
+import { BindingStatus } from '@/enum/device'
 
 /**
  * 业务相关的事务
@@ -91,23 +91,8 @@ export const ServiceTool = {
         if (!animal.status_device) {
             return '-'
         } else {
-            return this.utc2Time(animal.status_device.updated_at)
+            return Utils.utc2Time(animal.status_device.updated_at)
         }
-    },
-
-    /**
-     * utc时间转当地时区
-     * @param dateTime
-     * @param format
-     */
-    utc2Time(dateTime: string, format = 'YYYY-MM-DD HH:mm:ss'): string {
-        return (
-            dayjs(dateTime)
-                //@ts-ignore
-                .utc()
-                .add((window as any).timeZone, 'm')
-                .format(format)
-        )
     },
 
     /**
@@ -125,6 +110,23 @@ export const ServiceTool = {
         return {
             pageNumber,
             pageSize,
+        }
+    },
+
+    /**
+     * 获取生物绑定设备状态
+     */
+    getBindingStatus(animal: AnimalProps) {
+        if (animal.devices_binding && animal.devices_binding.length) {
+            // 已解绑的
+            if (animal.devices_binding[animal.devices_binding.length - 1].end_time) {
+                return BindingStatus.Deployed
+            }
+            // 绑定中的
+            return BindingStatus.Deploying
+        } else {
+            // 未绑定的
+            return BindingStatus.Undeploy
         }
     },
 }

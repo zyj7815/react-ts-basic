@@ -12,4 +12,6 @@ export const aweIconType = {
     'icon-device': 'icon-device',
     'icon-biological': 'icon-biological',
     'icon-group_empty': 'icon-group_empty',
+    'icon-mark': 'icon-mark',
+    'icon-bnding': 'icon-bnding',
 }

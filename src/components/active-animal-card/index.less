@@ -1,0 +1,86 @@
+@import "../../assets/style/color";
+
+.active-animal-card-wrapper {
+    padding: 10px 10px 0 0;
+    
+    .active-animal-card-main {
+        
+        padding: 10px;
+        background: #FFF;
+        border: 2px solid #fff;
+        transition: all 300ms;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        
+        &:hover {
+            border-color: @primary-color;
+            
+            .active-animal-card__device {
+                opacity: 1;
+            }
+        }
+        
+        .active-animal-card__avator {
+            width: 60px;
+            position: relative;
+            
+            .ant-avatar {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-60%, -50%);
+            }
+        }
+        
+        .active-animal-card__content {
+            flex: 1;
+            
+            .animal-card-nickname {
+                width: 100%;
+                zoom: 1;
+                overflow: hidden;
+                
+                .animal-nickname {
+                    float: left;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                
+                .animal-icon {
+                    float: right;
+                }
+            }
+            
+            
+            .animal-tag {
+                font-size: 11px;
+                border-radius: 2px;
+                transform: scale(.9);
+                font-weight: 500;
+                border: 1px solid #cccccc;
+                padding: 0 2px;
+                margin-right: 5px;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            }
+        }
+        
+        .active-animal-card__device {
+            transition: all 300ms;
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            bottom: 0;
+            width: 26px;
+            height: 26px;
+            background: @primary-color;
+            line-height: 26px;
+            text-align: center;
+            
+            * {
+                color: #fff;
+            }
+            
+        }
+    }
+}

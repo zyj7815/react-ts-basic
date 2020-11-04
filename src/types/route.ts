@@ -22,4 +22,4 @@ export interface IMenuNav {
     children?: IMenuNav[] // 子菜单
 }
 
-export type RouteProps = RouteComponentProps<any> & RoutesInterface
+export type AweRouteProps = RouteComponentProps<any> & RoutesInterface

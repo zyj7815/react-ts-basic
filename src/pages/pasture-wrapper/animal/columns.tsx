@@ -33,11 +33,12 @@ export const animalColumns = () => {
             render(nickname: string, record: any) {
                 return (
                     <div className="animal-nickname-icon">
-                        <span className="animal-nickname">{nickname}</span>
-
-                        {!record.device_id && (
-                            <span className="unbind-text">{useLanguage.not_installed}</span>
-                        )}
+                        <span className="animal-nickname">
+                            {nickname}
+                            {!record.device_id && (
+                                <span className="unbind-text">{useLanguage.not_installed}</span>
+                            )}
+                        </span>
 
                         {record.device_id && (
                             <span className="single-battery-wrapper">

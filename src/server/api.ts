@@ -15,6 +15,7 @@ if (process.env.REACT_APP_ENV === 'dev') {
     base = `${origin}/api/v1/`
 }
 
+// 使用v2的接口
 const base2 = base.replace('/v1/', '/v2/')
 
 export const Api = {
@@ -22,7 +23,9 @@ export const Api = {
     myself: base + 'user/myself',
     customize: (id: string) => `${base2}customize/company/${id}`,
     biological: {
+        new: base2 + 'biological/',
         list: base + 'biological/',
+        searchName: (nickname: string) => `${base2}biological/search/nickname/${nickname}`,
     },
     image: {
         one: (biologicalId: string, id: string) => {

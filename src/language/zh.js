@@ -63,7 +63,7 @@ const zh = {
     archive: '归档',
     add_an_animal: '新增生物',
     unbound: '未绑定',
-    bound: '已绑定',
+    bound: '定',
     unbind: '解绑',
     real_time_data: '实时数据',
     activity_analysis: '活动分析',
@@ -620,6 +620,7 @@ const zh = {
     inventoring: '正在盘点中',
     inventory_start: '盘点开始5分钟内不可取消，是否继续？',
     five_m_cancel: '盘点开始后5分钟内不可取消',
+    enter_valid_params: '请输入有效的参数',
 
     months: [
         '一月',

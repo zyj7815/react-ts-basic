@@ -1,12 +1,13 @@
 import React from 'react'
 import { Breadcrumb, Radio, Button } from 'antd'
 import { AweNavPage } from '@/pages/layout/page-nav'
-import { AwePageInfo, AwePageInfoItem } from '@/pages/layout/page-info'
+import { PageHeaderData, PageHeaderDataItem } from '@/components/page-header-data'
 import { useLanguage } from '@/language/useLanguage'
 import AnimalListTable from './list-table'
 import AnimalListCard from './list-card'
-import { RouteProps } from '@/types/route'
+import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
+import { RouteUris } from '@/router/config'
 
 const TabKey = 'tabKey'
 
@@ -15,10 +16,12 @@ enum TabType {
     Card = 'card',
 }
 
-const PastureBiological: React.FC<RouteProps> = (routeProps: RouteProps) => {
+const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const { id } = routeProps.match.params
     const tab = Utils.getUrlParam(TabKey) || TabType.List
-
     const [tabKey, setTabKey] = React.useState(tab)
+
+    console.log('tab = ', tab)
 
     const nav = (
         <Breadcrumb className="awe-page-breadcrumb">
@@ -27,7 +30,7 @@ const PastureBiological: React.FC<RouteProps> = (routeProps: RouteProps) => {
         </Breadcrumb>
     )
 
-    const infoItems: AwePageInfoItem[] = [
+    const infoItems: PageHeaderDataItem[] = [
         { mainText: '52', subText: useLanguage.animal_total },
         { mainText: '2', subText: useLanguage.pasture_total },
     ]
@@ -42,15 +45,22 @@ const PastureBiological: React.FC<RouteProps> = (routeProps: RouteProps) => {
         setTabKey(e.target.value)
     }
 
+    /**
+     * 新建生物
+     */
+    const handleNewAnimal = () => {
+        routeProps.history.push(RouteUris.PastureAnimalNew(id))
+    }
+
     return (
         <AweNavPage nav={nav}>
             <article className="awe-page-wrapper">
                 <header className="awe-page-header-info">
-                    <AwePageInfo infoItems={infoItems} />
+                    <PageHeaderData infoItems={infoItems} />
                 </header>
                 <section className="awe-page-content" style={{ paddingTop: 115 }}>
-                    <main className="awe-page-list__layout">
-                        <header className="awe-page-list__layout-header">
+                    <main className="awe-page__layout">
+                        <header className="awe-page__layout-header">
                             <Radio.Group
                                 optionType="button"
                                 value={tabKey}
@@ -59,11 +69,11 @@ const PastureBiological: React.FC<RouteProps> = (routeProps: RouteProps) => {
                             />
 
                             <span>
-                                <Button>{useLanguage.new_card}</Button>
+                                <Button onClick={handleNewAnimal}>{useLanguage.new_card}</Button>
                             </span>
                         </header>
 
-                        <section className="awe-page-list__layout-content">
+                        <section className="awe-page__layout-content">
                             {tabKey === TabType.List ? <AnimalListTable /> : <AnimalListCard />}
                         </section>
                     </main>

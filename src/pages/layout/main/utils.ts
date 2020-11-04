@@ -1,5 +1,5 @@
-import { IMenuNav } from '../../../types/route'
-import { Utils } from '../../../utils'
+import { IMenuNav } from '@/types/route'
+import { Utils } from '@/utils'
 
 /**
  * 检查Menu当前打开项

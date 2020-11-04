@@ -1,12 +1,21 @@
 import React from 'react'
-import { Dropdown, Layout, message, Radio, Menu, Avatar } from 'antd'
+import { Dropdown, message, Radio, Menu, Avatar } from 'antd'
 import { Token } from '@/server/token'
 import { MySelf } from '@/store'
-
-const { Header } = Layout
+import {
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    AudioOutlined,
+    UserOutlined,
+} from '@ant-design/icons'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
+import HeaderSearch from '@/pages/layout/main/header-search'
+import { useLanguage } from '@/language/useLanguage'
 
 interface HeaderProps {
     myself: MySelf
+    collapsed: boolean
+    setCollapsed: (status: boolean) => void
 }
 
 const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
@@ -58,28 +67,45 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
 
     const userMenu = (
         <Menu>
-            <Menu.Item onClick={logout}>退出登录</Menu.Item>
+            <Menu.Item>{props.myself.username}</Menu.Item>
+            <Menu.Item onClick={logout}>{useLanguage.login_out}</Menu.Item>
         </Menu>
     )
 
     return (
-        <Header className="layout-wrapper-header">
-            <div>{grid}</div>
+        <>
+            <div className="layout-header-content">
+                <div className="sider-trigger" onClick={() => props.setCollapsed(!props.collapsed)}>
+                    {!props.collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+                </div>
 
-            <nav className="layout-header-nav">
-                <Dropdown overlay={userMenu} trigger={['click']}>
+                <AweIcon type={aweIconType['icon-logo-druid-fullname']} className="header-logo" />
+
+                <HeaderSearch placeholder="搜索牧场" />
+
+                {grid}
+            </div>
+
+            <nav className="layout-header-content">
+                <AweIcon type={aweIconType['icon-map']} className="header-icon" />
+                <AweIcon type={aweIconType['icon-msg']} className="header-icon" />
+                <Dropdown overlay={userMenu} trigger={['hover']}>
                     <div className="layout-header-user">
-                        <Avatar style={{ background: '#16B351' }}>{props.myself.name[0]}</Avatar>
+                        <Avatar icon={<UserOutlined />} />
                         <span>{props.myself.name}</span>
                     </div>
                 </Dropdown>
 
-                <Radio.Group value={(window as any).isEn} onChange={changeLanguage}>
+                <Radio.Group
+                    value={(window as any).isEn}
+                    onChange={changeLanguage}
+                    buttonStyle="solid"
+                >
                     <Radio.Button value={false}>中</Radio.Button>
                     <Radio.Button value={true}>En</Radio.Button>
                 </Radio.Group>
             </nav>
-        </Header>
+        </>
     )
 }
 

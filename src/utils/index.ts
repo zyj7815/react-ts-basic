@@ -18,7 +18,7 @@ export const Utils = {
      */
     getUrlParam: function(name: string) {
         const url = location.href
-        if (url.indexOf('?') > -1) {
+        if (url.indexOf('?') > -1 && url.indexOf(name) > -1) {
             const temp1 = url.split('?')
             const pram = temp1[1]
             const keyValue = pram.split('&')

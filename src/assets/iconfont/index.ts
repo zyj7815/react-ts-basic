@@ -14,4 +14,8 @@ export const aweIconType = {
     'icon-group_empty': 'icon-group_empty',
     'icon-mark': 'icon-mark',
     'icon-bnding': 'icon-bnding',
+    'icon-logo-druid-fullname': 'icon-logo-druid-fullname',
+    'icon-search2': 'icon-search2',
+    'icon-map': 'icon-map',
+    'icon-msg': 'icon-msg',
 }

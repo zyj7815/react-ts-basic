@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { observer } from 'mobx-react'
 import { useRootStore } from '@/provider'
-import { RouteProps } from '@/types/route'
+import { AweRouteProps } from '@/types/route'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { Loading } from '@/assets/images'
 import { Api } from '@/server/api'
@@ -11,7 +11,7 @@ import { AweGlobal } from '@/global'
 import { errorMessage } from '@/server/error'
 import '@/pages/root/index.less'
 
-const Root: React.FC<RouteProps> = (routeProps: RouteProps) => {
+const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes } = routeProps
     const { setMyself, setResources, setTheme } = useRootStore()
     const [loading, setLoading] = React.useState(true)

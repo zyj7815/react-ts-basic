@@ -1,6 +1,7 @@
 @import "./color";
 @menu-height: 48px;
 @radio-height: 52px;
+@aweDisplayFooter: 64px;
 
 .dr-layout-wrapper {
     padding: 10px;
@@ -17,14 +18,11 @@
 }
 
 
-// 列表页面，有展示信息，无图表
+
 .awe-page-wrapper {
     
     height: 100%;
-    border: 1px dashed darkkhaki;
     position: relative;
-    //display: flex;
-    //flex-direction: column;
     
     .awe-page-header-info {
         position: absolute;
@@ -33,14 +31,14 @@
     
     .awe-page-content {
         height: 100%;
-        border: 1px dashed red;
         
-        .awe-page-list__layout {
+        .awe-page__layout {
             background: #FFF;
             height: 100%;
             position: relative;
+            overflow-y: auto;
             
-            .awe-page-list__layout-header {
+            .awe-page__layout-header {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -58,9 +56,9 @@
                 }
             }
             
-            .awe-page-list__layout-content {
+            .awe-page__layout-content {
                 height: 100%;
-                padding: @radio-height 0 10px 0;
+                padding: @radio-height 0 0 0;
                 overflow-y: auto;
                 background: @basic-color;
                 
@@ -72,30 +70,77 @@
                     padding: 8px 16px;
                     height: @menu-height;
                 }
-    
             }
             
-            .awe-page-list__layout-footer {
-                padding: 10px 0;
+            .awe-page__layout-footer {
+                padding: 3px 0;
                 display: flex;
                 justify-content: flex-end;
             }
         }
-    
         
         .awe-page-card__layout {
             height: 100%;
             overflow-y: auto;
         }
-        
     }
 }
 
 
 
+.awe-display {
+    
+    height: 100%;
+    position: relative;
+    padding-bottom: @aweDisplayFooter;
+    
+    .awe-display__content {
+        height: 100%;
+    }
+    
+    .awe-display__footer {
+        border-top: 1px solid @grey-line-color;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: @aweDisplayFooter;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 20px;
+    }
+}
 
 
+.awe-action-box {
 
+    .ant-btn {
+        margin-left: 10px;
+    }
+    
+}
+
+
+.awe-display-inner {
+    height: 100%;
+    padding-top: 55px;
+    overflow-y: auto;
+    
+    .awe-display-inner__header {
+        z-index: 10;
+        background: #fff;
+        position: absolute;
+        padding: 0 20px;
+        top: 0;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid @grey-line-color;
+    }
+    
+}
 
 
 

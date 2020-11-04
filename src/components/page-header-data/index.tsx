@@ -1,23 +1,23 @@
 import React from 'react'
 import './index.less'
 
-export type AwePageInfoItem = {
+export type PageHeaderDataItem = {
     mainText: string
     subText: string | number
 }
 
-interface AwePageInfoProps {
+interface PageHeaderDataProps {
     height?: number
-    infoItems: AwePageInfoItem[]
+    infoItems: PageHeaderDataItem[]
 }
 
-export const AwePageInfo: React.FC<AwePageInfoProps> = (props: AwePageInfoProps) => {
+export const PageHeaderData: React.FC<PageHeaderDataProps> = (props: PageHeaderDataProps) => {
     return (
         <header
             className="awe-page-info-wrapper"
             style={props.height ? { height: props.height } : {}}
         >
-            {props.infoItems.map((item: AwePageInfoItem, index: number) => (
+            {props.infoItems.map((item: PageHeaderDataItem, index: number) => (
                 <div
                     key={index}
                     className={`page-item ${index < props.infoItems.length - 1 &&

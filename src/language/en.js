@@ -623,6 +623,7 @@ const en = {
     inventoring: 'Inventoring',
     inventory_start: 'The process cannot be cancelled in 5 minutes. Continue?',
     five_m_cancel: 'The process cannot be cancelled in 5 minutes.',
+    enter_valid_params: 'Please enter valid parameters',
 
     months: [
         'January',

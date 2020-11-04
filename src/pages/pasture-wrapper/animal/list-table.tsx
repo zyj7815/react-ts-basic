@@ -2,24 +2,22 @@ import React from 'react'
 import { Layout, Table, Pagination } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { animalColumns } from '@/pages/pasture-wrapper/animal/columns'
-import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Utils } from '@/utils'
 import { ServiceTool } from '@/utils/service-tool'
+import axios from 'axios'
 
 const { Content, Footer } = Layout
-
-interface ListTableProps {}
 
 const AnimalListTable: React.FC = props => {
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [dataSource, setDataSource] = React.useState<any[]>([])
-    const scrollY = useWindowSize() - 410
+    const scrollY = useWindowSize() - 380
 
     React.useEffect(() => {
         fetchData()
@@ -75,7 +73,7 @@ const AnimalListTable: React.FC = props => {
                     columns={animalColumns()}
                 />
             </Content>
-            <Footer className="awe-page-list__layout-footer">
+            <Footer className="awe-page__layout-footer">
                 <Pagination
                     showSizeChanger
                     pageSize={parseInt(pageSize, 10)}

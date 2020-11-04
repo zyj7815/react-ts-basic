@@ -1,10 +1,10 @@
 import React from 'react'
 import AweLayout from '@/pages/layout/main'
-import { RouteProps } from '@/types/route'
+import { AweRouteProps } from '@/types/route'
 import { withRouter } from 'react-router-dom'
 import { mainMenuNav } from './menu'
 
-const MainWrapper: React.FC<RouteProps> = (routeProps: RouteProps) => {
+const MainWrapper: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes, history } = routeProps
 
     return (

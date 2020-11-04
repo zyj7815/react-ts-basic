@@ -2,7 +2,6 @@ import React from 'react'
 import LayoutHeader from './header'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { Logo, DruidLogo } from '@/assets/images'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { currentOpenKey, currentSubOpenKey } from './utils'
 import { Utils } from '@/utils'
@@ -19,7 +18,7 @@ import './index.less'
 import { AweIcon } from '@/assets/iconfont'
 import { IMenuNav } from '@/types/route'
 
-const { Sider, Content } = Layout
+const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
 
 interface IProps {
@@ -95,38 +94,33 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
 
     return (
         <Layout className="awe-layout-wrapper">
-            <Sider
-                collapsed={collapsed}
-                onCollapse={(collapsed: any) => setCollapsed(collapsed)}
-                className="layout-sidebar"
-            >
-                <header className="layout-sidebar__header">
-                    {props.children ? (
-                        props.children
-                    ) : (
-                        <img src={!collapsed ? DruidLogo : Logo} alt="" />
-                    )}
-                </header>
+            <Header className="layout-wrapper-header">
+                <LayoutHeader myself={myself} collapsed={collapsed} setCollapsed={setCollapsed} />
+            </Header>
 
-                <div className="sider-trigger" onClick={() => setCollapsed(!collapsed)}>
-                    {collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-                </div>
-                <Menu
-                    mode="inline"
-                    theme={'dark'}
-                    defaultSelectedKeys={[]}
-                    selectedKeys={[openKey]}
-                    openKeys={openSubKey}
-                    onOpenChange={(menu: any) => setOpenSubKey(menu)}
-                >
-                    {menuRoute(menuNav)}
-                </Menu>
-            </Sider>
+            <Content>
+                <Layout className="layout-wrapper-content">
+                    <Sider
+                        theme="light"
+                        collapsed={collapsed}
+                        onCollapse={(collapsed: any) => setCollapsed(collapsed)}
+                        className="layout-sidebar"
+                    >
+                        <Menu
+                            mode="inline"
+                            theme="light"
+                            defaultSelectedKeys={[]}
+                            selectedKeys={[openKey]}
+                            openKeys={openSubKey}
+                            onOpenChange={(menu: any) => setOpenSubKey(menu)}
+                        >
+                            {menuRoute(menuNav)}
+                        </Menu>
+                    </Sider>
 
-            <Layout className="layout-wrapper-content">
-                <LayoutHeader myself={myself} />
-                <Content className="awe-layout-content">{RenderRoutes(routes, true)}</Content>
-            </Layout>
+                    <Content className="awe-layout-content">{RenderRoutes(routes, true)}</Content>
+                </Layout>
+            </Content>
         </Layout>
     )
 }

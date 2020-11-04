@@ -1,10 +1,10 @@
 import React from 'react'
 import AweLayout from '@/pages/layout/main'
-import { RouteProps } from '@/types/route'
+import { AweRouteProps } from '@/types/route'
 import { withRouter } from 'react-router-dom'
 import { pastureMenuNav } from './menu'
 
-const PastureWrapper: React.FC<RouteProps> = (routeProps: RouteProps) => {
+const PastureWrapper: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes, history, match } = routeProps
     const { id } = match.params
 

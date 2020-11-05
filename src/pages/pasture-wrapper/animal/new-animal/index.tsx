@@ -1,5 +1,5 @@
 import React from 'react'
-import { AweNavPage } from '@/pages/layout/page-nav'
+import { AweNavPage } from '@/pages/components/page-nav'
 import { Breadcrumb, Form, Input, Select, DatePicker, InputNumber, Button, message } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { SpeciesList } from '@/config'
@@ -10,6 +10,7 @@ import { errorMessage } from '@/server/error'
 import { AweRouteProps } from '@/types/route'
 import { AweProgress } from '@/components/awe-progress'
 import { RouteUris } from '@/router/config'
+import AnimalSuccessModal from './success-modal'
 import axios from 'axios'
 import './index.less'
 
@@ -33,6 +34,7 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(false)
     const [percent, setPercent] = React.useState(0)
     const [percentVisible, setPercentVisible] = React.useState(false)
+    const [successVisible, setSuccessVisible] = React.useState(false)
     const [form] = Form.useForm()
 
     const handleSubmit = async () => {
@@ -96,8 +98,8 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setLoading(true)
         try {
             await axios.post(Api.biological.new, data, Token.data)
-            message.success('创建成功')
             setLoading(false)
+            setSuccessVisible(true)
         } catch (err) {
             setLoading(false)
             errorMessage.alert(err)
@@ -125,8 +127,29 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         } else {
             // 创建完成
             setPercentVisible(false)
-            routeProps.history.push(RouteUris.PastureAnimal(routeProps.match.params.id))
+            goToAnimalList()
         }
+    }
+
+    /**
+     * 跳转到生物列表
+     */
+    const goToAnimalList = () => {
+        routeProps.history.push(RouteUris.PastureAnimal(routeProps.match.params.id))
+    }
+
+    /**
+     * 跳转到生物详情
+     */
+    const goToAnimalDetail = () => {
+        // routeProps.history.push()
+    }
+
+    /**
+     * 跳转到生物绑定设备
+     */
+    const goToBoundDevice = () => {
+        // routeProps.history.push()
     }
 
     const nav = (
@@ -255,7 +278,7 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                                 </div>
                             </section>
 
-                            <footer className="awe-display__footer awe-action-box">
+                            <footer className="awe-display__footer awe-footer-action">
                                 <Button onClick={() => routeProps.history.goBack()}>
                                     {useLanguage.back}
                                 </Button>
@@ -269,6 +292,13 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             </AweNavPage>
 
             <AweProgress percent={percent} visible={percentVisible} />
+
+            <AnimalSuccessModal
+                visible={successVisible}
+                onMainEvent={goToBoundDevice}
+                onSubEvent={goToAnimalDetail}
+                onClose={goToAnimalList}
+            />
         </>
     )
 }

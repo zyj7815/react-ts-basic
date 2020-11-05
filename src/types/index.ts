@@ -9,6 +9,10 @@ export type SimpleModalProps = {
     visible: boolean
     loading?: boolean
 
-    onPrimary: (render?: boolean) => void
-    onOther?: (arg?: any) => void
+    // 主按的事件
+    onMainEvent: (ary?: any) => void
+    // 次要的事件
+    onSubEvent?: (arg?: any) => void
+    // 关闭
+    onClose: () => void
 }

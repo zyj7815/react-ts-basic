@@ -1,5 +1,5 @@
 import React from 'react'
-import AweLayout from '@/pages/layout/main'
+import AweLayout from '@/pages/layout'
 import { AweRouteProps } from '@/types/route'
 import { withRouter } from 'react-router-dom'
 import { pastureMenuNav } from './menu'

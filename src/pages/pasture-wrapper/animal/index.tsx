@@ -1,27 +1,33 @@
 import React from 'react'
 import { Breadcrumb, Radio, Button } from 'antd'
-import { AweNavPage } from '@/pages/layout/page-nav'
-import { PageHeaderData, PageHeaderDataItem } from '@/components/page-header-data'
+import { AweNavPage } from '@/pages/components/page-nav'
+import { PageHeaderData, PageHeaderDataItem } from '@/pages/components/page-header-data'
 import { useLanguage } from '@/language/useLanguage'
 import AnimalListTable from './list-table'
 import AnimalListCard from './list-card'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { RouteUris } from '@/router/config'
+import { TabType } from '@/enum'
 
 const TabKey = 'tabKey'
-
-enum TabType {
-    List = 'list',
-    Card = 'card',
-}
 
 const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { id } = routeProps.match.params
     const tab = Utils.getUrlParam(TabKey) || TabType.List
     const [tabKey, setTabKey] = React.useState(tab)
 
-    console.log('tab = ', tab)
+    const onChangeTab = (e: any) => {
+        Utils.pushParamsToUrl('tabKey', e.target.value)
+        setTabKey(e.target.value)
+    }
+
+    /**
+     * 新建生物
+     */
+    const handleNewAnimal = () => {
+        routeProps.history.push(RouteUris.PastureAnimalNew(id))
+    }
 
     const nav = (
         <Breadcrumb className="awe-page-breadcrumb">
@@ -39,18 +45,6 @@ const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) =
         { label: useLanguage.list_mode, value: TabType.List },
         { label: useLanguage.card_mode, value: TabType.Card },
     ]
-
-    const onChangeTab = (e: any) => {
-        Utils.pushParamsToUrl('tabKey', e.target.value)
-        setTabKey(e.target.value)
-    }
-
-    /**
-     * 新建生物
-     */
-    const handleNewAnimal = () => {
-        routeProps.history.push(RouteUris.PastureAnimalNew(id))
-    }
 
     return (
         <AweNavPage nav={nav}>

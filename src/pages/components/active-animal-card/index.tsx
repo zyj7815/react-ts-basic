@@ -9,14 +9,25 @@ import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { ServerRequest } from '@/server/request'
 import { animalProfile } from '@/assets/images'
 import './index.less'
+import ListCard from '@/pages/components/list-card/list-card'
 
 const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: AnimalProps }) => {
     const animal: AnimalProps = props.data
     const bindingStatus = ServiceTool.getBindingStatus(animal)
 
+    const action = (
+        <>
+            {bindingStatus === BindingStatus.Deploying ? (
+                <AweIcon type={aweIconType['icon-mark']} />
+            ) : (
+                <AweIcon type={aweIconType['icon-bnding']} />
+            )}
+        </>
+    )
+
     return (
-        <article className="active-animal-card-wrapper">
-            <main className="active-animal-card-main">
+        <ListCard action={action}>
+            <main className="active-animal-card">
                 <aside className="active-animal-card__avator">
                     <Avatar
                         size={40}
@@ -27,7 +38,6 @@ const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: Animal
                         }
                     />
                 </aside>
-
                 <section className="active-animal-card__content">
                     <nav className="animal-card-nickname">
                         <span className="animal-nickname">
@@ -77,16 +87,8 @@ const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: Animal
                         )}
                     </div>
                 </section>
-
-                <div className="active-animal-card__device">
-                    {bindingStatus === BindingStatus.Deploying ? (
-                        <AweIcon type={aweIconType['icon-mark']} />
-                    ) : (
-                        <AweIcon type={aweIconType['icon-bnding']} />
-                    )}
-                </div>
             </main>
-        </article>
+        </ListCard>
     )
 }
 

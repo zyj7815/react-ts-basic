@@ -18,4 +18,6 @@ export const aweIconType = {
     'icon-search2': 'icon-search2',
     'icon-map': 'icon-map',
     'icon-msg': 'icon-msg',
+    'icon-check-circle': 'icon-check-circle',
+    'icon-delete': 'icon-delete',
 }

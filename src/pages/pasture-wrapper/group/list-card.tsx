@@ -1,18 +1,17 @@
-import React from 'react'
-import axios from 'axios'
-import { Row, Col, Spin } from 'antd'
+import * as React from 'react'
+import { Row, Col } from 'antd'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import ActiveAnimalCard from '@/pages/components/active-animal-card'
-import { AnimalProps } from '@/types/animal'
+import GroupCard from '@/pages/components/group-card'
+import axios from 'axios'
 
 interface IState {
     dataSource: any[]
     loading: boolean
 }
 
-export default class AnimalListCard extends React.PureComponent<any | IState> {
+class GroupListCard extends React.Component<any, any> {
     private listContent: any = React.createRef()
     private list: any = null
 
@@ -70,7 +69,7 @@ export default class AnimalListCard extends React.PureComponent<any | IState> {
 
         try {
             const res = await axios.get(
-                Api.biological.list,
+                Api.group.list,
                 Token.pageToken(this.pageSize, (this.pageNumber - 1) * this.pageSize)
             )
             this.setState({
@@ -96,22 +95,21 @@ export default class AnimalListCard extends React.PureComponent<any | IState> {
         }
     }
 
-    render(): React.ReactNode {
+    public render(): React.ReactNode {
         return (
             <main className="awe-page-card__layout" ref={this.listContent}>
                 <Row>
-                    {this.state.dataSource.map((animal: AnimalProps) => {
+                    {this.state.dataSource.map((group: any) => {
                         return (
-                            <Col key={animal.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
-                                <ActiveAnimalCard data={animal} />
+                            <Col key={group.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
+                                <GroupCard data={group} />
                             </Col>
                         )
                     })}
                 </Row>
-                <Spin spinning={this.state.loading}>
-                    <div style={{ height: 100 }} />
-                </Spin>
             </main>
         )
     }
 }
+
+export default GroupListCard

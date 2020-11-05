@@ -1,0 +1,43 @@
+@import "../../../assets/style/color";
+
+.list-card-wrapper {
+    padding: 10px 10px 0 0;
+    
+    .list-card-content {
+        padding: 10px;
+        background: #FFF;
+        border: 2px solid #fff;
+        transition: all 300ms;
+        cursor: pointer;
+        position: relative;
+    
+        &:hover {
+            border-color: @primary-color;
+        
+            .list-card-action {
+                opacity: 1;
+            }
+        }
+    
+    
+    
+    
+        .list-card-action {
+            transition: all 300ms;
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            bottom: 0;
+            width: 26px;
+            height: 26px;
+            background: @primary-color;
+            line-height: 26px;
+            text-align: center;
+        
+            * {
+                color: #fff;
+            }
+        
+        }
+    }
+}

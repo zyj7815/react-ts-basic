@@ -27,6 +27,9 @@ export const Api = {
         list: base + 'biological/',
         searchName: (nickname: string) => `${base2}biological/search/nickname/${nickname}`,
     },
+    group: {
+        list: base + 'room/',
+    },
     image: {
         one: (biologicalId: string, id: string) => {
             return `${base2}file/biological/${biologicalId}/image/${id}`

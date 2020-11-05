@@ -27,3 +27,12 @@ export type AnimalProps = {
     beh_timestamp?: string
     survive?: number
 }
+
+export type GroupProps = {
+    id: string
+    updated_at: string
+    room_name: string
+    description: string
+    owner_id: string
+    total_biological: number
+}

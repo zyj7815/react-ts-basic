@@ -9,8 +9,8 @@ import {
     UserOutlined,
 } from '@ant-design/icons'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-import HeaderSearch from '@/pages/layout/main/header-search'
 import { useLanguage } from '@/language/useLanguage'
+import HeaderSearch from './header-search'
 
 interface HeaderProps {
     myself: MySelf

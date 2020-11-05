@@ -70,6 +70,14 @@
                     padding: 8px 16px;
                     height: @menu-height;
                 }
+    
+                .ant-table-row:nth-child(2n-1) {
+                    background: @table-grey-color;
+                    
+                    .ant-table-cell-fix-left, .ant-table-cell-fix-right {
+                        background: @table-grey-color;
+                    }
+                }
             }
             
             .awe-page__layout-footer {
@@ -112,12 +120,26 @@
 }
 
 
-.awe-action-box {
-
+// 新建、修改页面，footer中的操作
+.awe-footer-action {
     .ant-btn {
         margin-left: 10px;
     }
+}
+
+// 列表右边操作列
+.awe-table-action {
+    display: flex;
+    justify-content: space-between;
     
+    .awe-action-item {
+        cursor: pointer;
+        transition: all 400ms;
+    
+        &:hover {
+            color: @primary-color;
+        }
+    }
 }
 
 

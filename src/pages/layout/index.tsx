@@ -2,10 +2,10 @@ import React from 'react'
 import LayoutHeader from './header'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { RenderRoutes } from '@/router/RenderRoutes'
+import { RenderRoutes } from '../../router/RenderRoutes'
 import { currentOpenKey, currentSubOpenKey } from './utils'
-import { Utils } from '@/utils'
-import { useRootStore } from '@/provider'
+import { Utils } from '../../utils'
+import { useRootStore } from '../../provider'
 import { observer } from 'mobx-react'
 import {
     LeftCircleOutlined,

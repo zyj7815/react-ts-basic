@@ -10,13 +10,17 @@ import GroupListTable from '@/pages/pasture-wrapper/group/list-table'
 import GroupListCard from '@/pages/pasture-wrapper/group/list-card'
 import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
 import { GroupProps } from '@/types/animal'
+import GroupListCard1 from '@/pages/pasture-wrapper/group/list-card1'
+import { RouteUris } from '@/router/config'
 
 const TabKey = 'tabKey'
 
 const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const { id } = routeProps.match.params
     const tab = Utils.getUrlParam(TabKey) || TabType.List
     const [tabKey, setTabKey] = React.useState(tab)
     const [visible, setVisible] = React.useState(false)
+    const [newGroup, setNewGroup] = React.useState<GroupProps | null>(null)
 
     /**
      * 切换列表
@@ -39,6 +43,32 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      */
     const onNewGroupSuccess = (group: GroupProps) => {
         setVisible(false)
+        setNewGroup(group)
+        setTimeout(() => {
+            setNewGroup(null)
+        }, 1000)
+    }
+
+    /**
+     * 查看分组详情
+     * @param group
+     */
+    const onCheckGroup = (group: GroupProps) => {
+        console.log(group)
+        routeProps.history.push(RouteUris.PastureGroupDetail(id, group.id))
+    }
+
+    /**
+     * 编辑分组
+     * @param group
+     */
+    const onEditGroup = (group: GroupProps) => {
+        console.log(group)
+        routeProps.history.push(RouteUris.PastureGroupEdit(id, group.id))
+    }
+
+    const onDeleteGroup = (group: GroupProps) => {
+        console.log(group)
     }
 
     const nav = (
@@ -78,7 +108,20 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                         </header>
 
                         <section className="awe-page__layout-content">
-                            {tabKey === TabType.List ? <GroupListTable /> : <GroupListCard />}
+                            {tabKey === TabType.List ? (
+                                <GroupListTable
+                                    newGroup={newGroup}
+                                    onEditGroup={onEditGroup}
+                                    onCheckGroup={onCheckGroup}
+                                    onDeleteGroup={onDeleteGroup}
+                                />
+                            ) : (
+                                <GroupListCard1
+                                    newGroup={newGroup}
+                                    onCheckGroup={onCheckGroup}
+                                    onDeleteGroup={onDeleteGroup}
+                                />
+                            )}
                         </section>
                     </main>
                 </section>

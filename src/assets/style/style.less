@@ -1,17 +1,11 @@
-@import "~antd/lib/style/themes/default.less";
-@import "~antd/dist/antd.less";
-@import "./reset.css";
-@import "./color.less";
-@import "./layout";
-@import "./iconfont";
-@import "./beauty";
 
-/**
-* 通过Symbol引入的图标，svg标签都有fill属性，会导致修改不了图标颜色
-* 解决：部分iconfont的图标手动设置颜色
-*/
-svg path {
-    fill: currentColor;
+#root {
+    height: 100%;
+    
+    .ant-layout {
+        height: 100%;
+    }
+    
 }
 
 
@@ -24,12 +18,18 @@ svg path {
     }
 }
 
+/**
+* 通过Symbol引入的图标，svg标签都有fill属性，会导致修改不了图标颜色
+* 解决：部分iconfont的图标手动设置颜色
+*/
+svg path {
+    fill: currentColor;
+}
 
-#root {
-    height: 100%;
-    
-    .ant-layout {
-        height: 100%;
-    }
-    
+
+
+
+
+.awe-page-breadcrumb {
+    padding: 5px 0;
 }

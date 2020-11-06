@@ -16,4 +16,14 @@ export const mainMenuNav: IMenuNav[] = [
         icon: aweIconType['icon-device'],
         level: 1,
     },
+    {
+        title: useLanguage.user_center,
+        uri: RouteUris.MainAccount,
+        level: 1,
+    },
+    {
+        title: useLanguage.company,
+        uri: RouteUris.MainCompany,
+        level: 1,
+    },
 ]

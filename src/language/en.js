@@ -625,6 +625,15 @@ const en = {
     five_m_cancel: 'The process cannot be cancelled in 5 minutes.',
     enter_valid_params: 'Please enter valid parameters',
 
+    pasture_list: 'Pasture List',
+    pasture_name: 'Name',
+    type: 'Type',
+    current_archived: '当前/归档生物',
+    device_num: 'Number',
+    waiting_event_num: '待处理事件数',
+    new_pasture: 'New',
+    company: 'Company',
+
     months: [
         'January',
         'February',

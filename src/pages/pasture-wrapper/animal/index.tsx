@@ -4,7 +4,7 @@ import { AweNavPage } from '@/pages/components/page-nav'
 import { PageHeaderData, PageHeaderDataItem } from '@/pages/components/page-header-data'
 import { useLanguage } from '@/language/useLanguage'
 import AnimalListTable from './list-table'
-import AnimalListCard from './list-card'
+import AnimalListCard1 from './list-card1'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { RouteUris } from '@/router/config'
@@ -68,7 +68,7 @@ const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) =
                         </header>
 
                         <section className="awe-page__layout-content">
-                            {tabKey === TabType.List ? <AnimalListTable /> : <AnimalListCard />}
+                            {tabKey === TabType.List ? <AnimalListTable /> : <AnimalListCard1 />}
                         </section>
                     </main>
                 </section>

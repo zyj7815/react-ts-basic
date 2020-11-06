@@ -29,6 +29,9 @@ export const Api = {
     },
     group: {
         list: base + 'room/',
+        detail: (id: string) => `${base}room/id/${id}`,
+        biological: (id: string) => `${base}room/id/${id}/biological`,
+        idle: base2 + 'biological/room/idle',
     },
     image: {
         one: (biologicalId: string, id: string) => {

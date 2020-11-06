@@ -26,23 +26,35 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureAnimalNew(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/animal/new-animal')
+                        ),
+                        name: 'pasture-wrapper-animal-new',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureGroup(),
                         component: loadable(() => import('@/pages/pasture-wrapper/group')),
                         name: 'pasture-wrapper-group',
                         exact: true,
                     },
                     {
-                        path: RouteUris.PastureFence(),
-                        component: loadable(() => import('@/pages/pasture-wrapper/fence')),
-                        name: 'pasture-wrapper-fence',
+                        path: RouteUris.PastureGroupDetail(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/group/detail')),
+                        name: 'pasture-wrapper-group-detail',
                         exact: true,
                     },
                     {
-                        path: RouteUris.PastureAnimalNew(),
-                        component: loadable(() =>
-                            import('@/pages/pasture-wrapper/animal/new-animal')
-                        ),
-                        name: 'pasture-wrapper-animal-new',
+                        path: RouteUris.PastureGroupEdit(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/group/edit')),
+                        name: 'pasture-wrapper-group-edit',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureFence(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/fence')),
+                        name: 'pasture-wrapper-fence',
                         exact: true,
                     },
                 ],
@@ -63,6 +75,16 @@ export const routes: RouteInterface[] = [
                         component: loadable(() => import('@/pages/main-wrapper/device')),
                         name: 'main-wrapper-device',
                         exact: true,
+                    },
+                    {
+                        path: RouteUris.MainAccount,
+                        component: loadable(() => import('@/pages/main-wrapper/account')),
+                        name: 'main-wrapper-account',
+                    },
+                    {
+                        path: RouteUris.MainCompany,
+                        component: loadable(() => import('@/pages/main-wrapper/company')),
+                        name: 'main-wrapper-company',
                     },
                 ],
             },

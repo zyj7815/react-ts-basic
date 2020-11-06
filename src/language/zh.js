@@ -545,7 +545,7 @@ const zh = {
     inventory_animal: '在栏生物数量',
     fence_list: '围栏列表',
     group_total: '分组总数',
-    created_date: '创建日期',
+    created_date: '创建时间',
     view: '查看',
     associated_biological_number: '关联生物数',
     herd_management: '牧群管理',
@@ -621,6 +621,15 @@ const zh = {
     inventory_start: '盘点开始5分钟内不可取消，是否继续？',
     five_m_cancel: '盘点开始后5分钟内不可取消',
     enter_valid_params: '请输入有效的参数',
+
+    pasture_list: '牧场列表',
+    pasture_name: '牧场名称',
+    type: '类型',
+    current_archived: '当前/归档生物',
+    device_num: '设备数量',
+    waiting_event_num: '待处理事件数',
+    new_pasture: '新建牧场',
+    company: '公司信息',
 
     months: [
         '一月',

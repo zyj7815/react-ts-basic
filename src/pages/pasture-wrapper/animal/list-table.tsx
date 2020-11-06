@@ -18,6 +18,9 @@ const AnimalListTable: React.FC = props => {
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [dataSource, setDataSource] = React.useState<any[]>([])
     const scrollY = useWindowSize() - 380
+    // 将【页码】和【条数】放到url中，pageSize=10&pageNumber=1，这样在返回页面时可以直接请求上一次的url
+    // 在url中获取页码和条数
+    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
 
     React.useEffect(() => {
         fetchData()
@@ -30,10 +33,6 @@ const AnimalListTable: React.FC = props => {
         setLoading(true)
 
         try {
-            // 将【页码】和【条数】放到url中，pageSize=10&pageNumber=1，这样在返回页面时可以直接请求上一次的url
-            // 在url中获取页码和条数
-            let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
-
             const res = await axios.get(
                 Api.biological.list,
                 Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
@@ -59,8 +58,6 @@ const AnimalListTable: React.FC = props => {
         })
         setForceUpdate(!forceUpdate)
     }
-
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
 
     return (
         <Layout>

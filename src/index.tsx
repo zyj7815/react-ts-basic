@@ -8,7 +8,7 @@ import enUS from 'antd/es/locale/en_US'
 import dayjs from 'dayjs'
 import { ConfigProvider } from 'antd'
 import { Language } from '@/language'
-import '@/assets/style/style.less'
+import '@/assets/style/index.less'
 
 dayjs.extend(require('dayjs/plugin/utc'))
 

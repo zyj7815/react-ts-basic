@@ -9,7 +9,7 @@ import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { ServerRequest } from '@/server/request'
 import { animalProfile } from '@/assets/images'
 import './index.less'
-import ListCard from '@/pages/components/list-card/list-card'
+import CardItem from '@/pages/components/card-item-wrapper'
 
 const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: AnimalProps }) => {
     const animal: AnimalProps = props.data
@@ -26,7 +26,7 @@ const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: Animal
     )
 
     return (
-        <ListCard action={action}>
+        <CardItem action={action}>
             <main className="active-animal-card">
                 <aside className="active-animal-card__avator">
                     <Avatar
@@ -88,7 +88,7 @@ const ActiveAnimalCard: React.FC<{ data: AnimalProps }> = (props: { data: Animal
                     </div>
                 </section>
             </main>
-        </ListCard>
+        </CardItem>
     )
 }
 

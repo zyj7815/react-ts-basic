@@ -3,7 +3,7 @@ import { Row, Col } from 'antd'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import GroupCard from '@/pages/components/group-card'
+import GroupCard from '@/pages/pasture-wrapper/group/group-card'
 import axios from 'axios'
 
 interface IState {

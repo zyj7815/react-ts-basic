@@ -3,19 +3,49 @@
 @radio-height: 52px;
 @aweDisplayFooter: 64px;
 
-.dr-layout-wrapper {
+
+.awe-normal-page {
     padding: 10px;
+    background: @basic-color;
+    height: 100%;
     
-    .dr-layout-breadcrumb {
-        background: inherit;
-    }
+     .awe-normal-main {
+         height: 100%;
+         position: relative;
+         padding: 50px 0;
+         
+         .awe-normal__header {
+             z-index: 2;
+             position: absolute;
+             top: 0;
+             width: 100%;
+             height: 50px;
+             display: flex;
+             align-items: center;
+             justify-content: space-between;
+             background: #fff;
+             padding: 0 15px;
+         }
+         
+         .awe-normal__content {
+         
+             height: 100%;
+             background: #FFF;
+         }
+         
+         .awe-normal__footer {
+             position: absolute;
+             bottom: 0;
+             width: 100%;
+             display: flex;
+             justify-content: flex-end;
+             align-items: center;
+             height: 50px;
+         }
+         
+     }
 }
 
-
-
-.awe-page-breadcrumb {
-    padding: 5px 0;
-}
 
 
 
@@ -62,22 +92,7 @@
                 overflow-y: auto;
                 background: @basic-color;
                 
-                .ant-table-thead > tr > th {
-                    padding: 13px 16px 12px;
-                }
-    
-                .ant-table-tbody > tr > td {
-                    padding: 8px 16px;
-                    height: @menu-height;
-                }
-    
-                .ant-table-row:nth-child(2n-1) {
-                    background: @table-grey-color;
-                    
-                    .ant-table-cell-fix-left, .ant-table-cell-fix-right {
-                        background: @table-grey-color;
-                    }
-                }
+          
             }
             
             .awe-page__layout-footer {
@@ -95,7 +110,7 @@
 }
 
 
-
+// 常见于form详情页
 .awe-display {
     
     height: 100%;
@@ -120,33 +135,11 @@
 }
 
 
-// 新建、修改页面，footer中的操作
-.awe-footer-action {
-    .ant-btn {
-        margin-left: 10px;
-    }
-}
-
-// 列表右边操作列
-.awe-table-action {
-    display: flex;
-    justify-content: space-between;
-    
-    .awe-action-item {
-        cursor: pointer;
-        transition: all 400ms;
-    
-        &:hover {
-            color: @primary-color;
-        }
-    }
-}
-
-
 .awe-display-inner {
     height: 100%;
-    padding-top: 55px;
+    padding-top: 50px;
     overflow-y: auto;
+    background: #fff;
     
     .awe-display-inner__header {
         z-index: 10;
@@ -162,6 +155,30 @@
         border-bottom: 1px solid @grey-line-color;
     }
     
+}
+
+
+// 新建、修改页面，footer中的操作
+.awe-footer-action {
+    .ant-btn {
+        margin-left: 10px;
+    }
+}
+
+
+// 列表右边操作列
+.awe-table-action {
+    display: flex;
+    justify-content: space-between;
+    
+    .awe-action-item {
+        cursor: pointer;
+        transition: all 400ms;
+    
+        &:hover {
+            color: @primary-color;
+        }
+    }
 }
 
 
@@ -193,6 +210,12 @@
 }
 
 
+.awe-form-align-left {
+    
+    .ant-form-item-label {
+        text-align: left;
+    }
+}
 
 
 .single-battery-wrapper {
@@ -205,6 +228,7 @@
         height: 20px;
     }
 }
+
 
 .action-box {
     display: flex;

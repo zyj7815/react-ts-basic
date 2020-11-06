@@ -6,7 +6,7 @@ interface ListCardProps {
     action?: React.ReactNode
 }
 
-const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
+const CardItem: React.FC<ListCardProps> = (props: ListCardProps) => {
     return (
         <main className="list-card-wrapper">
             <article className="list-card-content beauty-radius beauty-shadow">
@@ -18,4 +18,4 @@ const ListCard: React.FC<ListCardProps> = (props: ListCardProps) => {
     )
 }
 
-export default ListCard
+export default CardItem

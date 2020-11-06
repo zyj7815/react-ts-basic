@@ -2,19 +2,17 @@
 
 
 
-
-
 .awe-layout-wrapper {
+    height: 100%;
+    
+    .ant-layout-content {
+        height: 100%;
+    }
     
     .layout-wrapper-header {
-        padding: 0 20px;
         background: @primary-color;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
         overflow: hidden;
-        
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         z-index: 2;
         
         .layout-header-content {
@@ -72,6 +70,7 @@
     
     
     .layout-wrapper-content {
+        height: 100%;
     
         // 菜单
         .ant-menu {
@@ -166,7 +165,7 @@
 @media screen and (max-width: 760px) {
     
     .layout-wrapper-header {
-        .awe-search-oval {
+        .header-search-oval {
             display: none;
         }
     }

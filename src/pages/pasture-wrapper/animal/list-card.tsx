@@ -5,7 +5,7 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import ActiveAnimalCard from '@/pages/components/active-animal-card'
-import { AnimalProps } from '@/types/animal'
+import { AnimalProps } from '@/types/common'
 
 interface IState {
     dataSource: any[]

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { AnimalProps } from '@/types/animal'
+import { AnimalProps } from '@/types/common'
 
 const AnimalListCard1: React.FC = props => {
     const pageSize = 20

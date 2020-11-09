@@ -24,8 +24,11 @@ export const RouteUris = {
     // 公司信息
     MainCompany: '/root/company',
 
-    // 牧场详情（生物详情）
+    // 牧场详情（牧场总览）
     PastureWrapper: (id = ROUTE_ID) => `/root/pasture/${id}`,
+
+    // 牧场总览
+    PastureOverview: (id = ROUTE_ID) => `/root/pasture/${id}/pasture`,
 
     // 生物列表
     PastureAnimal: (id = ROUTE_ID) => `/root/pasture/${id}/animal`,

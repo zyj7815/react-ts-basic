@@ -1,5 +1,5 @@
 import React from 'react'
-import { GroupProps } from '@/types/animal'
+import { GroupProps } from '@/types/common'
 
 interface GroupListProps {
     groupList: GroupProps[]

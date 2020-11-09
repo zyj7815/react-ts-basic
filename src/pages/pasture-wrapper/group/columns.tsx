@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils'
-import { GroupProps } from '@/types/animal'
+import { GroupProps } from '@/types/common'
 
 interface GroupColumnsProps {
     onCheckGroup: (group: GroupProps) => void

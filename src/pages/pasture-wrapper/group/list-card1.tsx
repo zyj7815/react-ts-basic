@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { GroupProps } from '@/types/animal'
+import { GroupProps } from '@/types/common'
 
 interface GroupListCardProps {
     newGroup: GroupProps | null

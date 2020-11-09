@@ -20,6 +20,11 @@ export const routes: RouteInterface[] = [
                 name: 'pasture-wrapper',
                 routes: [
                     {
+                        path: RouteUris.PastureOverview(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/overview')),
+                        name: 'pasture-wrapper-overview',
+                    },
+                    {
                         path: RouteUris.PastureAnimal(),
                         component: loadable(() => import('@/pages/pasture-wrapper/animal')),
                         name: 'pasture-wrapper-animal',

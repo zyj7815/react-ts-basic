@@ -1,6 +1,6 @@
 import React from 'react'
 import { Avatar } from 'antd'
-import { AnimalProps } from '@/types/animal'
+import { AnimalProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useLanguage } from '@/language/useLanguage'
 import { BindingStatus } from '@/enum/device'

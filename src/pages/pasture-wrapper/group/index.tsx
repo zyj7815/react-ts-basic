@@ -9,7 +9,7 @@ import { AweNavPage } from '@/pages/components/page-nav'
 import GroupListTable from '@/pages/pasture-wrapper/group/list-table'
 import GroupListCard from '@/pages/pasture-wrapper/group/list-card'
 import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
-import { GroupProps } from '@/types/animal'
+import { GroupProps } from '@/types/common'
 import GroupListCard1 from '@/pages/pasture-wrapper/group/list-card1'
 import { RouteUris } from '@/router/config'
 

@@ -1,11 +1,23 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
+import { PastureProps } from '@/types/common'
 
-export const pastureColumns = () => {
+type PastureColumnsProps = {
+    onCheckPasture: (pasture: PastureProps) => void
+}
+
+export const pastureColumns = (events: PastureColumnsProps) => {
     return [
         {
             title: useLanguage.pasture_name,
-            dataIndex: 'name',
+            dataIndex: 'nickname',
+            render(name: string, record: PastureProps) {
+                return (
+                    <span className="awe-action-item" onClick={() => events.onCheckPasture(record)}>
+                        {name}
+                    </span>
+                )
+            },
         },
         {
             title: useLanguage.type,

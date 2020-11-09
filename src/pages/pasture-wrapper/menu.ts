@@ -5,6 +5,12 @@ import { aweIconType } from '@/assets/iconfont'
 
 export const pastureMenuNav = (id: string): IMenuNav[] => [
     {
+        title: useLanguage.homepage,
+        uri: RouteUris.PastureOverview(id),
+        icon: aweIconType['icon-biological'],
+        level: 1,
+    },
+    {
         title: useLanguage.animal,
         uri: RouteUris.PastureAnimal(id),
         icon: aweIconType['icon-biological'],

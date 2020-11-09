@@ -9,7 +9,7 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { groupColumns } from '@/pages/pasture-wrapper/group/columns'
-import { GroupProps } from '@/types/animal'
+import { GroupProps } from '@/types/common'
 
 const { Content, Footer } = Layout
 

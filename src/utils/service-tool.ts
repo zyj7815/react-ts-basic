@@ -2,9 +2,9 @@ import { singleIcon } from '@/assets/images/signal'
 import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils/index'
-import { urlParams } from '@/types/url'
-import { AnimalProps } from '@/types/animal'
+import { AnimalProps } from '@/types/common'
 import { BindingStatus } from '@/enum/device'
+import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 
 /**
  * 业务相关的事务
@@ -99,12 +99,9 @@ export const ServiceTool = {
      * 从url中获取翻页相关的参数
      */
     getPageFromUrl() {
-        let { pageNumber, pageSize } = Utils.getUrlMultiParam([
-            urlParams.pageNumber,
-            urlParams.pageSize,
-        ])
+        let { pageNumber, pageSize } = Utils.getUrlMultiParam([_URL_PAGE_SIZE_, _URL_PAGE_NUMBER_])
         // 没有值就取默认参数
-        pageSize = Utils.hasExist(pageSize) ? parseInt(pageSize, 10) : urlParams.defaultPageSize
+        pageSize = Utils.hasExist(pageSize) ? parseInt(pageSize, 10) : _URL_DEFAULT_PAGE_SIZE_
         pageNumber = Utils.hasExist(pageNumber) ? parseInt(pageNumber, 10) : 1
 
         return {

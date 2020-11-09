@@ -81,12 +81,12 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
 
                 <AweIcon type={aweIconType['icon-logo-druid-fullname']} className="header-logo" />
 
-                <HeaderSearch placeholder="搜索牧场" />
-
                 {grid}
             </div>
 
             <nav className="layout-header-content">
+                <HeaderSearch placeholder="搜索牧场" />
+
                 <AweIcon type={aweIconType['icon-map']} className="header-icon" />
                 <AweIcon type={aweIconType['icon-msg']} className="header-icon" />
                 <Dropdown overlay={userMenu} trigger={['hover']}>

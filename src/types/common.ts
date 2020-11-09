@@ -36,3 +36,8 @@ export type GroupProps = {
     owner_id: string
     total_biological: number
 }
+
+export type PastureProps = {
+    id: string
+    name: string
+}

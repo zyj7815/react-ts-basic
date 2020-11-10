@@ -132,3 +132,22 @@ template {
     display: none;
 }
 
+
+/*控制整个滚动条*/
+::-webkit-scrollbar {
+    background-color: rgba(233, 233, 233, .7);
+    width: 7px;
+    height: 7px;
+    background-clip: padding-box;
+}
+
+/*滚动条中间滑动部分*/
+::-webkit-scrollbar-thumb {
+    background-color: rgba(106, 106, 106, .3);
+    border-radius: 2px;
+}
+
+/*滚动条右下角区域*/
+::-webkit-scrollbar-corner {
+    background-color: #8c8c8c;
+}

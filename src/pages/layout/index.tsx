@@ -94,18 +94,22 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
 
     return (
         <Layout className="awe-layout-wrapper">
-            <Header className="layout-wrapper-header">
+            <Header className="awe-layout-wrapper__header">
                 <LayoutHeader myself={myself} collapsed={collapsed} setCollapsed={setCollapsed} />
             </Header>
 
             <Content>
-                <Layout className="layout-wrapper-content">
+                <Layout className="awe-layout-wrapper__content">
                     <Sider
                         theme="light"
                         collapsed={collapsed}
                         onCollapse={(collapsed: any) => setCollapsed(collapsed)}
                         className="layout-sidebar"
                     >
+                        <header className="awe-layout-wrapper__content--operation">
+                            {props.children}
+                        </header>
+
                         <Menu
                             mode="inline"
                             theme="light"

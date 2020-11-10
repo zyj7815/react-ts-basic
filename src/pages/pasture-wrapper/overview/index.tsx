@@ -12,28 +12,14 @@ const PastureOver: React.FC = props => {
         <div className="awe-normal-page">
             <main className="pasture-overview-wrapper">
                 <Row gutter={[12, 0]} style={{ height: '100%' }}>
-                    <Col xs={24} sm={24} md={24} lg={14} xl={15}>
-                        <Row gutter={[12, 12]} style={{ height: '100%' }}>
-                            <Col span={24}>
-                                <OverviewMap />
-                            </Col>
-                            <Col span={24}>
-                                <OverviewAnimal />
-                            </Col>
-                        </Row>
+                    <Col xs={24} sm={24} md={24} lg={14} xl={15} xxl={17}>
+                        <OverviewMap />
+                        <OverviewAnimal />
                     </Col>
-                    <Col xs={24} sm={24} md={24} lg={10} xl={9}>
-                        <Row gutter={[12, 12]} style={{ height: '100%' }}>
-                            <Col span={24} style={{ height: '38%' }}>
-                                <OverviewWeather />
-                            </Col>
-                            <Col span={24} style={{ height: '35%' }}>
-                                <OverviewEvent />
-                            </Col>
-                            <Col span={24} style={{ height: '27%' }}>
-                                <OverviewMessage />
-                            </Col>
-                        </Row>
+                    <Col xs={24} sm={24} md={24} lg={10} xl={9} xxl={7}>
+                        <OverviewWeather />
+                        <OverviewEvent />
+                        <OverviewMessage />
                     </Col>
                 </Row>
             </main>

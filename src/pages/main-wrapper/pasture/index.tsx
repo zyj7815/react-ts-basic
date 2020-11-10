@@ -57,6 +57,17 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
+    /**
+     * 新建牧场
+     */
+    const handleNewPasture = () => {
+        routeProps.history.push(RouteUris.MainPastureNew)
+    }
+
+    /**
+     * 查看牧场详情
+     * @param pasture
+     */
     const handleDetail = (pasture: PastureProps) => {
         routeProps.history.push(RouteUris.PastureOverview(pasture.id))
     }
@@ -66,7 +77,9 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             <main className="awe-normal-main">
                 <header className="awe-normal__header beauty-shadow">
                     <span>{useLanguage.pasture_list}</span>
-                    <Button icon={<PlusCircleOutlined />}>{useLanguage.new_pasture}</Button>
+                    <Button icon={<PlusCircleOutlined />} onClick={handleNewPasture}>
+                        {useLanguage.new_pasture}
+                    </Button>
                 </header>
 
                 <section className="awe-normal__content">

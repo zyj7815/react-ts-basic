@@ -15,6 +15,9 @@ export const RouteUris = {
     // 牧场详情
     MainPasture: '/root',
 
+    // 新建牧场
+    MainPastureNew: '/root/new-pasture',
+
     // 设备信息
     MainDevice: '/root/device',
 
@@ -25,29 +28,29 @@ export const RouteUris = {
     MainCompany: '/root/company',
 
     // 牧场详情（牧场总览）
-    PastureWrapper: (id = ROUTE_ID) => `/root/pasture/${id}`,
+    PastureWrapper: (id = ROUTE_ID) => `/root/pasture-detail/${id}`,
 
     // 牧场总览
-    PastureOverview: (id = ROUTE_ID) => `/root/pasture/${id}/pasture`,
+    PastureOverview: (id = ROUTE_ID) => `/root/pasture-detail/${id}/pasture`,
 
     // 生物列表
-    PastureAnimal: (id = ROUTE_ID) => `/root/pasture/${id}/animal`,
+    PastureAnimal: (id = ROUTE_ID) => `/root/pasture-detail/${id}/animal`,
 
     // 生物 - 新建
-    PastureAnimalNew: (id = ROUTE_ID) => `/root/pasture/${id}/animal/new`,
+    PastureAnimalNew: (id = ROUTE_ID) => `/root/pasture-detail/${id}/animal/new`,
 
     // 分组列表
-    PastureGroup: (id = ROUTE_ID) => `/root/pasture/${id}/group`,
+    PastureGroup: (id = ROUTE_ID) => `/root/pasture-detail/${id}/group`,
 
     // 分组 - 详情
     PastureGroupDetail: (id = ROUTE_ID, groupId = GROUP_ID) => {
-        return `/root/pasture/${id}/group/${groupId}/detail`
+        return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
     // 分组 - 编辑
     PastureGroupEdit: (id = ROUTE_ID, groupId = GROUP_ID) => {
-        return `/root/pasture/${id}/group/${groupId}/edit`
+        return `/root/pasture-detail/${id}/group/${groupId}/edit`
     },
 
-    PastureFence: (id = ROUTE_ID) => `/root/pasture/${id}/fence`,
+    PastureFence: (id = ROUTE_ID) => `/root/pasture-detail/${id}/fence`,
 }

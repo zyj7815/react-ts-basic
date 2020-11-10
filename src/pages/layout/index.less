@@ -9,7 +9,7 @@
         height: 100%;
     }
     
-    .layout-wrapper-header {
+    .awe-layout-wrapper__header {
         background: @primary-color;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
         overflow: hidden;
@@ -69,8 +69,20 @@
     }
     
     
-    .layout-wrapper-content {
+    .awe-layout-wrapper__content {
         height: 100%;
+        
+        .awe-layout-wrapper__content--operation {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+    
+            .anticon {
+                color: @primary-color;
+            }
+        }
     
         // 菜单
         .ant-menu {
@@ -165,7 +177,7 @@
 
 @media screen and (max-width: 760px) {
     
-    .layout-wrapper-header {
+    .awe-layout-wrapper__header {
         .header-search-oval {
             display: none;
         }
@@ -174,7 +186,7 @@
 
 @media screen and (max-width: 560px) {
     
-    .layout-wrapper-header {
+    .awe-layout-wrapper__header {
         .header-icon {
             display: none;
         }

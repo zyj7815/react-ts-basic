@@ -22,10 +22,12 @@ export const Api = {
     login: base + 'login',
     myself: base + 'user/myself',
     customize: (id: string) => `${base2}customize/company/${id}`,
+    event: base2 + 'biological_event/',
     biological: {
         new: base2 + 'biological/',
         list: base + 'biological/',
         searchName: (nickname: string) => `${base2}biological/search/nickname/${nickname}`,
+        event: (id: string) => `${base2}biological_event/biological/${id}`,
     },
     group: {
         list: base + 'room/',

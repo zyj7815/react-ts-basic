@@ -20,4 +20,6 @@ export const aweIconType = {
     'icon-msg': 'icon-msg',
     'icon-check-circle': 'icon-check-circle',
     'icon-delete': 'icon-delete',
+    'icon-zuojiantou': 'icon-zuojiantou',
+    'icon-youjiantou': 'icon-youjiantou',
 }

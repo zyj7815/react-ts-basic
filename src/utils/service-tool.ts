@@ -3,7 +3,7 @@ import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils/index'
 import { AnimalProps } from '@/types/common'
-import { BindingStatus } from '@/enum/device'
+import { AbnormalType, BindingStatus } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 
 /**
@@ -124,6 +124,23 @@ export const ServiceTool = {
         } else {
             // 未绑定的
             return BindingStatus.Undeploy
+        }
+    },
+
+    /**
+     * 异常状态
+     * @param type
+     */
+    getAbnormalEvent(type: AbnormalType) {
+        switch (type) {
+            case AbnormalType.AbnormalActivity:
+                return useLanguage.activity_abnormal
+            case AbnormalType.AbnormalEating:
+                return useLanguage.eating_abnormal
+            case AbnormalType.AbnormalRuminate:
+                return useLanguage.ruminate_abnormal
+            default:
+                return useLanguage.activity_abnormal
         }
     },
 }

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Row, Col } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { getAMapWeather } from '@/utils/weather'
+import { getWeatherIcon } from '@/assets/images/weather'
+import { Utils } from '@/utils'
 
 const OverviewWeather: React.FC = props => {
     const [todayWeather, setTodayWeather] = React.useState<any>(null)
@@ -15,38 +17,63 @@ const OverviewWeather: React.FC = props => {
     const fetchData = async () => {
         try {
             const data = await getAMapWeather()
-            console.log(data)
             setTodayWeather(data.forecasts[0])
             setCity(`${data.province}${data.city}`)
+            setWeatherList([
+                {
+                    date: useLanguage.tomorrow,
+                    temperature: `${data.forecasts[1].nightTemp}~${data.forecasts[1].dayTemp}`,
+                },
+                {
+                    date: useLanguage.the_day_after_tomorrow,
+                    temperature: `${data.forecasts[2].nightTemp}~${data.forecasts[2].dayTemp}`,
+                },
+                {
+                    date: Utils.utc2Time(data.forecasts[3].date, 'MM月DD日'),
+                    temperature: `${data.forecasts[3].nightTemp}~${data.forecasts[3].dayTemp}`,
+                },
+            ])
         } catch (e) {
             console.log(e)
         }
     }
 
     return (
-        <div className="pasture-overview-item">
-            <Card title={useLanguage.weather}>
+        <div className="pasture-overview-item beauty-shadow" style={{ height: '33%' }}>
+            <header className="pasture-overview-item__header">{useLanguage.weather}</header>
+            <section className="pasture-overview-item__content">
                 <main className="pasture-overview-weather">
                     {todayWeather && (
-                        <section className="pasture-weather__content">
-                            <aside className="today-weather-icon">qwdqwd</aside>
+                        <Row className="pasture-weather__content">
+                            <Col className="today-weather-icon" xs={8} sm={8} md={7} lg={9} xl={8}>
+                                <img src={getWeatherIcon(todayWeather.dayWeather)} alt="" />
+                            </Col>
 
-                            <div className="today-weather-content">
-                                <div>{todayWeather.dayWeather}</div>
+                            <Col className="today-weather-content">
                                 <div>
+                                    <strong>{todayWeather.dayWeather}</strong>
+                                </div>
+
+                                <strong className="today-weather-content__temperature">
                                     {todayWeather.nightTemp}℃ ~ {todayWeather.dayTemp}℃
+                                </strong>
+                                <div className="today-weather-content__wind">
+                                    {todayWeather.dayWindDir}风 {todayWeather.dayWindPower}
                                 </div>
-                                <div>
-                                    {todayWeather.dayWindDir} {todayWeather.dayWindPower}
-                                </div>
-                                <div>{city}</div>
-                            </div>
-                        </section>
+                                <div className="today-weather-content__city">{city}</div>
+                            </Col>
+                        </Row>
                     )}
-
-                    <footer className="pasture-weather__more">footer</footer>
+                    <footer className="pasture-weather__more">
+                        {weatherList.map((weather: any, index: number) => (
+                            <main key={index} className="pasture-weather__more-item">
+                                <header>{weather.date}</header>
+                                <article>{weather.temperature}℃</article>
+                            </main>
+                        ))}
+                    </footer>
                 </main>
-            </Card>
+            </section>
         </div>
     )
 }

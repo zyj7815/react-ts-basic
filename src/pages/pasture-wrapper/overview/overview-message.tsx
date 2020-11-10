@@ -1,17 +1,15 @@
 import React from 'react'
-import { Card } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 
 const OverviewMessage: React.FC = props => {
     return (
-        <div className="pasture-overview-item">
-            <Card title={useLanguage.weather}>
-                <main className="pasture-overview-main">
-                    <section className="pasture-weather__content">section</section>
-
-                    <footer className="pasture-weather__more">footer</footer>
-                </main>
-            </Card>
+        <div className="pasture-overview-item beauty-shadow" style={{ height: '31%' }}>
+            <header className="pasture-overview-item__header">
+                {useLanguage.message_notification}
+            </header>
+            <section className="pasture-overview-item__content">
+                <main className="pasture-overview-message">dqwd</main>
+            </section>
         </div>
     )
 }

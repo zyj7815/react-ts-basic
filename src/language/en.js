@@ -625,6 +625,18 @@ const en = {
     five_m_cancel: 'The process cannot be cancelled in 5 minutes.',
     enter_valid_params: 'Please enter valid parameters',
 
+    next_step: 'Next',
+    last_step: 'Previous',
+    select_sence: 'Sence',
+    enter_info: 'Information',
+    select_locaiton: 'Location',
+    finish: 'Finish',
+    pasture_type: '牧场类型',
+    captivity_pasture: '圈养牧场',
+    free_range_pasture: '散养牧场',
+    inventory_free_range_pasture: '盘点散养牧场',
+    free_range_captivity_pasture: '散圈养养牧场',
+
     pasture_list: 'Pasture List',
     pasture_name: 'Name',
     type: 'Type',
@@ -633,6 +645,10 @@ const en = {
     waiting_event_num: '待处理事件数',
     new_pasture: 'New',
     company: 'Company',
+    tomorrow: 'Tomorrow',
+    the_day_after_tomorrow: 'After tomorrow',
+    abnormal_event: 'Abnormal Events',
+    abnormal_event_number: 'Number of events',
 
     months: [
         'January',

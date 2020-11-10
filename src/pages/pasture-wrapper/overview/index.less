@@ -2,32 +2,96 @@
 
 .pasture-overview-wrapper {
     
-    height: 100%;
+    position: relative;
+    height: 99%;
     
     .pasture-overview-item {
         background: #fff;
-        height: 100%;
+        position: relative;
+        padding-top: 45px;
+        margin-bottom: 15px;
         
-        .ant-card {
+        .pasture-overview-item__header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid @grey-line-color;
+            font-size: 16px;
+            color: @light-dark-color;
+        }
+        
+        .pasture-overview-item__content {
             height: 100%;
-            padding-bottom: 40px;
-            
-            .ant-card-head {
-                height: 40px;
-                
-                .ant-card-head-title {
-                    padding: 12px 0;
-                    color: @light-dark-color;
-                }
+        }
+    }
+}
+
+#pasture-overview-map {
+    height: 53%;
+    padding-top: 72px;
+    
+    .pasture-overview-map__header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 72px;
+        padding: 10px 15px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+        
+        .pasture-overview-map__header--item {
+            float: left;
+            width: 25%;
+            text-align: center;
+            position: relative;
+            strong {
+                font-size: 20px;
+                color: @dark-color;
             }
             
-            .ant-card-body {
-                padding: 0;
-                height: 100%;
-                padding-bottom: 10px;
-    
+            article {
+                color: @light-dark-color;
+            }
+            
+            &[data-line=true]:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 10px;
+                bottom: 10px;
+                width: 1px;
+                background: @grey-line-color;
             }
         }
+    }
+}
+
+
+
+
+
+
+
+#pasture-overview-animal {
+    height: 45%;
+    padding-top: 0;
+    
+    .pasture-overview-animal__title {
+        position: absolute;
+        left: 20px;
+        top: 10px;
+        font-size: 16px;
+        color: @light-dark-color;
+    }
+    
+    .ant-tabs-nav-wrap {
+        justify-content: flex-end;
     }
 }
 
@@ -35,34 +99,121 @@
 .pasture-overview-weather {
     height: 100%;
     position: relative;
-    padding-bottom: 81px;
-    
+    padding-bottom: 80px;
     
     .pasture-weather__content {
         
         height: 100%;
+        padding: 10px;
     
     
         .today-weather-icon {
             float: left;
-            width: 90px;
+            height: 100%;
+            position: relative;
+            padding: 5px;
+            
+            img {
+                height: 90%;
+                max-height: 100px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                
+            }
         }
     
     
         .today-weather-content {
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 15px;
+            
+            .today-weather-content__temperature {
+                font-size: 20px;
+                color: @dark-color;
+            }
+            
+            .today-weather-content__wind {
+                color: @grey-color;
+            }
+            
+            .today-weather-content__city {
+                margin-top: 10px;
+                color: @dark-color;
+            }
         }
     }
     
     .pasture-weather__more {
-        height: 80px;
+        height: 65px;
         width: 100%;
         position: absolute;
         bottom: 0;
-        background: #16B351;
+        border-top: 1px solid @grey-line-color;
+        padding: 0 7%;
+        
+        .pasture-weather__more-item {
+            float: left;
+            width: 33%;
+            height: 100%;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            header {
+                color: @grey-color;
+            }
+            
+            article {
+                color: @dark-color;
+                font-size: 16px;
+            }
+        }
         
     }
 }
 
-.pasture-overview-map {
+.pasture-overview-event {
+    
+    padding: 10px 20px;
+    height: 99%;
+    overflow-y: auto;
+    
+    h4 {
+        font-size: 16px;
+        
+        strong {
+            color: @red-color;
+        }
+    }
+    
+    .pasture-event__item {
+        position: relative;
+        display: flex;
+        margin-bottom: 10px;
+        
+        .pasture-event__item--content {
+            flex: 1;
+        }
+        
+        .pasture-event__item--date {
+            width: 70px;
+            text-align: right;
+        }
+    }
+    
+}
+
+
+
+.pasture-overview-message {
+    padding: 10px 20px;
+    height: 100%;
+    overflow-y: auto;
 }

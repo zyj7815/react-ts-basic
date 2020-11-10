@@ -622,6 +622,18 @@ const zh = {
     five_m_cancel: '盘点开始后5分钟内不可取消',
     enter_valid_params: '请输入有效的参数',
 
+    next_step: '下一步',
+    last_step: '上一步',
+    select_sence: '选择场景',
+    enter_info: '填写资料',
+    select_locaiton: '选择位置',
+    finish: '完成',
+    pasture_type: '牧场类型',
+    captivity_pasture: '圈养牧场',
+    free_range_pasture: '散养牧场',
+    inventory_free_range_pasture: '盘点散养牧场',
+    free_range_captivity_pasture: '散圈养养牧场',
+
     pasture_list: '牧场列表',
     pasture_name: '牧场名称',
     type: '类型',
@@ -630,6 +642,10 @@ const zh = {
     waiting_event_num: '待处理事件数',
     new_pasture: '新建牧场',
     company: '公司信息',
+    tomorrow: '明天',
+    the_day_after_tomorrow: '后天',
+    abnormal_event: '异常事件',
+    abnormal_event_number: '异常事件数',
 
     months: [
         '一月',

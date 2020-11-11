@@ -633,6 +633,11 @@ const zh = {
     free_range_pasture: '散养牧场',
     inventory_free_range_pasture: '盘点散养牧场',
     free_range_captivity_pasture: '散圈养养牧场',
+    phone: '联系电话',
+    got_it: '知道了',
+
+    device_type: '设备类型',
+    battery_power: '电量',
 
     pasture_list: '牧场列表',
     pasture_name: '牧场名称',
@@ -679,6 +684,7 @@ const zh = {
     no_data_com: text => `暂无${text}信息`,
     delete_message_success: num => `成功删除${num}条消息`,
     not_empty: text => `${text}不能为空`,
+    new_success_com: (text = '') => `新建${text}成功`,
     update_success_com: text => `编辑${text}成功`,
     update_failed_com: text => `编辑${text}失败`,
     failed_add_com: text => `添加${text}失败`,
@@ -697,6 +703,8 @@ const zh = {
     process_animal_num_sub: (sucNum, failedNum) =>
         `其中${sucNum}个生物处理成功，${failedNum}个处理失败`,
     modify_breed: status => `确认修改生物繁育状态为 “${status}” 吗？`,
+    new_pasture_result: sec =>
+        `牧场创建成功，您可以去列表查看了（倒计时 ${sec} 秒后跳转至牧场列表）`,
 }
 
 export default zh

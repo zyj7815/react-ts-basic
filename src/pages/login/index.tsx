@@ -10,7 +10,7 @@ import './index.less'
 
 const Login: React.FC = () => {
     if (Token.auth) {
-        window.location.href = `#${RouteUris.Root}`
+        window.location.href = `#${RouteUris.MainPasture}`
         return <div />
     }
 

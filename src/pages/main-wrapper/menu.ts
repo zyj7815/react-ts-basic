@@ -6,7 +6,7 @@ import { aweIconType } from '@/assets/iconfont'
 export const mainMenuNav: IMenuNav[] = [
     {
         title: useLanguage.pasture_management,
-        uri: RouteUris.MainWrapper,
+        uri: RouteUris.MainPasture,
         icon: aweIconType['icon-geofence'],
         level: 1,
     },

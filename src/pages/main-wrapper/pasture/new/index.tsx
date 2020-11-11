@@ -2,13 +2,25 @@ import React from 'react'
 import { AweNavPage } from '@/pages/components/page-nav'
 import { Breadcrumb, Button, Steps } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import FirstStepScene from '@/pages/main-wrapper/pasture/new/step-first-scene'
-import SecondStepInfo from '@/pages/main-wrapper/pasture/new/step-second-info'
-import ThirdStepLocation from '@/pages/main-wrapper/pasture/new/step-third-location'
+import { FirstStepScene } from '@/pages/main-wrapper/pasture/new/step-first-scene'
+import { SecondStepInfo } from '@/pages/main-wrapper/pasture/new/step-second-info'
+import { ThirdStepLocation } from '@/pages/main-wrapper/pasture/new/step-third-location'
+import { LastStepFinish } from '@/pages/main-wrapper/pasture/new/step-last-finish'
+import {
+    NewPastureContext,
+    PastureInfoProps,
+    PastureLocationProps,
+} from '@/pages/main-wrapper/pasture/new/context'
 import './index.less'
-import LastStepFinish from '@/pages/main-wrapper/pasture/new/step-last-finish'
+import { AweRouteProps } from '@/types/route'
+
+export interface PastureStepProps {
+    onNextStep?: () => void
+    onPreStep?: () => void
+}
 
 const { Step } = Steps
+
 const steps = [
     useLanguage.select_sence,
     useLanguage.enter_info,
@@ -16,11 +28,18 @@ const steps = [
     useLanguage.finish,
 ]
 
-const NewPasture: React.FC = props => {
-    const [current, setCurrent] = React.useState(1)
+const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const [current, setCurrent] = React.useState(4)
+    const [pastureType, setPastureType] = React.useState(1)
+    const [information, setInformation] = React.useState<PastureInfoProps | null>(null)
+    const [location, setLocation] = React.useState<PastureLocationProps | null>(null)
 
     const handleNext = () => {
-        setCurrent(current + 1)
+        if (current === 4) {
+            routeProps.history.goBack()
+        } else {
+            setCurrent(current + 1)
+        }
     }
 
     const handlePrev = () => {
@@ -35,41 +54,39 @@ const NewPasture: React.FC = props => {
     )
 
     return (
-        <AweNavPage nav={nav}>
-            <article className="awe-page-wrapper">
-                <section className="awe-page-content">
-                    <main className="awe-page__layout awe-display">
-                        <section className="awe-display__content new-pasture-wrapper">
-                            <header className="new-pasture__step">
-                                <Steps current={current - 1}>
-                                    {steps.map((item: string, index: number) => (
-                                        <Step key={index} title={item} />
-                                    ))}
-                                </Steps>
-                            </header>
+        <NewPastureContext.Provider
+            value={{
+                pastureType,
+                setPastureType,
+                information,
+                setInformation,
+                location,
+                setLocation,
+            }}
+        >
+            <AweNavPage nav={nav}>
+                <article className="awe-page-wrapper">
+                    <section className="new-pasture-wrapper">
+                        <header className="new-pasture__step">
+                            <Steps current={current - 1}>
+                                {steps.map((item: string, index: number) => (
+                                    <Step key={index} title={item} />
+                                ))}
+                            </Steps>
+                        </header>
 
-                            <article className="new-pasture__content">
-                                {current === 1 && <FirstStepScene />}
-                                {current === 2 && <SecondStepInfo />}
-                                {current === 3 && <ThirdStepLocation />}
-                                {current === 4 && <LastStepFinish />}
-                            </article>
-                        </section>
-
-                        {current < 4 && (
-                            <footer className="awe-display__footer awe-footer-action">
-                                {current > 1 && (
-                                    <Button onClick={handlePrev}>{useLanguage.last_step}</Button>
-                                )}
-                                <Button type="primary" onClick={handleNext}>
-                                    {current >= 3 ? useLanguage.confirm : useLanguage.next_step}
-                                </Button>
-                            </footer>
+                        {current === 1 && <FirstStepScene onNextStep={handleNext} />}
+                        {current === 2 && (
+                            <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />
                         )}
-                    </main>
-                </section>
-            </article>
-        </AweNavPage>
+                        {current === 3 && (
+                            <ThirdStepLocation onPreStep={handlePrev} onNextStep={handleNext} />
+                        )}
+                        {current === 4 && <LastStepFinish onNextStep={handleNext} />}
+                    </section>
+                </article>
+            </AweNavPage>
+        </NewPastureContext.Provider>
     )
 }
 

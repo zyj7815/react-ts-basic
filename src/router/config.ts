@@ -12,14 +12,17 @@ export const RouteUris = {
 
     MainWrapper: '/root',
 
-    // 牧场详情
-    MainPasture: '/root',
+    // 牧场信息
+    MainPasture: '/root/main-pasture',
 
     // 新建牧场
-    MainPastureNew: '/root/new-pasture',
+    MainPastureNew: '/root/main-pasture-new',
 
     // 设备信息
     MainDevice: '/root/device',
+
+    // 设备详情
+    MainDeviceDetail: (id = ROUTE_ID) => `/root/main-device/${id}`,
 
     // 用户信息
     MainAccount: '/root/account',

@@ -631,11 +631,16 @@ const en = {
     enter_info: 'Information',
     select_locaiton: 'Location',
     finish: 'Finish',
-    pasture_type: '牧场类型',
-    captivity_pasture: '圈养牧场',
-    free_range_pasture: '散养牧场',
-    inventory_free_range_pasture: '盘点散养牧场',
-    free_range_captivity_pasture: '散圈养养牧场',
+    pasture_type: 'Type',
+    captivity_pasture: 'Captivity',
+    free_range_pasture: 'Free ranging',
+    inventory_free_range_pasture: 'Inventory free ranging',
+    free_range_captivity_pasture: 'Captivity & Free ranging',
+    phone: 'Contact number',
+    got_it: 'Got it',
+
+    device_type: '设备类型',
+    battery_power: '电量',
 
     pasture_list: 'Pasture List',
     pasture_name: 'Name',
@@ -682,7 +687,8 @@ const en = {
     no_data_com: text => `No ${text} information`,
     delete_message_success: num => `${num} successfully deleted.`,
     not_empty: text => `${text} not be empty`,
-    update_success_com: text => `Update ${text} succeeded`,
+    new_success_com: (text = '') => `New ${text} success`,
+    update_success_com: text => `Update ${text || ''} succeeded`,
     update_failed_com: text => `Update ${text} failed`,
     failed_add_com: text => `Adding ${text} failed`,
     time_com: num => ` ${parseInt(num) > 1 ? 'times' : 'time'}`,
@@ -700,6 +706,8 @@ const en = {
     process_animal_num_sub: (sucNum, failedNum) =>
         `${sucNum} animals were processed successfully and ${failedNum} failed`,
     modify_breed: status => `Do you want to modify the breeding status to "${status}" ?`,
+    new_pasture_result: sec =>
+        `牧场创建成功，您可以去列表查看了（倒计时 ${sec} 秒后跳转至牧场列表）`,
 }
 
 export default en

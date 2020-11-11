@@ -10,12 +10,15 @@ import { Token } from '@/server/token'
 import { AweGlobal } from '@/global'
 import { errorMessage } from '@/server/error'
 import '@/pages/root/index.less'
+import { RouteUris } from '@/router/config'
 
 const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes } = routeProps
     const { setMyself, setResources, setTheme } = useRootStore()
     const [loading, setLoading] = React.useState(true)
     const [routeShow, setRouteShow] = React.useState(false)
+
+    // routeProps.history.push(RouteUris.MainPasture)
 
     React.useEffect(() => {
         /**

@@ -70,6 +70,12 @@ export const routes: RouteInterface[] = [
                 name: 'main-wrapper',
                 routes: [
                     {
+                        path: RouteUris.MainWrapper,
+                        component: loadable(() => import('@/pages/main-wrapper/pasture')),
+                        name: 'main-wrapper-pasture',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.MainPasture,
                         component: loadable(() => import('@/pages/main-wrapper/pasture')),
                         name: 'main-wrapper-pasture',
@@ -88,14 +94,22 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.MainDeviceDetail(),
+                        component: loadable(() => import('@/pages/main-wrapper/device/detail')),
+                        name: 'main-wrapper-device-detail',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.MainAccount,
                         component: loadable(() => import('@/pages/main-wrapper/account')),
                         name: 'main-wrapper-account',
+                        exact: true,
                     },
                     {
                         path: RouteUris.MainCompany,
                         component: loadable(() => import('@/pages/main-wrapper/company')),
                         name: 'main-wrapper-company',
+                        exact: true,
                     },
                 ],
             },

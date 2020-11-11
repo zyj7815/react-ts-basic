@@ -41,3 +41,9 @@ export type PastureProps = {
     id: string
     name: string
 }
+
+export type DeviceProps = {
+    id: string
+    mark: number
+    sn: string
+}

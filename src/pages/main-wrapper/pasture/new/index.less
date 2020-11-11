@@ -1,7 +1,11 @@
+@import "../../../../assets/style/color";
+
 .new-pasture-wrapper {
     position: relative;
-    padding: 90px 100px 10px;
+    padding: 110px 0 10px;
     width: 100%;
+    height: 100%;
+    background: #fff;
     
     .new-pasture__step {
         position: absolute;
@@ -13,8 +17,24 @@
     }
     
     .new-pasture__content {
-        border: 1px solid #f1f1f1;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 60px;
+    }
+    
+    
+    
+    .new-pasture-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        border-top: 1px solid @grey-line-color;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
@@ -22,30 +42,27 @@
 
 .new-pasture-scene {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100%;
-    padding-top: 60px;
+    width: 100%;
     
     .new-pasture-scene__type {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        width: 70%;
-        min-width: 500px;
-        max-width: 680px;
-        transform: translateX(-50%);
-        border: 1px solid #f1f1f1;
-        
+        position: relative;
+        width: 80%;
+        max-width: 700px;
+        margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
         
         .new-pasture-scene__type--title {
             position: absolute;
-            left: -70px;
+            left: -80px;
         }
         
         .new-pasture-scene__type--radio {
             cursor: pointer;
-            border: 1px solid #F55044;
             img {
                 margin-right: 5px;
             }
@@ -53,7 +70,73 @@
     }
     
     .new-pasture-scene__description {
-        border: 1px solid;
+        border: 1px solid @grey-line-color;
         height: 98%;
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        
+        .new-pasture-scene__description--arrow {
+            background: #fff;
+            position: absolute;
+            top: -9px;
+            left: 0;
+    
+            width: 15px;
+            height: 15px;
+            border-top: 1px solid @grey-line-color;
+            border-left: 1px solid @grey-line-color;
+            transform: rotate(45deg)
+        }
+    }
+}
+
+
+
+.new-pasture-info {
+    width: 100%;
+    max-width: 600px;
+    
+    .ant-form-item-label {
+        padding-bottom: 0;
+    }
+}
+
+
+.new-pasture-location {
+
+}
+
+
+.new-pasture-finish {
+    position: relative;
+    
+    aside {
+        float: left;
+        width: 100px;
+        .anticon {
+            color: @primary-color;
+            font-size: 70px;
+        }
+    }
+    
+    main {
+        overflow: hidden;
+        
+        h4 {
+            font-size: 30px;
+            color: @dark-color;
+        }
+        
+        strong {
+            color: @primary-color;
+        }
+    }
+    
+    .ant-btn {
+        position: absolute;
+        top: 130px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

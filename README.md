@@ -27,7 +27,7 @@
   }
 }
 ```
-在根目录新建文件 [.commitlintrc.js](https://github.com/zyj7815/react-ts-basic/blob/master/.commitlintrc.js)，根据具体情况配置。
+在根目录新建文件 [.commitlintrc.js](https://bitbucket.org/druidweb/web/src/master/.commitlintrc.js)，根据具体情况配置。
 
 
 ## babel 和 typescript
@@ -40,7 +40,7 @@ $ npm i -D html-loader html-webpack-plugin # 顺便把html的支持做好
 
 ```
 
-在根目录新建[tsconfig.json](https://github.com/zyj7815/react-ts-basic/blob/master/tsconfig.json)。
+在根目录新建[tsconfig.json](https://bitbucket.org/druidweb/awe-cattle-user/src/master/tsconfig.json)。
 
 
 ## 完善webpack打包配置

@@ -1,6 +1,5 @@
 import React from 'react'
-import { AweNavPage } from '@/pages/components/page-nav'
-import { Breadcrumb, Form, Input, Select, DatePicker, InputNumber, Button, message } from 'antd'
+import { Breadcrumb, Form, Input, Select, DatePicker, InputNumber, Button } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { SpeciesList } from '@/config'
 import { ObjectProps } from '@/types'
@@ -13,6 +12,7 @@ import { RouteUris } from '@/router/config'
 import AnimalSuccessModal from './success-modal'
 import axios from 'axios'
 import './index.less'
+import AwePage from '@/pages/components/awe-page'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -160,146 +160,127 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         </Breadcrumb>
     )
 
-    return (
+    const header = (
         <>
-            <AweNavPage nav={nav}>
-                <article className="awe-page-wrapper">
-                    <section className="awe-page-content">
-                        <main className="awe-page__layout awe-display">
-                            <section className="awe-display__content">
-                                <div className="awe-display-inner">
-                                    <header className="awe-display-inner__header">
-                                        <label>{useLanguage.basic_information}</label>
-                                        <a onClick={() => setIsBatch(!isBatch)}>
-                                            {isBatch
-                                                ? useLanguage.single_add
-                                                : useLanguage.batch_add}
-                                        </a>
-                                    </header>
+            <h4>{useLanguage.basic_information}</h4>
+            <a onClick={() => setIsBatch(!isBatch)}>
+                {isBatch ? useLanguage.single_add : useLanguage.batch_add}
+            </a>
+        </>
+    )
 
-                                    <Form className="animal-new-form" form={form} {...layout}>
-                                        {isBatch ? (
-                                            <FormItem
-                                                label={useLanguage.nickname}
-                                                rules={[{ required: true }]}
-                                                name="generate_nickname"
-                                            >
-                                                <Select placeholder={useLanguage.select}>
-                                                    <Option value={GenerateType.OrderType}>
-                                                        {useLanguage.animal_basic}+
-                                                        {useLanguage.ordinal_number}
-                                                    </Option>
-                                                    <Option value={GenerateType.RandomType}>
-                                                        {useLanguage.animal_basic}+
-                                                        {useLanguage.random_number}
-                                                    </Option>
-                                                </Select>
-                                            </FormItem>
-                                        ) : (
-                                            <FormItem
-                                                label={useLanguage.nickname}
-                                                name="nickname"
-                                                rules={[{ required: true }]}
-                                            >
-                                                <Input placeholder={useLanguage.select} />
-                                            </FormItem>
-                                        )}
+    const footer = (
+        <footer className="awe-footer-action">
+            <Button onClick={() => routeProps.history.goBack()}>{useLanguage.back}</Button>
+            <Button loading={loading} type="primary" onClick={handleSubmit}>
+                {useLanguage.submit}
+            </Button>
+        </footer>
+    )
 
-                                        {isBatch && (
-                                            <FormItem
-                                                label={useLanguage.batch_add_animal_num}
-                                                name="number"
-                                                rules={[
-                                                    { required: true },
-                                                    {
-                                                        type: 'number',
-                                                        min: 1,
-                                                        message: useLanguage.enter_valid_params,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber
-                                                    placeholder={useLanguage.enter_please}
-                                                    style={{ width: '100%' }}
-                                                />
-                                            </FormItem>
-                                        )}
+    return (
+        <AwePage
+            nav={nav}
+            header={header}
+            footer={footer}
+            isFBorder={true}
+            isHShadow={true}
+            isHPadding={true}
+            bgColor={true}
+        >
+            <Form className="animal-new-form" form={form} {...layout}>
+                {isBatch ? (
+                    <FormItem
+                        label={useLanguage.nickname}
+                        rules={[{ required: true }]}
+                        name="generate_nickname"
+                    >
+                        <Select placeholder={useLanguage.select}>
+                            <Option value={GenerateType.OrderType}>
+                                {useLanguage.animal_basic}+{useLanguage.ordinal_number}
+                            </Option>
+                            <Option value={GenerateType.RandomType}>
+                                {useLanguage.animal_basic}+{useLanguage.random_number}
+                            </Option>
+                        </Select>
+                    </FormItem>
+                ) : (
+                    <FormItem
+                        label={useLanguage.nickname}
+                        name="nickname"
+                        rules={[{ required: true }]}
+                    >
+                        <Input placeholder={useLanguage.select} />
+                    </FormItem>
+                )}
 
-                                        <FormItem label={useLanguage.species} name="species">
-                                            <Select placeholder={useLanguage.select}>
-                                                {SpeciesList.map((species: ObjectProps) => (
-                                                    <Option key={species.key} value={species.key}>
-                                                        {species.value}
-                                                    </Option>
-                                                ))}
-                                            </Select>
-                                        </FormItem>
+                {isBatch && (
+                    <FormItem
+                        label={useLanguage.batch_add_animal_num}
+                        name="number"
+                        rules={[
+                            { required: true },
+                            {
+                                type: 'number',
+                                min: 1,
+                                message: useLanguage.enter_valid_params,
+                            },
+                        ]}
+                    >
+                        <InputNumber
+                            placeholder={useLanguage.enter_please}
+                            style={{ width: '100%' }}
+                        />
+                    </FormItem>
+                )}
 
-                                        <FormItem label={useLanguage.gender} name="gender">
-                                            <Select placeholder={useLanguage.select}>
-                                                <Option value={1}>{useLanguage.male}</Option>
-                                                <Option value={2}>{useLanguage.female}</Option>{' '}
-                                            </Select>
-                                        </FormItem>
+                <FormItem label={useLanguage.species} name="species">
+                    <Select placeholder={useLanguage.select}>
+                        {SpeciesList.map((species: ObjectProps) => (
+                            <Option key={species.key} value={species.key}>
+                                {species.value}
+                            </Option>
+                        ))}
+                    </Select>
+                </FormItem>
 
-                                        <FormItem
-                                            label={useLanguage.data_of_birth}
-                                            name="birth_date"
-                                        >
-                                            <DatePicker
-                                                placeholder={useLanguage.select}
-                                                style={{ width: '100%' }}
-                                            />
-                                        </FormItem>
+                <FormItem label={useLanguage.gender} name="gender">
+                    <Select placeholder={useLanguage.select}>
+                        <Option value={1}>{useLanguage.male}</Option>
+                        <Option value={2}>{useLanguage.female}</Option>{' '}
+                    </Select>
+                </FormItem>
 
-                                        <FormItem
-                                            name="weight"
-                                            label={`${useLanguage.weight} (kg)`}
-                                            rules={[
-                                                {
-                                                    type: 'number',
-                                                    min: 1,
-                                                    message: useLanguage.enter_valid_params,
-                                                },
-                                            ]}
-                                        >
-                                            <InputNumber
-                                                placeholder={useLanguage.enter_please}
-                                                style={{ width: '100%' }}
-                                            />
-                                        </FormItem>
+                <FormItem label={useLanguage.data_of_birth} name="birth_date">
+                    <DatePicker placeholder={useLanguage.select} style={{ width: '100%' }} />
+                </FormItem>
 
-                                        <FormItem label={useLanguage.remark} name="description">
-                                            <Input.TextArea
-                                                placeholder={useLanguage.enter_please}
-                                            />
-                                        </FormItem>
-                                    </Form>
-                                </div>
-                            </section>
+                <FormItem
+                    name="weight"
+                    label={`${useLanguage.weight} (kg)`}
+                    rules={[
+                        {
+                            type: 'number',
+                            min: 1,
+                            message: useLanguage.enter_valid_params,
+                        },
+                    ]}
+                >
+                    <InputNumber placeholder={useLanguage.enter_please} style={{ width: '100%' }} />
+                </FormItem>
 
-                            <footer className="awe-display__footer awe-footer-action">
-                                <Button onClick={() => routeProps.history.goBack()}>
-                                    {useLanguage.back}
-                                </Button>
-                                <Button loading={loading} type="primary" onClick={handleSubmit}>
-                                    {useLanguage.submit}
-                                </Button>
-                            </footer>
-                        </main>
-                    </section>
-                </article>
-            </AweNavPage>
-
+                <FormItem label={useLanguage.remark} name="description">
+                    <Input.TextArea placeholder={useLanguage.enter_please} />
+                </FormItem>
+            </Form>
             <AweProgress percent={percent} visible={percentVisible} />
-
             <AnimalSuccessModal
                 visible={successVisible}
                 onMainEvent={goToBoundDevice}
                 onSubEvent={goToAnimalDetail}
                 onClose={goToAnimalList}
             />
-        </>
+        </AwePage>
     )
 }
 

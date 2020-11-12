@@ -1,54 +1,100 @@
-import * as React from 'react'
-import { Row, Col } from 'antd'
+import React from 'react'
+import { Col, Row, Spin } from 'antd'
+import GroupCard from '@/pages/pasture-wrapper/group/group-card'
+import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import GroupCard from '@/pages/pasture-wrapper/group/group-card'
-import axios from 'axios'
+import { GroupProps } from '@/types/common'
+import AwePage from '@/pages/components/awe-page'
 
-interface IState {
-    dataSource: any[]
-    loading: boolean
+interface GroupListCardProps {
+    newGroup: GroupProps | null
+    onCheckGroup: (group: GroupProps) => void
+    onDeleteGroup: (group: GroupProps) => void
 }
 
-class GroupListCard extends React.Component<any, any> {
-    private listContent: any = React.createRef()
-    private list: any = null
+const GroupListCard: React.FC<GroupListCardProps> = (props: GroupListCardProps) => {
+    let list: any = null
+    const listContent: any = React.useRef()
+    const [dataSource, setDataSource] = React.useState<GroupProps[]>([])
+    const [loading, setLoading] = React.useState(true)
 
-    private pageSize = 20
-    private pageNumber: number = 1
-    private isEnd = false // 数据请求完成，结束请求
+    const pageSize = 20
+    let pageNumber: number = 1
+    let isFinished = false // 数据请求完成，结束请求
 
-    public state: IState = {
-        dataSource: [],
-        loading: true,
-    }
+    React.useEffect(() => {
+        if (props.newGroup) {
+            // 新增分组
+            const dataList = [...dataSource]
+            if (!isFinished) {
+                // 由于新增了数据，前端是手动在第一位新增，而服务器数据则被向后推了1位，
+                // 所以删除当前的最后一个数据，而这条数据将在下一次请求时获得
+                dataList.pop()
+            }
+            setDataSource([props.newGroup, ...dataList])
+        } else {
+            if (!list) {
+                list = listContent.current
+            }
 
-    public componentDidMount(): void {
-        this.list = this.listContent.current
+            // 进入页面第一次，请求数据
+            if (useBottom()) {
+                fetchData()
+            }
 
-        // 进入页面第一次，请求数据
-        if (this.useBottom()) {
-            this.fetchData()
+            if (list) {
+                list.addEventListener('scroll', () => {
+                    const isBottom = useBottom()
+                    if (isBottom) {
+                        fetchData()
+                    }
+                })
+            }
         }
 
-        if (this.list) {
-            this.list.addEventListener('scroll', () => {
-                const isBottom = this.useBottom()
-                if (isBottom) {
-                    console.log('到底部')
+        return () => {
+            if (list) {
+                list.removeEventListener('scroll', () => {})
+            }
+        }
+    }, [props.newGroup])
 
-                    this.fetchData()
+    const fetchData = async () => {
+        if (isFinished) return
+
+        try {
+            setLoading(true)
+            const res = await axios.get(
+                Api.group.list,
+                Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
+            )
+
+            setLoading(false)
+            setDataSource(dataSource => dataSource.concat(res.data))
+
+            // 如果数据刚好返回了pageSize条，那么表示还有下一页
+            if (res.data.length === pageSize) {
+                pageNumber = pageNumber + 1
+                // 判断是否满屏，如果没有满屏就请求下一页
+                if (useBottom()) {
+                    fetchData()
                 }
-            })
+            } else {
+                isFinished = true
+            }
+        } catch (err) {
+            setLoading(false)
+            errorMessage.alert(err)
         }
     }
 
     /**
      * 判断滚动到底部
      */
-    private useBottom = () => {
-        const { scrollTop, clientHeight, scrollHeight } = this.list
+    const useBottom = () => {
+        const { scrollTop, clientHeight, scrollHeight } = list
 
         if (scrollTop + clientHeight === scrollHeight) {
             return true
@@ -57,59 +103,28 @@ class GroupListCard extends React.Component<any, any> {
         }
     }
 
-    /**
-     * 获取数据
-     */
-    private fetchData = async () => {
-        if (this.isEnd) return
-
-        this.setState({
-            loading: true,
-        })
-
-        try {
-            const res = await axios.get(
-                Api.group.list,
-                Token.pageToken(this.pageSize, (this.pageNumber - 1) * this.pageSize)
-            )
-            this.setState({
-                loading: false,
-                dataSource: this.state.dataSource.concat(res.data),
-            })
-
-            // 如果数据刚好返回了pageSize条，那么表示还有下一页
-            if (res.data.length === this.pageSize) {
-                this.pageNumber = this.pageNumber + 1
-                // 判断是否满屏，如果没有满屏就请求下一页
-                if (this.useBottom()) {
-                    this.fetchData()
-                }
-            } else {
-                this.isEnd = true
-            }
-        } catch (err) {
-            this.setState({
-                loading: false,
-            })
-            errorMessage.alert(err)
-        }
-    }
-
-    public render(): React.ReactNode {
-        return (
-            <main className="awe-page-card__layout" ref={this.listContent}>
+    return (
+        <AwePage noPadding={true}>
+            <main className="awe-page__card--list" ref={listContent}>
                 <Row>
-                    {this.state.dataSource.map((group: any) => {
+                    {dataSource.map((group: any) => {
                         return (
                             <Col key={group.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
-                                <GroupCard data={group} />
+                                <GroupCard
+                                    data={group}
+                                    onCheckGroup={props.onCheckGroup}
+                                    onDeleteGroup={props.onDeleteGroup}
+                                />
                             </Col>
                         )
                     })}
                 </Row>
+                <Spin spinning={loading}>
+                    <div style={{ height: 100 }} />
+                </Spin>
             </main>
-        )
-    }
+        </AwePage>
+    )
 }
 
-export default GroupListCard
+export default React.memo(GroupListCard)

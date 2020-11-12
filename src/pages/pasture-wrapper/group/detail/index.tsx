@@ -1,6 +1,5 @@
 import React from 'react'
 import { Breadcrumb, Button, Row, Col } from 'antd'
-import { AweNavPage } from '@/pages/components/page-nav'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { Api } from '@/server/api'
@@ -10,8 +9,9 @@ import { AnimalProps, GroupProps } from '@/types/common'
 import axios from 'axios'
 import { Utils } from '@/utils'
 import ActiveAnimalCard from '@/pages/components/active-animal-card'
-import './index.less'
 import { RouteUris } from '@/router/config'
+import AwePage from '@/pages/components/awe-page'
+import './index.less'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { id, groupId } = routeProps.match.params
@@ -58,47 +58,41 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         </Breadcrumb>
     )
 
+    const info = (
+        <div className="group-detail-info beauty-shadow">
+            <label>{group ? group.room_name : ''}</label>
+            <div>
+                <span className="animal-tag">
+                    {useLanguage.animal_count} {group ? group.total_biological : 0}
+                </span>
+            </div>
+            <div className="group-detail-other">
+                <span>
+                    {useLanguage.updating_time}：
+                    {group && Utils.utc2Time(group.updated_at, 'YYYY-MM-DD')}
+                </span>
+
+                <span>
+                    {useLanguage.remark}：{group && group.description}
+                </span>
+            </div>
+
+            <Button onClick={handleEditGroup}>{useLanguage.edit_group}</Button>
+        </div>
+    )
+
     return (
-        <AweNavPage nav={nav}>
-            <article className="awe-page-wrapper" id="group-detail-wrapper">
-                <header className="awe-page-header-info">
-                    <div className="group-detail-info">
-                        <label>{group ? group.room_name : ''}</label>
-                        <div>
-                            <span className="animal-tag">
-                                {useLanguage.animal_count} {group ? group.total_biological : 0}
-                            </span>
-                        </div>
-                        <div className="group-detail-other">
-                            <span>
-                                {useLanguage.updating_time}：
-                                {group && Utils.utc2Time(group.updated_at, 'YYYY-MM-DD')}
-                            </span>
-
-                            <span>
-                                {useLanguage.remark}：{group && group.description}
-                            </span>
-                        </div>
-
-                        <Button onClick={handleEditGroup}>{useLanguage.edit_group}</Button>
-                    </div>
-                </header>
-
-                <section className="awe-page-content" style={{ paddingTop: 120 }}>
-                    <main className="awe-page__layout">
-                        <Row>
-                            {dataSource.map((animal: AnimalProps) => {
-                                return (
-                                    <Col key={animal.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
-                                        <ActiveAnimalCard data={animal} />
-                                    </Col>
-                                )
-                            })}
-                        </Row>
-                    </main>
-                </section>
-            </article>
-        </AweNavPage>
+        <AwePage nav={nav} header={info}>
+            <Row>
+                {dataSource.map((animal: AnimalProps) => {
+                    return (
+                        <Col key={animal.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
+                            <ActiveAnimalCard data={animal} />
+                        </Col>
+                    )
+                })}
+            </Row>
+        </AwePage>
     )
 }
 

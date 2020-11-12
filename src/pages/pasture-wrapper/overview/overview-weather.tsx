@@ -39,7 +39,10 @@ const OverviewWeather: React.FC = props => {
     }
 
     return (
-        <div className="pasture-overview-item beauty-shadow" style={{ height: '33%' }}>
+        <div
+            className="pasture-overview-item beauty-shadow"
+            style={{ height: '33%', minHeight: 240 }}
+        >
             <header className="pasture-overview-item__header">{useLanguage.weather}</header>
             <section className="pasture-overview-item__content">
                 <main className="pasture-overview-weather">

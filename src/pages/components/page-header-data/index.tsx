@@ -1,6 +1,10 @@
 import React from 'react'
 import './index.less'
 
+/**
+ * 生物列表上部分的信息
+ */
+
 export type PageHeaderDataItem = {
     mainText: string
     subText: string | number

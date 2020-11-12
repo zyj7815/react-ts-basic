@@ -1,5 +1,4 @@
 import React from 'react'
-import { AweNavPage } from '@/pages/components/page-nav'
 import { Breadcrumb, Button, Steps } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { FirstStepScene } from '@/pages/main-wrapper/pasture/new/step-first-scene'
@@ -76,7 +75,7 @@ const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             }}
         >
             <div className="new-pasture-wrapper">
-                <AwePage nav={nav} bgColor={true} header={step}>
+                <AwePage nav={nav} header={step} bgColor={true}>
                     {current === 1 && <FirstStepScene onNextStep={handleNext} />}
                     {current === 2 && (
                         <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />

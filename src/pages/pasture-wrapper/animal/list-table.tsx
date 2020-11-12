@@ -70,7 +70,7 @@ const AnimalListTable: React.FC = props => {
     )
 
     return (
-        <AwePage bgColor={true} noPadding={true} footer={footer}>
+        <AwePage ctColor={true} noPadding={true} footer={footer}>
             <Table
                 pagination={false}
                 loading={loading}

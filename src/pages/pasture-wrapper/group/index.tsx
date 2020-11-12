@@ -5,13 +5,12 @@ import { Utils } from '@/utils'
 import { TabType } from '@/enum'
 import { useLanguage } from '@/language/useLanguage'
 import { PageHeaderData, PageHeaderDataItem } from '@/pages/components/page-header-data'
-import { AweNavPage } from '@/pages/components/page-nav'
 import GroupListTable from '@/pages/pasture-wrapper/group/list-table'
-import GroupListCard from '@/pages/pasture-wrapper/group/list-card'
 import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
 import { GroupProps } from '@/types/common'
-import GroupListCard1 from '@/pages/pasture-wrapper/group/list-card1'
+import GroupListCard from '@/pages/pasture-wrapper/group/list-card'
 import { RouteUris } from '@/router/config'
+import AwePage from '@/pages/components/awe-page'
 
 const TabKey = 'tabKey'
 
@@ -85,54 +84,46 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         { label: useLanguage.card_mode, value: TabType.Card },
     ]
 
+    const radio = (
+        <>
+            <Radio.Group
+                optionType="button"
+                value={tabKey}
+                options={listRadio}
+                onChange={onChangeTab}
+            />
+
+            <span>
+                <Button onClick={handleNewGroup}>{useLanguage.new_group}</Button>
+            </span>
+        </>
+    )
+
     return (
-        <AweNavPage nav={nav}>
-            <article className="awe-page-wrapper">
-                <header className="awe-page-header-info">
-                    <PageHeaderData infoItems={infoItems} />
-                </header>
-
-                <section className="awe-page-content" style={{ paddingTop: 115 }}>
-                    <main className="awe-page__layout">
-                        <header className="awe-page__layout-header">
-                            <Radio.Group
-                                optionType="button"
-                                value={tabKey}
-                                options={listRadio}
-                                onChange={onChangeTab}
-                            />
-
-                            <span>
-                                <Button onClick={handleNewGroup}>{useLanguage.new_group}</Button>
-                            </span>
-                        </header>
-
-                        <section className="awe-page__layout-content">
-                            {tabKey === TabType.List ? (
-                                <GroupListTable
-                                    newGroup={newGroup}
-                                    onEditGroup={onEditGroup}
-                                    onCheckGroup={onCheckGroup}
-                                    onDeleteGroup={onDeleteGroup}
-                                />
-                            ) : (
-                                <GroupListCard1
-                                    newGroup={newGroup}
-                                    onCheckGroup={onCheckGroup}
-                                    onDeleteGroup={onDeleteGroup}
-                                />
-                            )}
-                        </section>
-                    </main>
-                </section>
-            </article>
+        <AwePage nav={nav} header={<PageHeaderData infoItems={infoItems} />}>
+            <AwePage header={radio} hdColor={true} noPadding={true} isHPadding={true}>
+                {tabKey === TabType.List ? (
+                    <GroupListTable
+                        newGroup={newGroup}
+                        onEditGroup={onEditGroup}
+                        onCheckGroup={onCheckGroup}
+                        onDeleteGroup={onDeleteGroup}
+                    />
+                ) : (
+                    <GroupListCard
+                        newGroup={newGroup}
+                        onCheckGroup={onCheckGroup}
+                        onDeleteGroup={onDeleteGroup}
+                    />
+                )}
+            </AwePage>
 
             <NewGroupModal
                 visible={visible}
                 onMainEvent={onNewGroupSuccess}
                 onClose={() => setVisible(false)}
             />
-        </AweNavPage>
+        </AwePage>
     )
 }
 

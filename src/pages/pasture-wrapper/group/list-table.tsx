@@ -10,6 +10,7 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { groupColumns } from '@/pages/pasture-wrapper/group/columns'
 import { GroupProps } from '@/types/common'
+import AwePage from '@/pages/components/awe-page'
 
 const { Content, Footer } = Layout
 
@@ -80,33 +81,31 @@ const GroupListTable: React.FC<GroupListTableProps> = (props: GroupListTableProp
         }
     }
 
-    return (
-        <Layout>
-            <Content>
-                <Table
-                    pagination={false}
-                    loading={loading}
-                    scroll={{ x: 950, y: scrollY }}
-                    dataSource={dataSource}
-                    columns={groupColumns({
-                        onCheckGroup: props.onCheckGroup,
-                        onEditGroup: props.onEditGroup,
-                        onDeleteGroup: props.onDeleteGroup,
-                    })}
-                />
-            </Content>
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            total={total}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+        />
+    )
 
-            <Footer className="awe-page__layout-footer">
-                <Pagination
-                    showSizeChanger
-                    pageSize={parseInt(pageSize, 10)}
-                    current={parseInt(pageNumber, 10)}
-                    total={total}
-                    showTotal={total => useLanguage.total_number(total)}
-                    onChange={onPageChange}
-                />
-            </Footer>
-        </Layout>
+    return (
+        <AwePage ctColor={true} noPadding={true} footer={footer}>
+            <Table
+                pagination={false}
+                loading={loading}
+                scroll={{ x: 950, y: scrollY }}
+                dataSource={dataSource}
+                columns={groupColumns({
+                    onCheckGroup: props.onCheckGroup,
+                    onEditGroup: props.onEditGroup,
+                    onDeleteGroup: props.onDeleteGroup,
+                })}
+            />
+        </AwePage>
     )
 }
 

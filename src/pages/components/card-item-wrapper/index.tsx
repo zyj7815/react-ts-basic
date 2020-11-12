@@ -1,6 +1,10 @@
 import React from 'react'
 import './index.less'
 
+/**
+ * 卡片包装容器
+ */
+
 interface ListCardProps {
     children: React.ReactNode
     action?: React.ReactNode

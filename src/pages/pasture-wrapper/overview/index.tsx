@@ -6,10 +6,11 @@ import OverviewWeather from '@/pages/pasture-wrapper/overview/overview-weather'
 import OverviewEvent from '@/pages/pasture-wrapper/overview/overview-event'
 import OverviewMessage from '@/pages/pasture-wrapper/overview/overview-message'
 import './index.less'
+import AwePage from '@/pages/components/awe-page'
 
 const PastureOver: React.FC = props => {
     return (
-        <div className="awe-normal-page">
+        <AwePage>
             <main className="pasture-overview-wrapper">
                 <Row gutter={[12, 0]} style={{ height: '100%' }}>
                     <Col xs={24} sm={24} md={24} lg={14} xl={15} xxl={17}>
@@ -23,7 +24,7 @@ const PastureOver: React.FC = props => {
                     </Col>
                 </Row>
             </main>
-        </div>
+        </AwePage>
     )
 }
 

@@ -3,7 +3,10 @@ import { useLanguage } from '@/language/useLanguage'
 
 const OverviewMessage: React.FC = props => {
     return (
-        <div className="pasture-overview-item beauty-shadow" style={{ height: '31%' }}>
+        <div
+            className="pasture-overview-item beauty-shadow"
+            style={{ height: '31%', minHeight: 170, marginBottom: 0 }}
+        >
             <header className="pasture-overview-item__header">
                 {useLanguage.message_notification}
             </header>

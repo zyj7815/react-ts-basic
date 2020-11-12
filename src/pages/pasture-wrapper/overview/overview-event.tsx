@@ -25,7 +25,10 @@ const OverviewEvent: React.FC = props => {
     }
 
     return (
-        <div className="pasture-overview-item beauty-shadow" style={{ height: '32%' }}>
+        <div
+            className="pasture-overview-item beauty-shadow"
+            style={{ height: '32%', minHeight: 220 }}
+        >
             <header className="pasture-overview-item__header">{useLanguage.abnormal_event}</header>
 
             <section className="pasture-overview-item__content">

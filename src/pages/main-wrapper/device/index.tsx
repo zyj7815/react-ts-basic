@@ -73,7 +73,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     return (
         <AwePage
             hdColor={true}
-            bgColor={true}
+            ctColor={true}
             isHPadding={true}
             isHShadow={true}
             header={<span>qwdqwd</span>}

@@ -1,3 +1,5 @@
+@import "../../../assets/style/variable";
+
 .awe-page-wrapper {
     padding: 0 10px 10px 10px;
     height: 100%;
@@ -46,6 +48,10 @@
             flex-direction: row-reverse;
             justify-content: space-between;
             padding: 10px 0;
+            
+            &[data-border=true] {
+                border-top: 1px solid @grey-line-color;
+            }
         
             .ant-select {
                 margin-right: 0;

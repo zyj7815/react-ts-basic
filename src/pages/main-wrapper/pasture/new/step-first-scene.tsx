@@ -124,7 +124,7 @@ export const FirstStepScene: React.FC<PastureStepProps> = (props: PastureStepPro
                     dpqwdkopqwkdpoqkwpdoqwd
                 </article>
             </section>
-            <footer className="new-pasture-footer awe-footer-action">
+            <footer className="new-pasture-footer">
                 <Button type="primary" onClick={props.onNextStep}>
                     {useLanguage.next_step}
                 </Button>

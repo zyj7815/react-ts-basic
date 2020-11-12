@@ -1,5 +1,4 @@
 import React from 'react'
-import { AweNavPage } from '@/pages/components/page-nav'
 import { Breadcrumb, Form, Input, Avatar, Row, Col, Button } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
@@ -12,6 +11,7 @@ import { ServerRequest } from '@/server/request'
 import { animalProfile } from '@/assets/images'
 import axios from 'axios'
 import './index.less'
+import AwePage from '@/pages/components/awe-page'
 
 const FormItem = Form.Item
 
@@ -109,61 +109,57 @@ const GroupEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         </Breadcrumb>
     )
 
+    const formHeader = (
+        <div className="group-edit-form beauty-shadow">
+            <Form form={form} {...layout}>
+                <FormItem
+                    label={useLanguage.group_name}
+                    name="room_name"
+                    rules={[{ required: true }]}
+                >
+                    <Input />
+                </FormItem>
+                <FormItem label={useLanguage.remark} name="description">
+                    <Input.TextArea />
+                </FormItem>
+            </Form>
+
+            <Button onClick={handleUpdateGroup}>{useLanguage.confirm}</Button>
+        </div>
+    )
+
     return (
-        <AweNavPage nav={nav}>
-            <article className="awe-page-wrapper" id="group-edit-wrapper">
-                <header className="awe-page-header-info">
-                    <div className="group-edit-form">
-                        <Form form={form} {...layout}>
-                            <FormItem
-                                label={useLanguage.group_name}
-                                name="room_name"
-                                rules={[{ required: true }]}
-                            >
-                                <Input />
-                            </FormItem>
-                            <FormItem label={useLanguage.remark} name="description">
-                                <Input.TextArea />
-                            </FormItem>
-                        </Form>
+        <AwePage nav={nav} header={formHeader}>
+            <main className="group-edit-content">
+                <h4>{useLanguage.selected}</h4>
 
-                        <Button onClick={handleUpdateGroup}>{useLanguage.confirm}</Button>
-                    </div>
-                </header>
+                <Row>
+                    {selectedAnimal.map((animal: AnimalProps) => (
+                        <Col
+                            {...cardLayout}
+                            key={animal.id}
+                            onClick={() => handleAnimalCard(animal.id, false)}
+                        >
+                            <GroupAnimalCard animal={animal} />
+                        </Col>
+                    ))}
+                </Row>
 
-                <section className="awe-page-content">
-                    <main className="awe-page__layout">
-                        <h4>{useLanguage.selected}</h4>
+                <h4>{useLanguage.not_selected}</h4>
 
-                        <Row>
-                            {selectedAnimal.map((animal: AnimalProps) => (
-                                <Col
-                                    {...cardLayout}
-                                    key={animal.id}
-                                    onClick={() => handleAnimalCard(animal.id, false)}
-                                >
-                                    <GroupAnimalCard animal={animal} />
-                                </Col>
-                            ))}
-                        </Row>
-
-                        <h4>{useLanguage.not_selected}</h4>
-
-                        <Row>
-                            {noGroupAnimal.map((animal: AnimalProps) => (
-                                <Col
-                                    {...cardLayout}
-                                    key={animal.id}
-                                    onClick={() => handleAnimalCard(animal.id, true)}
-                                >
-                                    <GroupAnimalCard animal={animal} />
-                                </Col>
-                            ))}
-                        </Row>
-                    </main>
-                </section>
-            </article>
-        </AweNavPage>
+                <Row>
+                    {noGroupAnimal.map((animal: AnimalProps) => (
+                        <Col
+                            {...cardLayout}
+                            key={animal.id}
+                            onClick={() => handleAnimalCard(animal.id, true)}
+                        >
+                            <GroupAnimalCard animal={animal} />
+                        </Col>
+                    ))}
+                </Row>
+            </main>
+        </AwePage>
     )
 }
 

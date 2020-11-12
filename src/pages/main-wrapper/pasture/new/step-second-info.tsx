@@ -65,7 +65,7 @@ export const SecondStepInfo: React.FC<PastureStepProps> = (props: PastureStepPro
                 </Form>
             </section>
 
-            <footer className="new-pasture-footer awe-footer-action">
+            <footer className="new-pasture-footer">
                 <Button onClick={props.onPreStep}>{useLanguage.last_step}</Button>
                 <Button type="primary" onClick={onSubmit}>
                     {useLanguage.next_step}

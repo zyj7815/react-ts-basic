@@ -8,7 +8,7 @@ export const ThirdStepLocation: React.FC<PastureStepProps> = (props: PastureStep
         <article className="new-pasture__content">
             <section className="new-pasture-location">qwdqw</section>
 
-            <footer className="new-pasture-footer awe-footer-action">
+            <footer className="new-pasture-footer">
                 <Button onClick={props.onPreStep}>{useLanguage.last_step}</Button>
                 <Button type="primary" onClick={props.onNextStep}>
                     {useLanguage.confirm}

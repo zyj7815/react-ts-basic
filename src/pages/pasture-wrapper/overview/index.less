@@ -3,13 +3,15 @@
 .pasture-overview-wrapper {
     
     position: relative;
-    height: 99%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
     
     .pasture-overview-item {
         background: #fff;
         position: relative;
         padding-top: 45px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
         
         .pasture-overview-item__header {
             position: absolute;
@@ -34,6 +36,7 @@
 
 #pasture-overview-map {
     height: 53%;
+    min-height: 370px;
     padding-top: 72px;
     
     .pasture-overview-map__header {
@@ -80,7 +83,9 @@
 
 #pasture-overview-animal {
     height: 45%;
+    min-height: 340px;
     padding-top: 0;
+    margin-bottom: 0;
     
     .pasture-overview-animal__title {
         position: absolute;
@@ -187,7 +192,7 @@
     
     h4 {
         font-size: 16px;
-        
+        margin-bottom: 10px;
         strong {
             color: @red-color;
         }
@@ -196,7 +201,7 @@
     .pasture-event__item {
         position: relative;
         display: flex;
-        margin-bottom: 10px;
+        margin-bottom: 7px;
         
         .pasture-event__item--content {
             flex: 1;

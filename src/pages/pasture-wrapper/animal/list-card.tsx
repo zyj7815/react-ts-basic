@@ -1,55 +1,80 @@
 import React from 'react'
+import { Col, Row, Spin } from 'antd'
+import ActiveAnimalCard from '@/pages/components/active-animal-card'
 import axios from 'axios'
-import { Row, Col, Spin } from 'antd'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import ActiveAnimalCard from '@/pages/components/active-animal-card'
 import { AnimalProps } from '@/types/common'
+import AwePage from '@/pages/components/awe-page'
 
-interface IState {
-    dataSource: any[]
-    loading: boolean
-}
+const AnimalListCard: React.FC = props => {
+    const pageSize = 20
 
-export default class AnimalListCard extends React.PureComponent<any | IState> {
-    private listContent: any = React.createRef()
-    private list: any = null
+    let list: any = null
+    let pageNumber: number = 1
+    let isFinished = false // 数据请求完成，结束请求
 
-    private pageSize = 20
-    private pageNumber: number = 1
-    private isEnd = false // 数据请求完成，结束请求
+    const listContent: any = React.useRef()
+    const [loading, setLoading] = React.useState(true)
+    const [dataSource, setDataSource] = React.useState<AnimalProps[]>([])
 
-    public state: IState = {
-        dataSource: [],
-        loading: true,
-    }
-
-    public componentDidMount(): void {
-        this.list = this.listContent.current
-
-        // 进入页面第一次，请求数据
-        if (this.useBottom()) {
-            this.fetchData()
+    React.useEffect(() => {
+        if (!list) {
+            list = listContent.current
         }
 
-        if (this.list) {
-            this.list.addEventListener('scroll', () => {
-                const isBottom = this.useBottom()
-                if (isBottom) {
-                    console.log('到底部')
+        // 进入页面第一次，请求数据
+        fetchData()
 
-                    this.fetchData()
+        if (list) {
+            list.addEventListener('scroll', () => {
+                const isBottom = useBottom()
+                if (isBottom) {
+                    fetchData()
                 }
             })
+        }
+
+        return () => {
+            list.removeEventListener('scroll', () => {})
+        }
+    }, [])
+
+    const fetchData = async () => {
+        if (isFinished) return
+
+        try {
+            setLoading(true)
+            const res = await axios.get(
+                Api.biological.list,
+                Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
+            )
+
+            setLoading(false)
+            setDataSource(dataSource => dataSource.concat(res.data))
+
+            // 如果数据刚好返回了pageSize条，那么表示还有下一页
+            if (res.data.length === pageSize) {
+                pageNumber = pageNumber + 1
+                // 判断是否满屏，如果没有满屏就请求下一页
+                if (useBottom()) {
+                    fetchData()
+                }
+            } else {
+                isFinished = true
+            }
+        } catch (err) {
+            setLoading(false)
+            errorMessage.alert(err)
         }
     }
 
     /**
      * 判断滚动到底部
      */
-    private useBottom = () => {
-        const { scrollTop, clientHeight, scrollHeight } = this.list
+    const useBottom = () => {
+        const { scrollTop, clientHeight, scrollHeight } = list
 
         if (scrollTop + clientHeight === scrollHeight) {
             return true
@@ -58,49 +83,11 @@ export default class AnimalListCard extends React.PureComponent<any | IState> {
         }
     }
 
-    /**
-     * 获取数据
-     */
-    private fetchData = async () => {
-        if (this.isEnd) return
-
-        this.setState({
-            loading: true,
-        })
-
-        try {
-            const res = await axios.get(
-                Api.biological.list,
-                Token.pageToken(this.pageSize, (this.pageNumber - 1) * this.pageSize)
-            )
-            this.setState({
-                loading: false,
-                dataSource: this.state.dataSource.concat(res.data),
-            })
-
-            // 如果数据刚好返回了pageSize条，那么表示还有下一页
-            if (res.data.length === this.pageSize) {
-                this.pageNumber = this.pageNumber + 1
-                // 判断是否满屏，如果没有满屏就请求下一页
-                if (this.useBottom()) {
-                    this.fetchData()
-                }
-            } else {
-                this.isEnd = true
-            }
-        } catch (err) {
-            this.setState({
-                loading: false,
-            })
-            errorMessage.alert(err)
-        }
-    }
-
-    render(): React.ReactNode {
-        return (
-            <main className="awe-page-card__layout" ref={this.listContent}>
+    return (
+        <AwePage noPadding={true}>
+            <main className="awe-page__card--list" ref={listContent}>
                 <Row>
-                    {this.state.dataSource.map((animal: AnimalProps) => {
+                    {dataSource.map((animal: AnimalProps) => {
                         return (
                             <Col key={animal.id} sm={24} md={12} lg={8} xl={8} xxl={6}>
                                 <ActiveAnimalCard data={animal} />
@@ -108,10 +95,12 @@ export default class AnimalListCard extends React.PureComponent<any | IState> {
                         )
                     })}
                 </Row>
-                <Spin spinning={this.state.loading}>
+                <Spin spinning={loading}>
                     <div style={{ height: 100 }} />
                 </Spin>
             </main>
-        )
-    }
+        </AwePage>
+    )
 }
+
+export default React.memo(AnimalListCard)

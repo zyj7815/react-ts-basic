@@ -19,7 +19,7 @@ export const RouteUris = {
     MainPastureNew: '/root/main-pasture-new',
 
     // 设备信息
-    MainDevice: '/root/device',
+    MainDevice: '/root/main-device',
 
     // 设备详情
     MainDeviceDetail: (id = ROUTE_ID) => `/root/main-device/${id}`,

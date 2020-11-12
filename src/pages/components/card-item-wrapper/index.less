@@ -1,8 +1,8 @@
-@import "../../../assets/style/color";
+@import "../../../assets/style/variable";
 
 .list-card-wrapper {
     padding: 10px 10px 0 0;
-    
+
     .list-card-content {
         padding: 10px;
         background: #FFF;
@@ -10,18 +10,18 @@
         transition: all 300ms;
         cursor: pointer;
         position: relative;
-    
+
         &:hover {
             border-color: @primary-color;
-        
+
             .list-card-action {
                 opacity: 1;
             }
         }
-    
-    
-    
-    
+
+
+
+
         .list-card-action {
             transition: all 300ms;
             position: absolute;
@@ -33,11 +33,11 @@
             background: @primary-color;
             line-height: 26px;
             text-align: center;
-        
+
             * {
                 color: #fff;
             }
-        
+
         }
     }
 }

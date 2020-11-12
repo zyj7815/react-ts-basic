@@ -5,6 +5,7 @@ import { RadioFalse, RadioTrue } from '@/assets/images/icon'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { ObjectProps } from '@/types'
 import { NewPastureContext } from '@/pages/main-wrapper/pasture/new/context'
+import AwePage from '@/pages/components/awe-page'
 
 const pastureTypes: ObjectProps[] = [
     {
@@ -70,6 +71,28 @@ export const FirstStepScene: React.FC<PastureStepProps> = (props: PastureStepPro
 
         arrowRef.current.style.left = element.offsetWidth / 2 + diffLeft + 'px'
     }
+
+    const header = (
+        <header className="new-pasture-scene__type" ref={headerRef}>
+            <span className="new-pasture-scene__type--title">{useLanguage.pasture_type}</span>
+
+            {pastureTypes.map((obj: ObjectProps) => (
+                <span
+                    ref={obj.key === pastureType ? currentRadioRef : null}
+                    key={obj.key}
+                    className="new-pasture-scene__type--radio"
+                    onClick={e => changePastureType(e.target, obj.key)}
+                >
+                    {obj.key === pastureType ? (
+                        <img src={RadioTrue} alt="" />
+                    ) : (
+                        <img src={RadioFalse} alt="" />
+                    )}
+                    {obj.value}
+                </span>
+            ))}
+        </header>
+    )
 
     return (
         <article className="new-pasture__content">

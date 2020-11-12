@@ -1,14 +1,14 @@
 import React from 'react'
 import { Breadcrumb, Radio, Button } from 'antd'
-import { AweNavPage } from '@/pages/components/page-nav'
 import { PageHeaderData, PageHeaderDataItem } from '@/pages/components/page-header-data'
 import { useLanguage } from '@/language/useLanguage'
 import AnimalListTable from './list-table'
-import AnimalListCard1 from './list-card1'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { RouteUris } from '@/router/config'
 import { TabType } from '@/enum'
+import AwePage from '@/pages/components/awe-page'
+import AnimalListCard from '@/pages/pasture-wrapper/animal/list-card'
 
 const TabKey = 'tabKey'
 
@@ -29,13 +29,6 @@ const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) =
         routeProps.history.push(RouteUris.PastureAnimalNew(id))
     }
 
-    const nav = (
-        <Breadcrumb className="awe-page-breadcrumb">
-            <Breadcrumb.Item>{useLanguage.pasture_management}</Breadcrumb.Item>
-            <Breadcrumb.Item>{useLanguage.animal_card}</Breadcrumb.Item>
-        </Breadcrumb>
-    )
-
     const infoItems: PageHeaderDataItem[] = [
         { mainText: '52', subText: useLanguage.animal_total },
         { mainText: '2', subText: useLanguage.pasture_total },
@@ -46,34 +39,34 @@ const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) =
         { label: useLanguage.card_mode, value: TabType.Card },
     ]
 
+    const nav = (
+        <Breadcrumb className="awe-page-breadcrumb">
+            <Breadcrumb.Item>{useLanguage.pasture_management}</Breadcrumb.Item>
+            <Breadcrumb.Item>{useLanguage.animal_card}</Breadcrumb.Item>
+        </Breadcrumb>
+    )
+
+    const radio = (
+        <>
+            <Radio.Group
+                optionType="button"
+                value={tabKey}
+                options={listRadio}
+                onChange={onChangeTab}
+            />
+
+            <span>
+                <Button onClick={handleNewAnimal}>{useLanguage.new_card}</Button>
+            </span>
+        </>
+    )
+
     return (
-        <AweNavPage nav={nav}>
-            <article className="awe-page-wrapper">
-                <header className="awe-page-header-info">
-                    <PageHeaderData infoItems={infoItems} />
-                </header>
-                <section className="awe-page-content" style={{ paddingTop: 115 }}>
-                    <main className="awe-page__layout">
-                        <header className="awe-page__layout-header">
-                            <Radio.Group
-                                optionType="button"
-                                value={tabKey}
-                                options={listRadio}
-                                onChange={onChangeTab}
-                            />
-
-                            <span>
-                                <Button onClick={handleNewAnimal}>{useLanguage.new_card}</Button>
-                            </span>
-                        </header>
-
-                        <section className="awe-page__layout-content">
-                            {tabKey === TabType.List ? <AnimalListTable /> : <AnimalListCard1 />}
-                        </section>
-                    </main>
-                </section>
-            </article>
-        </AweNavPage>
+        <AwePage nav={nav} header={<PageHeaderData infoItems={infoItems} />}>
+            <AwePage header={radio} hdColor={true} noPadding={true} isHPadding={true}>
+                {tabKey === TabType.List ? <AnimalListTable /> : <AnimalListCard />}
+            </AwePage>
+        </AwePage>
     )
 }
 

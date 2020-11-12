@@ -13,6 +13,7 @@ import { ServiceTool } from '@/utils/service-tool'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import axios from 'axios'
+import AwePage from '@/pages/components/awe-page'
 
 const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<PastureProps[]>([])
@@ -72,41 +73,46 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.PastureOverview(pasture.id))
     }
 
+    const header = (
+        <>
+            <span>{useLanguage.pasture_list}</span>
+            <Button icon={<PlusCircleOutlined />} onClick={handleNewPasture}>
+                {useLanguage.new_pasture}
+            </Button>
+        </>
+    )
+
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            total={total}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+        />
+    )
+
     return (
-        <div className="awe-normal-page">
-            <main className="awe-normal-main">
-                <header className="awe-normal__header beauty-shadow">
-                    <span>{useLanguage.pasture_list}</span>
-                    <Button icon={<PlusCircleOutlined />} onClick={handleNewPasture}>
-                        {useLanguage.new_pasture}
-                    </Button>
-                </header>
-
-                <section className="awe-normal__content">
-                    <Table
-                        rowKey="id"
-                        loading={loading}
-                        dataSource={dataSource}
-                        pagination={false}
-                        scroll={{ x: 900, y: scrollY }}
-                        columns={pastureColumns({
-                            onCheckPasture: handleDetail,
-                        })}
-                    />
-                </section>
-
-                <footer className="awe-normal__footer">
-                    <Pagination
-                        showSizeChanger
-                        pageSize={parseInt(pageSize, 10)}
-                        current={parseInt(pageNumber, 10)}
-                        total={total}
-                        showTotal={total => useLanguage.total_number(total)}
-                        onChange={onPageChange}
-                    />
-                </footer>
-            </main>
-        </div>
+        <AwePage
+            hdColor={true}
+            bgColor={true}
+            isHPadding={true}
+            isHShadow={true}
+            header={header}
+            footer={footer}
+        >
+            <Table
+                rowKey="id"
+                loading={loading}
+                dataSource={dataSource}
+                pagination={false}
+                scroll={{ x: 900, y: scrollY }}
+                columns={pastureColumns({
+                    onCheckPasture: handleDetail,
+                })}
+            />
+        </AwePage>
     )
 }
 

@@ -1,10 +1,35 @@
+@import "../../../../assets/style/variable";
+
 .main-device-detail {
     background: #fff;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     
-    .main-device-header__item {
-        height: 200px;
-        border: 1px solid #F55044;
+    display: flex;
+    flex-direction: column;
+    
+    .main-device-detail__header {
+        .main-device-header__item {
+            height: 200px;
+            border: 1px solid #F55044;
+        }
+    }
+    
+    .main-device-detail__map {
+        height: 100%;
+        border: 1px solid;
+    }
+}
+
+
+@media screen and (max-width: @grid-lg){
+    
+    .main-device-detail {
+        display: block;
+        .main-device-detail__map {
+            border: 1px dashed #F55044;
+            height: 600px;
+        }
     }
 }

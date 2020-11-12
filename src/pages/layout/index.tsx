@@ -106,9 +106,11 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                         onCollapse={(collapsed: any) => setCollapsed(collapsed)}
                         className="layout-sidebar"
                     >
-                        <header className="awe-layout-wrapper__content--operation">
-                            {props.children}
-                        </header>
+                        {props.children && (
+                            <header className="awe-layout-wrapper__content--operation">
+                                {props.children}
+                            </header>
+                        )}
 
                         <Menu
                             mode="inline"

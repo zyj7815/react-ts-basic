@@ -12,6 +12,7 @@ import { deviceColumns } from '@/pages/main-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
+import AwePage from '@/pages/components/awe-page'
 
 const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -58,35 +59,37 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
-    return (
-        <div className="awe-normal-page">
-            <main className="awe-normal-main">
-                <header className="awe-normal__header beauty-shadow">qwdkqwd</header>
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+            total={total}
+        />
+    )
 
-                <section className="awe-normal__content">
-                    <Table
-                        rowKey="id"
-                        loading={loading}
-                        dataSource={dataSource}
-                        pagination={false}
-                        scroll={{ x: 900, y: scrollY }}
-                        columns={deviceColumns({
-                            onCheckDevice: handleDeviceDetail,
-                        })}
-                    />
-                </section>
-                <footer className="awe-normal__footer">
-                    <Pagination
-                        showSizeChanger
-                        pageSize={parseInt(pageSize, 10)}
-                        current={parseInt(pageNumber, 10)}
-                        showTotal={total => useLanguage.total_number(total)}
-                        onChange={onPageChange}
-                        total={total}
-                    />
-                </footer>
-            </main>
-        </div>
+    return (
+        <AwePage
+            hdColor={true}
+            bgColor={true}
+            isHPadding={true}
+            isHShadow={true}
+            header={<span>qwdqwd</span>}
+            footer={footer}
+        >
+            <Table
+                rowKey="id"
+                loading={loading}
+                dataSource={dataSource}
+                pagination={false}
+                scroll={{ x: 900, y: scrollY }}
+                columns={deviceColumns({
+                    onCheckDevice: handleDeviceDetail,
+                })}
+            />
+        </AwePage>
     )
 }
 

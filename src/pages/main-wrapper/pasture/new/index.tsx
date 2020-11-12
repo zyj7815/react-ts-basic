@@ -13,6 +13,7 @@ import {
 } from '@/pages/main-wrapper/pasture/new/context'
 import './index.less'
 import { AweRouteProps } from '@/types/route'
+import AwePage from '@/pages/components/awe-page'
 
 export interface PastureStepProps {
     onNextStep?: () => void
@@ -29,7 +30,7 @@ const steps = [
 ]
 
 const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const [current, setCurrent] = React.useState(4)
+    const [current, setCurrent] = React.useState(1)
     const [pastureType, setPastureType] = React.useState(1)
     const [information, setInformation] = React.useState<PastureInfoProps | null>(null)
     const [location, setLocation] = React.useState<PastureLocationProps | null>(null)
@@ -53,6 +54,16 @@ const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         </Breadcrumb>
     )
 
+    const step = (
+        <header className="new-pasture__step">
+            <Steps current={current - 1}>
+                {steps.map((item: string, index: number) => (
+                    <Step key={index} title={item} />
+                ))}
+            </Steps>
+        </header>
+    )
+
     return (
         <NewPastureContext.Provider
             value={{
@@ -64,28 +75,18 @@ const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 setLocation,
             }}
         >
-            <AweNavPage nav={nav}>
-                <article className="awe-page-wrapper">
-                    <section className="new-pasture-wrapper">
-                        <header className="new-pasture__step">
-                            <Steps current={current - 1}>
-                                {steps.map((item: string, index: number) => (
-                                    <Step key={index} title={item} />
-                                ))}
-                            </Steps>
-                        </header>
-
-                        {current === 1 && <FirstStepScene onNextStep={handleNext} />}
-                        {current === 2 && (
-                            <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />
-                        )}
-                        {current === 3 && (
-                            <ThirdStepLocation onPreStep={handlePrev} onNextStep={handleNext} />
-                        )}
-                        {current === 4 && <LastStepFinish onNextStep={handleNext} />}
-                    </section>
-                </article>
-            </AweNavPage>
+            <div className="new-pasture-wrapper">
+                <AwePage nav={nav} bgColor={true} header={step}>
+                    {current === 1 && <FirstStepScene onNextStep={handleNext} />}
+                    {current === 2 && (
+                        <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />
+                    )}
+                    {current === 3 && (
+                        <ThirdStepLocation onPreStep={handlePrev} onNextStep={handleNext} />
+                    )}
+                    {current === 4 && <LastStepFinish onNextStep={handleNext} />}
+                </AwePage>
+            </div>
         </NewPastureContext.Provider>
     )
 }

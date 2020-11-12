@@ -1,4 +1,4 @@
-@import "./color";
+@import "variable";
 @menu-height: 48px;
 @radio-height: 52px;
 @aweDisplayFooter: 64px;
@@ -48,66 +48,71 @@
 
 
 
-.awe-page-wrapper {
-    
-    height: 100%;
-    position: relative;
-    
-    .awe-page-header-info {
-        position: absolute;
-        width: 100%;
-    }
-    
-    .awe-page-content {
-        height: 100%;
-        
-        .awe-page__layout {
-            background: #FFF;
-            height: 100%;
-            position: relative;
-            overflow-y: auto;
-            
-            .awe-page__layout-header {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                
-                background: inherit;
-                padding: 0 10px;
-                height: @radio-height;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                
-                .ant-radio-group {
-                    display: inherit;
-                }
-            }
-            
-            .awe-page__layout-content {
-                height: 100%;
-                padding: @radio-height 0 0 0;
-                overflow-y: auto;
-                background: @basic-color;
-                
-          
-            }
-            
-            .awe-page__layout-footer {
-                padding: 3px 0;
-                display: flex;
-                justify-content: flex-end;
-            }
-        }
-        
-        .awe-page-card__layout {
-            height: 100%;
-            overflow-y: auto;
-        }
-    }
-}
+//.awe-page-wrapper {
+//
+//    height: 100%;
+//    position: relative;
+//
+//    .awe-page-header-info {
+//        position: absolute;
+//        width: 100%;
+//    }
+//
+//    .awe-page-content {
+//        height: 100%;
+//
+//        .awe-page__layout {
+//            background: #FFF;
+//            height: 100%;
+//            position: relative;
+//            overflow-y: auto;
+//
+//            .awe-page__layout-header {
+//                position: absolute;
+//                top: 0;
+//                left: 0;
+//                width: 100%;
+//
+//                background: inherit;
+//                padding: 0 10px;
+//                height: @radio-height;
+//                display: flex;
+//                align-items: center;
+//                justify-content: space-between;
+//
+//                .ant-radio-group {
+//                    display: inherit;
+//                }
+//            }
+//
+//            .awe-page__layout-content {
+//                height: 100%;
+//                padding: @radio-height 0 0 0;
+//                overflow-y: auto;
+//                background: @basic-color;
+//
+//
+//            }
+//
+//            .awe-page__layout-footer {
+//                padding: 3px 0;
+//                display: flex;
+//                justify-content: flex-end;
+//            }
+//        }
+//
+//        .awe-page-card__layout {
+//            height: 100%;
+//            overflow-y: auto;
+//        }
+//    }
+//}
 
+
+.awe-page__card--list {
+    height: 100%;
+    overflow-y: auto;
+}
 
 // 常见于form详情页
 .awe-display {

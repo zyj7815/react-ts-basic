@@ -26,50 +26,62 @@ const MainAccount: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.EditAccount)
     }
     return (
-        <div id={'accountInfo'}>
+        <div id={'account-info'}>
             <div className={'content'}>
                 <div className={'avatar'}>
                     <UserOutlined />
                 </div>
                 <Row>
                     <Col xl={7} lg={12} md={12} sm={24}>
-                        <div className={'colContent'}>
-                            <div className={'topBox'}>
-                                <div className={'title'}>{useLanguage.account_name}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                        <div className={'col-content'}>
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.account_name}
+                                </div>
+                                <div className={'col-content-top-box-text'}>成都德鲁伊科技</div>
                             </div>
-                            <div className={'bottomBox'}>
-                                <div className={'title'}>{useLanguage.gender}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                            <div className={'col-content-bottom-box'}>
+                                <div className={'col-content-bottom-box-title'}>
+                                    {useLanguage.gender}
+                                </div>
+                                <div className={'col-content-bottom-box-text'}>成都德鲁伊科技</div>
                             </div>
                         </div>
                     </Col>
                     <Col xl={7} lg={12} md={12} sm={24}>
-                        <div className={'colContent'}>
-                            <div className={'topBox'}>
-                                <div className={'title'}>{useLanguage.phone_new}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                        <div className={'col-content'}>
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.phone_new}
+                                </div>
+                                <div className={'col-content-top-box-text'}>成都德鲁伊科技</div>
                             </div>
-                            <div className={'bottomBox'}>
-                                <div className={'title'}>{useLanguage.mail}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                            <div className={'col-content-bottom-box'}>
+                                <div className={'col-content-bottom-box-title'}>
+                                    {useLanguage.mail}
+                                </div>
+                                <div className={'col-content-bottom-box-text'}>成都德鲁伊科技</div>
                             </div>
                         </div>
                     </Col>
                     <Col xl={10} lg={24} md={24} sm={24}>
-                        <div className={'colContent'}>
-                            <div className={'topBox'}>
-                                <div className={'title'}>{useLanguage.address}</div>
-                                <div className={'text'}>四川省成都市天府三街1325号</div>
+                        <div className="col-content">
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.address}
+                                </div>
+                                <div className={'col-content-top-box-text'}>
+                                    四川省成都市天府三街1325号
+                                </div>
                             </div>
                         </div>
                     </Col>
                 </Row>
-                <div className={'editBox'}>
-                    <Button type="primary" className={'editBtn'} onClick={editInfo}>
+                <div className={'edit-box'}>
+                    <Button type="primary" className={'edit-btn'} onClick={editInfo}>
                         {useLanguage.edit_information}
                     </Button>
-                    <Button type="primary" className={'editPsd'} onClick={editPsd}>
+                    <Button type="primary" className={'edit-psd'} onClick={editPsd}>
                         {useLanguage.update_password}
                     </Button>
                 </div>

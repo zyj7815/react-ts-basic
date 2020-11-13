@@ -10,7 +10,7 @@ const MainCompany: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.CompanyEdit)
     }
     return (
-        <div id={'companyInfo'}>
+        <div id={'company-info'}>
             <div className={'content'}>
                 <Row>
                     <Col xl={7} lg={12} md={12} sm={24}>

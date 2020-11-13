@@ -1,7 +1,7 @@
 import React from 'react'
 import { AweRouteProps } from '@/types/route'
 import { Row, Col, Button, Form, Input, Select } from 'antd'
-import './companyEdit.less'
+import './company-edit.less'
 import { useLanguage } from '@/language/useLanguage'
 import { RouteUris } from '@/router/config'
 const { TextArea } = Input
@@ -16,20 +16,20 @@ const CompanyEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainCompany)
     }
     return (
-        <div id={'companyEdit'}>
+        <div id={'company-edit'}>
             <div className={'content'}>
-                <div className={'contentBox'}>
-                    <div className={'titleBox'}>
-                        <div className={'textBox'}>
+                <div className={'content-box'}>
+                    <div className={'title-box'}>
+                        <div className={'text-box'}>
                             <div className={'icon'}></div>
                             <div className={'title'}>编辑资料</div>
                         </div>
                         <div>
-                            <Button className={'cancelBtn'} onClick={cancel}>
+                            <Button className={'cancel-btn'} onClick={cancel}>
                                 {useLanguage.cancel}
                             </Button>
                             <Button
-                                className={'saveBtn'}
+                                className={'save-btn'}
                                 onClick={() => {
                                     form.validateFields()
                                         .then(values => {
@@ -44,7 +44,7 @@ const CompanyEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                             </Button>
                         </div>
                     </div>
-                    <div className={'formBox'}>
+                    <div className={'form-box'}>
                         <Form
                             labelCol={{ span: 5 }}
                             form={form}

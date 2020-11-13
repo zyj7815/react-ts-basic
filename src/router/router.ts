@@ -120,7 +120,7 @@ export const routes: RouteInterface[] = [
                     {
                         path: RouteUris.EditAccount,
                         component: loadable(() =>
-                            import('@/pages/main-wrapper/account/accountEdit')
+                            import('@/pages/main-wrapper/account/account-edit')
                         ),
                         name: 'main-wrapper-account',
                         exact: true,
@@ -140,7 +140,7 @@ export const routes: RouteInterface[] = [
                     {
                         path: RouteUris.CompanyEdit,
                         component: loadable(() =>
-                            import('@/pages/main-wrapper/company/companyEdit')
+                            import('@/pages/main-wrapper/company/company-edit')
                         ),
                         name: 'main-wrapper-company',
                         exact: true,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AweRouteProps } from '@/types/route'
 import { Row, Col, Button, Form, Input, Select, Upload, message } from 'antd'
-import './accountEdit.less'
+import './account-edit.less'
 import { useLanguage } from '@/language/useLanguage'
 import { RouteUris } from '@/router/config'
 import { UserOutlined } from '@ant-design/icons'
@@ -44,20 +44,20 @@ const AccountEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         // })
     }
     return (
-        <div id={'accountEdit'}>
+        <div id={'account-edit'}>
             <div className={'content'}>
-                <div className={'contentBox'}>
-                    <div className={'titleBox'}>
-                        <div className={'textBox'}>
+                <div className={'content-box'}>
+                    <div className={'title-box'}>
+                        <div className={'text-box'}>
                             <div className={'icon'}></div>
                             <div className={'title'}>编辑资料</div>
                         </div>
                         <div>
-                            <Button className={'cancelBtn'} onClick={cancel}>
+                            <Button className={'cancel-btn'} onClick={cancel}>
                                 {useLanguage.cancel}
                             </Button>
                             <Button
-                                className={'saveBtn'}
+                                className={'save-btn'}
                                 onClick={() => {
                                     form.validateFields()
                                         .then(values => {
@@ -72,22 +72,22 @@ const AccountEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                             </Button>
                         </div>
                     </div>
-                    <div className={'BottomBox'}>
-                        <div className={'leftBox'}>
+                    <div className={'Bottom-box'}>
+                        <div className={'left-box'}>
                             <div className={'avatar'}>
                                 <UserOutlined />
                             </div>
-                            <div className={'avaBtn'}>
+                            <div className={'ava-btn'}>
                                 <Upload
                                     customRequest={onRequestImage}
                                     fileList={fileList}
                                     accept=".jpg,.png,.jpeg,.bmp"
                                 >
-                                    <Button className={'upAva'}>上传头像</Button>
+                                    <Button className={'up-ava'}>上传头像</Button>
                                 </Upload>
                             </div>
                         </div>
-                        <div className={'formBox'}>
+                        <div className={'form-box'}>
                             <Form
                                 labelCol={{ span: 5 }}
                                 form={form}

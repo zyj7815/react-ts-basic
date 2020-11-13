@@ -73,6 +73,14 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.PastureOverview(pasture.id))
     }
 
+    /**
+     * 编辑牧场详情
+     * @param pasture
+     */
+    const handleEdit = (pasture: PastureProps) => {
+        routeProps.history.push(RouteUris.MainPastureEdit(pasture.id))
+    }
+
     const header = (
         <>
             <span>{useLanguage.pasture_list}</span>
@@ -109,7 +117,8 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
                 columns={pastureColumns({
-                    onCheckPasture: handleDetail,
+                    onCheckDetailEvent: handleDetail,
+                    onEditEvent: handleEdit,
                 })}
             />
         </AwePage>

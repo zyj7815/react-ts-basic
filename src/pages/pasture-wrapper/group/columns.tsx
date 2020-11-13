@@ -2,14 +2,9 @@ import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils'
 import { GroupProps } from '@/types/common'
+import { AweColumnProps } from '@/types'
 
-interface GroupColumnsProps {
-    onCheckGroup: (group: GroupProps) => void
-    onEditGroup: (group: GroupProps) => void
-    onDeleteGroup: (group: GroupProps) => void
-}
-
-export const groupColumns = (event: GroupColumnsProps) => {
+export const groupColumns = (events: AweColumnProps<GroupProps>) => {
     return [
         {
             title: useLanguage.group_name,
@@ -40,16 +35,19 @@ export const groupColumns = (event: GroupColumnsProps) => {
                     <span className="awe-table-action">
                         <span
                             className="awe-action-item"
-                            onClick={() => event.onCheckGroup(record)}
+                            onClick={() => events.onCheckDetailEvent(record)}
                         >
                             {useLanguage.view}
                         </span>
-                        <span className="awe-action-item" onClick={() => event.onEditGroup(record)}>
+                        <span
+                            className="awe-action-item"
+                            onClick={() => events.onEditEvent && events.onEditEvent(record)}
+                        >
                             {useLanguage.edit}
                         </span>
                         <span
                             className="awe-action-item"
-                            onClick={() => event.onDeleteGroup(record)}
+                            onClick={() => events.onDeleteEvent && events.onDeleteEvent(record)}
                         >
                             {useLanguage.delete}
                         </span>

@@ -1,0 +1,72 @@
+@import "../../../assets/style/variable";
+
+@listWidth: 300px;
+
+.pasture-map-wrapper {
+
+    height: 100%;
+    overflow: hidden;
+    padding: 0 @listWidth 0 0;
+    
+    .pasture-map__content {
+        float: left;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #16B351;
+    }
+    
+    
+    .pasture-map__list {
+        float: left;
+        width: @listWidth;
+        height: 100%;
+        border: 1px solid #F55044;
+        margin-left: -@listWidth;
+        position: relative;
+        left: @listWidth;
+        
+        .pasture-map__list--nav {
+            width: 100%;
+            label {
+                font-size: 16px;
+        
+            }
+        }
+    }
+}
+
+
+.pasture-map-card {
+
+    background: #fff;
+    margin: 10px 0 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 300ms;
+    position: relative;
+    overflow: hidden;
+    
+    &[data-select=true]:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: @primary-color;
+    }
+    
+    &:hover {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    .pasture-map-card__content {
+        color: @light-dark-color;
+        margin-top: 5px;
+        
+        .pasture-map-card__content--item {
+            display: inline-block;
+            width: 50%;
+        }
+    }
+}

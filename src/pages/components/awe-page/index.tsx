@@ -10,15 +10,17 @@ interface AwePageProps {
     isHPadding?: boolean // header是否有padding
     isHShadow?: boolean // header是否带阴影
     isFBorder?: boolean // footer顶部线条
+    isHiddenX?: boolean // x轴是否滚动
     nav?: React.ReactNode
     header?: React.ReactNode
     footer?: React.ReactNode
     children: React.ReactNode
+    className?: string
 }
 
 const AwePage: React.FC<AwePageProps> = (props: AwePageProps) => {
     return (
-        <div className="awe-page-wrapper" data-padding={props.noPadding}>
+        <div className={`awe-page-wrapper ${props.className}`} data-padding={props.noPadding}>
             <nav className="awe-page__nav">{props.nav}</nav>
             <main
                 className="awe-page__main"
@@ -37,6 +39,7 @@ const AwePage: React.FC<AwePageProps> = (props: AwePageProps) => {
 
                 <section
                     className="awe-page__main-content"
+                    data-scrollX={props.isHiddenX}
                     style={{ backgroundColor: props.ctColor ? '#fff' : '' }}
                 >
                     {props.children}

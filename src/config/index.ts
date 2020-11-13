@@ -10,3 +10,11 @@ export const SpeciesList: ObjectProps[] = [
     { value: useLanguage.donkey, key: 105 },
     { value: useLanguage.other, key: 0 },
 ]
+
+/**
+ * form标题整行
+ */
+export const formFullLayout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 24 },
+}

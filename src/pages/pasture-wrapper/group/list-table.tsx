@@ -1,18 +1,16 @@
 import React from 'react'
-import { Layout, Table, Pagination } from 'antd'
+import { Table, Pagination } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { ServiceTool } from '@/utils/service-tool'
 import { Utils } from '@/utils'
-import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { groupColumns } from '@/pages/pasture-wrapper/group/columns'
 import { GroupProps } from '@/types/common'
+import axios from 'axios'
 import AwePage from '@/pages/components/awe-page'
-
-const { Content, Footer } = Layout
 
 interface GroupListTableProps {
     newGroup: GroupProps | null
@@ -100,9 +98,9 @@ const GroupListTable: React.FC<GroupListTableProps> = (props: GroupListTableProp
                 scroll={{ x: 950, y: scrollY }}
                 dataSource={dataSource}
                 columns={groupColumns({
-                    onCheckGroup: props.onCheckGroup,
-                    onEditGroup: props.onEditGroup,
-                    onDeleteGroup: props.onDeleteGroup,
+                    onCheckDetailEvent: props.onCheckGroup,
+                    onEditEvent: props.onEditGroup,
+                    onDeleteEvent: props.onDeleteGroup,
                 })}
             />
         </AwePage>

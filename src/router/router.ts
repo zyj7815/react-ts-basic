@@ -62,6 +62,12 @@ export const routes: RouteInterface[] = [
                         name: 'pasture-wrapper-fence',
                         exact: true,
                     },
+                    {
+                        path: RouteUris.PastureMapDetail(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/map')),
+                        name: 'pasture-wrapper-map',
+                        exact: true,
+                    },
                 ],
             },
             {
@@ -88,6 +94,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.MainPastureEdit(),
+                        component: loadable(() => import('@/pages/main-wrapper/pasture/edit')),
+                        name: 'main-wrapper-pasture-edit',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.MainDevice,
                         component: loadable(() => import('@/pages/main-wrapper/device')),
                         name: 'main-wrapper-device',
@@ -109,6 +121,12 @@ export const routes: RouteInterface[] = [
                         path: RouteUris.MainCompany,
                         component: loadable(() => import('@/pages/main-wrapper/company')),
                         name: 'main-wrapper-company',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.MainPastureMap,
+                        component: loadable(() => import('@/pages/main-wrapper/map')),
+                        name: 'main-wrapper-map',
                         exact: true,
                     },
                 ],

@@ -3,13 +3,9 @@ import { Button, Form, Input } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { NewPastureContext, PastureInfoProps } from '@/pages/main-wrapper/pasture/new/context'
+import { formFullLayout } from '@/config'
 
 const FormItem = Form.Item
-
-const layout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-}
 
 export const SecondStepInfo: React.FC<PastureStepProps> = (props: PastureStepProps) => {
     const { information, setInformation } = React.useContext(NewPastureContext)
@@ -42,7 +38,7 @@ export const SecondStepInfo: React.FC<PastureStepProps> = (props: PastureStepPro
     return (
         <article className="new-pasture__content">
             <section className="new-pasture-info">
-                <Form {...layout} form={form}>
+                <Form {...formFullLayout} form={form}>
                     <FormItem
                         label={useLanguage.pasture_name}
                         name="name"

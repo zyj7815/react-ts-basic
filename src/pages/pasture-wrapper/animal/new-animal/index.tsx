@@ -1,7 +1,7 @@
 import React from 'react'
 import { Breadcrumb, Form, Input, Select, DatePicker, InputNumber, Button } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import { SpeciesList } from '@/config'
+import { formFullLayout, SpeciesList } from '@/config'
 import { ObjectProps } from '@/types'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
@@ -16,11 +16,6 @@ import AwePage from '@/pages/components/awe-page'
 
 const FormItem = Form.Item
 const Option = Select.Option
-
-const layout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-}
 
 // 批量生成生物的昵称类型
 enum GenerateType {
@@ -188,7 +183,7 @@ const NewAnimal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHPadding={true}
             bgColor={true}
         >
-            <Form className="animal-new-form" form={form} {...layout}>
+            <Form className="animal-new-form" form={form} {...formFullLayout}>
                 {isBatch ? (
                     <FormItem
                         label={useLanguage.nickname}

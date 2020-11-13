@@ -12,6 +12,9 @@
     
     .awe-page__nav {
         padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
     }
     
     .awe-page__main {
@@ -38,7 +41,14 @@
     
         .awe-page__main-content {
             height: 100%;
-            overflow-y: auto;
+            
+            &[data-scrollX=true] {
+                overflow-x: hidden;
+            }
+            
+            .ant-row {
+                overflow-x: hidden;
+            }
         }
     
     

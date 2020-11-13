@@ -14,7 +14,7 @@ import AwePage from '@/pages/components/awe-page'
 import './index.less'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const { id, groupId } = routeProps.match.params
+    const { pastureId, groupId } = routeProps.match.params
 
     const [group, setGroup] = React.useState<GroupProps | null>(null)
     const [dataSource, setDataSource] = React.useState<AnimalProps[]>([])
@@ -47,7 +47,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * 编辑分组信息
      */
     const handleEditGroup = () => {
-        routeProps.history.push(RouteUris.PastureGroupEdit(id, groupId))
+        routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, groupId))
     }
 
     const nav = (

@@ -11,11 +11,14 @@ import {
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import HeaderSearch from './header-search'
+import { AweRouteProps } from '@/types/route'
+import { RouteUris } from '@/router/config'
 
 interface HeaderProps {
     myself: MySelf
     collapsed: boolean
     setCollapsed: (status: boolean) => void
+    checkMap: () => void
 }
 
 const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
@@ -87,8 +90,12 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
             <nav className="layout-header-content">
                 <HeaderSearch placeholder="搜索牧场" />
 
-                <AweIcon type={aweIconType['icon-map']} className="header-icon" />
-                <AweIcon type={aweIconType['icon-msg']} className="header-icon" />
+                <a className="layout-icon" onClick={props.checkMap}>
+                    <AweIcon type={aweIconType['icon-map']} className="header-icon" />
+                </a>
+                <a className="layout-icon">
+                    <AweIcon type={aweIconType['icon-msg']} className="header-icon" />
+                </a>
                 <Dropdown overlay={userMenu} trigger={['hover']}>
                     <div className="layout-header-user">
                         <Avatar icon={<UserOutlined />} />

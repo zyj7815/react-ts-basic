@@ -17,14 +17,16 @@ import {
 import './index.less'
 import { AweIcon } from '@/assets/iconfont'
 import { IMenuNav } from '@/types/route'
+import { RouteUris } from '@/router/config'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
 
 interface IProps {
     routes: any
+    pastureId?: string
     menuNav: IMenuNav[]
-    history?: any
+    history: any
     children?: React.ReactNode
     textCenter?: boolean
 }
@@ -52,6 +54,17 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                 setOpenKey(currentOpenKey(tmpMenu))
             })
     }, [])
+
+    const onCheckMap = () => {
+        // 如果是在最外层牧场管理页面，就跳转到牧场列表
+        if (props.history.location.pathname.indexOf('main') > -1) {
+            props.history.push(RouteUris.MainPastureMap)
+        }
+        // 如果进入牧场详情后，就跳转到单个牧场地图
+        else {
+            props.history.push(RouteUris.PastureMapDetail(props.pastureId))
+        }
+    }
 
     const menuRoute = (menu: IMenuNav[]) => {
         return menu.map((nav: IMenuNav) => {
@@ -95,7 +108,12 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
     return (
         <Layout className="awe-layout-wrapper">
             <Header className="awe-layout-wrapper__header">
-                <LayoutHeader myself={myself} collapsed={collapsed} setCollapsed={setCollapsed} />
+                <LayoutHeader
+                    myself={myself}
+                    collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                    checkMap={onCheckMap}
+                />
             </Header>
 
             <Content>

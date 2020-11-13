@@ -13,7 +13,7 @@ import AnimalListCard from '@/pages/pasture-wrapper/animal/list-card'
 const TabKey = 'tabKey'
 
 const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const { id } = routeProps.match.params
+    const { pastureId } = routeProps.match.params
     const tab = Utils.getUrlParam(TabKey) || TabType.List
     const [tabKey, setTabKey] = React.useState(tab)
 
@@ -26,7 +26,7 @@ const PastureBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) =
      * 新建生物
      */
     const handleNewAnimal = () => {
-        routeProps.history.push(RouteUris.PastureAnimalNew(id))
+        routeProps.history.push(RouteUris.PastureAnimalNew(pastureId))
     }
 
     const infoItems: PageHeaderDataItem[] = [

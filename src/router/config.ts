@@ -1,4 +1,4 @@
-export const ROUTE_ID = ':id'
+export const PASTURE_ID = ':pastureId'
 export const GROUP_ID = ':groupId'
 
 export const RouteUris = {
@@ -16,44 +16,53 @@ export const RouteUris = {
     MainPasture: '/root/main-pasture',
 
     // 新建牧场
-    MainPastureNew: '/root/main-pasture-new',
+    MainPastureNew: '/root/main-pasture/new',
+
+    // 编辑牧场
+    MainPastureEdit: (id = PASTURE_ID) => `/root/main-pasture/edit/${id}`,
+
+    // 牧场地图详情
+    MainPastureMap: '/root/main-pasture/map',
 
     // 设备信息
     MainDevice: '/root/main-device',
 
     // 设备详情
-    MainDeviceDetail: (id = ROUTE_ID) => `/root/main-device/${id}`,
+    MainDeviceDetail: (id = PASTURE_ID) => `/root/main-device/${id}`,
 
     // 用户信息
-    MainAccount: '/root/account',
+    MainAccount: '/root/main-account',
 
     // 公司信息
-    MainCompany: '/root/company',
+    MainCompany: '/root/main-company',
 
     // 牧场详情（牧场总览）
-    PastureWrapper: (id = ROUTE_ID) => `/root/pasture-detail/${id}`,
+    PastureWrapper: (id = PASTURE_ID) => `/root/pasture-detail/${id}`,
+
+    // 牧场地图
+    PastureMapDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/map`,
 
     // 牧场总览
-    PastureOverview: (id = ROUTE_ID) => `/root/pasture-detail/${id}/pasture`,
+    PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
 
     // 生物列表
-    PastureAnimal: (id = ROUTE_ID) => `/root/pasture-detail/${id}/animal`,
+    PastureAnimal: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal`,
 
     // 生物 - 新建
-    PastureAnimalNew: (id = ROUTE_ID) => `/root/pasture-detail/${id}/animal/new`,
+    PastureAnimalNew: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/new`,
 
     // 分组列表
-    PastureGroup: (id = ROUTE_ID) => `/root/pasture-detail/${id}/group`,
+    PastureGroup: (id = PASTURE_ID) => `/root/pasture-detail/${id}/group`,
 
     // 分组 - 详情
-    PastureGroupDetail: (id = ROUTE_ID, groupId = GROUP_ID) => {
+    PastureGroupDetail: (id = PASTURE_ID, groupId = GROUP_ID) => {
         return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
     // 分组 - 编辑
-    PastureGroupEdit: (id = ROUTE_ID, groupId = GROUP_ID) => {
+    PastureGroupEdit: (id = PASTURE_ID, groupId = GROUP_ID) => {
         return `/root/pasture-detail/${id}/group/${groupId}/edit`
     },
 
-    PastureFence: (id = ROUTE_ID) => `/root/pasture-detail/${id}/fence`,
+    PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 }

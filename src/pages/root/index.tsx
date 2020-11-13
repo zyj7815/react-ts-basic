@@ -18,8 +18,6 @@ const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(true)
     const [routeShow, setRouteShow] = React.useState(false)
 
-    // routeProps.history.push(RouteUris.MainPasture)
-
     React.useEffect(() => {
         /**
          * 请求数据
@@ -46,6 +44,11 @@ const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 setRouteShow(true)
 
                 onRemoveLoading()
+
+                // 如果是根目录进来，就跳转到 /#/root/main-pasture
+                if (routeProps.history.location.pathname === RouteUris.Root) {
+                    routeProps.history.push(RouteUris.MainPasture)
+                }
             } catch (e) {
                 errorMessage.alert(e)
             }

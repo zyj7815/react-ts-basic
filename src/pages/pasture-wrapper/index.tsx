@@ -8,7 +8,7 @@ import { LeftCircleOutlined } from '@ant-design/icons'
 
 const PastureWrapper: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes, history, match } = routeProps
-    const { id } = match.params
+    const { pastureId } = match.params
 
     const goBack = () => {
         routeProps.history.push(RouteUris.MainPasture)
@@ -16,7 +16,12 @@ const PastureWrapper: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     return (
         <>
-            <AweLayout history={history} routes={routes} menuNav={pastureMenuNav(id)}>
+            <AweLayout
+                history={history}
+                routes={routes}
+                menuNav={pastureMenuNav(pastureId)}
+                pastureId={pastureId}
+            >
                 <a onClick={goBack}>
                     <LeftCircleOutlined />
                 </a>

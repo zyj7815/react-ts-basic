@@ -15,7 +15,7 @@ import AwePage from '@/pages/components/awe-page'
 const TabKey = 'tabKey'
 
 const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const { id } = routeProps.match.params
+    const { pastureId } = routeProps.match.params
     const tab = Utils.getUrlParam(TabKey) || TabType.List
     const [tabKey, setTabKey] = React.useState(tab)
     const [visible, setVisible] = React.useState(false)
@@ -54,7 +54,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      */
     const onCheckGroup = (group: GroupProps) => {
         console.log(group)
-        routeProps.history.push(RouteUris.PastureGroupDetail(id, group.id))
+        routeProps.history.push(RouteUris.PastureGroupDetail(pastureId, group.id))
     }
 
     /**
@@ -63,7 +63,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      */
     const onEditGroup = (group: GroupProps) => {
         console.log(group)
-        routeProps.history.push(RouteUris.PastureGroupEdit(id, group.id))
+        routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
     }
 
     const onDeleteGroup = (group: GroupProps) => {

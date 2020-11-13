@@ -1,19 +1,19 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { PastureProps } from '@/types/common'
+import { AweColumnProps } from '@/types'
 
-type PastureColumnsProps = {
-    onCheckPasture: (pasture: PastureProps) => void
-}
-
-export const pastureColumns = (events: PastureColumnsProps) => {
+export const pastureColumns = (events: AweColumnProps<PastureProps>) => {
     return [
         {
             title: useLanguage.pasture_name,
             dataIndex: 'nickname',
             render(name: string, record: PastureProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckPasture(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() => events.onCheckDetailEvent(record)}
+                    >
                         {name}
                     </span>
                 )
@@ -42,6 +42,20 @@ export const pastureColumns = (events: PastureColumnsProps) => {
         {
             title: useLanguage.operation,
             dataIndex: 'operation',
+            width: 100,
+            fixed: 'right' as 'right',
+            render(action: any, record: PastureProps) {
+                return (
+                    <span className="awe-table-action">
+                        <span
+                            className="awe-action-item"
+                            onClick={() => events.onEditEvent && events.onEditEvent(record)}
+                        >
+                            {useLanguage.edit}
+                        </span>
+                    </span>
+                )
+            },
         },
     ]
 }

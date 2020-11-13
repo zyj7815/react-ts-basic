@@ -16,3 +16,13 @@ export type SimpleModalProps = {
     // 关闭
     onClose: () => void
 }
+
+// column通用的type接口
+export type AweColumnProps<T> = {
+    // 查看详情
+    onCheckDetailEvent: (record: T) => void
+    // 编辑
+    onEditEvent?: (record: T) => void
+    // 删除
+    onDeleteEvent?: (record: T) => void
+}

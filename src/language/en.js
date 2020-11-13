@@ -1,3 +1,5 @@
+import { en_zk } from '@/language/en_zk'
+
 const en = {
     login: 'Login',
     individual_statistics: 'Individual statistics',
@@ -649,6 +651,8 @@ const en = {
     device_num: 'Number',
     waiting_event_num: '待处理事件数',
     new_pasture: 'New',
+    edit_information: 'Edit information',
+    company_name: 'Company name',
     company: 'Company',
     tomorrow: 'Tomorrow',
     the_day_after_tomorrow: 'After tomorrow',
@@ -708,6 +712,7 @@ const en = {
     modify_breed: status => `Do you want to modify the breeding status to "${status}" ?`,
     new_pasture_result: sec =>
         `牧场创建成功，您可以去列表查看了（倒计时 ${sec} 秒后跳转至牧场列表）`,
+    ...en_zk,
 }
 
 export default en

@@ -27,8 +27,14 @@ export const RouteUris = {
     // 用户信息
     MainAccount: '/root/account',
 
+    // 编辑用户信息
+    EditAccount: '/root/accountEdit',
+
     // 公司信息
     MainCompany: '/root/company',
+
+    // 公司编辑
+    CompanyEdit: '/root/companyEdit',
 
     // 牧场详情（牧场总览）
     PastureWrapper: (id = ROUTE_ID) => `/root/pasture-detail/${id}`,

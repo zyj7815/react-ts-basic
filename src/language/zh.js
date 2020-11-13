@@ -1,3 +1,5 @@
+import { zh_zk } from '@/language/zh_zk'
+
 const zh = {
     login: '登录',
     individual_statistics: '个体统计',
@@ -102,6 +104,7 @@ const zh = {
     insurance_amount: '投保金额',
     insurance_validity: '保险有效期',
     insurance_company: '保险公司名',
+    company_name: '公司名称',
     agent: '经办人',
     insurance_policy_management: '保单管理',
     sort: '排序',
@@ -164,7 +167,7 @@ const zh = {
     update_password: '修改密码',
     old_password: '旧密码',
     new_password: '新密码',
-    confirm_new_password: '确认新密码',
+    confirm_new_password: '确认密码',
     message_notification: '消息通知',
     read: '已读',
     message_type: '消息类型',
@@ -644,6 +647,7 @@ const zh = {
     pasture_list: '牧场列表',
     pasture_name: '牧场名称',
     type: '类型',
+    edit_information: '编辑资料',
     current_archived: '当前/归档生物',
     device_num: '设备数量',
     waiting_event_num: '待处理事件数',
@@ -694,6 +698,7 @@ const zh = {
     update_failed_com: text => `编辑${text}失败`,
     failed_add_com: text => `添加${text}失败`,
     time_com: () => '次',
+
     day_com: day => `${day}天`,
     no_com: text => `暂无${text}数据`,
     add_animal_num: num => `共添加${num}个生物`,
@@ -710,6 +715,7 @@ const zh = {
     modify_breed: status => `确认修改生物繁育状态为 “${status}” 吗？`,
     new_pasture_result: sec =>
         `牧场创建成功，您可以去列表查看了（倒计时 ${sec} 秒后跳转至牧场列表）`,
+    ...zh_zk,
 }
 
 export default zh

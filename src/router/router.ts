@@ -118,6 +118,14 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.EditAccount,
+                        component: loadable(() =>
+                            import('@/pages/main-wrapper/account/accountEdit')
+                        ),
+                        name: 'main-wrapper-account',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.MainCompany,
                         component: loadable(() => import('@/pages/main-wrapper/company')),
                         name: 'main-wrapper-company',
@@ -127,6 +135,14 @@ export const routes: RouteInterface[] = [
                         path: RouteUris.MainPastureMap,
                         component: loadable(() => import('@/pages/main-wrapper/map')),
                         name: 'main-wrapper-map',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.CompanyEdit,
+                        component: loadable(() =>
+                            import('@/pages/main-wrapper/company/companyEdit')
+                        ),
+                        name: 'main-wrapper-company',
                         exact: true,
                     },
                 ],

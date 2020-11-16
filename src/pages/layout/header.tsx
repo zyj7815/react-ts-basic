@@ -11,8 +11,6 @@ import {
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import HeaderSearch from './header-search'
-import { AweRouteProps } from '@/types/route'
-import { RouteUris } from '@/router/config'
 
 interface HeaderProps {
     myself: MySelf
@@ -78,7 +76,7 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
     return (
         <>
             <div className="layout-header-content">
-                <div className="sider-trigger" onClick={() => props.setCollapsed(!props.collapsed)}>
+                <div className="side-trigger" onClick={() => props.setCollapsed(!props.collapsed)}>
                     {!props.collapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
                 </div>
 
@@ -103,11 +101,7 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
                     </div>
                 </Dropdown>
 
-                <Radio.Group
-                    value={(window as any).isEn}
-                    onChange={changeLanguage}
-                    buttonStyle="solid"
-                >
+                <Radio.Group value={(window as any).isEn} onChange={changeLanguage}>
                     <Radio.Button value={false}>中</Radio.Button>
                     <Radio.Button value={true}>En</Radio.Button>
                 </Radio.Group>

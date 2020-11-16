@@ -4,6 +4,7 @@ import { useLanguage } from '@/language/useLanguage'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { NewPastureContext, PastureInfoProps } from '@/pages/main-wrapper/pasture/new/context'
 import { formFullLayout } from '@/config'
+import AwePage from '@/pages/components/awe-page'
 
 const FormItem = Form.Item
 
@@ -36,7 +37,18 @@ export const SecondStepInfo: React.FC<PastureStepProps> = (props: PastureStepPro
     }
 
     return (
-        <article className="new-pasture__content">
+        <AwePage
+            isFBorder={true}
+            noPadding={true}
+            footer={
+                <footer className="new-pasture-footer">
+                    <Button onClick={props.onPreStep}>{useLanguage.last_step}</Button>
+                    <Button type="primary" onClick={onSubmit}>
+                        {useLanguage.next_step}
+                    </Button>
+                </footer>
+            }
+        >
             <section className="new-pasture-info">
                 <Form {...formFullLayout} form={form}>
                     <FormItem
@@ -60,13 +72,6 @@ export const SecondStepInfo: React.FC<PastureStepProps> = (props: PastureStepPro
                     </FormItem>
                 </Form>
             </section>
-
-            <footer className="new-pasture-footer">
-                <Button onClick={props.onPreStep}>{useLanguage.last_step}</Button>
-                <Button type="primary" onClick={onSubmit}>
-                    {useLanguage.next_step}
-                </Button>
-            </footer>
-        </article>
+        </AwePage>
     )
 }

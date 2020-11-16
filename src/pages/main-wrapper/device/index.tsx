@@ -13,9 +13,7 @@ import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
-import './index.less'
-const { Search } = Input
-const { Option } = Select
+import { AweIcon, aweIconType } from '@/assets/iconfont'
 
 const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -58,15 +56,19 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
+    /**
+     * 设备详情
+     * @param device
+     */
     const handleDeviceDetail = (device: DeviceProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
-    const onSearch = (value: string) => {
-        console.log(value)
-    }
-    const handleChange = (value: any) => {
-        console.log(value)
+    /**
+     * 分配农场
+     */
+    const handleAllocationPasture = () => {
+        routeProps.history.push(RouteUris.MainDeviceAllocation)
     }
 
     const footer = (
@@ -79,36 +81,28 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             total={total}
         />
     )
+
     const header = (
-        <div className={'header-box'}>
-            <div>
-                <Search
-                    placeholder={useLanguage.search_device}
-                    onSearch={onSearch}
-                    style={{ width: 200 }}
-                    className={'search-input'}
-                />
-            </div>
-            <div>
-                <Button className={'distribution-btn'}>分配牧场</Button>
-                <span className={'filter-text'}>{useLanguage.filter}:</span>
-                <Select
-                    defaultValue="all"
-                    style={{ width: 142 }}
-                    onChange={handleChange}
-                    className={'filter-input'}
-                >
-                    <Option value="all">{useLanguage.all}</Option>
-                    <Option value="lucy">{useLanguage.bluetooth_ear_tag}</Option>
-                    <Option value="Yiminghe">{useLanguage.full_featured_ear_tags}</Option>
-                    <Option value="fixed">{useLanguage.fixed_gateway}</Option>
-                    <Option value="mobile">{useLanguage.mobile_gateway}</Option>
-                    <Option value="no">{useLanguage.no_biological_device_connected}</Option>
-                    <Option value="Tag">Tag</Option>
-                    <Option value="Ring">Ring</Option>
+        <>
+            <Input
+                style={{ width: 200 }}
+                className="awe-row-reverse"
+                placeholder={useLanguage.search_device}
+                prefix={<AweIcon type={aweIconType['icon-search2']} />}
+            />
+
+            <span>
+                <Button onClick={handleAllocationPasture}>{useLanguage.allocation_pasture}</Button>
+                <span>{useLanguage.filter}：</span>
+                <Select defaultValue={1}>
+                    {[1, 2, 3, 4].map(val => (
+                        <Select.Option key={val} value={val}>
+                            {val}
+                        </Select.Option>
+                    ))}
                 </Select>
-            </div>
-        </div>
+            </span>
+        </>
     )
 
     return (
@@ -119,7 +113,6 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'device-management'}
         >
             <Table
                 rowKey="id"
@@ -128,7 +121,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
                 columns={deviceColumns({
-                    onCheckDevice: handleDeviceDetail,
+                    onCheckDetailEvent: handleDeviceDetail,
                 })}
             />
         </AwePage>

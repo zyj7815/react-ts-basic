@@ -9,15 +9,15 @@ import './index.less'
 const PastureMapOverview: React.FC = props => {
     return (
         <AwePage>
-            <main className="pasture-map-wrapper">
-                <div className="pasture-map__content">
+            <main className="all-pasture-map-wrapper">
+                <div className="all-pasture-map__content">
                     <section>qqwd</section>
                 </div>
 
-                <aside className="pasture-map__list">
+                <aside className="all-pasture-map__list">
                     <AwePage
                         nav={
-                            <div className="pasture-map__list--nav">
+                            <div className="all-pasture-map__list--nav">
                                 <label>{useLanguage.pasture_management}</label>
                                 <Input prefix={<AweIcon type={aweIconType['icon-search2']} />} />
                             </div>
@@ -40,13 +40,13 @@ type PastureMapCardProps = {
 
 const PastureMapCard: React.FC<PastureMapCardProps> = (props: PastureMapCardProps) => {
     return (
-        <div className="pasture-map-card beauty-radius" data-select={props.select}>
+        <div className="all-pasture-map-card beauty-radius" data-select={props.select}>
             <h4>牧场名字xxxx</h4>
-            <main className="pasture-map-card__content">
-                <article className="pasture-map-card__content--item">
+            <main className="all-pasture-map-card__content">
+                <article className="all-pasture-map-card__content--item">
                     {useLanguage.animal_basic} 123
                 </article>
-                <article className="pasture-map-card__content--item">
+                <article className="all-pasture-map-card__content--item">
                     {useLanguage.type} 散圈养养牧场
                 </article>
             </main>

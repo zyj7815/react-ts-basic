@@ -1,7 +1,6 @@
 @import "../../../../assets/style/variable";
 
 .main-device-detail {
-    background: #fff;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -12,15 +11,152 @@
     .main-device-detail__header {
         .main-device-header__item {
             height: 200px;
-            border: 1px solid #F55044;
+            background: #fff;
         }
     }
     
     .main-device-detail__map {
         height: 100%;
-        border: 1px solid;
+        background: #fff;
     }
 }
+
+
+
+.main-device__info {
+
+    .awe-page__main {
+        overflow-x: hidden;
+    }
+    
+    .main-device__info--detail {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding-right: 20px;
+        position: relative;
+        
+        .device-info__detail--mark {
+            font-size: 32px;
+            margin-right: 20px;
+        }
+        
+        .device-info__detail--env {
+            border: 1px solid @grey-line-color;
+            height: 24px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 70%;
+            max-width: 200px;
+        }
+        
+        .device-info__detail--icon {
+            position: absolute;
+            right: 0;
+            width: 22px;
+        }
+    }
+    
+    .beauty-primary {
+        margin-right: 10px;
+    }
+    
+    .main-device__info--center {
+        margin-top: 15px;
+    }
+    
+    .awe-page__main-footer {
+        justify-content: flex-end!important;
+    }
+}
+
+
+
+.main-device__animal {
+    padding: 10px 15px;
+    
+    .main-device__animal--content {
+        display: flex;
+        align-items: center;
+    
+        article {
+            margin: 0 20px;
+            min-width: 70px;
+        }
+        
+        img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+    }
+    
+    
+    .main-device__animal--status {
+        width: 100%;
+        border: 1px solid @grey-line-color;
+        padding: 10px;
+        border-radius: 10px;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        
+        span {
+            margin-right: 20px;
+        }
+    }
+}
+
+
+
+.main-device__pasture {
+    padding: 15px 20px;
+    height: 100%;
+    
+    .main-device__pasture--title {
+        font-size: 18px;
+        font-weight: 400;
+        color: @primary-color;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .main-device__pasture--content {
+        display: flex;
+        justify-content: space-between;
+        
+        .device-pasture__item {
+            width: 30%;
+            height: 113px;
+            border: 1px solid @grey-line-color;
+            border-radius: 12px;
+            
+            position: relative;
+            
+          
+            
+            .device-pasture__item--title {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                color: @light-dark-color;
+                font-size: 12px;
+            }
+            
+            .device-pasture__item--content {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -30%);
+                font-size: 48px;
+                color: #7d7d7d;
+            }
+        }
+    }
+}
+
 
 
 @media screen and (max-width: @grid-lg){

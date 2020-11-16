@@ -1,5 +1,77 @@
 @import "../../../assets/style/variable";
 
+//.awe-page-wrapper {
+//    padding: 0 10px 10px 10px;
+//    height: 100%;
+//    display: flex;
+//    flex-direction: column;
+//
+//    &[data-padding=true] {
+//        padding: 0;
+//    }
+//
+//    .awe-page__nav {
+//        padding: 5px 0;
+//        display: flex;
+//        justify-content: space-between;
+//        flex-wrap: nowrap;
+//    }
+//
+//    .awe-page__main {
+//        height: 100%;
+//        overflow-y: auto;
+//        display: flex;
+//        flex-direction: column;
+//        border: 2px dashed red;
+//
+//        .awe-page__main-header {
+//            display: flex;
+//            justify-content: space-between;
+//            align-items: center;
+//            //padding: 10px 15px;
+//            z-index: 1;
+//
+//            &[data-shadow=true] {
+//                box-shadow: 0 1px 2px 0 #e3e3e3;
+//            }
+//
+//            &[data-padding=true] {
+//                padding: 10px 20px;
+//            }
+//        }
+//
+//        .awe-page__main-content {
+//            height: 100%;
+//
+//            &[data-scrollX=true] {
+//                overflow-x: hidden;
+//            }
+//
+//            .ant-row {
+//                overflow-x: hidden;
+//            }
+//        }
+//
+//
+//
+//        .awe-page__main-footer {
+//            display: flex;
+//            flex-direction: row-reverse;
+//            justify-content: space-between;
+//            padding: 10px 0;
+//
+//            &[data-border=true] {
+//                border-top: 1px solid @grey-line-color;
+//            }
+//
+//            .ant-select {
+//                margin-right: 0;
+//            }
+//        }
+//    }
+//}
+
+
 .awe-page-wrapper {
     padding: 0 10px 10px 10px;
     height: 100%;
@@ -26,7 +98,7 @@
         .awe-page__main-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            //align-items: center;
             //padding: 10px 15px;
             z-index: 1;
             
@@ -38,9 +110,10 @@
                 padding: 10px 20px;
             }
         }
-    
+        
         .awe-page__main-content {
             height: 100%;
+            overflow-y: auto;
             
             &[data-scrollX=true] {
                 overflow-x: hidden;
@@ -50,9 +123,9 @@
                 overflow-x: hidden;
             }
         }
-    
-    
-    
+        
+        
+        
         .awe-page__main-footer {
             display: flex;
             flex-direction: row-reverse;
@@ -62,7 +135,7 @@
             &[data-border=true] {
                 border-top: 1px solid @grey-line-color;
             }
-        
+            
             .ant-select {
                 margin-right: 0;
             }

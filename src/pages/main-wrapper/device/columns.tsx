@@ -2,19 +2,19 @@ import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { DeviceProps } from '@/types/common'
 import { Utils } from '@/utils'
+import { AweColumnProps } from '@/types'
 
-type deviceColumnsProps = {
-    onCheckDevice: (device: DeviceProps) => void
-}
-
-export const deviceColumns = (events: deviceColumnsProps) => {
+export const deviceColumns = (events: AweColumnProps<any>) => {
     return [
         {
             title: useLanguage.sn,
             dataIndex: 'nickname',
             render(name: number, record: DeviceProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckDevice(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() => events.onCheckDetailEvent(record)}
+                    >
                         {name}
                     </span>
                 )

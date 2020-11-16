@@ -661,6 +661,15 @@ const zh = {
     abnormal_event: '异常事件',
     abnormal_event_number: '异常事件数',
 
+    confirm_delete: '确认删除',
+    confirm_delete_desc: '请勾选以下选项来继续此操作',
+
+    light: '光照',
+    gprs_type: '通信方式',
+    animals_number: '生物数量',
+    group_number: '分组数量',
+    allocation_pasture: '分配牧场',
+
     months: [
         '一月',
         '二月',

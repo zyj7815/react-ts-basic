@@ -10,9 +10,9 @@ import {
     PastureInfoProps,
     PastureLocationProps,
 } from '@/pages/main-wrapper/pasture/new/context'
-import './index.less'
 import { AweRouteProps } from '@/types/route'
 import AwePage from '@/pages/components/awe-page'
+import './index.less'
 
 export interface PastureStepProps {
     onNextStep?: () => void
@@ -74,18 +74,14 @@ const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 setLocation,
             }}
         >
-            <div className="new-pasture-wrapper">
-                <AwePage nav={nav} header={step} bgColor={true}>
-                    {current === 1 && <FirstStepScene onNextStep={handleNext} />}
-                    {current === 2 && (
-                        <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />
-                    )}
-                    {current === 3 && (
-                        <ThirdStepLocation onPreStep={handlePrev} onNextStep={handleNext} />
-                    )}
-                    {current === 4 && <LastStepFinish onNextStep={handleNext} />}
-                </AwePage>
-            </div>
+            <AwePage className="new-pasture-wrapper" nav={nav} header={step} bgColor={true}>
+                {current === 1 && <FirstStepScene onNextStep={handleNext} />}
+                {current === 2 && <SecondStepInfo onPreStep={handlePrev} onNextStep={handleNext} />}
+                {current === 3 && (
+                    <ThirdStepLocation onPreStep={handlePrev} onNextStep={handleNext} />
+                )}
+                {current === 4 && <LastStepFinish onNextStep={handleNext} />}
+            </AwePage>
         </NewPastureContext.Provider>
     )
 }

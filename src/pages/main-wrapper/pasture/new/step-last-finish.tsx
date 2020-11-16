@@ -3,6 +3,7 @@ import { Button } from 'antd'
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { useLanguage } from '@/language/useLanguage'
+import AwePage from '@/pages/components/awe-page'
 
 export const LastStepFinish: React.FC<PastureStepProps> = (props: PastureStepProps) => {
     const [countDown, setCountDown] = React.useState(3)
@@ -26,7 +27,7 @@ export const LastStepFinish: React.FC<PastureStepProps> = (props: PastureStepPro
     }, [countDown])
 
     return (
-        <article className="new-pasture__content">
+        <AwePage>
             <section className="new-pasture-finish">
                 <aside>
                     <CheckCircleOutlined />
@@ -42,6 +43,6 @@ export const LastStepFinish: React.FC<PastureStepProps> = (props: PastureStepPro
                 </main>
                 <Button type="primary">{useLanguage.got_it}</Button>
             </section>
-        </article>
+        </AwePage>
     )
 }

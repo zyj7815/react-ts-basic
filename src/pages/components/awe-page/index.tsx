@@ -22,14 +22,14 @@ interface AwePageProps {
 const AwePage: React.FC<AwePageProps> = (props: AwePageProps) => {
     return (
         <div
+            id={props.id}
             className={`awe-page-wrapper ${props.className}`}
             data-padding={props.noPadding}
-            id={props.id}
         >
             <nav className="awe-page__nav">{props.nav}</nav>
             <main
                 className="awe-page__main"
-                style={{ backgroundColor: props.bgColor ? '#fff' : 'f' }}
+                style={{ backgroundColor: props.bgColor ? '#fff' : '' }}
             >
                 {props.header && (
                     <header

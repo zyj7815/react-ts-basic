@@ -28,10 +28,13 @@ export const RouteUris = {
     MainDevice: '/root/main-device',
 
     // 设备详情
-    MainDeviceDetail: (id = PASTURE_ID) => `/root/main-device/${id}/device`,
+    MainDeviceDetail: (id = PASTURE_ID) => `/root/main-device/detail/${id}`,
 
     // 密钥管理
     MainKey: '/root/key-management',
+
+    // 设备分配牧场
+    MainDeviceAllocation: `/root/main-device/allocation`,
 
     // 用户信息
     MainAccount: '/root/main-account',

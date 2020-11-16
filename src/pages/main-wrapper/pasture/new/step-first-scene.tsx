@@ -94,41 +94,26 @@ export const FirstStepScene: React.FC<PastureStepProps> = (props: PastureStepPro
         </header>
     )
 
+    const footer = (
+        <footer className="new-pasture-footer">
+            <Button type="primary" onClick={props.onNextStep}>
+                {useLanguage.next_step}
+            </Button>
+        </footer>
+    )
+
     return (
-        <article className="new-pasture__content">
-            <section className="new-pasture-scene">
-                <header className="new-pasture-scene__type" ref={headerRef}>
-                    <span className="new-pasture-scene__type--title">
-                        {useLanguage.pasture_type}
-                    </span>
-
-                    {pastureTypes.map((obj: ObjectProps) => (
-                        <span
-                            ref={obj.key === pastureType ? currentRadioRef : null}
-                            key={obj.key}
-                            className="new-pasture-scene__type--radio"
-                            onClick={e => changePastureType(e.target, obj.key)}
-                        >
-                            {obj.key === pastureType ? (
-                                <img src={RadioTrue} alt="" />
-                            ) : (
-                                <img src={RadioFalse} alt="" />
-                            )}
-                            {obj.value}
-                        </span>
-                    ))}
-                </header>
-
-                <article className="new-pasture-scene__description" ref={descriptionRef}>
-                    <span className="new-pasture-scene__description--arrow" ref={arrowRef} />
-                    dpqwdkopqwkdpoqkwpdoqwd
-                </article>
-            </section>
-            <footer className="new-pasture-footer">
-                <Button type="primary" onClick={props.onNextStep}>
-                    {useLanguage.next_step}
-                </Button>
-            </footer>
-        </article>
+        <AwePage
+            id="new-pasture-scene"
+            header={header}
+            footer={footer}
+            isFBorder={true}
+            noPadding={true}
+        >
+            <article className="new-pasture-scene__description" ref={descriptionRef}>
+                <span className="new-pasture-scene__description--arrow" ref={arrowRef} />
+                dpqwdkopqwkdpoqkwpdoqwd
+            </article>
+        </AwePage>
     )
 }

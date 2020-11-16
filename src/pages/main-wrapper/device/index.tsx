@@ -7,12 +7,13 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { Pagination, Table } from 'antd'
+import { Pagination, Table, Input, Button, Select } from 'antd'
 import { deviceColumns } from '@/pages/main-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
 
 const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -55,8 +56,19 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
+    /**
+     * 设备详情
+     * @param device
+     */
     const handleDeviceDetail = (device: DeviceProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
+    }
+
+    /**
+     * 分配农场
+     */
+    const handleAllocationPasture = () => {
+        routeProps.history.push(RouteUris.MainDeviceAllocation)
     }
 
     const footer = (
@@ -70,13 +82,36 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         />
     )
 
+    const header = (
+        <>
+            <Input
+                style={{ width: 200 }}
+                className="awe-row-reverse"
+                placeholder={useLanguage.search_device}
+                prefix={<AweIcon type={aweIconType['icon-search2']} />}
+            />
+
+            <span>
+                <Button onClick={handleAllocationPasture}>{useLanguage.allocation_pasture}</Button>
+                <span>{useLanguage.filter}：</span>
+                <Select defaultValue={1}>
+                    {[1, 2, 3, 4].map(val => (
+                        <Select.Option key={val} value={val}>
+                            {val}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </span>
+        </>
+    )
+
     return (
         <AwePage
             hdColor={true}
             ctColor={true}
             isHPadding={true}
             isHShadow={true}
-            header={<span>qwdqwd</span>}
+            header={header}
             footer={footer}
         >
             <Table
@@ -86,7 +121,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
                 columns={deviceColumns({
-                    onCheckDevice: handleDeviceDetail,
+                    onCheckDetailEvent: handleDeviceDetail,
                 })}
             />
         </AwePage>

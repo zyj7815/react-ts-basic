@@ -4,7 +4,6 @@ import { Modal, Button } from 'antd'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import './success-modal.less'
-import { routes } from '@/router/router'
 
 const AnimalSuccessModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
     const [timer, setTimer] = React.useState(5)

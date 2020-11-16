@@ -12,25 +12,10 @@
         max-width: 1200px;
     }
     
-    .new-pasture__content {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 0 20px 80px 20px;
-    }
-    
-    
     
     .new-pasture-footer {
-        position: absolute;
-        bottom: 0;
-        left: 10px;
-        right: 10px;
-        height: 70px;
-        border-top: 1px solid @grey-line-color;
-        padding: 15px 30px;
-        display: flex;
-        justify-content: flex-end;
+        background: #fff;
+        padding-right: 20px;
         
         .ant-btn {
             margin-left: 15px;
@@ -39,37 +24,41 @@
 }
 
 
-
-.new-pasture-scene {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+#new-pasture-scene {
     
-    .new-pasture-scene__type {
+    .awe-page__main-header {
         position: relative;
-        width: 70%;
-        max-width: 700px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
+        width: 100%;
+        justify-content: center;
         
-        .new-pasture-scene__type--title {
-            position: absolute;
-            left: -80px;
-        }
+        .new-pasture-scene__type {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
         
-        .new-pasture-scene__type--radio {
-            cursor: pointer;
-            img {
-                margin-right: 5px;
+            .new-pasture-scene__type--title {
+                position: absolute;
+                left: -80px;
+            }
+        
+            .new-pasture-scene__type--radio {
+                cursor: pointer;
+                img {
+                    margin-right: 5px;
+                }
             }
         }
     }
     
+    .awe-page__main-content {
+        padding-top: 10px;
+    }
+    
     .new-pasture-scene__description {
+        margin: auto;
         border: 1px solid @grey-line-color;
         height: 98%;
         width: 100%;
@@ -81,7 +70,7 @@
             position: absolute;
             top: -9px;
             left: 0;
-    
+            
             width: 15px;
             height: 15px;
             border-top: 1px solid @grey-line-color;
@@ -96,6 +85,7 @@
 .new-pasture-info {
     width: 100%;
     max-width: 600px;
+    margin: auto;
     
     .ant-form-item-label {
         padding-bottom: 0;
@@ -105,11 +95,34 @@
 
 .new-pasture-location {
 
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    height: 100%;
+    padding-bottom: 20px;
+    
+    .new-pasture-location__map {
+        height: 100%;
+        background: #f1f1f1;
+    }
+    
+    .new-pasture-location__edit {
+        
+        .ant-input {
+            max-width: 310px;
+        }
+        .ant-btn {
+            margin-left: 20px;
+        }
+    }
 }
 
 
 .new-pasture-finish {
+    
     position: relative;
+    width: 600px;
+    margin: auto;
     
     aside {
         float: left;
@@ -138,5 +151,16 @@
         top: 130px;
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+
+
+@media screen and (max-width: @grid-md) {
+    
+    .new-pasture-location {
+        .new-pasture-location__map {
+            height: 300px;
+        }
     }
 }

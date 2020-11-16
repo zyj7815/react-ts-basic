@@ -112,6 +112,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.MainDeviceAllocation,
+                        component: loadable(() => import('@/pages/main-wrapper/device/allocation')),
+                        name: 'main-wrapper-device-allocation',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.MainAccount,
                         component: loadable(() => import('@/pages/main-wrapper/account')),
                         name: 'main-wrapper-account',

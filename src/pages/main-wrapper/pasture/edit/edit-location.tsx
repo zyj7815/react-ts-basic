@@ -10,7 +10,7 @@ export const EditPastureLocation: React.FC = props => {
     const formOperation = (
         <Form {...formFullLayout}>
             <Row>
-                <Col xs={24} md={24} lg={24} xl={9} xxl={11}>
+                <Col xs={24} md={24} lg={24} xl={11} xxl={11} style={{ paddingRight: 30 }}>
                     <FormItem
                         label={useLanguage.pasture_location}
                         help={useLanguage.enter_address_select_location}
@@ -18,7 +18,7 @@ export const EditPastureLocation: React.FC = props => {
                         <Input />
                     </FormItem>
                 </Col>
-                <Col lg={24} xl={15} xxl={12}>
+                <Col lg={24} xl={13} xxl={12}>
                     <FormItem label={useLanguage.draw_range}>
                         <Radio.Group>
                             <Radio.Button value="1">{useLanguage.circle}</Radio.Button>

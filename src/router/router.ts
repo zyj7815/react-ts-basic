@@ -69,6 +69,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureAbnormal(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/abnormal')),
+                        name: 'pasture-wrapper-abnormal',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureMapDetail(),
                         component: loadable(() => import('@/pages/pasture-wrapper/map')),
                         name: 'pasture-wrapper-map',

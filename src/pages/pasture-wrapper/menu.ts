@@ -29,6 +29,12 @@ export const pastureMenuNav = (id: string): IMenuNav[] => [
         level: 1,
     },
     {
+        title: useLanguage.abnormal_event,
+        uri: RouteUris.PastureAbnormal(id),
+        icon: aweIconType['icon-device'],
+        level: 1,
+    },
+    {
         title: useLanguage.fence_management,
         uri: RouteUris.PastureFence(id),
         icon: aweIconType['icon-geofence'],

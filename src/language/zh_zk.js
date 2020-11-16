@@ -16,4 +16,13 @@ export const zh_zk = {
     no_biological_device_connected: '未关联生物设备',
     fence_type: '围栏类型',
     search_fence_name: '搜索围栏名',
+    bio_name: '生物名',
+    time_of_occurrence: '发生时间',
+    event_type: '事件类型',
+    event_content: '事件内容',
+    process: '处理',
+    device_abnormal: '设备异常',
+    device_lost: '设备丢失',
+    device_damage: '设备损坏',
+    device_good: '设备完好',
 }

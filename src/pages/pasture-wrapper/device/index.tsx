@@ -1,27 +1,27 @@
 import React from 'react'
-import { AweRouteProps } from '@/types/route'
+import axios from 'axios'
+import { DeviceProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
-import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { KeyProps } from '@/types/common'
-import { RouteUris } from '@/router/config'
-import { Button, Input, Pagination, Table } from 'antd'
+import { Pagination, Table, Input, Button, Select } from 'antd'
+import { deviceColumns } from '@/pages/pasture-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
+import { AweRouteProps } from '@/types/route'
+import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
-import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
 import './index.less'
 const { Search } = Input
+const { Option } = Select
 
-const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const [dataSource, setDataSource] = React.useState([])
+const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const [currentRoleId, setCurrentRoleId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -58,29 +58,16 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
-    const handleKeyDetail = (device: KeyProps) => {
+    const handleDeviceDetail = (device: DeviceProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
-    }
-
-    const onAddBio = (device: any) => {
-        console.log(device)
     }
 
     const onSearch = (value: string) => {
         console.log(value)
     }
-
-    const header = (
-        <>
-            <Search
-                placeholder={useLanguage.search_fence_name}
-                onSearch={onSearch}
-                style={{ width: 200 }}
-                className={'search-input'}
-            />
-            <Button className={'create_fence_btn'}>{useLanguage.new_fence}</Button>
-        </>
-    )
+    const handleChange = (value: any) => {
+        console.log(value)
+    }
 
     const footer = (
         <Pagination
@@ -92,6 +79,36 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             total={total}
         />
     )
+    const header = (
+        <div className={'header-box'}>
+            <div>
+                <Search
+                    placeholder={useLanguage.search_device}
+                    onSearch={onSearch}
+                    style={{ width: 200 }}
+                    className={'search-input'}
+                />
+            </div>
+            <div>
+                <span className={'filter-text'}>{useLanguage.filter}:</span>
+                <Select
+                    defaultValue="all"
+                    style={{ width: 142 }}
+                    onChange={handleChange}
+                    className={'filter-input'}
+                >
+                    <Option value="all">{useLanguage.all}</Option>
+                    <Option value="lucy">{useLanguage.bluetooth_ear_tag}</Option>
+                    <Option value="Yiminghe">{useLanguage.full_featured_ear_tags}</Option>
+                    <Option value="fixed">{useLanguage.fixed_gateway}</Option>
+                    <Option value="mobile">{useLanguage.mobile_gateway}</Option>
+                    <Option value="no">{useLanguage.no_biological_device_connected}</Option>
+                    <Option value="Tag">Tag</Option>
+                    <Option value="Ring">Ring</Option>
+                </Select>
+            </div>
+        </div>
+    )
 
     return (
         <AwePage
@@ -101,7 +118,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'pasture-fence'}
+            id={'pasture-device'}
         >
             <Table
                 rowKey="id"
@@ -109,20 +126,12 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
-                columns={fenceColumns({
-                    onCheckKey: handleKeyDetail,
-                    currentRoleId: currentRoleId,
-                    onAddBio: onAddBio,
+                columns={deviceColumns({
+                    onCheckDevice: handleDeviceDetail,
                 })}
-                onRow={(record, index) => {
-                    return {
-                        onMouseEnter: () => setCurrentRoleId(record.id),
-                        onMouseLeave: () => setCurrentRoleId(''),
-                    }
-                }}
             />
         </AwePage>
     )
 }
 
-export default PastureFence
+export default PastureDevice

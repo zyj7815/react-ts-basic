@@ -51,6 +51,9 @@ export const RouteUris = {
     // 牧场地图
     PastureMapDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/map`,
 
+    // 牧场设备
+    PastureDevice: (id = PASTURE_ID) => `/root/pasture-detail/${id}/device`,
+
     // 牧场总览
     PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
 

@@ -14,4 +14,6 @@ export const zh_zk = {
     fixed_gateway: '固定网关',
     mobile_gateway: '移动网关',
     no_biological_device_connected: '未关联生物设备',
+    fence_type: '围栏类型',
+    search_fence_name: '搜索围栏名',
 }

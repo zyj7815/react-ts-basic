@@ -63,6 +63,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureDevice(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/device')),
+                        name: 'pasture-wrapper-device',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureMapDetail(),
                         component: loadable(() => import('@/pages/pasture-wrapper/map')),
                         name: 'pasture-wrapper-map',

@@ -6,12 +6,12 @@ import { AweRouteProps } from '@/types/route'
 import { UserOutlined } from '@ant-design/icons'
 import './account.less'
 import { RouteUris } from '@/router/config'
+import { CollectionCreateForm } from './psdForm'
 
 const MainAccount: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const [form] = Form.useForm()
     const [loading, setLoading] = useState(false)
     const [visible, setVisible] = useState(false)
-    const handleOk = (values: any) => {
+    const handleOk = (values: any, form: any) => {
         console.log(values)
         form.resetFields()
         setVisible(false)
@@ -85,62 +85,11 @@ const MainAccount: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                         {useLanguage.update_password}
                     </Button>
                 </div>
-                <Modal
+                <CollectionCreateForm
                     visible={visible}
-                    title={useLanguage.update_password}
-                    bodyStyle={{ paddingBottom: 0 }}
-                    className={'editPsdModal'}
-                    footer={[
-                        <Button key="back" onClick={handleCancel}>
-                            {useLanguage.cancel}
-                        </Button>,
-                        <Button
-                            key="submit"
-                            type="primary"
-                            loading={loading}
-                            onClick={() => {
-                                form.validateFields()
-                                    .then(values => {
-                                        handleOk(values)
-                                    })
-                                    .catch(info => {
-                                        console.log('Validate Failed:', info)
-                                    })
-                            }}
-                        >
-                            {useLanguage.modify}
-                        </Button>,
-                    ]}
-                >
-                    <Form
-                        labelCol={{ span: 5 }}
-                        form={form}
-                        wrapperCol={{ span: 19 }}
-                        layout="horizontal"
-                    >
-                        <Form.Item
-                            label={useLanguage.old_password}
-                            name="old_password"
-                            rules={[{ required: true, message: '请输入公司名称' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            label={useLanguage.new_password}
-                            name="new_password"
-                            rules={[{ required: true, message: '请输入公司名称' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            label={useLanguage.confirm_new_password}
-                            name="confirm_new_password"
-                            rules={[{ required: true, message: '请输入公司名称' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-                    </Form>
-                </Modal>
+                    handleOk={handleOk}
+                    handleCancel={handleCancel}
+                />
             </div>
         </div>
     )

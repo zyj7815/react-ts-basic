@@ -7,12 +7,15 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { Pagination, Table } from 'antd'
+import { Pagination, Table, Input, Button, Select } from 'antd'
 import { deviceColumns } from '@/pages/main-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
+import './index.less'
+const { Search } = Input
+const { Option } = Select
 
 const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -59,6 +62,13 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
+    const onSearch = (value: string) => {
+        console.log(value)
+    }
+    const handleChange = (value: any) => {
+        console.log(value)
+    }
+
     const footer = (
         <Pagination
             showSizeChanger
@@ -69,6 +79,37 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             total={total}
         />
     )
+    const header = (
+        <div className={'header-box'}>
+            <div>
+                <Search
+                    placeholder={useLanguage.search_device}
+                    onSearch={onSearch}
+                    style={{ width: 200 }}
+                    className={'search-input'}
+                />
+            </div>
+            <div>
+                <Button className={'distribution-btn'}>分配牧场</Button>
+                <span className={'filter-text'}>{useLanguage.filter}:</span>
+                <Select
+                    defaultValue="all"
+                    style={{ width: 142 }}
+                    onChange={handleChange}
+                    className={'filter-input'}
+                >
+                    <Option value="all">{useLanguage.all}</Option>
+                    <Option value="lucy">{useLanguage.bluetooth_ear_tag}</Option>
+                    <Option value="Yiminghe">{useLanguage.full_featured_ear_tags}</Option>
+                    <Option value="fixed">{useLanguage.fixed_gateway}</Option>
+                    <Option value="mobile">{useLanguage.mobile_gateway}</Option>
+                    <Option value="no">{useLanguage.no_biological_device_connected}</Option>
+                    <Option value="Tag">Tag</Option>
+                    <Option value="Ring">Ring</Option>
+                </Select>
+            </div>
+        </div>
+    )
 
     return (
         <AwePage
@@ -76,8 +117,9 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             ctColor={true}
             isHPadding={true}
             isHShadow={true}
-            header={<span>qwdqwd</span>}
+            header={header}
             footer={footer}
+            id={'device-management'}
         >
             <Table
                 rowKey="id"

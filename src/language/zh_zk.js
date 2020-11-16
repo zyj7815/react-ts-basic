@@ -6,4 +6,12 @@ export const zh_zk = {
     account_name: '账号名',
     phone_new: '电话',
     modify: '修改',
+    key_management: '密钥管理',
+    create_key: '创建密钥',
+    name: '名字',
+    bluetooth_ear_tag: '蓝牙耳标',
+    full_featured_ear_tags: '全功能耳标',
+    fixed_gateway: '固定网关',
+    mobile_gateway: '移动网关',
+    no_biological_device_connected: '未关联生物设备',
 }

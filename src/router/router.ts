@@ -145,6 +145,14 @@ export const routes: RouteInterface[] = [
                         name: 'main-wrapper-company',
                         exact: true,
                     },
+                    {
+                        path: RouteUris.MainKey,
+                        component: loadable(() =>
+                            import('@/pages/main-wrapper/key-management/key-management')
+                        ),
+                        name: 'main-wrapper-key',
+                        exact: true,
+                    },
                 ],
             },
         ],

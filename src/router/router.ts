@@ -63,6 +63,18 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureDevice(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/device')),
+                        name: 'pasture-wrapper-device',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureAbnormal(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/abnormal')),
+                        name: 'pasture-wrapper-abnormal',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureMapDetail(),
                         component: loadable(() => import('@/pages/pasture-wrapper/map')),
                         name: 'pasture-wrapper-map',
@@ -120,7 +132,7 @@ export const routes: RouteInterface[] = [
                     {
                         path: RouteUris.EditAccount,
                         component: loadable(() =>
-                            import('@/pages/main-wrapper/account/accountEdit')
+                            import('@/pages/main-wrapper/account/account-edit')
                         ),
                         name: 'main-wrapper-account',
                         exact: true,
@@ -140,9 +152,17 @@ export const routes: RouteInterface[] = [
                     {
                         path: RouteUris.CompanyEdit,
                         component: loadable(() =>
-                            import('@/pages/main-wrapper/company/companyEdit')
+                            import('@/pages/main-wrapper/company/company-edit')
                         ),
                         name: 'main-wrapper-company',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.MainKey,
+                        component: loadable(() =>
+                            import('@/pages/main-wrapper/key-management/key-management')
+                        ),
+                        name: 'main-wrapper-key',
                         exact: true,
                     },
                 ],

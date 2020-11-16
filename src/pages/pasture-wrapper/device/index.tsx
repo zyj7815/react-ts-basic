@@ -8,7 +8,7 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import { Pagination, Table, Input, Button, Select } from 'antd'
-import { deviceColumns } from '@/pages/main-wrapper/device/columns'
+import { deviceColumns } from '@/pages/pasture-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
@@ -17,7 +17,7 @@ import './index.less'
 const { Search } = Input
 const { Option } = Select
 
-const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
@@ -90,7 +90,6 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 />
             </div>
             <div>
-                <Button className={'distribution-btn'}>分配牧场</Button>
                 <span className={'filter-text'}>{useLanguage.filter}:</span>
                 <Select
                     defaultValue="all"
@@ -119,7 +118,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'device-management'}
+            id={'pasture-device'}
         >
             <Table
                 rowKey="id"
@@ -135,4 +134,4 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     )
 }
 
-export default MainDevice
+export default PastureDevice

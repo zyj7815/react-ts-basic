@@ -1,5 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AwePage from '@/pages/components/awe-page'
+import { Button, Col, Row, Avatar, Modal, Form, Input, Pagination, Table, Breadcrumb } from 'antd'
+import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
+import { UserOutlined } from '@ant-design/icons'
+import './key-management.less'
+import { RouteUris } from '@/router/config'
+import { KeyProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
@@ -7,16 +14,9 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { KeyProps } from '@/types/common'
-import { RouteUris } from '@/router/config'
-import { Button, Input, Pagination, Table } from 'antd'
-import { useLanguage } from '@/language/useLanguage'
-import AwePage from '@/pages/components/awe-page'
-import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
-import './index.less'
-const { Search } = Input
+import { keyColumns } from '@/pages/main-wrapper/key-management/columns'
 
-const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
@@ -62,23 +62,10 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
-    const onAddBio = (device: any) => {
-        console.log(device)
-    }
-
-    const onSearch = (value: string) => {
-        console.log(value)
-    }
-
     const header = (
         <>
-            <Search
-                placeholder={useLanguage.search_fence_name}
-                onSearch={onSearch}
-                style={{ width: 200 }}
-                className={'search-input'}
-            />
-            <Button className={'create_fence_btn'}>{useLanguage.new_fence}</Button>
+            <span></span>
+            <Button className={'create_key_btn'}>{useLanguage.create_key}</Button>
         </>
     )
 
@@ -101,28 +88,28 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'pasture-fence'}
         >
-            <Table
-                rowKey="id"
-                loading={loading}
-                dataSource={dataSource}
-                pagination={false}
-                scroll={{ x: 900, y: scrollY }}
-                columns={fenceColumns({
-                    onCheckKey: handleKeyDetail,
-                    currentRoleId: currentRoleId,
-                    onAddBio: onAddBio,
-                })}
-                onRow={(record, index) => {
-                    return {
-                        onMouseEnter: () => setCurrentRoleId(record.id),
-                        onMouseLeave: () => setCurrentRoleId(''),
-                    }
-                }}
-            />
+            <main id={'key-management'}>
+                <Table
+                    rowKey="id"
+                    loading={loading}
+                    dataSource={dataSource}
+                    pagination={false}
+                    scroll={{ x: 900, y: scrollY }}
+                    columns={keyColumns({
+                        onCheckKey: handleKeyDetail,
+                        currentRoleId: currentRoleId,
+                    })}
+                    onRow={(record, index) => {
+                        return {
+                            onMouseEnter: () => setCurrentRoleId(record.id),
+                            onMouseLeave: () => setCurrentRoleId(''),
+                        }
+                    }}
+                />
+            </main>
         </AwePage>
     )
 }
 
-export default PastureFence
+export default MainKey

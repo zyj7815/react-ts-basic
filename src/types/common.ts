@@ -47,3 +47,6 @@ export type DeviceProps = {
     mark: number
     sn: string
 }
+export type KeyProps = {
+    id: string
+}

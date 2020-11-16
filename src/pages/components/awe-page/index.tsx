@@ -16,11 +16,16 @@ interface AwePageProps {
     footer?: React.ReactNode
     children: React.ReactNode
     className?: string
+    id?: string
 }
 
 const AwePage: React.FC<AwePageProps> = (props: AwePageProps) => {
     return (
-        <div className={`awe-page-wrapper ${props.className}`} data-padding={props.noPadding}>
+        <div
+            className={`awe-page-wrapper ${props.className}`}
+            data-padding={props.noPadding}
+            id={props.id}
+        >
             <nav className="awe-page__nav">{props.nav}</nav>
             <main
                 className="awe-page__main"

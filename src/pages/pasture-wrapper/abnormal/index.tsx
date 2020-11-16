@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { DeviceProps } from '@/types/common'
+import { DeviceProps, KeyProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
@@ -8,20 +8,24 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import { Pagination, Table, Input, Button, Select } from 'antd'
-import { deviceColumns } from '@/pages/main-wrapper/device/columns'
+import { keyColumns } from '@/pages/pasture-wrapper/abnormal/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
+import { DeviceAbnForm } from './device-abnormalForm'
 import './index.less'
+import { CollectionCreateForm } from '@/pages/main-wrapper/account/psdForm'
 const { Search } = Input
 const { Option } = Select
 
-const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
+    const [deviceAbnVisible, setDeviceAbnVisible] = useState(true)
+    const [currentRoleId, setCurrentRoleId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -58,15 +62,28 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
-    const handleDeviceDetail = (device: DeviceProps) => {
-        routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
-    }
-
     const onSearch = (value: string) => {
         console.log(value)
     }
-    const handleChange = (value: any) => {
-        console.log(value)
+    const handleKeyDetail = (device: KeyProps) => {
+        routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
+    }
+
+    const onCheckProcess = (record: object) => {
+        console.log(record)
+        setDeviceAbnVisible(true)
+    }
+
+    const handleOk = () => {
+        setDeviceAbnVisible(false)
+    }
+
+    const handleCancel = () => {
+        setDeviceAbnVisible(false)
+    }
+
+    const onChangeRadio = (e: any) => {
+        console.log(`radio checked:${e.target.value}`)
     }
 
     const footer = (
@@ -80,35 +97,14 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         />
     )
     const header = (
-        <div className={'header-box'}>
-            <div>
-                <Search
-                    placeholder={useLanguage.search_device}
-                    onSearch={onSearch}
-                    style={{ width: 200 }}
-                    className={'search-input'}
-                />
-            </div>
-            <div>
-                <Button className={'distribution-btn'}>分配牧场</Button>
-                <span className={'filter-text'}>{useLanguage.filter}:</span>
-                <Select
-                    defaultValue="all"
-                    style={{ width: 142 }}
-                    onChange={handleChange}
-                    className={'filter-input'}
-                >
-                    <Option value="all">{useLanguage.all}</Option>
-                    <Option value="lucy">{useLanguage.bluetooth_ear_tag}</Option>
-                    <Option value="Yiminghe">{useLanguage.full_featured_ear_tags}</Option>
-                    <Option value="fixed">{useLanguage.fixed_gateway}</Option>
-                    <Option value="mobile">{useLanguage.mobile_gateway}</Option>
-                    <Option value="no">{useLanguage.no_biological_device_connected}</Option>
-                    <Option value="Tag">Tag</Option>
-                    <Option value="Ring">Ring</Option>
-                </Select>
-            </div>
-        </div>
+        <>
+            <Search
+                placeholder={useLanguage.search_animal}
+                onSearch={onSearch}
+                style={{ width: 200 }}
+                className={'search-input'}
+            />
+        </>
     )
 
     return (
@@ -119,7 +115,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'device-management'}
+            id={'pasture-abnormal'}
         >
             <Table
                 rowKey="id"
@@ -127,12 +123,26 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
-                columns={deviceColumns({
-                    onCheckDevice: handleDeviceDetail,
+                columns={keyColumns({
+                    onCheckKey: handleKeyDetail,
+                    currentRoleId: currentRoleId,
+                    onCheckProcess: onCheckProcess,
                 })}
+                onRow={(record, index) => {
+                    return {
+                        onMouseEnter: () => setCurrentRoleId(record.id),
+                        onMouseLeave: () => setCurrentRoleId(''),
+                    }
+                }}
+            />
+            <DeviceAbnForm
+                visible={deviceAbnVisible}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+                onChangeRadio={onChangeRadio}
             />
         </AwePage>
     )
 }
 
-export default MainDevice
+export default PastureAbnormal

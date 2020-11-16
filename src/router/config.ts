@@ -28,7 +28,10 @@ export const RouteUris = {
     MainDevice: '/root/main-device',
 
     // 设备详情
-    MainDeviceDetail: (id = PASTURE_ID) => `/root/main-device/${id}`,
+    MainDeviceDetail: (id = PASTURE_ID) => `/root/main-device/${id}/device`,
+
+    // 密钥管理
+    MainKey: '/root/key-management',
 
     // 用户信息
     MainAccount: '/root/main-account',
@@ -47,6 +50,12 @@ export const RouteUris = {
 
     // 牧场地图
     PastureMapDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/map`,
+
+    // 牧场设备
+    PastureDevice: (id = PASTURE_ID) => `/root/pasture-detail/${id}/device`,
+
+    // 牧场异常事件
+    PastureAbnormal: (id = PASTURE_ID) => `/root/pasture-detail/${id}/abnormal`,
 
     // 牧场总览
     PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,

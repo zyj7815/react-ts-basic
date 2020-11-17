@@ -226,7 +226,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     onCheckDetailEvent: onCheckDetailEvent,
                     onEditEvent: onEditEvent,
                     onDeleteEvent: onDeleteEvent,
-                    currentRoleId: currentRoleId,
+                    currentId: currentRoleId,
                 })}
                 rowSelection={addBio ? rowSelection : undefined}
             />

@@ -66,29 +66,5 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
                 )
             },
         },
-        // {
-        //     title: useLanguage.action,
-        //     dataIndex: 'action',
-        //     fixed: 'right' as 'right',
-        //     width: 170,
-        //     render(action: any, record: GroupProps) {
-        //         return (
-        //             <span className="awe-table-action">
-        //                 <span
-        //                     className="awe-action-item"
-        //                     onClick={() => events.onEditEvent && events.onEditEvent(record)}
-        //                 >
-        //                     {useLanguage.edit}
-        //                 </span>
-        //                 <span
-        //                     className="awe-action-item"
-        //                     onClick={() => events.onDeleteEvent && events.onDeleteEvent(record)}
-        //                 >
-        //                     {useLanguage.delete}
-        //                 </span>
-        //             </span>
-        //         )
-        //     },
-        // },
     ]
 }

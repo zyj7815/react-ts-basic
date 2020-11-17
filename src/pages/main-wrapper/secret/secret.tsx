@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import AwePage from '@/pages/components/awe-page'
-import { Button, Col, Row, Avatar, Modal, Form, Input, Pagination, Table, Breadcrumb } from 'antd'
+import { Button, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
-import { UserOutlined } from '@ant-design/icons'
-import './key-management.less'
+import './secret.less'
 import { RouteUris } from '@/router/config'
 import { KeyProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
@@ -14,7 +13,7 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { keyColumns } from '@/pages/main-wrapper/key-management/columns'
+import { keyColumns } from '@/pages/main-wrapper/secret/columns'
 
 const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
@@ -89,7 +88,7 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             header={header}
             footer={footer}
         >
-            <main id={'key-management'}>
+            <main id={'secret'}>
                 <Table
                     rowKey="id"
                     loading={loading}

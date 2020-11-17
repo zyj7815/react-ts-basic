@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AweRouteProps } from '@/types/route'
-import { Row, Col, Button, Form, Input, Select, Upload, message } from 'antd'
+import { Button, Form, Input, Select, Upload } from 'antd'
 import './account-edit.less'
 import { useLanguage } from '@/language/useLanguage'
 import { RouteUris } from '@/router/config'

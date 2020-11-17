@@ -1,10 +1,8 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { Utils } from '@/utils'
 import { GroupProps } from '@/types/common'
 import { AweColumnProps } from '@/types'
 import { PlusCircleOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
 
 export const groupColumns = (events: AweColumnProps<GroupProps>) => {
     return [
@@ -15,7 +13,9 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
             render(name: any, record: GroupProps) {
                 return (
                     <span
-                        onClick={() => events.onCheckDetailEvent(record)}
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
                         className={'group-name'}
                     >
                         {name}

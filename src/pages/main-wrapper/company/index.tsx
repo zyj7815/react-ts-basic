@@ -15,37 +15,51 @@ const MainCompany: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 <Row>
                     <Col xl={7} lg={12} md={12} sm={24}>
                         <div className={'col-content'}>
-                            <div className={'top-box'}>
-                                <div className={'title'}>{useLanguage.company_name}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.company_name}
+                                </div>
+                                <div className={'col-content-top-box-text'}>成都德鲁伊科技</div>
                             </div>
                             <div className={'bottom-box'}>
-                                <div className={'title'}>{useLanguage.company_email}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                                <div className={'col-content-bottom-box-title'}>
+                                    {useLanguage.company_email}
+                                </div>
+                                <div className={'col-content-bottom-box-text'}>成都德鲁伊科技</div>
                             </div>
                         </div>
                     </Col>
                     <Col xl={7} lg={12} md={12} sm={24}>
                         <div className={'col-content'}>
-                            <div className={'top-box'}>
-                                <div className={'title'}>{useLanguage.work_phone}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.work_phone}
+                                </div>
+                                <div className={'col-content-top-box-text'}>成都德鲁伊科技</div>
                             </div>
                             <div className={'bottom-box'}>
-                                <div className={'title'}>{useLanguage.language_configuration}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                                <div className={'col-content-bottom-box-title'}>
+                                    {useLanguage.language_configuration}
+                                </div>
+                                <div className={'col-content-bottom-box-text'}>成都德鲁伊科技</div>
                             </div>
                         </div>
                     </Col>
                     <Col xl={10} lg={24} md={24} sm={24}>
                         <div className={'col-content'}>
-                            <div className={'top-box'}>
-                                <div className={'title'}>{useLanguage.company_address}</div>
-                                <div className={'text'}>四川省成都市天府三街1325号</div>
+                            <div className={'col-content-top-box'}>
+                                <div className={'col-content-top-box-title'}>
+                                    {useLanguage.company_address}
+                                </div>
+                                <div className={'col-content-top-box-text'}>
+                                    四川省成都市天府三街1325号
+                                </div>
                             </div>
                             <div className={'bottom-box'}>
-                                <div className={'title'}>{useLanguage.time_zone}</div>
-                                <div className={'text'}>成都德鲁伊科技</div>
+                                <div className={'col-content-bottom-box-title'}>
+                                    {useLanguage.time_zone}
+                                </div>
+                                <div className={'col-content-bottom-box-text'}>成都德鲁伊科技</div>
                             </div>
                         </div>
                     </Col>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import AwePage from '@/pages/components/awe-page'
-import { Button, Col, Row, Avatar, Modal, Form, Input } from 'antd'
+import { Button, Col, Row } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { UserOutlined } from '@ant-design/icons'

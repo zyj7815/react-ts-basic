@@ -13,9 +13,11 @@ import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
-import { DeviceAbnForm } from './device-abnormalForm'
+import { DeviceAbnForm } from './device-abn-form'
+import { OdbaAbnForm } from './odba-abn-form'
 import './index.less'
 import { CollectionCreateForm } from '@/pages/main-wrapper/account/psdForm'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
 const { Search } = Input
 const { Option } = Select
 
@@ -24,8 +26,11 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const [deviceAbnVisible, setDeviceAbnVisible] = useState(true)
+    const [deviceAbnVisible, setDeviceAbnVisible] = useState(false)
+    const [odbaAbnVisible, setOdbaAbnVisible] = useState(false)
     const [currentRoleId, setCurrentRoleId] = React.useState('')
+    const [radioValue, setRadioValue] = useState('a')
+    const [nextModal, setNextModal] = useState(false)
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -82,8 +87,25 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
         setDeviceAbnVisible(false)
     }
 
+    const handleOdbaNextOk = () => {
+        // setOdbaAbnVisible(false)
+        setNextModal(true)
+    }
+
+    const handleOdbaCancel = () => {
+        if (nextModal) {
+            setNextModal(false)
+        } else {
+            setOdbaAbnVisible(false)
+        }
+    }
+
     const onChangeRadio = (e: any) => {
         console.log(`radio checked:${e.target.value}`)
+    }
+
+    const onChangeOdbaRadio = (e: any) => {
+        setRadioValue(e.target.value)
     }
 
     const footer = (
@@ -98,11 +120,11 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     )
     const header = (
         <>
-            <Search
-                placeholder={useLanguage.search_animal}
-                onSearch={onSearch}
+            <Input
                 style={{ width: 200 }}
-                className={'search-input'}
+                className="awe-row-reverse"
+                placeholder={useLanguage.search_animal}
+                prefix={<AweIcon type={aweIconType['icon-search2']} />}
             />
         </>
     )
@@ -140,6 +162,14 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
                 handleOk={handleOk}
                 handleCancel={handleCancel}
                 onChangeRadio={onChangeRadio}
+            />
+            <OdbaAbnForm
+                visible={odbaAbnVisible}
+                handleOk={handleOdbaNextOk}
+                handleCancel={handleOdbaCancel}
+                onChangeRadio={onChangeOdbaRadio}
+                radioValue={radioValue}
+                nextModal={nextModal}
             />
         </AwePage>
     )

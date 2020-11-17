@@ -22,6 +22,10 @@ export const CollectionCreateForm: React.FC<CollectionCreateFormProps> = (event:
             title={useLanguage.update_password}
             bodyStyle={{ paddingBottom: 0 }}
             className={'editPsdModal'}
+            onCancel={() => {
+                form.resetFields()
+                event.handleCancel()
+            }}
             footer={[
                 <Button
                     key="back"

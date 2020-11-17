@@ -14,6 +14,7 @@ import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
 import './index.less'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
 const { Search } = Input
 const { Option } = Select
 
@@ -82,11 +83,11 @@ const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const header = (
         <div className={'header-box'}>
             <div>
-                <Search
-                    placeholder={useLanguage.search_device}
-                    onSearch={onSearch}
+                <Input
                     style={{ width: 200 }}
-                    className={'search-input'}
+                    className="awe-row-reverse"
+                    placeholder={useLanguage.search_device}
+                    prefix={<AweIcon type={aweIconType['icon-search2']} />}
                 />
             </div>
             <div>

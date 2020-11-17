@@ -1,40 +1,67 @@
-import React from 'react'
-import { Breadcrumb, Button, Radio } from 'antd'
+import React, { useState } from 'react'
+import { Breadcrumb, Button, Input, Pagination, Radio, Table } from 'antd'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
-import { TabType } from '@/enum'
 import { useLanguage } from '@/language/useLanguage'
-import { PageHeaderData, PageHeaderDataItem } from '@/pages/components/page-header-data'
+import { DeviceProps, GroupProps } from '@/types/common'
 import GroupListTable from '@/pages/pasture-wrapper/group/list-table'
-import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
-import { GroupProps } from '@/types/common'
-import GroupListCard from '@/pages/pasture-wrapper/group/list-card'
-import { RouteUris } from '@/router/config'
+import { groupColumns } from './columns'
 import AwePage from '@/pages/components/awe-page'
-
+import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
+import { ServiceTool } from '@/utils/service-tool'
+import { useWindowSize } from '@/hooks/useWindowSzie'
+import axios from 'axios'
+import { Api } from '@/server/api'
+import { Token } from '@/server/token'
+import { errorMessage } from '@/server/error'
+import { RouteUris } from '@/router/config'
+import './index.less'
 const TabKey = 'tabKey'
 
 const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId } = routeProps.match.params
-    const tab = Utils.getUrlParam(TabKey) || TabType.List
-    const [tabKey, setTabKey] = React.useState(tab)
+    const [dataSource, setDataSource] = React.useState<any[]>([])
+    const [loading, setLoading] = React.useState(false)
+    const [total, setTotal] = React.useState(0)
+    const [forceUpdate, setForceUpdate] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
+    const [currentRoleId, setCurrentRoleId] = React.useState('')
+    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const [newGroup, setNewGroup] = React.useState<GroupProps | null>(null)
+    const scrollY = useWindowSize() - 240
 
-    /**
-     * 切换列表
-     * @param e
-     */
-    const onChangeTab = (e: any) => {
-        Utils.pushParamsToUrl('tabKey', e.target.value)
-        setTabKey(e.target.value)
+    React.useEffect(() => {
+        fetchData()
+    }, [forceUpdate])
+
+    const fetchData = async () => {
+        setLoading(true)
+        try {
+            const res = await axios.get(
+                Api.biological.list,
+                Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
+            )
+            setTotal(parseInt(res.headers['x-result-count']))
+            setDataSource(res.data)
+            setLoading(false)
+        } catch (err) {
+            setLoading(false)
+            errorMessage.alert(err)
+        }
     }
 
     /**
-     * 新建分组
+     * 翻页、更改条数操作
+     * @param pageNumber
+     * @param pageSize
      */
-    const handleNewGroup = () => {
-        setVisible(true)
+    const onPageChange = (pageNumber: number, pageSize?: number) => {
+        Utils.pushMultiParamsToUrl({
+            pageSize,
+            pageNumber,
+        })
+        setForceUpdate(!forceUpdate)
     }
 
     /**
@@ -42,17 +69,17 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      */
     const onNewGroupSuccess = (group: GroupProps) => {
         setVisible(false)
-        setNewGroup(group)
-        setTimeout(() => {
-            setNewGroup(null)
-        }, 1000)
+        setForceUpdate(!forceUpdate)
+        // setNewGroup(group)
+        // setTimeout(() => {
+        //     setNewGroup(null)
+        // }, 1000)
     }
-
     /**
      * 查看分组详情
      * @param group
      */
-    const onCheckGroup = (group: GroupProps) => {
+    const onCheckDetailEvent = (group: GroupProps) => {
         console.log(group)
         routeProps.history.push(RouteUris.PastureGroupDetail(pastureId, group.id))
     }
@@ -61,63 +88,72 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * 编辑分组
      * @param group
      */
-    const onEditGroup = (group: GroupProps) => {
+    const onEditEvent = (group: GroupProps) => {
         console.log(group)
         routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
     }
 
-    const onDeleteGroup = (group: GroupProps) => {
+    const onDeleteEvent = (group: GroupProps) => {
         console.log(group)
     }
 
-    const nav = (
-        <Breadcrumb className="awe-page-breadcrumb">
-            <Breadcrumb.Item>{useLanguage.pasture_management}</Breadcrumb.Item>
-            <Breadcrumb.Item>{useLanguage.group_management}</Breadcrumb.Item>
-        </Breadcrumb>
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+            total={total}
+        />
     )
-
-    const infoItems: PageHeaderDataItem[] = [{ mainText: '10', subText: useLanguage.group_total }]
-
-    const listRadio = [
-        { label: useLanguage.list_mode, value: TabType.List },
-        { label: useLanguage.card_mode, value: TabType.Card },
-    ]
-
-    const radio = (
+    const header = (
         <>
-            <Radio.Group
-                optionType="button"
-                value={tabKey}
-                options={listRadio}
-                onChange={onChangeTab}
+            <Input
+                style={{ width: 200 }}
+                className="awe-row-reverse"
+                placeholder={useLanguage.search_fence}
+                prefix={<AweIcon type={aweIconType['icon-search2']} />}
             />
-
-            <span>
-                <Button onClick={handleNewGroup}>{useLanguage.new_group}</Button>
-            </span>
+            <Button
+                onClick={() => {
+                    setVisible(true)
+                }}
+            >
+                {useLanguage.create_group}
+            </Button>
         </>
     )
 
     return (
-        <AwePage nav={nav} header={<PageHeaderData infoItems={infoItems} />}>
-            <AwePage header={radio} hdColor={true} noPadding={true} isHPadding={true}>
-                {tabKey === TabType.List ? (
-                    <GroupListTable
-                        newGroup={newGroup}
-                        onEditGroup={onEditGroup}
-                        onCheckGroup={onCheckGroup}
-                        onDeleteGroup={onDeleteGroup}
-                    />
-                ) : (
-                    <GroupListCard
-                        newGroup={newGroup}
-                        onCheckGroup={onCheckGroup}
-                        onDeleteGroup={onDeleteGroup}
-                    />
-                )}
-            </AwePage>
-
+        <AwePage
+            hdColor={true}
+            ctColor={true}
+            isHPadding={true}
+            isHShadow={true}
+            header={header}
+            footer={footer}
+            id={'pasture-group'}
+        >
+            <Table
+                rowKey="id"
+                loading={loading}
+                dataSource={dataSource}
+                pagination={false}
+                scroll={{ x: 900, y: scrollY }}
+                columns={groupColumns({
+                    onCheckDetailEvent: onCheckDetailEvent,
+                    onEditEvent: onEditEvent,
+                    onDeleteEvent: onDeleteEvent,
+                    currentRoleId: currentRoleId,
+                })}
+                onRow={(record, index) => {
+                    return {
+                        onMouseEnter: () => setCurrentRoleId(record.id),
+                        onMouseLeave: () => setCurrentRoleId(''),
+                    }
+                }}
+            />
             <NewGroupModal
                 visible={visible}
                 onMainEvent={onNewGroupSuccess}

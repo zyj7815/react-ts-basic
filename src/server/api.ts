@@ -43,4 +43,9 @@ export const Api = {
             return `${base2}file/biological/${biologicalId}/image/${id}/thumbnail`
         },
     },
+    message: {
+        basic: `${base}message/`,
+        list: (timestamp: string) => `${base}message/page/${timestamp}`,
+        del: base + 'message/delete',
+    },
 }

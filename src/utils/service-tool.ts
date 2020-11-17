@@ -3,7 +3,7 @@ import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils/index'
 import { AnimalProps } from '@/types/common'
-import { AbnormalType, BindingStatus } from '@/enum'
+import { AbnormalType, BindingStatus, MessageType } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 
 /**
@@ -141,6 +141,23 @@ export const ServiceTool = {
                 return useLanguage.ruminate_abnormal
             default:
                 return useLanguage.activity_abnormal
+        }
+    },
+
+    /**
+     * 消息通知类型
+     * @param type
+     */
+    getMsgType(type: MessageType) {
+        switch (type) {
+            case MessageType.AnimalInfo:
+                return useLanguage.animal_info
+            case MessageType.DeviceInfo:
+                return useLanguage.device_info
+            case MessageType.FenceInfo:
+                return useLanguage.fence_info
+            default:
+                return useLanguage.other
         }
     },
 }

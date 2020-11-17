@@ -13,7 +13,9 @@ export const deviceColumns = (events: AweColumnProps<any>) => {
                 return (
                     <span
                         className="awe-action-item"
-                        onClick={() => events.onCheckDetailEvent(record)}
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
                     >
                         {name}
                     </span>

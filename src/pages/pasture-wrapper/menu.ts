@@ -40,4 +40,10 @@ export const pastureMenuNav = (id: string): IMenuNav[] => [
         icon: aweIconType['icon-geofence'],
         level: 1,
     },
+    {
+        title: useLanguage.message_notification,
+        uri: RouteUris.PastureMessage(id),
+        icon: aweIconType['icon-geofence'],
+        level: 1,
+    },
 ]

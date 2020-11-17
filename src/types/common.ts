@@ -47,6 +47,14 @@ export type DeviceProps = {
     mark: number
     sn: string
 }
+
 export type KeyProps = {
     id: string
+}
+
+export type MessageProps = {
+    id: string
+    src_name: string
+    timestamp: string
+    readed_at?: string
 }

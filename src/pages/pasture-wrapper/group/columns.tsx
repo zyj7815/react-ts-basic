@@ -35,7 +35,9 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
                     <span className="awe-table-action">
                         <span
                             className="awe-action-item"
-                            onClick={() => events.onCheckDetailEvent(record)}
+                            onClick={() =>
+                                events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                            }
                         >
                             {useLanguage.view}
                         </span>

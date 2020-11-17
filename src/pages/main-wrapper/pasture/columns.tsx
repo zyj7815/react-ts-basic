@@ -12,7 +12,9 @@ export const pastureColumns = (events: AweColumnProps<PastureProps>) => {
                 return (
                     <span
                         className="awe-action-item"
-                        onClick={() => events.onCheckDetailEvent(record)}
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
                     >
                         {name}
                     </span>

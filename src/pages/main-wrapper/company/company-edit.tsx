@@ -77,7 +77,7 @@ const CompanyEdit: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                                 name="company_address"
                                 rules={[{ required: true, message: '请输入公司名称' }]}
                             >
-                                <TextArea showCount autoSize={{ minRows: 4, maxRows: 4 }} />
+                                <TextArea autoSize={{ minRows: 4, maxRows: 4 }} />
                             </Form.Item>
                         </Form>
                     </div>

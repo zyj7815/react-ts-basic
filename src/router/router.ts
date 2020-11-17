@@ -80,6 +80,12 @@ export const routes: RouteInterface[] = [
                         name: 'pasture-wrapper-map',
                         exact: true,
                     },
+                    {
+                        path: RouteUris.PastureMessage(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/message')),
+                        name: 'pasture-wrapper-message',
+                        exact: true,
+                    },
                 ],
             },
             {

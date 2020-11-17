@@ -20,3 +20,13 @@ export enum AbnormalType {
     // 反刍异常
     AbnormalRuminate,
 }
+
+// 消息类型
+export enum MessageType {
+    // 生物信息
+    AnimalInfo = 5,
+    // 围栏信息
+    FenceInfo = 6,
+    // 设备信息
+    DeviceInfo = 3,
+}

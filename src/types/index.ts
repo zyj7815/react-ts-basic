@@ -19,8 +19,10 @@ export type SimpleModalProps = {
 
 // column通用的type接口
 export type AweColumnProps<T> = {
+    // 当前鼠标停留的行
+    currentId?: string
     // 查看详情
-    onCheckDetailEvent: (record: T) => void
+    onCheckDetailEvent?: (record: T) => void
     // 编辑
     onEditEvent?: (record: T) => void
     // 删除

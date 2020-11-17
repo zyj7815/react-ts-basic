@@ -1,15 +1,9 @@
-## 脚手架要达到的需求
 
-- webpack的配置
-- 对静态资源（图片，模板等）的处理
-- 使react项目支持typescript，eslint，prettier等工具
-- 优化webpack配置，减小代码的体积
-- 支持不同的css预处理器（less，sass等）
-- 一套好用的样式方案
-- 使项目支持多个环境切换（开发，测试，预发布，生产等）
-- 使用规则来自动约束代码规范
-- 优化开发体验
-- 一些优化项目性能的建议
+# 代码规范
+
+
+
+
 
 
 
@@ -1168,10 +1162,3 @@ module.exports = {
     ]
 }
 ```
-
-
-## 项目讲解
-
-- [hook、mobx+hook的使用](doc/react-hook.md)
-- [路由鉴权](doc/auth.md)
-- [主题替换](doc/theme.md)

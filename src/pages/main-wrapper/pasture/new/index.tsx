@@ -48,7 +48,9 @@ const NewPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const nav = (
         <Breadcrumb className="awe-page-breadcrumb">
-            <Breadcrumb.Item>{useLanguage.pasture_management}</Breadcrumb.Item>
+            <Breadcrumb.Item>
+                <a onClick={() => routeProps.history.goBack()}>{useLanguage.pasture_management}</a>
+            </Breadcrumb.Item>
             <Breadcrumb.Item>{useLanguage.new_pasture}</Breadcrumb.Item>
         </Breadcrumb>
     )

@@ -2,6 +2,7 @@ import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { PastureProps } from '@/types/common'
 import { AweColumnProps } from '@/types'
+import { Button } from 'antd'
 
 export const pastureColumns = (events: AweColumnProps<PastureProps>) => {
     return [
@@ -42,20 +43,19 @@ export const pastureColumns = (events: AweColumnProps<PastureProps>) => {
             dataIndex: 'event',
         },
         {
-            title: useLanguage.operation,
-            dataIndex: 'operation',
+            title: '',
+            dataIndex: 'id',
             width: 100,
-            fixed: 'right' as 'right',
-            render(action: any, record: PastureProps) {
-                return (
-                    <span className="awe-table-action">
-                        <span
-                            className="awe-action-item"
-                            onClick={() => events.onEditEvent && events.onEditEvent(record)}
-                        >
-                            {useLanguage.edit}
-                        </span>
-                    </span>
+            render(id: string, record: PastureProps) {
+                return events.currentId === id ? (
+                    <Button
+                        className="awe-primary-btn"
+                        onClick={() => events.onEditEvent && events.onEditEvent(record)}
+                    >
+                        {useLanguage.edit}
+                    </Button>
+                ) : (
+                    ''
                 )
             },
         },

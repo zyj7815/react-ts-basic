@@ -90,7 +90,7 @@ export const animalColumns = () => {
             width: (window as any).isEn ? 170 : 100,
             render(operation: string, record: any) {
                 return (
-                    <div className="action-box">
+                    <div className="awe-action-box">
                         {record.device_id ? (
                             <span>{useLanguage.view_location}</span>
                         ) : (

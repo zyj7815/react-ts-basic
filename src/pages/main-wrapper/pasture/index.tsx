@@ -20,6 +20,7 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
+    const [currentId, setCurrentId] = React.useState('')
     // 将【页码】和【条数】放到url中，pageSize=10&pageNumber=1，这样在返回页面时可以直接请求上一次的url
     // 在url中获取页码和条数
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
@@ -117,9 +118,16 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
                 columns={pastureColumns({
+                    currentId: currentId,
                     onCheckDetailEvent: handleDetail,
                     onEditEvent: handleEdit,
                 })}
+                onRow={(record: PastureProps) => {
+                    return {
+                        onMouseEnter: () => setCurrentId(record.id),
+                        onMouseLeave: () => setCurrentId(''),
+                    }
+                }}
             />
         </AwePage>
     )

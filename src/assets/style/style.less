@@ -78,7 +78,7 @@ svg path {
 
 .awe-btn-box {
     white-space: nowrap;
-    .ant-btn {
+    & > * {
         margin-left: 10px;
     }
 }
@@ -105,7 +105,7 @@ svg path {
 }
 
 
-.action-box {
+.awe-action-box {
     display: flex;
     justify-content: space-between;
     
@@ -116,4 +116,10 @@ svg path {
     span:hover {
         color: @primary-color;
     }
+}
+
+
+.awe-primary-btn {
+    border: 1px solid @primary-color;
+    color: @primary-color;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Radio } from 'antd'
+import { Button, Modal, Radio } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 
 interface Values {

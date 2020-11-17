@@ -171,9 +171,7 @@ export const routes: RouteInterface[] = [
                     },
                     {
                         path: RouteUris.MainKey,
-                        component: loadable(() =>
-                            import('@/pages/main-wrapper/key-management/key-management')
-                        ),
+                        component: loadable(() => import('@/pages/main-wrapper/secret/secret')),
                         name: 'main-wrapper-key',
                         exact: true,
                     },

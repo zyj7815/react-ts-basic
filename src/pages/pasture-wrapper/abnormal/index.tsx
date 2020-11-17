@@ -7,7 +7,7 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { Pagination, Table, Input, Button, Select } from 'antd'
+import { Pagination, Table, Input } from 'antd'
 import { keyColumns } from '@/pages/pasture-wrapper/abnormal/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
@@ -16,10 +16,7 @@ import AwePage from '@/pages/components/awe-page'
 import { DeviceAbnForm } from './device-abn-form'
 import { OdbaAbnForm } from './odba-abn-form'
 import './index.less'
-import { CollectionCreateForm } from '@/pages/main-wrapper/account/psdForm'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-const { Search } = Input
-const { Option } = Select
 
 const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -28,7 +25,7 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [deviceAbnVisible, setDeviceAbnVisible] = useState(false)
     const [odbaAbnVisible, setOdbaAbnVisible] = useState(false)
-    const [currentRoleId, setCurrentRoleId] = React.useState('')
+    const [currentId, setCurrentId] = React.useState('')
     const [radioValue, setRadioValue] = useState('a')
     const [nextModal, setNextModal] = useState(false)
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
@@ -147,13 +144,13 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
                 scroll={{ x: 900, y: scrollY }}
                 columns={keyColumns({
                     onCheckKey: handleKeyDetail,
-                    currentRoleId: currentRoleId,
+                    currentId: currentId,
                     onCheckProcess: onCheckProcess,
                 })}
                 onRow={(record, index) => {
                     return {
-                        onMouseEnter: () => setCurrentRoleId(record.id),
-                        onMouseLeave: () => setCurrentRoleId(''),
+                        onMouseEnter: () => setCurrentId(record.id),
+                        onMouseLeave: () => setCurrentId(''),
                     }
                 }}
             />

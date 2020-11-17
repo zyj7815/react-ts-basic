@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Breadcrumb, Button, Input, Pagination, Radio, Table } from 'antd'
+import { Button, Input, Pagination, Table } from 'antd'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { useLanguage } from '@/language/useLanguage'
-import { DeviceProps, GroupProps } from '@/types/common'
-import GroupListTable from '@/pages/pasture-wrapper/group/list-table'
+import { GroupProps } from '@/types/common'
 import { groupColumns } from './columns'
 import AwePage from '@/pages/components/awe-page'
 import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
@@ -17,7 +16,6 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { RouteUris } from '@/router/config'
 import './index.less'
-const TabKey = 'tabKey'
 
 const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId } = routeProps.match.params
@@ -26,9 +24,8 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
-    const [currentRoleId, setCurrentRoleId] = React.useState('')
+    const [currentId, setCurrentId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
-    const [newGroup, setNewGroup] = React.useState<GroupProps | null>(null)
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -145,12 +142,12 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     onCheckDetailEvent: onCheckDetailEvent,
                     onEditEvent: onEditEvent,
                     onDeleteEvent: onDeleteEvent,
-                    currentId: currentRoleId,
+                    currentId: currentId,
                 })}
                 onRow={(record, index) => {
                     return {
-                        onMouseEnter: () => setCurrentRoleId(record.id),
-                        onMouseLeave: () => setCurrentRoleId(''),
+                        onMouseEnter: () => setCurrentId(record.id),
+                        onMouseLeave: () => setCurrentId(''),
                     }
                 }}
             />

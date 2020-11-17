@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Modal, Input, Checkbox } from 'antd'
+import { Button, Modal, Checkbox } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-const { TextArea } = Input
 
 interface CollectionCreateFormProps {
     visible: boolean

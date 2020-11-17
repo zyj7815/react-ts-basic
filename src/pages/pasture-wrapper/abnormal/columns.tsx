@@ -5,7 +5,7 @@ import { KeyProps } from '@/types/common'
 import { Utils } from '@/utils'
 
 type keyColumnsProps = {
-    currentRoleId: string
+    currentId: string
     onCheckKey: (key: KeyProps) => void
     onCheckProcess: (key: any) => void
 }
@@ -45,7 +45,7 @@ export const keyColumns = (events: keyColumnsProps) => {
                     <div className={'created-date-box'}>
                         <div className={'created-date-text'}>{Utils.utc2Time(updated_at)}</div>
                         <div>
-                            {events.currentRoleId === record.id ? (
+                            {events.currentId === record.id ? (
                                 <Button
                                     className={'created-date-btn'}
                                     onClick={() => {

@@ -6,7 +6,7 @@ import { Utils } from '@/utils'
 import { PlusCircleOutlined } from '@ant-design/icons'
 
 type fenceColumnsProps = {
-    currentRoleId: string
+    currentId: string
     onCheckKey: (key: KeyProps) => void
     onAddBio: (key: KeyProps) => void
 }
@@ -61,7 +61,7 @@ export const fenceColumns = (events: fenceColumnsProps) => {
                     <div className={'created-date-box'}>
                         <div className={'created-date-text'}>{Utils.utc2Time(updated_at)}</div>
                         <div>
-                            {events.currentRoleId === record.id ? (
+                            {events.currentId === record.id ? (
                                 <Button className={'created-date-btn'} danger>
                                     {useLanguage.delete}
                                 </Button>

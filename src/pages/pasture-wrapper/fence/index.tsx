@@ -21,7 +21,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const [currentRoleId, setCurrentRoleId] = React.useState('')
+    const [currentId, setCurrentId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -111,13 +111,13 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 scroll={{ x: 900, y: scrollY }}
                 columns={fenceColumns({
                     onCheckKey: handleKeyDetail,
-                    currentRoleId: currentRoleId,
+                    currentId: currentId,
                     onAddBio: onAddBio,
                 })}
                 onRow={(record, index) => {
                     return {
-                        onMouseEnter: () => setCurrentRoleId(record.id),
-                        onMouseLeave: () => setCurrentRoleId(''),
+                        onMouseEnter: () => setCurrentId(record.id),
+                        onMouseLeave: () => setCurrentId(''),
                     }
                 }}
             />

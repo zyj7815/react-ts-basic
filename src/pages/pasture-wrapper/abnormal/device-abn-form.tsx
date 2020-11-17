@@ -2,12 +2,6 @@ import React, { useState } from 'react'
 import { Button, Modal, Radio } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 
-interface Values {
-    title: string
-    description: string
-    modifier: string
-}
-
 interface CollectionCreateFormProps {
     visible: boolean
     handleOk: () => void

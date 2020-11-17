@@ -43,10 +43,61 @@
     .ant-radio-button-wrapper:not(:first-child):before{
         display: none;
     }
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+        border: 1px solid @primary-color;
+    }
     .ant-modal-footer{
         border-top: none;
-        button{
-            border-radius: 8px;
-        }
+        
+    }
+}
+.OdbaAbnModal{
+    .radio-button {
+        width: 71px;
+        height: 71px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 71px;
+        margin-right: 10px;
+        border: 1px solid #DBDBDB;
+        text-align: center;
+    }
+    .radio-button-last{
+        width: 71px;
+        height: 71px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 71px;
+        border: 1px solid #DBDBDB;
+        text-align: center;
+    }
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+        border: 1px solid @primary-color;
+    }
+    
+    .ant-radio-button-wrapper {
+        padding: 0 10px;
+    }
+    .ant-radio-button-wrapper:not(:first-child):before{
+        display: none;
+    }
+    .ant-modal-footer{
+        border-top: none;
+        
+    }
+    .header-box{
+        display: flex;
+        justify-content: space-between;
+    }
+    .ant-modal-header{
+        padding: 14px 24px;
+    }
+    .title-text{
+        margin-top: 7px;
+    }
+    .title-btn{
+    
     }
 }

@@ -27,4 +27,6 @@ export type AweColumnProps<T> = {
     onEditEvent?: (record: T) => void
     // 删除
     onDeleteEvent?: (record: T) => void
+    //鼠标移入移出
+    currentRoleId?: any
 }

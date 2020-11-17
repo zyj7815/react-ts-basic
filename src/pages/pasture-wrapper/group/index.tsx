@@ -145,7 +145,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     onCheckDetailEvent: onCheckDetailEvent,
                     onEditEvent: onEditEvent,
                     onDeleteEvent: onDeleteEvent,
-                    currentRoleId: currentRoleId,
+                    currentId: currentRoleId,
                 })}
                 onRow={(record, index) => {
                     return {

@@ -14,7 +14,9 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
             render(name: any, record: GroupProps) {
                 return (
                     <span
-                        onClick={() => events.onCheckDetailEvent(record)}
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
                         className={'group-name'}
                     >
                         {name}
@@ -42,7 +44,7 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
                 return (
                     <div className={'description-box'}>
                         <span className={'description-text'}>{name}</span>
-                        {events.currentRoleId === record.id && (
+                        {events.currentId === record.id && (
                             <div>
                                 <Button
                                     className={'edit-btn'}

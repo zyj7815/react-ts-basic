@@ -9,12 +9,6 @@ const PastureDetail: React.FC = props => {
     React.useEffect(() => {
         const pie = new MultiPieChart('animal-chart')
         pie.onDraw()
-
-        const div: any = document.getElementById('animal-chart')
-        const ul = div.childNodes.item(0)
-        const lis = ul.childNodes
-
-        console.log(lis)
     }, [chartRef.current])
 
     return (

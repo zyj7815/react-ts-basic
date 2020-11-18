@@ -16,7 +16,7 @@ export const DeleteModal: React.FC<CollectionCreateFormProps> = (event: any) => 
             visible={event.visible}
             title={useLanguage.confirm_delete}
             bodyStyle={{ paddingBottom: 10 }}
-            className={'deleteGroupModal'}
+            className={'deleteSecretModal'}
             closable={false}
             width={430}
             footer={[

@@ -25,8 +25,8 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
     const [currentId, setCurrentId] = React.useState('')
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
+    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
 
     React.useEffect(() => {
         fetchData()
@@ -67,10 +67,6 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const onNewGroupSuccess = (group: GroupProps) => {
         setVisible(false)
         setForceUpdate(!forceUpdate)
-        // setNewGroup(group)
-        // setTimeout(() => {
-        //     setNewGroup(null)
-        // }, 1000)
     }
     /**
      * 查看分组详情

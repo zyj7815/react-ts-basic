@@ -7,6 +7,7 @@ import { Utils } from '@/utils'
 type keyColumnsProps = {
     currentRoleId: string
     onCheckKey: (key: KeyProps) => void
+    delete: () => void
 }
 
 export const keyColumns = (events: keyColumnsProps) => {
@@ -42,7 +43,11 @@ export const keyColumns = (events: keyColumnsProps) => {
                         <div className={'created-date-text'}>{Utils.utc2Time(updated_at)}</div>
                         <div>
                             {events.currentRoleId === record.id ? (
-                                <Button className={'created-date-btn'} danger>
+                                <Button
+                                    className={'created-date-btn'}
+                                    danger
+                                    onClick={events.delete}
+                                >
                                     {useLanguage.delete}
                                 </Button>
                             ) : (

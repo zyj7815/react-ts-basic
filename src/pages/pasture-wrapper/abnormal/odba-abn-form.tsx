@@ -3,12 +3,6 @@ import { Button, Modal, Form, Input, Radio, DatePicker } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 const { TextArea } = Input
 
-interface Values {
-    title: string
-    description: string
-    modifier: string
-}
-
 interface CollectionCreateFormProps {
     visible: boolean
     radioValue: any

@@ -35,4 +35,5 @@ export const zh_zk = {
     del_group: '删除分组',
     abnormal_num: '异常数',
     search_fence: '搜索围栏名',
+    delete_confirm: '请勾选以下选项来继续此操作',
 }

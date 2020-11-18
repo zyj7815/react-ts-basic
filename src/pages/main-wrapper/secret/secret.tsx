@@ -14,11 +14,14 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import { keyColumns } from '@/pages/main-wrapper/secret/columns'
+import { DeleteModal } from '@/pages/main-wrapper/secret/deleteModal'
 
 const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
+    const [visible, setVisible] = React.useState(false)
+    const [radioValue, setRadioValue] = useState(false)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [currentRoleId, setCurrentRoleId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
@@ -61,9 +64,26 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
+    const handleOk = () => {
+        setVisible(false)
+    }
+
+    const handleCancel = () => {
+        setVisible(false)
+        setRadioValue(false)
+    }
+
+    const onChangeRadio = (e: any) => {
+        setRadioValue(e.target.checked)
+    }
+
+    const deleteKey = () => {
+        setVisible(true)
+    }
+
     const header = (
         <>
-            <span></span>
+            <div />
             <Button className={'create_key_btn'}>{useLanguage.create_key}</Button>
         </>
     )
@@ -98,6 +118,7 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     columns={keyColumns({
                         onCheckKey: handleKeyDetail,
                         currentRoleId: currentRoleId,
+                        delete: deleteKey,
                     })}
                     onRow={(record, index) => {
                         return {
@@ -105,6 +126,13 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                             onMouseLeave: () => setCurrentRoleId(''),
                         }
                     }}
+                />
+                <DeleteModal
+                    visible={visible}
+                    handleOk={handleOk}
+                    handleCancel={handleCancel}
+                    onChangeRadio={onChangeRadio}
+                    radioValue={radioValue}
                 />
             </main>
         </AwePage>

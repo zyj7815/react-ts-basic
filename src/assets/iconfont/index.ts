@@ -4,7 +4,7 @@ import { createFromIconfontCN } from '@ant-design/icons'
 // https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.12&manage_type=myprojects&projectId=367759&keyword=&project_type=&page=
 
 export const AweIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_367759_m53vyisng7.js',
+    scriptUrl: '//at.alicdn.com/t/font_367759_9siqeporg05.js',
 })
 
 export const aweIconType = {

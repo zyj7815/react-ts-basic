@@ -39,6 +39,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureDetail(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/pasture')),
+                        name: 'pasture-wrapper-detail',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureGroup(),
                         component: loadable(() => import('@/pages/pasture-wrapper/group')),
                         name: 'pasture-wrapper-group',

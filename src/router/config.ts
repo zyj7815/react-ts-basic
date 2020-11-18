@@ -57,11 +57,14 @@ export const RouteUris = {
     // 牧场设备
     PastureDevice: (id = PASTURE_ID) => `/root/pasture-detail/${id}/device`,
 
+    // 牧场 - 牧场管理
+    PastureDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
+
     // 牧场异常事件
     PastureAbnormal: (id = PASTURE_ID) => `/root/pasture-detail/${id}/abnormal`,
 
     // 牧场总览
-    PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
+    PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/overview`,
 
     // 生物列表
     PastureAnimal: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal`,

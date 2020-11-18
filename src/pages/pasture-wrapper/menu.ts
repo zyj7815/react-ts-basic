@@ -11,6 +11,12 @@ export const pastureMenuNav = (id: string): IMenuNav[] => [
         level: 1,
     },
     {
+        title: useLanguage.pasture_management,
+        uri: RouteUris.PastureDetail(id),
+        icon: aweIconType['icon-biological'],
+        level: 1,
+    },
+    {
         title: useLanguage.animal,
         uri: RouteUris.PastureAnimal(id),
         icon: aweIconType['icon-biological'],

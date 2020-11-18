@@ -17,7 +17,6 @@ const OverviewEvent: React.FC = props => {
     const fetchData = async () => {
         try {
             const res = await axios.get(Api.event, Token.pageToken(100))
-            console.log(res.data)
             setDataSource(res.data)
         } catch (e) {
             errorMessage.alert(e)

@@ -1,27 +1,24 @@
-const host = window.location.host
-const repo = 'cattle+user'
-
-const AppKey = `${host}+${repo}`
+import { storageKey } from '@/config/channel'
 
 export const Token = {
-    auth: window.localStorage.getItem(AppKey) || window.sessionStorage.getItem(AppKey),
+    auth: window.localStorage.getItem(storageKey) || window.sessionStorage.getItem(storageKey),
 
     data: {
         headers: {
-            'x-druid-authentication': window.localStorage.getItem(AppKey),
+            'x-druid-authentication': window.localStorage.getItem(storageKey),
         },
     },
 
     setToken: (auth: string | number, remember: boolean) => {
         if (remember) {
-            window.localStorage.setItem(AppKey, `${auth}`)
+            window.localStorage.setItem(storageKey, `${auth}`)
         } else {
-            window.sessionStorage.setItem(AppKey, `${auth}`)
+            window.sessionStorage.setItem(storageKey, `${auth}`)
         }
     },
 
     cleanAuth: () => {
-        window.localStorage.setItem(AppKey, '')
+        window.localStorage.setItem(storageKey, '')
         window.location.reload()
     },
 

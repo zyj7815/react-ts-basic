@@ -1,4 +1,9 @@
 import Highcharts from 'highcharts'
+import ChartModuleMore from 'highcharts/highcharts-more.js'
+import HCSoldGauge from 'highcharts/modules/solid-gauge'
+
+ChartModuleMore(Highcharts)
+HCSoldGauge(Highcharts)
 
 // 默认三种颜色
 const defaultPieColor: string[] = ['#3EC6AD', '#F2E43C', '#556BE0']
@@ -22,11 +27,13 @@ class AweChart {
     constructor(container: string) {
         this.container = container
     }
+}
 
+export class LineChart extends AweChart {
     /**
      * 画曲线
      */
-    public onDrawLine() {
+    public onDraw() {
         if (!this.container) return
 
         const series: any[] = [
@@ -105,5 +112,128 @@ class AweChart {
                 e.yAxis[0].setExtremes(0, max)
             }
         )
+    }
+}
+
+export class MultiPieChart extends AweChart {
+    public onDraw() {
+        if (!this.container) return
+
+        const colorArr: string[] = ['#16B351', '#EBD74D', '#E26D6D']
+
+        const series: any[] = [
+            {
+                name: '已安装/生物总数',
+                //这里不支持color属性
+                data: [
+                    {
+                        color: colorArr[0],
+                        radius: '100%',
+                        innerRadius: '80%',
+                        y: 80,
+                    },
+                ],
+            },
+            {
+                name: '生病/生物总数',
+                data: [
+                    {
+                        //只能通过这里设置color属性
+                        color: colorArr[1],
+                        radius: '75%',
+                        innerRadius: '60%',
+                        y: 60,
+                    },
+                ],
+            },
+            {
+                name: '异常生物数/总生物数',
+                data: [
+                    {
+                        //只能通过这里设置color属性
+                        color: colorArr[2],
+                        radius: '55%',
+                        innerRadius: '45%',
+                        y: 70,
+                    },
+                ],
+            },
+        ]
+
+        Highcharts.chart(this.container, {
+            title: {
+                text: '',
+            },
+            chart: {
+                type: 'solidgauge',
+            },
+            legend: {
+                verticalAlign: 'middle',
+                align: 'center',
+                layout: 'vertical',
+                itemHoverStyle: {
+                    color: '#666',
+                },
+                squareSymbol: false,
+                symbolRadius: 0,
+                itemStyle: {
+                    color: '#666',
+                },
+                symbolWidth: 0, // 图标宽度
+                useHTML: true,
+                labelFormatter: function() {
+                    return `<div class="chart-pie-legend">
+                            <div class="chart-pie-legend__data" style="color: ${
+                                colorArr[this.index]
+                            }">123/234</div>
+                            <div class="chart-pie-legend__name">${this.name}</div>
+                            <div style="height: 8px" />
+                        </div>`
+                },
+            },
+            tooltip: {
+                enabled: false,
+            },
+            pane: {
+                startAngle: 0,
+                endAngle: 360,
+                background: [
+                    {
+                        outerRadius: '100%',
+                        innerRadius: '80%',
+                        backgroundColor: '#f6f6f6',
+                        borderWidth: 0,
+                    },
+                    {
+                        outerRadius: '75%',
+                        innerRadius: '60%',
+                        backgroundColor: '#f6f6f6',
+                        borderWidth: 0,
+                    },
+                    {
+                        outerRadius: '55%',
+                        innerRadius: '45%',
+                        backgroundColor: '#f6f6f6',
+                        borderWidth: 0,
+                    },
+                ],
+            },
+            yAxis: {
+                visible: false,
+                min: 0,
+                max: 100,
+                lineWidth: 0,
+                //tickPositions: []
+            },
+            plotOptions: {
+                solidgauge: {
+                    showInLegend: true,
+                    dataLabels: {
+                        enabled: false,
+                    },
+                },
+            },
+            series: series,
+        })
     }
 }

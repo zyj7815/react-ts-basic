@@ -3,6 +3,7 @@ export enum TabType {
     Card = 'card',
 }
 
+// 设备绑定状态
 export enum BindingStatus {
     // 未绑定
     Undeploy = 0,
@@ -12,6 +13,7 @@ export enum BindingStatus {
     Deploying,
 }
 
+// 异常事件
 export enum AbnormalType {
     // 活动量异常
     AbnormalActivity = 1,

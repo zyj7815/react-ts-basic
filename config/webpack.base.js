@@ -102,7 +102,10 @@ module.exports = merge(webpackConfig, {
                             'postcss-loader',
                             {
                                 loader: 'less-loader',
-                                options: { javascriptEnabled: true }
+                                options: {
+                                    // modifyVars:{ "primary-color": "#1DA57A"},
+                                    javascriptEnabled: true
+                                }
                             }
                         ]
                     },

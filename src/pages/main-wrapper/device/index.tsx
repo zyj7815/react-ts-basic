@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { DeviceProps } from '@/types/common'
+import { DeviceProps, DeviceTypeProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
@@ -14,6 +14,7 @@ import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
+import { rootStore } from '@/provider'
 
 const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
@@ -31,7 +32,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setLoading(true)
         try {
             const res = await axios.get(
-                Api.biological.list,
+                Api.device.basic,
                 Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
             )
             setTotal(parseInt(res.headers['x-result-count']))
@@ -94,10 +95,13 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             <span>
                 <Button onClick={handleAllocationPasture}>{useLanguage.allocation_pasture}</Button>
                 <span>{useLanguage.filter}：</span>
-                <Select defaultValue={1}>
-                    {[1, 2, 3, 4].map(val => (
-                        <Select.Option key={val} value={val}>
-                            {val}
+                <Select
+                    placeholder={useLanguage.select_common(useLanguage.device_type)}
+                    style={{ minWidth: 180 }}
+                >
+                    {rootStore.device_type_list.map((deviceType: DeviceTypeProps) => (
+                        <Select.Option key={deviceType.id} value={deviceType.id}>
+                            {deviceType.name}
                         </Select.Option>
                     ))}
                 </Select>

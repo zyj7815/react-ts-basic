@@ -23,6 +23,10 @@ export const Api = {
     myself: base + 'user/myself',
     customize: (id: string) => `${base2}customize/company/${id}`,
     event: base2 + 'biological_event/',
+    device: {
+        basic: base + 'device/',
+        device_type: base + 'dt/',
+    },
     biological: {
         new: base2 + 'biological/',
         list: base + 'biological/',

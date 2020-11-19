@@ -1,20 +1,17 @@
 import * as React from 'react'
-import axios from 'axios'
 import { observer } from 'mobx-react'
 import { useRootStore } from '@/provider'
 import { AweRouteProps } from '@/types/route'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { Loading } from '@/assets/images'
-import { Api } from '@/server/api'
 import { Token } from '@/server/token'
-import { AweGlobal } from '@/global'
 import { errorMessage } from '@/server/error'
-import '@/pages/root/index.less'
 import { RouteUris } from '@/router/config'
+import '@/pages/root/index.less'
 
 const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { routes } = routeProps
-    const { setMyself, setResources, setTheme } = useRootStore()
+    const { getBasicData } = useRootStore()
     const [loading, setLoading] = React.useState(true)
     const [routeShow, setRouteShow] = React.useState(false)
 
@@ -24,25 +21,8 @@ const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
          */
         const fetchData = async () => {
             try {
-                const myself = await axios.get(Api.myself, Token.data)
-
-                const customzie = await axios.get(Api.customize(myself.data.company_id), Token.data)
-
-                // 配置自模块定义参数
-                if (customzie.data) {
-                    // 模块权限
-                    setResources(customzie.data.company_policy.resources)
-                    // 配置主题
-                    setTheme(customzie.data.theme)
-                }
-
-                // 设置全局变量
-                AweGlobal.setTimeZone(myself.data.profile.time_zone)
-                // 设置myself参数
-                setMyself(myself.data)
-
+                await getBasicData()
                 setRouteShow(true)
-
                 onRemoveLoading()
 
                 // 如果是根目录进来，就跳转到 /#/root/main-pasture
@@ -51,6 +31,7 @@ const Root: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 }
             } catch (e) {
                 errorMessage.alert(e)
+                Token.cleanAuth()
             }
         }
 

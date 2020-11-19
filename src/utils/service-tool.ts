@@ -5,6 +5,7 @@ import { Utils } from '@/utils/index'
 import { AnimalProps } from '@/types/common'
 import { AbnormalType, BindingStatus, MessageType } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
+import { rootStore } from '@/provider'
 
 /**
  * 业务相关的事务
@@ -159,5 +160,21 @@ export const ServiceTool = {
             default:
                 return useLanguage.other
         }
+    },
+
+    /**
+     * 获取设备类型
+     */
+    getDeviceType(type: number) {
+        let name: string = useLanguage.unknown_type
+
+        for (const deviceType of rootStore.device_type_list) {
+            if (deviceType.device_type === type) {
+                name = deviceType.name
+                break
+            }
+        }
+
+        return name
     },
 }

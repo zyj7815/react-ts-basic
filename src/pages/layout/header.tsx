@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dropdown, message, Radio, Menu, Avatar } from 'antd'
 import { Token } from '@/server/token'
-import { MySelf } from '@/store'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -11,9 +10,10 @@ import {
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import HeaderSearch from './header-search'
+import { MySelfProps } from '@/types/common'
 
 interface HeaderProps {
-    myself: MySelf
+    myself: MySelfProps
     collapsed: boolean
     setCollapsed: (status: boolean) => void
     checkMap: () => void

@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { STORE_ROOT, RootStore } from '@/store'
+import { RootStore, STORE_ROOT } from '@/store'
 
 function createStores() {
     return {
@@ -16,4 +16,6 @@ function useRootStore() {
     return rootStore
 }
 
-export { stores, useStores, StoresContext, useRootStore }
+const rootStore = stores[STORE_ROOT]
+
+export { stores, useStores, StoresContext, useRootStore, rootStore }

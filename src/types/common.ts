@@ -1,3 +1,6 @@
+declare const RoleTypes: ['user', 'admin']
+declare type RoleType = typeof RoleTypes[number]
+
 export type AnimalProps = {
     id: string
     nickname: string
@@ -57,4 +60,26 @@ export type MessageProps = {
     src_name: string
     timestamp: string
     readed_at?: string
+}
+
+// 设备类型
+export type DeviceTypeProps = {
+    id: string
+    model: string
+    name: string
+    device_type: number
+}
+
+export type MySelfProps = {
+    id: string
+    name: string
+    username: string
+    company_name: string
+    company_id: string
+    role: RoleType
+    profile: {
+        language: number
+        page_size: number
+        time_zone: number
+    }
 }

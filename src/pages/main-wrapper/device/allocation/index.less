@@ -1,0 +1,40 @@
+@import "../../../../assets/style/variable";
+
+#device-allocation-wrapper {
+    
+    .awe-page__main-content {
+        overflow: hidden;
+    }
+    
+    .ant-layout {
+        height: 100%;
+    
+        .allocation-pasture__list {
+            height: 100%;
+            overflow-y: auto;
+        
+            .allocation-pasture__list--item {
+                padding: 20px;
+                border: 1px solid @grey-line-color;
+                cursor: pointer;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: all 300ms;
+                
+                &:hover {
+                    background: #fcfcfc;
+                }
+    
+                &[data-select=true] {
+                    background: @basic-color;
+                }
+    
+            }
+        
+        }
+    }
+    
+   
+}
+

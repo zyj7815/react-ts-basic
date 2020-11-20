@@ -47,8 +47,9 @@ const AddAnimalSuccessModal: React.FC<ModalProps> = (props: ModalProps) => {
     return (
         <Modal
             centered={true}
-            title={useLanguage.add_success}
+            title={useLanguage.error_report}
             visible={props.visible}
+            closable={false}
             onCancel={props.onClose}
             footer={[
                 <Button key="b" type="primary" onClick={() => props.onMainEvent()}>

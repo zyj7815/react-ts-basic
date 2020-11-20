@@ -125,22 +125,13 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const saveAddBio = () => {
         if (selectedRowKeys.length) {
             if (selectedRowKeys.length === 1) {
-                if (addBio) {
-                    onCreateSingle(selectedRowKeys[0])
-                } else if (delBio) {
-                    onCreateSingle(selectedRowKeys[0])
-                }
+                onCreateSingle(selectedRowKeys[0])
             } else {
-                if (addBio) {
-                    setPercentVisible(true)
-                    onCreateMulti(selectedRowKeys, selectedRowKeys.length)
-                } else if (delBio) {
-                    setPercentVisible(true)
-                    onCreateMulti(selectedRowKeys, selectedRowKeys.length)
-                }
+                setPercentVisible(true)
+                onCreateMulti(selectedRowKeys, selectedRowKeys.length)
             }
         } else {
-            message.warn('请选择生物')
+            message.warn(useLanguage.select_animal)
         }
     }
 
@@ -162,7 +153,8 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             setAddBio(false)
             setDelBio(false)
             setForceUpdate(!forceUpdate)
-            message.success(useLanguage.add_success)
+            setSelectedRowKeys([])
+            message.success(useLanguage.operation_success)
         } catch (err) {
             setLoading(false)
             errorMessage.alert(err)
@@ -170,7 +162,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     }
 
     /**
-     * 添加多个生物
+     * 添加删除多个生物
      * @param dataList
      * @param total 创建总数
      */
@@ -191,7 +183,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 setPercent(((total - dataList.length) / total) * 100)
                 onCreateMulti(dataList, total)
             } catch (e) {
-                console.log(e)
                 failedAnimalsLength.push(e)
                 setPercent(((total - dataList.length) / total) * 100)
                 onCreateMulti(dataList, total)
@@ -203,6 +194,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             setAddBio(false)
             setDelBio(false)
             setSuccessVisible(true)
+            setSelectedRowKeys([])
             setForceUpdate(!forceUpdate)
         }
     }

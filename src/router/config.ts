@@ -90,8 +90,8 @@ export const RouteUris = {
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 
     // 围栏添加生物
-    FenceAddBiological: (id = PASTURE_ID, fenceId = FENCE_ID) =>
-        `/root/pasture-detail/${id}/fence/${fenceId}/add`,
+    PastureFenceAddBiological: (id = PASTURE_ID, fenceId = FENCE_ID) =>
+        `/root/pasture-detail/${id}/fence/${fenceId}/add/animal`,
 
     // 消息通知
     PastureMessage: (id = PASTURE_ID) => `/root/pasture-detail/${id}/message`,

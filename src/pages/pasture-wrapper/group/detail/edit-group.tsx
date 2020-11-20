@@ -35,10 +35,7 @@ const EditGroupModal: React.FC<ModalProps> = (props: ModalProps) => {
         if (props.group) {
             form.setFieldsValue(props.group)
         }
-        // if (props.visible) {
-        //     form.resetFields()
-        // }
-    }, [props.group])
+    }, [props.visible])
 
     const onSubmit = async () => {
         try {

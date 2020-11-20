@@ -72,7 +72,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     }
 
     const fenceAddBiological = (fence: any) => {
-        routeProps.history.push(RouteUris.FenceAddBiological(pastureId, fence.id))
+        routeProps.history.push(RouteUris.PastureFenceAddBiological(pastureId, fence.id))
     }
 
     const header = (

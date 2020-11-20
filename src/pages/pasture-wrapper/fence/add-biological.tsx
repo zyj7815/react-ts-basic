@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AweRouteProps } from '@/types/route'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
@@ -22,6 +22,7 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [currentId, setCurrentId] = React.useState('')
+    const [selectedRowKeys, setSelectedRowKeys] = useState([])
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -72,6 +73,16 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
 
     const back = () => {
         routeProps.history.goBack()
+    }
+
+    const onSelectChange = (selectedRowKeys: any) => {
+        // console.log(selectedRowKeys)
+        setSelectedRowKeys(selectedRowKeys)
+    }
+
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
     }
 
     const nav = (
@@ -128,12 +139,13 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
                     currentId: currentId,
                     onAddBio: onAddBio,
                 })}
-                onRow={(record, index) => {
-                    return {
-                        onMouseEnter: () => setCurrentId(record.id),
-                        onMouseLeave: () => setCurrentId(''),
-                    }
-                }}
+                rowSelection={rowSelection}
+                // onRow={(record, index) => {
+                //     return {
+                //         onMouseEnter: () => setCurrentId(record.id),
+                //         onMouseLeave: () => setCurrentId(''),
+                //     }
+                // }}
             />
         </AwePage>
     )

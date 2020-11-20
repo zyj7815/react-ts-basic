@@ -38,6 +38,10 @@ export const Api = {
         detail: (id: string) => `${base}room/id/${id}`,
         biological: (id: string) => `${base}room/id/${id}/biological`,
         idle: base2 + 'biological/room/idle',
+        addBiological: (romeId: string, bioId: string) =>
+            `${base}room/id/${romeId}/biological/${bioId}/add`,
+        delBiological: (romeId: string, bioId: string) =>
+            `${base}room/id/${romeId}/biological/${bioId}/del`,
     },
     image: {
         one: (biologicalId: string, id: string) => {

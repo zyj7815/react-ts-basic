@@ -32,6 +32,7 @@ export const en_zk = {
     incident_false_positive: '事件误报',
     create_group: '创建分组',
     add_creature: '添加生物',
+    delete_animal_new: '删除生物',
     del_group: '删除分组',
     abnormal_num: '异常数',
     search_fence: '搜索围栏名',

@@ -14,15 +14,31 @@ const layout = {
     wrapperCol: { span: 17 },
 }
 
-const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
+interface ModalProps {
+    group: any
+    visible: boolean
+    loading?: boolean
+
+    // 主按的事件
+    onMainEvent: (ary?: any) => void
+    // 次要的事件
+    onSubEvent?: (arg?: any) => void
+    // 关闭
+    onClose: () => void
+}
+
+const EditGroupModal: React.FC<ModalProps> = (props: ModalProps) => {
     const [form] = Form.useForm()
     const [loading, setLoading] = React.useState(false)
 
     React.useEffect(() => {
-        if (props.visible) {
-            form.resetFields()
+        if (props.group) {
+            form.setFieldsValue(props.group)
         }
-    }, [props.visible])
+        // if (props.visible) {
+        //     form.resetFields()
+        // }
+    }, [props.group])
 
     const onSubmit = async () => {
         try {
@@ -30,7 +46,7 @@ const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
 
             setLoading(true)
             try {
-                const res = await axios.post(Api.group.list, values, Token.data)
+                const res = await axios.put(Api.group.detail(props.group.id), values, Token.data)
                 message.success(useLanguage.success_common(useLanguage.add_new))
                 setLoading(false)
                 props.onMainEvent(res.data)
@@ -73,4 +89,4 @@ const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
     )
 }
 
-export default NewGroupModal
+export default EditGroupModal

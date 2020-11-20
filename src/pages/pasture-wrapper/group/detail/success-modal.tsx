@@ -4,8 +4,21 @@ import { Modal, Button } from 'antd'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import './success-modal.less'
+interface ModalProps {
+    addAll: number
+    failedAnimals: number
+    visible: boolean
+    loading?: boolean
 
-const AddAnimalSuccessModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
+    // 主按的事件
+    onMainEvent: (ary?: any) => void
+    // 次要的事件
+    onSubEvent?: (arg?: any) => void
+    // 关闭
+    onClose: () => void
+}
+
+const AddAnimalSuccessModal: React.FC<ModalProps> = (props: ModalProps) => {
     const [timer, setTimer] = React.useState(5)
     let interval: any = null
 
@@ -34,8 +47,9 @@ const AddAnimalSuccessModal: React.FC<SimpleModalProps> = (props: SimpleModalPro
     return (
         <Modal
             centered={true}
-            title={useLanguage.add_success}
+            title={useLanguage.error_report}
             visible={props.visible}
+            closable={false}
             onCancel={props.onClose}
             footer={[
                 <Button key="b" type="primary" onClick={() => props.onMainEvent()}>
@@ -47,10 +61,13 @@ const AddAnimalSuccessModal: React.FC<SimpleModalProps> = (props: SimpleModalPro
                 <AweIcon type={aweIconType['icon-check-circle']} />
 
                 <div>
-                    <strong>{timer} </strong>
-                    <span>{useLanguage.auto_goto_page}</span>
-                    <strong> {useLanguage.animal_card} </strong>
-                    <span>{useLanguage.page}</span>
+                    <div>{useLanguage.add_animal_num(props.addAll)}</div>
+                    <div>
+                        {useLanguage.add_animal_num_sub(
+                            props.addAll - props.failedAnimals,
+                            props.failedAnimals
+                        )}
+                    </div>
                 </div>
             </div>
         </Modal>

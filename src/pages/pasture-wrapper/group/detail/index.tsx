@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Breadcrumb, Button, Input, Pagination, Radio, Table } from 'antd'
+import { Breadcrumb, Button, Input, message, Pagination, Radio, Table } from 'antd'
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { useLanguage } from '@/language/useLanguage'
@@ -17,6 +17,7 @@ import { DeleteModal } from './deleteModal'
 import './index.less'
 import { AweProgress } from '@/components/awe-progress'
 import AddAnimalSuccessModal from '@/pages/pasture-wrapper/group/detail/success-modal'
+import EditGroupModal from '@/pages/pasture-wrapper/group/detail/edit-group'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId, groupId } = routeProps.match.params
@@ -30,9 +31,14 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [successVisible, setSuccessVisible] = React.useState(false)
     const [currentRoleId, setCurrentRoleId] = React.useState('')
     const [addBio, setAddBio] = useState(false)
+    const [delBio, setDelBio] = useState(false)
     const [radioValue, setRadioValue] = useState(false)
+    const [editVisible, setEditVisible] = useState(false)
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    const [addAll, setAddAll] = useState(0)
+    const [failedAnimals, setFailedAnimals] = useState(0)
+    let failedAnimalsLength = []
     const [group, setGroup] = React.useState<GroupProps | null>(null)
     const scrollY = useWindowSize() - 240
 
@@ -95,7 +101,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param group
      */
     const onEditEvent = (group: GroupProps) => {
-        console.log(group)
         routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
     }
 
@@ -108,27 +113,48 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
+    const deleteBiological = () => {
+        setDelBio(true)
+    }
+
     const onSelectChange = (selectedRowKeys: any) => {
         // console.log(selectedRowKeys)
         setSelectedRowKeys(selectedRowKeys)
     }
 
     const saveAddBio = () => {
-        setAddBio(false)
-        setForceUpdate(!forceUpdate)
-        setPercentVisible(true)
+        if (selectedRowKeys.length) {
+            if (selectedRowKeys.length === 1) {
+                onCreateSingle(selectedRowKeys[0])
+            } else {
+                setPercentVisible(true)
+                onCreateMulti(selectedRowKeys, selectedRowKeys.length)
+            }
+        } else {
+            message.warn(useLanguage.select_animal)
+        }
     }
 
     /**
-     * 添加单个生物
+     * 添加删除单个生物
      * @param data
      */
     const onCreateSingle = async (data: any) => {
         setLoading(true)
         try {
-            await axios.post(Api.biological.new, data, Token.data)
+            await axios.put(
+                addBio
+                    ? Api.group.addBiological(groupId, data)
+                    : Api.group.delBiological(groupId, data),
+                null,
+                Token.data
+            )
             setLoading(false)
-            setSuccessVisible(true)
+            setAddBio(false)
+            setDelBio(false)
+            setForceUpdate(!forceUpdate)
+            setSelectedRowKeys([])
+            message.success(useLanguage.operation_success)
         } catch (err) {
             setLoading(false)
             errorMessage.alert(err)
@@ -136,27 +162,40 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     }
 
     /**
-     * 添加多个生物
+     * 添加删除多个生物
      * @param dataList
      * @param total 创建总数
      */
     const onCreateMulti = async (dataList: any[], total: number) => {
+        setAddAll(total)
         if (dataList.length > 0) {
             // 取当前数组第一个生物对象
             const data = dataList.shift()
 
             try {
-                await axios.post(Api.biological.new, data, Token.data)
+                await axios.put(
+                    addBio
+                        ? Api.group.addBiological(groupId, data)
+                        : Api.group.delBiological(groupId, data),
+                    null,
+                    Token.data
+                )
                 setPercent(((total - dataList.length) / total) * 100)
                 onCreateMulti(dataList, total)
             } catch (e) {
+                failedAnimalsLength.push(e)
                 setPercent(((total - dataList.length) / total) * 100)
                 onCreateMulti(dataList, total)
             }
         } else {
             // 创建完成
+            setFailedAnimals(failedAnimalsLength.length)
             setPercentVisible(false)
-            fetchData()
+            setAddBio(false)
+            setDelBio(false)
+            setSuccessVisible(true)
+            setSelectedRowKeys([])
+            setForceUpdate(!forceUpdate)
         }
     }
 
@@ -175,6 +214,11 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const backGroup = () => {
         routeProps.history.push(RouteUris.PastureGroup(groupId))
+    }
+
+    const onEditGroupSuccess = () => {
+        setEditVisible(false)
+        fetchGroupData()
     }
 
     const footer = (
@@ -199,7 +243,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     <span className={'header-box-des-text'}>{group && group.description}</span>
                 </div>
             </header>
-            {addBio ? (
+            {addBio || delBio ? (
                 <div>
                     <Button className={'header-btn'} onClick={saveAddBio}>
                         {useLanguage.save}
@@ -207,6 +251,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     <Button
                         onClick={() => {
                             setAddBio(false)
+                            setDelBio(false)
                             setSelectedRowKeys([])
                             setForceUpdate(!forceUpdate)
                         }}
@@ -219,7 +264,17 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     <Button className={'header-btn'} onClick={addBiological}>
                         {useLanguage.add_creature}
                     </Button>
-                    <Button className={'header-btn'}>{useLanguage.edit_group}</Button>
+                    <Button onClick={deleteBiological} danger={true} style={{ marginRight: 16 }}>
+                        {useLanguage.delete_animal_new}
+                    </Button>
+                    <Button
+                        className={'header-btn'}
+                        onClick={() => {
+                            setEditVisible(true)
+                        }}
+                    >
+                        {useLanguage.edit_group}
+                    </Button>
                     <Button
                         danger={true}
                         onClick={() => {
@@ -271,7 +326,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     onDeleteEvent: onDeleteEvent,
                     currentId: currentRoleId,
                 })}
-                rowSelection={addBio ? rowSelection : undefined}
+                rowSelection={addBio || delBio ? rowSelection : undefined}
             />
             <DeleteModal
                 visible={visible}
@@ -280,9 +335,17 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 onChangeRadio={onChangeRadio}
                 radioValue={radioValue}
             />
+            <EditGroupModal
+                visible={editVisible}
+                onMainEvent={onEditGroupSuccess}
+                group={group}
+                onClose={() => setEditVisible(false)}
+            />
             <AweProgress percent={percent} visible={percentVisible} />
             <AddAnimalSuccessModal
                 visible={successVisible}
+                addAll={addAll}
+                failedAnimals={failedAnimals}
                 onMainEvent={() => {
                     setSuccessVisible(false)
                 }}

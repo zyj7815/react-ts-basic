@@ -69,7 +69,7 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
-                        path: RouteUris.FenceAddBiological(),
+                        path: RouteUris.PastureFenceAddBiological(),
                         component: loadable(() =>
                             import('@/pages/pasture-wrapper/fence/add-biological')
                         ),

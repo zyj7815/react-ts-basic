@@ -60,12 +60,8 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
             title: useLanguage.deploy_status,
             dataIndex: 'mark',
             width: 170,
-            render(total_area: number) {
-                return (
-                    <div className={'deploy-status'}>
-                        {total_area === 0 ? <PlusCircleOutlined /> : total_area}
-                    </div>
-                )
+            render(mark: number) {
+                return <div>{mark}</div>
             },
         },
         {

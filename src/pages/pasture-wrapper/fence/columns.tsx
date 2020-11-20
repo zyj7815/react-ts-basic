@@ -33,11 +33,14 @@ export const fenceColumns = (events: fenceColumnsProps) => {
             width: 190,
             render(name: number, record: KeyProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onAddBio(record)}>
+                    <span>
                         {name !== 0 ? (
                             name
                         ) : (
-                            <span onClick={() => events.addBiological(record)}>
+                            <span
+                                className="awe-action-item"
+                                onClick={() => events.addBiological(record)}
+                            >
                                 <PlusCircleOutlined />
                             </span>
                         )}

@@ -670,6 +670,8 @@ const zh = {
     group_number: '分组数量',
     allocation_pasture: '分配牧场',
 
+    pasture_info: '牧场资料',
+
     months: [
         '一月',
         '二月',

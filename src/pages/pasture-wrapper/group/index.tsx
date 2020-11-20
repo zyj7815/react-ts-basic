@@ -36,7 +36,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setLoading(true)
         try {
             const res = await axios.get(
-                Api.biological.list,
+                Api.group.list,
                 Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
             )
             setTotal(parseInt(res.headers['x-result-count']))

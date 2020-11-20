@@ -15,6 +15,8 @@ import { errorMessage } from '@/server/error'
 import { RouteUris } from '@/router/config'
 import { DeleteModal } from './deleteModal'
 import './index.less'
+import { AweProgress } from '@/components/awe-progress'
+import AddAnimalSuccessModal from '@/pages/pasture-wrapper/group/detail/success-modal'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId, groupId } = routeProps.match.params
@@ -23,6 +25,9 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
+    const [percent, setPercent] = React.useState(0)
+    const [percentVisible, setPercentVisible] = React.useState(false)
+    const [successVisible, setSuccessVisible] = React.useState(false)
     const [currentRoleId, setCurrentRoleId] = React.useState('')
     const [addBio, setAddBio] = useState(false)
     const [radioValue, setRadioValue] = useState(false)
@@ -34,7 +39,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     React.useEffect(() => {
         fetchData()
         fetchGroupData()
-        fetchAnimalData()
     }, [forceUpdate])
 
     const fetchGroupData = async () => {
@@ -46,22 +50,16 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         }
     }
 
-    const fetchAnimalData = async () => {
-        try {
-            const res = await axios.get(Api.group.biological(groupId), Token.pageToken(999))
-            setDataSource(res.data)
-        } catch (err) {
-            errorMessage.alert(err)
-        }
-    }
-
     const fetchData = async () => {
         setLoading(true)
+        let api = Api.group.biological(groupId)
+        if (addBio) {
+            api = Api.biological.list
+        } else {
+            api = Api.group.biological(groupId)
+        }
         try {
-            const res = await axios.get(
-                Api.biological.list,
-                Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
-            )
+            const res = await axios.get(api, Token.pageToken(pageSize, (pageNumber - 1) * pageSize))
             setTotal(parseInt(res.headers['x-result-count']))
             setDataSource(res.data)
             setLoading(false)
@@ -107,6 +105,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const addBiological = () => {
         setAddBio(true)
+        setForceUpdate(!forceUpdate)
     }
 
     const onSelectChange = (selectedRowKeys: any) => {
@@ -116,6 +115,49 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const saveAddBio = () => {
         setAddBio(false)
+        setForceUpdate(!forceUpdate)
+        setPercentVisible(true)
+    }
+
+    /**
+     * 添加单个生物
+     * @param data
+     */
+    const onCreateSingle = async (data: any) => {
+        setLoading(true)
+        try {
+            await axios.post(Api.biological.new, data, Token.data)
+            setLoading(false)
+            setSuccessVisible(true)
+        } catch (err) {
+            setLoading(false)
+            errorMessage.alert(err)
+        }
+    }
+
+    /**
+     * 添加多个生物
+     * @param dataList
+     * @param total 创建总数
+     */
+    const onCreateMulti = async (dataList: any[], total: number) => {
+        if (dataList.length > 0) {
+            // 取当前数组第一个生物对象
+            const data = dataList.shift()
+
+            try {
+                await axios.post(Api.biological.new, data, Token.data)
+                setPercent(((total - dataList.length) / total) * 100)
+                onCreateMulti(dataList, total)
+            } catch (e) {
+                setPercent(((total - dataList.length) / total) * 100)
+                onCreateMulti(dataList, total)
+            }
+        } else {
+            // 创建完成
+            setPercentVisible(false)
+            fetchData()
+        }
     }
 
     const handleOk = () => {
@@ -150,11 +192,11 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             <header className={'header-box'}>
                 <div className={'header-box-group'}>
                     <span>{useLanguage.group_name}：</span>
-                    <span className={'header-box-group-text'}>蒙牛草原</span>
+                    <span className={'header-box-group-text'}>{group && group.room_name}</span>
                 </div>
                 <div>
                     <span>{useLanguage.remark}：</span>
-                    <span className={'header-box-des-text'}>蒙牛草原</span>
+                    <span className={'header-box-des-text'}>{group && group.description}</span>
                 </div>
             </header>
             {addBio ? (
@@ -166,6 +208,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                         onClick={() => {
                             setAddBio(false)
                             setSelectedRowKeys([])
+                            setForceUpdate(!forceUpdate)
                         }}
                     >
                         {useLanguage.cancel}
@@ -236,6 +279,16 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 handleCancel={handleCancel}
                 onChangeRadio={onChangeRadio}
                 radioValue={radioValue}
+            />
+            <AweProgress percent={percent} visible={percentVisible} />
+            <AddAnimalSuccessModal
+                visible={successVisible}
+                onMainEvent={() => {
+                    setSuccessVisible(false)
+                }}
+                onClose={() => {
+                    setForceUpdate(!forceUpdate)
+                }}
             />
         </AwePage>
     )

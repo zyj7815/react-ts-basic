@@ -9,15 +9,14 @@ import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import { KeyProps } from '@/types/common'
 import { RouteUris } from '@/router/config'
-import { Button, Input, Pagination, Table } from 'antd'
+import { Breadcrumb, Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import AwePage from '@/pages/components/awe-page'
-import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
+import { bioColumns } from '@/pages/pasture-wrapper/fence/bio-columns'
 import './index.less'
 const { Search } = Input
 
-const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const { pastureId } = routeProps.match.params
+const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
@@ -71,19 +70,28 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         console.log(value)
     }
 
-    const fenceAddBiological = (fence: any) => {
-        routeProps.history.push(RouteUris.FenceAddBiological(pastureId, fence.id))
+    const back = () => {
+        routeProps.history.goBack()
     }
+
+    const nav = (
+        <Breadcrumb className="awe-page-breadcrumb">
+            <Breadcrumb.Item>{useLanguage.fence_management}</Breadcrumb.Item>
+            <Breadcrumb.Item>{useLanguage.add_creature}</Breadcrumb.Item>
+        </Breadcrumb>
+    )
 
     const header = (
         <>
-            <Search
-                placeholder={useLanguage.search_fence_name}
-                onSearch={onSearch}
-                style={{ width: 200 }}
-                className={'search-input'}
-            />
-            <Button className={'create_fence_btn'}>{useLanguage.new_fence}</Button>
+            <div />
+            <div>
+                <Button className={'create_fence_btn'} style={{ marginRight: 10 }} onClick={back}>
+                    {useLanguage.back}
+                </Button>
+                <Button type={'primary'} className={'create_fence_btn'}>
+                    {useLanguage.save}
+                </Button>
+            </div>
         </>
     )
 
@@ -106,7 +114,8 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             isHShadow={true}
             header={header}
             footer={footer}
-            id={'pasture-fence'}
+            nav={nav}
+            id={'pasture-fence-add-biological'}
         >
             <Table
                 rowKey="id"
@@ -114,11 +123,10 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
-                columns={fenceColumns({
+                columns={bioColumns({
                     onCheckKey: handleKeyDetail,
                     currentId: currentId,
                     onAddBio: onAddBio,
-                    addBiological: fenceAddBiological,
                 })}
                 onRow={(record, index) => {
                     return {
@@ -131,4 +139,4 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     )
 }
 
-export default PastureFence
+export default FenceAddBiological

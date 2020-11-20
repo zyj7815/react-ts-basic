@@ -1,5 +1,6 @@
 export const PASTURE_ID = ':pastureId'
 export const GROUP_ID = ':groupId'
+export const FENCE_ID = ':fenceId'
 
 export const RouteUris = {
     Login: '/login',
@@ -87,6 +88,10 @@ export const RouteUris = {
 
     // 围栏列表
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
+
+    // 围栏添加生物
+    FenceAddBiological: (id = PASTURE_ID, fenceId = FENCE_ID) =>
+        `/root/pasture-detail/${id}/fence/${fenceId}/add`,
 
     // 消息通知
     PastureMessage: (id = PASTURE_ID) => `/root/pasture-detail/${id}/message`,

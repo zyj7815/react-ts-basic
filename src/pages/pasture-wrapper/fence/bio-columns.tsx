@@ -4,43 +4,23 @@ import { Button } from 'antd'
 import { KeyProps } from '@/types/common'
 import { Utils } from '@/utils'
 import { PlusCircleOutlined } from '@ant-design/icons'
-import { RouteUris } from '@/router/config'
 
-type fenceColumnsProps = {
+type bioColumnsProps = {
     currentId: string
     onCheckKey: (key: KeyProps) => void
     onAddBio: (key: KeyProps) => void
-    addBiological: (key: KeyProps) => void
 }
 
-export const fenceColumns = (events: fenceColumnsProps) => {
+export const bioColumns = (events: bioColumnsProps) => {
     return [
         {
-            title: useLanguage.fence_name,
+            title: useLanguage.bio_name,
             dataIndex: 'nickname',
             width: 120,
             render(name: number, record: KeyProps) {
                 return (
                     <span className="awe-action-item" onClick={() => events.onCheckKey(record)}>
                         {name}
-                    </span>
-                )
-            },
-        },
-        {
-            title: useLanguage.animal_count,
-            dataIndex: 'total_area',
-            width: 190,
-            render(name: number, record: KeyProps) {
-                return (
-                    <span className="awe-action-item" onClick={() => events.onAddBio(record)}>
-                        {name !== 0 ? (
-                            name
-                        ) : (
-                            <span onClick={() => events.addBiological(record)}>
-                                <PlusCircleOutlined />
-                            </span>
-                        )}
                     </span>
                 )
             },

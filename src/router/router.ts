@@ -69,6 +69,14 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.FenceAddBiological(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/fence/add-biological')
+                        ),
+                        name: 'pasture-wrapper-fence',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureDevice(),
                         component: loadable(() => import('@/pages/pasture-wrapper/device')),
                         name: 'pasture-wrapper-device',

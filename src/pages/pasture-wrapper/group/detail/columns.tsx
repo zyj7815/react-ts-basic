@@ -8,7 +8,7 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
     return [
         {
             title: useLanguage.nickname,
-            dataIndex: 'room_name',
+            dataIndex: 'nickname',
             width: 220,
             render(name: any, record: GroupProps) {
                 return (
@@ -43,22 +43,22 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
         },
         {
             title: useLanguage.species,
-            dataIndex: 'total_biological',
+            dataIndex: 'species',
             width: 100,
         },
         {
             title: useLanguage.gender,
-            dataIndex: 'total_biological',
+            dataIndex: 'gender',
             width: 100,
         },
         {
             title: useLanguage.age,
-            dataIndex: 'total_biological',
+            dataIndex: 'age',
             width: 100,
         },
         {
             title: useLanguage.deploy_status,
-            dataIndex: 'total_area',
+            dataIndex: 'mark',
             width: 170,
             render(total_area: number) {
                 return (

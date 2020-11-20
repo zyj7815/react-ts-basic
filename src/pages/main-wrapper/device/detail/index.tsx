@@ -13,13 +13,13 @@ const DeviceDetail: React.FC = props => {
             <section className="main-device-detail">
                 <header className="main-device-detail__header">
                     <Row gutter={[12, 12]}>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={7}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={8} xxl={7}>
                             <DeviceInfo />
                         </Col>
-                        <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={10}>
+                        <Col xs={24} sm={24} md={24} lg={12} xl={8} xxl={10}>
                             <DeviceAnimal />
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={8} xxl={7}>
+                        <Col xs={24} sm={24} md={24} lg={12} xl={8} xxl={7}>
                             <DevicePasture />
                         </Col>
                     </Row>

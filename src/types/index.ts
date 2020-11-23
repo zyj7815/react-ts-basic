@@ -5,14 +5,17 @@ export type ObjectProps = {
 }
 
 // 简单的modal
-export interface SimpleModalProps {
+export interface SimpleModalProps<T> {
+    argument?: T | null
+
     visible: boolean
+
     loading?: boolean
 
     // 主按的事件
-    onMainEvent: (ary?: any) => void
+    onMainEvent: (ary?: T) => void
     // 次要的事件
-    onSubEvent?: (arg?: any) => void
+    onSubEvent?: (arg?: T) => void
     // 关闭
     onClose: () => void
 }

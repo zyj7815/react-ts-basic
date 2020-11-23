@@ -1,18 +1,22 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { Avatar } from 'antd'
-import { ServerRequest } from '@/server/request'
-import { animalProfile } from '@/assets/images'
 import { ServiceTool } from '@/utils/service-tool'
 import { AweColumnProps } from '@/types'
 import { AnimalProps } from '@/types/common'
+import { PlusCircleOutlined } from '@ant-design/icons'
 
-export const animalColumns = (events: AweColumnProps<AnimalProps>, hiddenOption: boolean) => {
-    const columns: any[] = [
+interface AnimalColumnProps extends AweColumnProps<AnimalProps> {
+    onCheckAbnormal: (record: AnimalProps) => void
+    onCheckGroup: (record: AnimalProps) => void
+    onCheckDevice: (record: AnimalProps) => void
+}
+
+export const animalColumns = (events: AnimalColumnProps) => {
+    return [
         {
             title: useLanguage.animal_nickname,
             dataIndex: 'nickname',
-            width: 250,
+            width: 150,
             render(nickname: string, record: AnimalProps) {
                 return (
                     <span
@@ -27,6 +31,34 @@ export const animalColumns = (events: AweColumnProps<AnimalProps>, hiddenOption:
             },
         },
         {
+            title: useLanguage.animal_status,
+            dataIndex: 'status',
+            width: 140,
+            render(status: any, record: AnimalProps) {
+                return (
+                    <span className="awe-border-box">
+                        <span>发情</span>
+                        <span>生病</span>
+                    </span>
+                )
+            },
+        },
+        {
+            title: useLanguage.abnormal_num,
+            dataIndex: 'abnormal',
+            width: 100,
+            render(abnormal: number, record: AnimalProps): any {
+                return (
+                    <span
+                        className="awe-action-item"
+                        onClick={() => events.onCheckAbnormal(record)}
+                    >
+                        12
+                    </span>
+                )
+            },
+        },
+        {
             title: useLanguage.species,
             dataIndex: 'species',
             width: 120,
@@ -35,43 +67,36 @@ export const animalColumns = (events: AweColumnProps<AnimalProps>, hiddenOption:
             },
         },
         {
-            title: useLanguage.group,
+            title: useLanguage.gender,
+            dataIndex: 'gender',
+            width: 120,
+            render: (gender: number) => ServiceTool.getGender(gender),
+        },
+        {
+            title: useLanguage.belong_group,
             dataIndex: 'room_name',
             width: 150,
-            render(room_name: string) {
-                return room_name || '-'
+            render(room_name: string, record: AnimalProps) {
+                return room_name ? (
+                    <span className="awe-action-item" onClick={() => events.onCheckGroup(record)}>
+                        {room_name}
+                    </span>
+                ) : (
+                    '-'
+                )
             },
         },
         {
-            title: useLanguage.latest_gprs_time,
-            dataIndex: 'updated_at',
-            render(updated_at: number, record: any) {
-                return record.device_id ? ServiceTool.getDeviceUpdated(record) : '-'
+            title: useLanguage.deploy_status,
+            dataIndex: 'mark',
+            width: 100,
+            render(mark: string, record: AnimalProps) {
+                return (
+                    <span className="awe-action-item" onClick={() => events.onCheckDevice(record)}>
+                        {mark || <PlusCircleOutlined />}
+                    </span>
+                )
             },
         },
     ]
-
-    const action = {
-        title: useLanguage.action,
-        dataIndex: 'operation',
-        fixed: 'right' as 'right',
-        width: (window as any).isEn ? 170 : 100,
-        render(operation: string, record: any) {
-            return (
-                <div className="awe-action-box">
-                    {record.device_id ? (
-                        <span>{useLanguage.view_location}</span>
-                    ) : (
-                        <span>{useLanguage.bound_device}</span>
-                    )}
-                </div>
-            )
-        },
-    }
-
-    if (!hiddenOption) {
-        columns.push(action)
-    }
-
-    return columns
 }

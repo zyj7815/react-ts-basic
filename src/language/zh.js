@@ -677,6 +677,8 @@ const zh = {
     animal_detail: '生物详情',
     animal_device: '关联设备',
     animal_record: '生物记录',
+    belong_group: '所属分组',
+    inventory_history: '历史盘点',
 
     months: [
         '一月',

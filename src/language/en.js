@@ -680,6 +680,8 @@ const en = {
     animal_detail: '生物详情',
     animal_device: '关联设备',
     animal_record: '生物记录',
+    belong_group: 'Group',
+    inventory_history: 'History',
 
     months: [
         'January',

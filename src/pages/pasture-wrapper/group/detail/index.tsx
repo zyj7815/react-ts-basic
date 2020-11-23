@@ -305,15 +305,12 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
                 rowSelection={addBio || delBio ? rowSelection : undefined}
-                columns={animalColumns(
-                    {
-                        onCheckDetailEvent: onCheckDetailEvent,
-                        onEditEvent: onCheckDetailEvent,
-                        onDeleteEvent: onDeleteEvent,
-                        currentId: currentRoleId,
-                    },
-                    true
-                )}
+                columns={animalColumns({
+                    onCheckDetailEvent: onCheckDetailEvent,
+                    onEditEvent: onCheckDetailEvent,
+                    onDeleteEvent: onDeleteEvent,
+                    currentId: currentRoleId,
+                })}
             />
 
             <AweConfirm visible={visible} onConfirm={handleOk} onCancel={handleCancel} />

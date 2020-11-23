@@ -2,22 +2,26 @@ import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
 import { Utils } from '@/utils'
+import { AweColumnProps } from '@/types'
+import { AbnormalProps } from '@/types/common'
 
-type keyColumnsProps = {
-    currentId: string
-    onCheckKey: (key: any) => void
-    onCheckProcess: (key: any) => void
+interface AbnormalColumnsProps extends AweColumnProps<AbnormalProps> {
+    onResolveAbnormal: (record: AbnormalProps) => void
 }
 
-export const keyColumns = (events: keyColumnsProps) => {
+export const abnormalColumns = (events: AbnormalColumnsProps) => {
     return [
         {
             title: useLanguage.bio_name,
             dataIndex: 'nickname',
-            width: 150,
-            render(name: number, record: any) {
+            render(name: number, record: AbnormalProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckKey(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
+                    >
                         {name}
                     </span>
                 )
@@ -27,14 +31,13 @@ export const keyColumns = (events: keyColumnsProps) => {
             title: useLanguage.time_of_occurrence,
             dataIndex: 'updated_at',
             width: 210,
-            render(updated_at: string, record: any): any {
-                return <span>{Utils.utc2Time(updated_at)}</span>
+            render(updated_at: string, record: AbnormalProps): any {
+                return Utils.utc2Time(updated_at)
             },
         },
         {
             title: useLanguage.event_type,
-            dataIndex: 'total_area',
-            width: 190,
+            dataIndex: 'type',
         },
         {
             title: useLanguage.event_content,
@@ -45,11 +48,11 @@ export const keyColumns = (events: keyColumnsProps) => {
             title: '',
             dataIndex: 'id',
             width: 110,
-            render(id: string, record: any): any {
+            render(id: string, record: AbnormalProps): any {
                 return events.currentId === record.id ? (
                     <Button
                         className="awe-primary-btn"
-                        onClick={() => events.onCheckProcess(record)}
+                        onClick={() => events.onResolveAbnormal(record)}
                     >
                         {useLanguage.process}
                     </Button>

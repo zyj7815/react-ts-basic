@@ -13,9 +13,8 @@ import { Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import AwePage from '@/pages/components/awe-page'
 import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
-import './index.less'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-const { Search } = Input
+import './index.less'
 
 const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId } = routeProps.match.params
@@ -115,7 +114,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 loading={loading}
                 dataSource={dataSource}
                 pagination={false}
-                scroll={{ x: 1100, y: scrollY }}
+                scroll={{ x: 900, y: scrollY }}
                 columns={fenceColumns({
                     onCheckDetailEvent: handleFenceDetail,
                     currentId: currentId,

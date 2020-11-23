@@ -2,6 +2,7 @@ export const PASTURE_ID = ':pastureId'
 export const GROUP_ID = ':groupId'
 export const FENCE_ID = ':fenceId'
 export const ANIMAL_ID = ':animalId'
+export const DEVICE_ID = ':deviceId'
 
 export const RouteUris = {
     Login: '/login',
@@ -59,6 +60,11 @@ export const RouteUris = {
     // 牧场设备
     PastureDevice: (id = PASTURE_ID) => `/root/pasture-detail/${id}/device`,
 
+    // 牧场设备详情
+    PastureDeviceDetail: (id = PASTURE_ID, deviceId = DEVICE_ID) => {
+        return `/root/pasture-detail/${id}/device/${deviceId}`
+    },
+
     // 牧场 - 牧场管理
     PastureDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
 
@@ -83,15 +89,15 @@ export const RouteUris = {
     // 生物 - 新建
     PastureAnimalNew: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/new`,
 
-    // 分组列表
+    // 牧场分组列表
     PastureGroup: (id = PASTURE_ID) => `/root/pasture-detail/${id}/group`,
 
-    // 分组 - 详情
+    // 牧场分组 - 详情
     PastureGroupDetail: (id = PASTURE_ID, groupId = GROUP_ID) => {
         return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
-    // 围栏列表
+    // 牧场围栏列表
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 
     // 围栏添加生物
@@ -116,7 +122,7 @@ export const RouteUris = {
         return `/root/animal-detail/${id}/pasture/${pastureId}/device`
     },
 
-    // 生物管理设备
+    // 生物记录
     AnimalRecord: (id = ANIMAL_ID, pastureId = PASTURE_ID) => {
         return `/root/animal-detail/${id}/pasture/${pastureId}/record`
     },

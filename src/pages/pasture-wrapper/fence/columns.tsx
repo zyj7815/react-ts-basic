@@ -4,6 +4,8 @@ import { Button } from 'antd'
 import { FenceProps } from '@/types/common'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { AweColumnProps } from '@/types'
+import { FenceMessageType, FenceShapeType } from '@/enum'
+import { calculateArea } from '@/utils/area'
 
 interface fenceColumnsProps extends AweColumnProps<FenceProps> {
     onCheckAnimal: (fence: FenceProps) => void
@@ -31,7 +33,7 @@ export const fenceColumns = (events: fenceColumnsProps) => {
         {
             title: useLanguage.animal_count,
             dataIndex: 'total_biological',
-            width: 190,
+            width: 110,
             render(total: number, record: FenceProps) {
                 return (
                     <span className="awe-action-item" onClick={() => events.onCheckAnimal(record)}>
@@ -42,18 +44,43 @@ export const fenceColumns = (events: fenceColumnsProps) => {
         },
         {
             title: useLanguage.fence_type,
-            dataIndex: 'temperature',
-            width: 190,
+            dataIndex: 'type',
+            render(type: string) {
+                return type === FenceShapeType.FencePolygon
+                    ? useLanguage.polygon
+                    : useLanguage.circle
+            },
         },
         {
             title: useLanguage.newnotification,
-            dataIndex: 'temperature',
-            width: 190,
+            dataIndex: 'msg_type',
+            render(msg_type: number) {
+                return msg_type === FenceMessageType.EnterFence
+                    ? useLanguage.into_fence
+                    : useLanguage.leave_fence
+            },
         },
         {
             title: useLanguage.area,
             dataIndex: 'area',
-            render: () => `124135233.123 ㎡`,
+            render(area: number, record: FenceProps) {
+                let fenceArea = 0
+
+                if (record.distance) {
+                    // 圆形
+                    fenceArea = Math.PI * record.distance * record.distance
+                } else {
+                    // 多边形
+                    fenceArea = calculateArea(record.polygon.points)
+                }
+
+                if (fenceArea > 10000000) {
+                    fenceArea = fenceArea / 1000000
+                    return `${parseFloat(fenceArea.toFixed(2))} k㎡`
+                } else {
+                    return `${Math.floor(fenceArea)} ㎡`
+                }
+            },
         },
         {
             title: '',

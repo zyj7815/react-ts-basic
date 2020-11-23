@@ -93,6 +93,12 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureDeviceDetail(),
+                        component: loadable(() => import('@/pages/main-wrapper/device/detail')),
+                        name: 'pasture-wrapper-device-detail',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureAbnormal(),
                         component: loadable(() => import('@/pages/pasture-wrapper/abnormal')),
                         name: 'pasture-wrapper-abnormal',

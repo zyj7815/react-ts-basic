@@ -19,7 +19,7 @@ const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const [dataSource, setDataSource] = React.useState<any[]>([])
+    const [dataSource, setDataSource] = React.useState<AnimalProps[]>([])
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -74,6 +74,28 @@ const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.AnimalDetail(pastureId, animal.id))
     }
 
+    /**
+     * 查看异常
+     * @param animal
+     */
+    const handleAbnormal = (animal: AnimalProps) => {}
+
+    /**
+     * 查看分组
+     * @param animal
+     */
+    const handleGroup = (animal: AnimalProps) => {}
+
+    /**
+     * 查看设备
+     * @param animal
+     */
+    const handleDevice = (animal: AnimalProps) => {
+        if (animal.device_id) {
+            routeProps.history.push(RouteUris.PastureDeviceDetail(pastureId, animal.device_id))
+        }
+    }
+
     const header = (
         <>
             <span />
@@ -106,10 +128,13 @@ const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             <Table
                 pagination={false}
                 loading={loading}
-                scroll={{ x: 1020, y: scrollY }}
+                scroll={{ x: 1220, y: scrollY }}
                 dataSource={dataSource}
                 columns={animalColumns({
                     onCheckDetailEvent: handleAnimalDetail,
+                    onCheckAbnormal: handleAbnormal,
+                    onCheckGroup: handleGroup,
+                    onCheckDevice: handleDevice,
                 })}
             />
         </AwePage>

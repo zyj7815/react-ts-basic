@@ -1,4 +1,4 @@
-import { FenceMessageType } from '@/enum'
+import { FenceMessageType, FenceShapeType } from '@/enum'
 
 declare const RoleTypes: ['user', 'admin']
 declare type RoleType = typeof RoleTypes[number]
@@ -55,6 +55,14 @@ export type DeviceProps = {
     id: string
     mark: number
     sn: string
+    status_device: {
+        battery_power: number
+        battery_voltage: number
+        signal_strength: number
+    }
+    status_env: {
+        temperature: number
+    }
 }
 
 // 围栏模型
@@ -64,8 +72,9 @@ export type FenceProps = {
     total_biological: number
     total_gateway: number
     msg_type: FenceMessageType
-    polygon: any[]
-    type: 'Polygon' | 'Round'
+    polygon: { points: any[] }
+    distance?: number
+    type: FenceShapeType
 }
 
 // 密钥模型
@@ -82,6 +91,13 @@ export type MessageProps = {
     src_name: string
     timestamp: string
     readed_at?: string
+}
+
+// 异常事件模型
+export type AbnormalProps = {
+    id: string
+    name: string
+    type: number
 }
 
 // 设备类型

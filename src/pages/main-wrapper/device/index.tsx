@@ -125,7 +125,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 loading={loading}
                 dataSource={dataSource}
                 pagination={false}
-                scroll={{ x: 900, y: scrollY }}
+                scroll={{ x: 1000, y: scrollY }}
                 columns={deviceColumns({
                     onCheckDetailEvent: handleDeviceDetail,
                 })}

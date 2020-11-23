@@ -123,7 +123,7 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
                 pagination={false}
                 rowSelection={rowSelection}
                 scroll={{ x: 900, y: scrollY }}
-                columns={animalColumns({}, true)}
+                columns={animalColumns({})}
             />
         </AwePage>
     )

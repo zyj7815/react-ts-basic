@@ -33,7 +33,11 @@ const EditGroupModal: React.FC<SimpleModalProps<GroupProps>> = (
 
             setLoading(true)
             try {
-                const res = await axios.put(Api.group.detail(props.group.id), values, Token.data)
+                const res = await axios.put(
+                    Api.group.detail(props.argument ? props.argument.id : ''),
+                    values,
+                    Token.data
+                )
                 message.success(useLanguage.success_common(useLanguage.add_new))
                 setLoading(false)
                 props.onMainEvent(res.data)

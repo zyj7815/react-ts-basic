@@ -10,60 +10,19 @@ import { AnimalProps } from '@/types/common'
 export const animalColumns = (events: AweColumnProps<AnimalProps>, hiddenOption: boolean) => {
     const columns: any[] = [
         {
-            title: useLanguage.picture,
-            dataIndex: 'photo',
-            width: 100,
-            render(photo: string, record: any) {
-                return (
-                    <div>
-                        <Avatar
-                            size={40}
-                            src={
-                                record.images
-                                    ? ServerRequest.getImgUrl(record.images[0], record.id, true)
-                                    : animalProfile
-                            }
-                        />
-                    </div>
-                )
-            },
-        },
-        {
             title: useLanguage.animal_nickname,
             dataIndex: 'nickname',
             width: 250,
             render(nickname: string, record: AnimalProps) {
                 return (
-                    <div className="animal-nickname-icon">
-                        <span
-                            className="animal-nickname"
-                            onClick={() =>
-                                events.onCheckDetailEvent && events.onCheckDetailEvent(record)
-                            }
-                        >
-                            {nickname}
-                            {!record.device_id && (
-                                <span className="unbind-text">{useLanguage.not_installed}</span>
-                            )}
-                        </span>
-
-                        {record.device_id && (
-                            <span className="single-battery-wrapper">
-                                <img
-                                    className="single-battery__signal"
-                                    src={ServiceTool.getSignalIcon(
-                                        record.status_device ? record.status_device : record
-                                    )}
-                                />
-                                <img
-                                    className="single-battery__battery"
-                                    src={ServiceTool.getBatteryIcon(
-                                        record.status_device ? record.status_device : record
-                                    )}
-                                />
-                            </span>
-                        )}
-                    </div>
+                    <span
+                        className="awe-action-item"
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
+                    >
+                        {nickname}
+                    </span>
                 )
             },
         },

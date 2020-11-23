@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { DeviceProps, KeyProps } from '@/types/common'
+import { DeviceProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
@@ -67,7 +67,7 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const onSearch = (value: string) => {
         console.log(value)
     }
-    const handleKeyDetail = (device: KeyProps) => {
+    const handleKeyDetail = (device: any) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 

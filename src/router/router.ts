@@ -73,12 +73,6 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
-                        path: RouteUris.PastureGroupEdit(),
-                        component: loadable(() => import('@/pages/pasture-wrapper/group/edit')),
-                        name: 'pasture-wrapper-group-edit',
-                        exact: true,
-                    },
-                    {
                         path: RouteUris.PastureFence(),
                         component: loadable(() => import('@/pages/pasture-wrapper/fence')),
                         name: 'pasture-wrapper-fence',
@@ -87,7 +81,7 @@ export const routes: RouteInterface[] = [
                     {
                         path: RouteUris.PastureFenceAddBiological(),
                         component: loadable(() =>
-                            import('@/pages/pasture-wrapper/fence/add-biological')
+                            import('@/pages/pasture-wrapper/fence/add-animal')
                         ),
                         name: 'pasture-wrapper-fence',
                         exact: true,

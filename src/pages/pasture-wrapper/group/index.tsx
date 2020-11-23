@@ -77,15 +77,6 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.PastureGroupDetail(pastureId, group.id))
     }
 
-    /**
-     * 编辑分组
-     * @param group
-     */
-    const onEditEvent = (group: GroupProps) => {
-        console.log(group)
-        routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
-    }
-
     const onDeleteEvent = (group: GroupProps) => {
         console.log(group)
     }
@@ -136,7 +127,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 scroll={{ x: 900, y: scrollY }}
                 columns={groupColumns({
                     onCheckDetailEvent: onCheckDetailEvent,
-                    onEditEvent: onEditEvent,
+                    onEditEvent: onCheckDetailEvent,
                     onDeleteEvent: onDeleteEvent,
                     currentId: currentId,
                 })}

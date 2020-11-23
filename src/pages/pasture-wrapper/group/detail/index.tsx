@@ -13,11 +13,11 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { RouteUris } from '@/router/config'
-import { DeleteModal } from './deleteModal'
 import './index.less'
 import { AweProgress } from '@/components/awe-progress'
 import AddAnimalSuccessModal from '@/pages/pasture-wrapper/group/detail/success-modal'
 import EditGroupModal from '@/pages/pasture-wrapper/group/detail/edit-group'
+import AweConfirm from '@/components/awe-confirm'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId, groupId } = routeProps.match.params
@@ -32,7 +32,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [currentRoleId, setCurrentRoleId] = React.useState('')
     const [addBio, setAddBio] = useState(false)
     const [delBio, setDelBio] = useState(false)
-    const [radioValue, setRadioValue] = useState(false)
     const [editVisible, setEditVisible] = useState(false)
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
@@ -94,14 +93,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const onCheckDetailEvent = (group: GroupProps) => {
         // console.log(group)
         routeProps.history.push(RouteUris.PastureGroupDetail(pastureId, group.id))
-    }
-
-    /**
-     * 编辑分组
-     * @param group
-     */
-    const onEditEvent = (group: GroupProps) => {
-        routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
     }
 
     const onDeleteEvent = (group: GroupProps) => {
@@ -205,11 +196,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const handleCancel = () => {
         setVisible(false)
-        setRadioValue(false)
-    }
-
-    const onChangeRadio = (e: any) => {
-        setRadioValue(e.target.checked)
     }
 
     const backGroup = () => {
@@ -253,7 +239,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                             setAddBio(false)
                             setDelBio(false)
                             setSelectedRowKeys([])
-                            setForceUpdate(!forceUpdate)
+                            // setForceUpdate(!forceUpdate)
                         }}
                     >
                         {useLanguage.cancel}
@@ -320,21 +306,16 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
+                rowSelection={addBio || delBio ? rowSelection : undefined}
                 columns={groupColumns({
                     onCheckDetailEvent: onCheckDetailEvent,
-                    onEditEvent: onEditEvent,
+                    onEditEvent: onCheckDetailEvent,
                     onDeleteEvent: onDeleteEvent,
                     currentId: currentRoleId,
                 })}
-                rowSelection={addBio || delBio ? rowSelection : undefined}
             />
-            <DeleteModal
-                visible={visible}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
-                onChangeRadio={onChangeRadio}
-                radioValue={radioValue}
-            />
+            <AweConfirm visible={visible} onConfirm={handleOk} onCancel={handleCancel} />
+
             <EditGroupModal
                 visible={editVisible}
                 onMainEvent={onEditGroupSuccess}
@@ -346,12 +327,8 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 visible={successVisible}
                 addAll={addAll}
                 failedAnimals={failedAnimals}
-                onMainEvent={() => {
-                    setSuccessVisible(false)
-                }}
-                onClose={() => {
-                    setForceUpdate(!forceUpdate)
-                }}
+                onMainEvent={() => setSuccessVisible(false)}
+                onClose={() => setForceUpdate(!forceUpdate)}
             />
         </AwePage>
     )

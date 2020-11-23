@@ -5,7 +5,7 @@ export type ObjectProps = {
 }
 
 // 简单的modal
-export type SimpleModalProps = {
+export interface SimpleModalProps {
     visible: boolean
     loading?: boolean
 
@@ -18,7 +18,7 @@ export type SimpleModalProps = {
 }
 
 // column通用的type接口
-export type AweColumnProps<T> = {
+export interface AweColumnProps<T> {
     // 当前鼠标停留的行
     currentId?: string
     // 查看详情

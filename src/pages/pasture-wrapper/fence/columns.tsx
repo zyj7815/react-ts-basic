@@ -1,27 +1,28 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
-import { KeyProps } from '@/types/common'
-import { Utils } from '@/utils'
+import { FenceProps } from '@/types/common'
 import { PlusCircleOutlined } from '@ant-design/icons'
-import { RouteUris } from '@/router/config'
+import { AweColumnProps } from '@/types'
 
-type fenceColumnsProps = {
-    currentId: string
-    onCheckKey: (key: KeyProps) => void
-    onAddBio: (key: KeyProps) => void
-    addBiological: (key: KeyProps) => void
+interface fenceColumnsProps extends AweColumnProps<FenceProps> {
+    onCheckAnimal: (fence: FenceProps) => void
 }
 
 export const fenceColumns = (events: fenceColumnsProps) => {
     return [
         {
             title: useLanguage.fence_name,
-            dataIndex: 'nickname',
-            width: 120,
-            render(name: number, record: KeyProps) {
+            dataIndex: 'area_name',
+            width: 150,
+            render(name: number, record: FenceProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckKey(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
+                    >
                         {name}
                     </span>
                 )
@@ -29,21 +30,12 @@ export const fenceColumns = (events: fenceColumnsProps) => {
         },
         {
             title: useLanguage.animal_count,
-            dataIndex: 'total_area',
+            dataIndex: 'total_biological',
             width: 190,
-            render(name: number, record: KeyProps) {
+            render(total: number, record: FenceProps) {
                 return (
-                    <span>
-                        {name !== 0 ? (
-                            name
-                        ) : (
-                            <span
-                                className="awe-action-item"
-                                onClick={() => events.addBiological(record)}
-                            >
-                                <PlusCircleOutlined />
-                            </span>
-                        )}
+                    <span className="awe-action-item" onClick={() => events.onCheckAnimal(record)}>
+                        {total ? total : <PlusCircleOutlined />}
                     </span>
                 )
             },
@@ -60,21 +52,18 @@ export const fenceColumns = (events: fenceColumnsProps) => {
         },
         {
             title: useLanguage.area,
-            dataIndex: 'updated_at',
-            render(updated_at: string, record: any): any {
-                return (
-                    <div className={'created-date-box'}>
-                        <div className={'created-date-text'}>{Utils.utc2Time(updated_at)}</div>
-                        <div>
-                            {events.currentId === record.id ? (
-                                <Button className={'created-date-btn'} danger>
-                                    {useLanguage.delete}
-                                </Button>
-                            ) : (
-                                ''
-                            )}
-                        </div>
-                    </div>
+            dataIndex: 'area',
+            render: () => `124135233.123 ㎡`,
+        },
+        {
+            title: '',
+            dataIndex: 'id',
+            width: 110,
+            render(id: string, record: FenceProps): any {
+                return events.currentId === record.id ? (
+                    <Button danger>{useLanguage.delete}</Button>
+                ) : (
+                    ''
                 )
             },
         },

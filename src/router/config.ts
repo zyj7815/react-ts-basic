@@ -91,11 +91,6 @@ export const RouteUris = {
         return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
-    // 分组 - 编辑
-    PastureGroupEdit: (id = PASTURE_ID, groupId = GROUP_ID) => {
-        return `/root/pasture-detail/${id}/group/${groupId}/edit`
-    },
-
     // 围栏列表
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 

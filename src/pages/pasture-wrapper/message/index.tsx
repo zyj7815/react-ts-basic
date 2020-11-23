@@ -28,7 +28,7 @@ const PastureMessage: React.FC = props => {
     const [selectedRow, setSelectedRow] = React.useState<MessageProps[]>([])
     const [visible, setVisible] = React.useState(false)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const scrollY = useWindowSize() - 240
+    const scrollY = useWindowSize() - 250
 
     React.useEffect(() => {
         fetchData()

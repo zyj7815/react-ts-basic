@@ -1,6 +1,9 @@
+import { FenceMessageType } from '@/enum'
+
 declare const RoleTypes: ['user', 'admin']
 declare type RoleType = typeof RoleTypes[number]
 
+// 生物模型
 export type AnimalProps = {
     id: string
     nickname: string
@@ -31,6 +34,7 @@ export type AnimalProps = {
     survive?: number
 }
 
+// 分组模型
 export type GroupProps = {
     id: string
     updated_at: string
@@ -40,21 +44,39 @@ export type GroupProps = {
     total_biological: number
 }
 
+// 牧场模型
 export type PastureProps = {
     id: string
     name: string
 }
 
+//设备模型
 export type DeviceProps = {
     id: string
     mark: number
     sn: string
 }
 
-export type KeyProps = {
+// 围栏模型
+export type FenceProps = {
     id: string
+    area_name: string
+    total_biological: number
+    total_gateway: number
+    msg_type: FenceMessageType
+    polygon: any[]
+    type: 'Polygon' | 'Round'
 }
 
+// 密钥模型
+export type SecretProps = {
+    id: string
+    name: string
+    access_id: string
+    secret_id: string
+}
+
+// 消息模型
 export type MessageProps = {
     id: string
     src_name: string

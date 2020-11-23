@@ -10,6 +10,7 @@ export const deviceColumns = (events: AweColumnProps<any>) => {
         {
             title: useLanguage.sn,
             dataIndex: 'sn',
+            width: 160,
             render(name: number, record: DeviceProps) {
                 return (
                     <span
@@ -26,6 +27,8 @@ export const deviceColumns = (events: AweColumnProps<any>) => {
         {
             title: useLanguage.device_type,
             dataIndex: 'device_type',
+            width: 210,
+            ellipsis: true,
             render(device_type: number) {
                 return ServiceTool.getDeviceType(device_type)
             },
@@ -33,7 +36,7 @@ export const deviceColumns = (events: AweColumnProps<any>) => {
         {
             title: useLanguage.latest_gprs_time,
             dataIndex: 'updated_at',
-            width: 190,
+            width: 210,
             render(updated_at: string): any {
                 return Utils.utc2Time(updated_at)
             },

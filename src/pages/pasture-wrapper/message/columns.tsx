@@ -20,7 +20,7 @@ export const messageColumns = (events: AweColumnProps<MessageProps>) => {
         {
             title: useLanguage.message_type,
             dataIndex: 'type',
-            width: 90,
+            width: 130,
             render(type: number) {
                 return ServiceTool.getMsgType(type)
             },
@@ -35,7 +35,7 @@ export const messageColumns = (events: AweColumnProps<MessageProps>) => {
         {
             title: useLanguage.time,
             dataIndex: 'timestamp',
-            width: 190,
+            width: 210,
             render(timestamp: string) {
                 return Utils.utc2Time(timestamp)
             },

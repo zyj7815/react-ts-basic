@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AwePage from '@/pages/components/awe-page'
 import { Button, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
-import './secret.less'
 import { RouteUris } from '@/router/config'
-import { KeyProps } from '@/types/common'
+import { SecretProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
@@ -13,17 +12,17 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { keyColumns } from '@/pages/main-wrapper/secret/columns'
-import { DeleteModal } from '@/pages/main-wrapper/secret/deleteModal'
+import { secretColumns } from '@/pages/main-wrapper/secret/columns'
+import AweConfirm from '@/components/awe-confirm'
+import './secret.less'
 
 const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const [dataSource, setDataSource] = React.useState([])
+    const [dataSource, setDataSource] = React.useState<SecretProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [visible, setVisible] = React.useState(false)
-    const [radioValue, setRadioValue] = useState(false)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    const [currentRoleId, setCurrentRoleId] = React.useState('')
+    const [currentSecretId, setCurrentSecretId] = React.useState('')
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -60,7 +59,7 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
-    const handleKeyDetail = (device: KeyProps) => {
+    const handleSecretDetail = (device: SecretProps) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
@@ -70,21 +69,16 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const handleCancel = () => {
         setVisible(false)
-        setRadioValue(false)
     }
 
-    const onChangeRadio = (e: any) => {
-        setRadioValue(e.target.checked)
-    }
-
-    const deleteKey = () => {
+    const handleDeleteSecret = () => {
         setVisible(true)
     }
 
     const header = (
         <>
-            <div />
-            <Button className={'create_key_btn'}>{useLanguage.create_key}</Button>
+            <span />
+            <Button>{useLanguage.create_key}</Button>
         </>
     )
 
@@ -115,25 +109,19 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     dataSource={dataSource}
                     pagination={false}
                     scroll={{ x: 900, y: scrollY }}
-                    columns={keyColumns({
-                        onCheckKey: handleKeyDetail,
-                        currentRoleId: currentRoleId,
-                        delete: deleteKey,
+                    columns={secretColumns({
+                        onCheckDetailEvent: handleSecretDetail,
+                        currentId: currentSecretId,
+                        onDeleteEvent: handleDeleteSecret,
                     })}
                     onRow={(record, index) => {
                         return {
-                            onMouseEnter: () => setCurrentRoleId(record.id),
-                            onMouseLeave: () => setCurrentRoleId(''),
+                            onMouseEnter: () => setCurrentSecretId(record.id),
+                            onMouseLeave: () => setCurrentSecretId(''),
                         }
                     }}
                 />
-                <DeleteModal
-                    visible={visible}
-                    handleOk={handleOk}
-                    handleCancel={handleCancel}
-                    onChangeRadio={onChangeRadio}
-                    radioValue={radioValue}
-                />
+                <AweConfirm visible={visible} onConfirm={handleOk} onCancel={handleCancel} />
             </main>
         </AwePage>
     )

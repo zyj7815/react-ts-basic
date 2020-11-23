@@ -32,3 +32,10 @@ export enum MessageType {
     // 设备信息
     DeviceInfo = 3,
 }
+
+export enum FenceMessageType {
+    // 进入围栏
+    EnterFence = 1,
+    // 离开围栏
+    OutFence,
+}

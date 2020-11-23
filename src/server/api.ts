@@ -33,6 +33,9 @@ export const Api = {
         searchName: (nickname: string) => `${base2}biological/search/nickname/${nickname}`,
         event: (id: string) => `${base2}biological_event/biological/${id}`,
     },
+    geofence: {
+        list: base + 'geofence/',
+    },
     group: {
         list: base + 'room/',
         detail: (id: string) => `${base}room/id/${id}`,

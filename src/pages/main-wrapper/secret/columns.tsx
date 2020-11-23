@@ -1,24 +1,24 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
-import { KeyProps } from '@/types/common'
 import { Utils } from '@/utils'
+import { AweColumnProps } from '@/types'
+import { SecretProps } from '@/types/common'
 
-type keyColumnsProps = {
-    currentRoleId: string
-    onCheckKey: (key: KeyProps) => void
-    delete: () => void
-}
-
-export const keyColumns = (events: keyColumnsProps) => {
+export const secretColumns = (events: AweColumnProps<SecretProps>) => {
     return [
         {
             title: useLanguage.name,
             dataIndex: 'nickname',
-            width: 120,
-            render(name: number, record: KeyProps) {
+            width: 150,
+            render(name: number, record: SecretProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckKey(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() =>
+                            events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                        }
+                    >
                         {name}
                     </span>
                 )
@@ -26,35 +26,36 @@ export const keyColumns = (events: keyColumnsProps) => {
         },
         {
             title: 'access id',
-            dataIndex: 'device_type',
-            width: 190,
+            dataIndex: 'access_id',
+            width: 260,
         },
         {
             title: 'secret',
-            dataIndex: 'temperature',
-            width: 190,
+            dataIndex: 'secret_id',
+            width: 260,
         },
         {
             title: useLanguage.created_date,
             dataIndex: 'updated_at',
-            render(updated_at: string, record: any): any {
-                return (
-                    <div className={'created-date-box'}>
-                        <div className={'created-date-text'}>{Utils.utc2Time(updated_at)}</div>
-                        <div>
-                            {events.currentRoleId === record.id ? (
-                                <Button
-                                    className={'created-date-btn'}
-                                    danger
-                                    onClick={events.delete}
-                                >
-                                    {useLanguage.delete}
-                                </Button>
-                            ) : (
-                                ''
-                            )}
-                        </div>
-                    </div>
+            width: 210,
+            render(updated_at: string): any {
+                return Utils.utc2Time(updated_at)
+            },
+        },
+        {
+            title: '',
+            dataIndex: 'id',
+            width: 110,
+            render(id: string, record: SecretProps) {
+                return events.currentId === record.id ? (
+                    <Button
+                        danger
+                        onClick={() => events.onDeleteEvent && events.onDeleteEvent(record)}
+                    >
+                        {useLanguage.delete}
+                    </Button>
+                ) : (
+                    ''
                 )
             },
         },

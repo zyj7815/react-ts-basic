@@ -23,11 +23,12 @@ export const deviceColumns = (events: deviceColumnsProps) => {
         {
             title: useLanguage.device_type,
             dataIndex: 'device_type',
+            ellipsis: true,
         },
         {
             title: useLanguage.latest_gprs_time,
             dataIndex: 'updated_at',
-            width: 190,
+            width: 210,
             render(updated_at: string): any {
                 return Utils.utc2Time(updated_at)
             },

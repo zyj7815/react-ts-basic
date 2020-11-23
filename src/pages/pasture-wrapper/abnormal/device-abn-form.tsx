@@ -15,7 +15,7 @@ export const DeviceAbnForm: React.FC<CollectionCreateFormProps> = (event: any) =
             visible={event.visible}
             title={useLanguage.device_abnormal}
             bodyStyle={{ paddingBottom: 10, margin: '0 auto', width: 338 }}
-            className={'DeviceAbnModal'}
+            className="device-abnormal-modal"
             width={350}
             footer={[
                 <Button key="back" onClick={event.handleCancel}>

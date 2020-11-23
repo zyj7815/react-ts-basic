@@ -7,8 +7,8 @@ import { ServiceTool } from '@/utils/service-tool'
 import { AweColumnProps } from '@/types'
 import { AnimalProps } from '@/types/common'
 
-export const animalColumns = (events: AweColumnProps<AnimalProps>) => {
-    return [
+export const animalColumns = (events: AweColumnProps<AnimalProps>, hiddenOption: boolean) => {
+    const columns: any[] = [
         {
             title: useLanguage.picture,
             dataIndex: 'photo',
@@ -90,22 +90,29 @@ export const animalColumns = (events: AweColumnProps<AnimalProps>) => {
                 return record.device_id ? ServiceTool.getDeviceUpdated(record) : '-'
             },
         },
-        {
-            title: useLanguage.action,
-            dataIndex: 'operation',
-            fixed: 'right' as 'right',
-            width: (window as any).isEn ? 170 : 100,
-            render(operation: string, record: any) {
-                return (
-                    <div className="awe-action-box">
-                        {record.device_id ? (
-                            <span>{useLanguage.view_location}</span>
-                        ) : (
-                            <span>{useLanguage.bound_device}</span>
-                        )}
-                    </div>
-                )
-            },
-        },
     ]
+
+    const action = {
+        title: useLanguage.action,
+        dataIndex: 'operation',
+        fixed: 'right' as 'right',
+        width: (window as any).isEn ? 170 : 100,
+        render(operation: string, record: any) {
+            return (
+                <div className="awe-action-box">
+                    {record.device_id ? (
+                        <span>{useLanguage.view_location}</span>
+                    ) : (
+                        <span>{useLanguage.bound_device}</span>
+                    )}
+                </div>
+            )
+        },
+    }
+
+    if (!hiddenOption) {
+        columns.push(action)
+    }
+
+    return columns
 }

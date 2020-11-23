@@ -7,13 +7,14 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { KeyProps } from '@/types/common'
+import { FenceProps } from '@/types/common'
 import { RouteUris } from '@/router/config'
 import { Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import AwePage from '@/pages/components/awe-page'
 import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
 import './index.less'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
 const { Search } = Input
 
 const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
@@ -34,7 +35,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setLoading(true)
         try {
             const res = await axios.get(
-                Api.biological.list,
+                Api.geofence.list,
                 Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
             )
             setTotal(parseInt(res.headers['x-result-count']))
@@ -59,29 +60,30 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
-    const handleKeyDetail = (device: KeyProps) => {
-        routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
-    }
-
-    const onAddBio = (device: any) => {
-        console.log(device)
-    }
+    //
+    const handleFenceDetail = (fence: FenceProps) => {}
 
     const onSearch = (value: string) => {
         console.log(value)
     }
 
-    const fenceAddBiological = (fence: any) => {
-        routeProps.history.push(RouteUris.PastureFenceAddBiological(pastureId, fence.id))
+    const onCheckAnimal = (fence: FenceProps) => {
+        if (fence.total_biological) {
+            // 有生物时执行查看生物的操作
+        } else {
+            // 无生物时，跳转到分配生物列表
+            routeProps.history.push(RouteUris.PastureFenceAddBiological(pastureId, fence.id))
+        }
     }
 
     const header = (
         <>
-            <Search
-                placeholder={useLanguage.search_fence_name}
-                onSearch={onSearch}
+            <Input
                 style={{ width: 200 }}
-                className={'search-input'}
+                className="awe-row-reverse"
+                placeholder={useLanguage.search_device}
+                prefix={<AweIcon type={aweIconType['icon-search2']} />}
+                onChange={e => onSearch(e.target.value)}
             />
             <Button className={'create_fence_btn'}>{useLanguage.new_fence}</Button>
         </>
@@ -113,12 +115,11 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 loading={loading}
                 dataSource={dataSource}
                 pagination={false}
-                scroll={{ x: 900, y: scrollY }}
+                scroll={{ x: 1100, y: scrollY }}
                 columns={fenceColumns({
-                    onCheckKey: handleKeyDetail,
+                    onCheckDetailEvent: handleFenceDetail,
                     currentId: currentId,
-                    onAddBio: onAddBio,
-                    addBiological: fenceAddBiological,
+                    onCheckAnimal: onCheckAnimal,
                 })}
                 onRow={(record, index) => {
                     return {

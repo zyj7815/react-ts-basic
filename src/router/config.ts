@@ -68,6 +68,9 @@ export const RouteUris = {
     // 牧场总览
     PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/overview`,
 
+    // 生物管理
+    PastureAnimalManager: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal`,
+
     // 生物总览
     PastureAnimalOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/overview`,
 

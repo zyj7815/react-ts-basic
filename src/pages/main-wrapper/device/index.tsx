@@ -72,17 +72,6 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         routeProps.history.push(RouteUris.MainDeviceAllocation)
     }
 
-    const footer = (
-        <Pagination
-            showSizeChanger
-            pageSize={parseInt(pageSize, 10)}
-            current={parseInt(pageNumber, 10)}
-            showTotal={total => useLanguage.total_number(total)}
-            onChange={onPageChange}
-            total={total}
-        />
-    )
-
     const header = (
         <>
             <Input
@@ -93,7 +82,9 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
             />
 
             <span>
-                <Button onClick={handleAllocationPasture}>{useLanguage.allocation_pasture}</Button>
+                <Button onClick={handleAllocationPasture} style={{ marginRight: 20 }}>
+                    {useLanguage.allocation_pasture}
+                </Button>
                 <span>{useLanguage.filter}：</span>
                 <Select
                     placeholder={useLanguage.select_common(useLanguage.device_type)}
@@ -107,6 +98,17 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 </Select>
             </span>
         </>
+    )
+
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+            total={total}
+        />
     )
 
     return (

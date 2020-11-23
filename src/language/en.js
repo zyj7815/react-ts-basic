@@ -422,7 +422,6 @@ const en = {
     percentage: 'Percentage',
     animal_group: 'animal group',
     remarks_should_characters: 'Remarks should be less than 50 characters',
-    animal_list: 'animal list',
     all_group: 'All group',
     all_fence: 'All fence',
     request_error: 'Request error',
@@ -674,6 +673,13 @@ const en = {
     allocation_pasture: '分配牧场',
 
     pasture_info: '牧场资料',
+    format_err: '格式不正确',
+    animal_inventory: '生物盘点',
+    animal_overview: '生物概览',
+    animal_list: '生物列表',
+    animal_detail: '生物详情',
+    animal_device: '关联设备',
+    animal_record: '生物记录',
 
     months: [
         'January',

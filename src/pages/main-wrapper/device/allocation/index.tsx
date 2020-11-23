@@ -106,6 +106,18 @@ const DeviceAllocationPasture: React.FC<AweRouteProps> = (routeProps: AweRoutePr
         setSelectedDeviceId(rowKeys)
     }
 
+    const header = (
+        <>
+            <span />
+            <span className="awe-btn-box">
+                <Button type="primary">{useLanguage.save}</Button>
+                <Button onClick={() => routeProps.history.push(RouteUris.MainDevice)}>
+                    {useLanguage.cancel}
+                </Button>
+            </span>
+        </>
+    )
+
     const footer = (
         <Pagination
             total={total}
@@ -141,28 +153,14 @@ const DeviceAllocationPasture: React.FC<AweRouteProps> = (routeProps: AweRoutePr
                         isHShadow={true}
                         hdColor={true}
                         ctColor={true}
-                        header={
-                            <>
-                                <span />
-                                <span className="awe-btn-box">
-                                    <Button type="primary">{useLanguage.save}</Button>
-                                    <Button
-                                        onClick={() =>
-                                            routeProps.history.push(RouteUris.MainDevice)
-                                        }
-                                    >
-                                        {useLanguage.cancel}
-                                    </Button>
-                                </span>
-                            </>
-                        }
+                        header={header}
                     >
                         <Table
                             rowKey="id"
                             loading={loading}
                             dataSource={deviceData}
                             pagination={false}
-                            scroll={{ x: 900, y: scrollY }}
+                            scroll={{ x: 1100, y: scrollY }}
                             columns={deviceColumns({})}
                             rowSelection={{
                                 selectedRowKeys: selectedDeviceId,

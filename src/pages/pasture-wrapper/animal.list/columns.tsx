@@ -4,8 +4,10 @@ import { Avatar } from 'antd'
 import { ServerRequest } from '@/server/request'
 import { animalProfile } from '@/assets/images'
 import { ServiceTool } from '@/utils/service-tool'
+import { AweColumnProps } from '@/types'
+import { AnimalProps } from '@/types/common'
 
-export const animalColumns = () => {
+export const animalColumns = (events: AweColumnProps<AnimalProps>) => {
     return [
         {
             title: useLanguage.picture,
@@ -30,10 +32,15 @@ export const animalColumns = () => {
             title: useLanguage.animal_nickname,
             dataIndex: 'nickname',
             width: 250,
-            render(nickname: string, record: any) {
+            render(nickname: string, record: AnimalProps) {
                 return (
                     <div className="animal-nickname-icon">
-                        <span className="animal-nickname">
+                        <span
+                            className="animal-nickname"
+                            onClick={() =>
+                                events.onCheckDetailEvent && events.onCheckDetailEvent(record)
+                            }
+                        >
                             {nickname}
                             {!record.device_id && (
                                 <span className="unbind-text">{useLanguage.not_installed}</span>

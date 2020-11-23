@@ -1,25 +1,27 @@
 import React from 'react'
-import { Table, Pagination } from 'antd'
+import AwePage from '@/pages/components/awe-page'
+import { Button, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import { animalColumns } from '@/pages/pasture-wrapper/animal/columns'
+import { RouteUris } from '@/router/config'
+import { AweRouteProps } from '@/types/route'
+import { useWindowSize } from '@/hooks/useWindowSzie'
+import { ServiceTool } from '@/utils/service-tool'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Utils } from '@/utils'
-import { ServiceTool } from '@/utils/service-tool'
+import { animalColumns } from '@/pages/pasture-wrapper/animal.list/columns'
 import axios from 'axios'
-import AwePage from '@/pages/components/awe-page'
+import { AnimalProps } from '@/types/common'
 
-const AnimalListTable: React.FC = props => {
+const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const { pastureId } = routeProps.match.params
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [dataSource, setDataSource] = React.useState<any[]>([])
-    const scrollY = useWindowSize() - 400
-    // 将【页码】和【条数】放到url中，pageSize=10&pageNumber=1，这样在返回页面时可以直接请求上一次的url
-    // 在url中获取页码和条数
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
         fetchData()
@@ -58,6 +60,29 @@ const AnimalListTable: React.FC = props => {
         setForceUpdate(!forceUpdate)
     }
 
+    /**
+     * 新建生物
+     */
+    const handleNewAnimal = () => {
+        routeProps.history.push(RouteUris.PastureAnimalNew(pastureId))
+    }
+
+    /**
+     * 查看生物详情
+     */
+    const handleAnimalDetail = (animal: AnimalProps) => {
+        routeProps.history.push(RouteUris.AnimalDetail(pastureId, animal.id))
+    }
+
+    const header = (
+        <>
+            <span />
+            <span>
+                <Button onClick={handleNewAnimal}>{useLanguage.new_card}</Button>
+            </span>
+        </>
+    )
+
     const footer = (
         <Pagination
             total={total}
@@ -70,16 +95,25 @@ const AnimalListTable: React.FC = props => {
     )
 
     return (
-        <AwePage ctColor={true} noPadding={true} footer={footer}>
+        <AwePage
+            header={header}
+            footer={footer}
+            isHShadow={true}
+            isHPadding={true}
+            hdColor={true}
+            ctColor={true}
+        >
             <Table
                 pagination={false}
                 loading={loading}
                 scroll={{ x: 1020, y: scrollY }}
                 dataSource={dataSource}
-                columns={animalColumns()}
+                columns={animalColumns({
+                    onCheckDetailEvent: handleAnimalDetail,
+                })}
             />
         </AwePage>
     )
 }
 
-export default AnimalListTable
+export default AnimalList

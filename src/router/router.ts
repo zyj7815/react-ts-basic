@@ -25,23 +25,39 @@ export const routes: RouteInterface[] = [
                         name: 'pasture-wrapper-overview',
                     },
                     {
-                        path: RouteUris.PastureAnimal(),
-                        component: loadable(() => import('@/pages/pasture-wrapper/animal')),
-                        name: 'pasture-wrapper-animal',
+                        path: RouteUris.PastureDetail(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/pasture')),
+                        name: 'pasture-wrapper-detail',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureAnimalOverview(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/animal.overview')
+                        ),
+                        name: 'pasture-wrapper-animal-overview',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureAnimalList(),
+                        component: loadable(() => import('@/pages/pasture-wrapper/animal.list')),
+                        name: 'pasture-wrapper-animal-list',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureAnimalInventory(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/animal.inventory')
+                        ),
+                        name: 'pasture-wrapper-animal-inventory',
                         exact: true,
                     },
                     {
                         path: RouteUris.PastureAnimalNew(),
                         component: loadable(() =>
-                            import('@/pages/pasture-wrapper/animal/new-animal')
+                            import('@/pages/pasture-wrapper/animal.list/new-animal')
                         ),
                         name: 'pasture-wrapper-animal-new',
-                        exact: true,
-                    },
-                    {
-                        path: RouteUris.PastureDetail(),
-                        component: loadable(() => import('@/pages/pasture-wrapper/pasture')),
-                        name: 'pasture-wrapper-detail',
                         exact: true,
                     },
                     {
@@ -99,6 +115,28 @@ export const routes: RouteInterface[] = [
                         component: loadable(() => import('@/pages/pasture-wrapper/message')),
                         name: 'pasture-wrapper-message',
                         exact: true,
+                    },
+                ],
+            },
+            {
+                path: RouteUris.AnimalWrapper(),
+                component: loadable(() => import('@/pages/animal-wrapper')),
+                name: 'animal-wrapper',
+                routes: [
+                    {
+                        path: RouteUris.AnimalDetail(),
+                        component: loadable(() => import('@/pages/animal-wrapper/detail')),
+                        name: 'animal-wrapper-detail',
+                    },
+                    {
+                        path: RouteUris.AnimalDevice(),
+                        component: loadable(() => import('@/pages/animal-wrapper/device')),
+                        name: 'animal-wrapper-device',
+                    },
+                    {
+                        path: RouteUris.AnimalRecord(),
+                        component: loadable(() => import('@/pages/animal-wrapper/record')),
+                        name: 'animal-wrapper-record',
                     },
                 ],
             },

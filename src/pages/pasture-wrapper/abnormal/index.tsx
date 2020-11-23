@@ -24,10 +24,10 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [deviceAbnVisible, setDeviceAbnVisible] = useState(false)
-    const [odbaAbnVisible, setOdbaAbnVisible] = useState(false)
+    const [odbaAbnVisible, setOdbaAbnVisible] = useState(true)
     const [currentId, setCurrentId] = React.useState('')
-    const [radioValue, setRadioValue] = useState('a')
-    const [nextModal, setNextModal] = useState(false)
+    const [radioValue, setRadioValue] = useState('jack')
+    const [checkValue, setCheckValue] = useState(false)
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
@@ -85,24 +85,23 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     }
 
     const handleOdbaNextOk = () => {
-        // setOdbaAbnVisible(false)
-        setNextModal(true)
+        setOdbaAbnVisible(false)
     }
 
     const handleOdbaCancel = () => {
-        if (nextModal) {
-            setNextModal(false)
-        } else {
-            setOdbaAbnVisible(false)
-        }
+        setOdbaAbnVisible(false)
     }
 
-    const onChangeRadio = (e: any) => {
-        console.log(`radio checked:${e.target.value}`)
+    const onChangeRadio = (value: any) => {
+        console.log(`radio checked:${value}`)
     }
 
-    const onChangeOdbaRadio = (e: any) => {
-        setRadioValue(e.target.value)
+    const onChangeOdbaRadio = (value: any) => {
+        setRadioValue(value)
+    }
+
+    const onChangeCheck = (e: any) => {
+        setCheckValue(e.target.checked)
     }
 
     const footer = (
@@ -166,7 +165,8 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
                 handleCancel={handleOdbaCancel}
                 onChangeRadio={onChangeOdbaRadio}
                 radioValue={radioValue}
-                nextModal={nextModal}
+                checkValue={checkValue}
+                onChangeCheck={onChangeCheck}
             />
         </AwePage>
     )

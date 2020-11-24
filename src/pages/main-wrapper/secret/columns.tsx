@@ -1,9 +1,9 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { AweColumnProps } from '@/types'
-import { SecretProps } from '@/types/common'
+import { SecretProps } from '@/model'
 
 export const secretColumns = (events: AweColumnProps<SecretProps>) => {
     return [
@@ -39,7 +39,7 @@ export const secretColumns = (events: AweColumnProps<SecretProps>) => {
             dataIndex: 'updated_at',
             width: 210,
             render(updated_at: string): any {
-                return Utils.utc2Time(updated_at)
+                return Helper.utc2Time(updated_at)
             },
         },
         {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { PastureProps } from '@/types/common'
+import { PastureProps } from '@/model'
 import { AweColumnProps } from '@/types'
 import { Button } from 'antd'
 

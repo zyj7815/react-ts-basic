@@ -1,10 +1,10 @@
 import React from 'react'
-import { SimpleModalProps } from '../../../../types'
+import { SimpleModalProps } from '@/types'
 import { Modal, Button } from 'antd'
-import { AweIcon, aweIconType } from '../../../../assets/iconfont'
-import { useLanguage } from '../../../../language/useLanguage'
+import { AweIcon, aweIconType } from '@/assets/iconfont'
+import { useLanguage } from '@/language/useLanguage'
+import { AnimalProps } from '@/model'
 import './success-modal.less'
-import { AnimalProps } from '@/types/common'
 
 const AnimalSuccessModal: React.FC<SimpleModalProps<AnimalProps>> = (
     props: SimpleModalProps<AnimalProps>

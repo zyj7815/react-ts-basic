@@ -1,14 +1,14 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { AweColumnProps } from '@/types'
-import { AnimalProps } from '@/types/common'
+import { AnimalProps } from '@/model'
 import { PlusCircleOutlined } from '@ant-design/icons'
 
 interface AnimalColumnProps extends AweColumnProps<AnimalProps> {
-    onCheckAbnormal: (record: AnimalProps) => void
-    onCheckGroup: (record: AnimalProps) => void
-    onCheckDevice: (record: AnimalProps) => void
+    onCheckAbnormal?: (record: AnimalProps) => void
+    onCheckGroup?: (record: AnimalProps) => void
+    onCheckDevice?: (record: AnimalProps) => void
 }
 
 export const animalColumns = (events: AnimalColumnProps) => {
@@ -51,7 +51,7 @@ export const animalColumns = (events: AnimalColumnProps) => {
                 return (
                     <span
                         className="awe-action-item"
-                        onClick={() => events.onCheckAbnormal(record)}
+                        onClick={() => events.onCheckAbnormal && events.onCheckAbnormal(record)}
                     >
                         12
                     </span>
@@ -63,14 +63,14 @@ export const animalColumns = (events: AnimalColumnProps) => {
             dataIndex: 'species',
             width: 120,
             render(species: number) {
-                return ServiceTool.getSpecies(species)
+                return ServiceTip.getSpecies(species)
             },
         },
         {
             title: useLanguage.gender,
             dataIndex: 'gender',
             width: 120,
-            render: (gender: number) => ServiceTool.getGender(gender),
+            render: (gender: number) => ServiceTip.getGender(gender),
         },
         {
             title: useLanguage.belong_group,
@@ -78,7 +78,10 @@ export const animalColumns = (events: AnimalColumnProps) => {
             width: 150,
             render(room_name: string, record: AnimalProps) {
                 return room_name ? (
-                    <span className="awe-action-item" onClick={() => events.onCheckGroup(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() => events.onCheckGroup && events.onCheckGroup(record)}
+                    >
                         {room_name}
                     </span>
                 ) : (
@@ -92,7 +95,10 @@ export const animalColumns = (events: AnimalColumnProps) => {
             width: 100,
             render(mark: string, record: AnimalProps) {
                 return (
-                    <span className="awe-action-item" onClick={() => events.onCheckDevice(record)}>
+                    <span
+                        className="awe-action-item"
+                        onClick={() => events.onCheckDevice && events.onCheckDevice(record)}
+                    >
                         {mark || <PlusCircleOutlined />}
                     </span>
                 )

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
-import { FenceProps } from '@/types/common'
+import { FenceProps } from '@/model'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { AweColumnProps } from '@/types'
 import { FenceMessageType, FenceShapeType } from '@/enum'
-import { calculateArea } from '@/utils/area'
+import { calculateArea } from '@/helper/area'
 
 interface fenceColumnsProps extends AweColumnProps<FenceProps> {
     onCheckAnimal: (fence: FenceProps) => void

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, Row, Col } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import { getAMapWeather } from '@/utils/weather'
+import { getAMapWeather } from '@/service/weather'
 import { getWeatherIcon } from '@/assets/images/weather'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 
 const OverviewWeather: React.FC = props => {
     const [todayWeather, setTodayWeather] = React.useState<any>(null)
@@ -29,7 +29,7 @@ const OverviewWeather: React.FC = props => {
                     temperature: `${data.forecasts[2].nightTemp}~${data.forecasts[2].dayTemp}`,
                 },
                 {
-                    date: Utils.utc2Time(data.forecasts[3].date, 'MM月DD日'),
+                    date: Helper.utc2Time(data.forecasts[3].date, 'MM月DD日'),
                     temperature: `${data.forecasts[3].nightTemp}~${data.forecasts[3].dayTemp}`,
                 },
             ])

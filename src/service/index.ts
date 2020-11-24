@@ -1,8 +1,8 @@
 import { singleIcon } from '@/assets/images/signal'
 import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
-import { Utils } from '@/utils/index'
-import { AnimalProps } from '@/types/common'
+import { Helper } from '@/helper'
+import { AnimalProps } from '@/model'
 import { AbnormalType, BindingStatus, GenderType, MessageType } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 import { rootStore } from '@/provider'
@@ -10,7 +10,7 @@ import { rootStore } from '@/provider'
 /**
  * 业务相关的事务
  */
-export const ServiceTool = {
+export const ServiceTip = {
     /**
      * 获取性别
      */
@@ -106,7 +106,7 @@ export const ServiceTool = {
         if (!animal.status_device) {
             return '-'
         } else {
-            return Utils.utc2Time(animal.status_device.updated_at)
+            return Helper.utc2Time(animal.status_device.updated_at)
         }
     },
 
@@ -114,10 +114,10 @@ export const ServiceTool = {
      * 从url中获取翻页相关的参数
      */
     getPageFromUrl() {
-        let { pageNumber, pageSize } = Utils.getUrlMultiParam([_URL_PAGE_SIZE_, _URL_PAGE_NUMBER_])
+        let { pageNumber, pageSize } = Helper.getUrlMultiParam([_URL_PAGE_SIZE_, _URL_PAGE_NUMBER_])
         // 没有值就取默认参数
-        pageSize = Utils.hasExist(pageSize) ? parseInt(pageSize, 10) : _URL_DEFAULT_PAGE_SIZE_
-        pageNumber = Utils.hasExist(pageNumber) ? parseInt(pageNumber, 10) : 1
+        pageSize = Helper.hasExist(pageSize) ? parseInt(pageSize, 10) : _URL_DEFAULT_PAGE_SIZE_
+        pageNumber = Helper.hasExist(pageNumber) ? parseInt(pageNumber, 10) : 1
 
         return {
             pageNumber,

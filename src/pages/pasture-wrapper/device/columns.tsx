@@ -1,9 +1,9 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { DeviceProps } from '@/types/common'
-import { Utils } from '@/utils'
+import { DeviceProps } from '@/model'
+import { Helper } from '@/helper'
 import { AweColumnProps } from '@/types'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 
 export const deviceColumns = (events: AweColumnProps<DeviceProps>) => {
     return [
@@ -28,7 +28,7 @@ export const deviceColumns = (events: AweColumnProps<DeviceProps>) => {
             dataIndex: 'device_type',
             ellipsis: true,
             render(deviceType: number) {
-                return ServiceTool.getDeviceType(deviceType)
+                return ServiceTip.getDeviceType(deviceType)
             },
         },
         {
@@ -36,7 +36,7 @@ export const deviceColumns = (events: AweColumnProps<DeviceProps>) => {
             dataIndex: 'updated_at',
             width: 210,
             render(updated_at: string): any {
-                return Utils.utc2Time(updated_at)
+                return Helper.utc2Time(updated_at)
             },
         },
         {

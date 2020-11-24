@@ -1,10 +1,10 @@
 import React from 'react'
 import { AweColumnProps } from '@/types'
 import { Button } from 'antd'
-import { MessageProps } from '@/types/common'
+import { MessageProps } from '@/model'
 import { useLanguage } from '@/language/useLanguage'
-import { ServiceTool } from '@/utils/service-tool'
-import { Utils } from '@/utils'
+import { ServiceTip } from '@/service'
+import { Helper } from '@/helper'
 import { ReadMsg, UnreadMsg } from '@/assets/images/icon'
 
 export const messageColumns = (events: AweColumnProps<MessageProps>) => {
@@ -22,7 +22,7 @@ export const messageColumns = (events: AweColumnProps<MessageProps>) => {
             dataIndex: 'type',
             width: 130,
             render(type: number) {
-                return ServiceTool.getMsgType(type)
+                return ServiceTip.getMsgType(type)
             },
         },
         {
@@ -37,7 +37,7 @@ export const messageColumns = (events: AweColumnProps<MessageProps>) => {
             dataIndex: 'timestamp',
             width: 210,
             render(timestamp: string) {
-                return Utils.utc2Time(timestamp)
+                return Helper.utc2Time(timestamp)
             },
         },
         {

@@ -1,17 +1,17 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Button, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
-import { SecretProps } from '@/types/common'
-import { ServiceTool } from '@/utils/service-tool'
+import { SecretProps } from '@/model'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { secretColumns } from '@/pages/main-wrapper/secret/columns'
 import AweConfirm from '@/components/awe-confirm'
 import './secret.less'
@@ -23,7 +23,7 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [visible, setVisible] = React.useState(false)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [currentSecretId, setCurrentSecretId] = React.useState('')
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -52,7 +52,7 @@ const MainKey: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

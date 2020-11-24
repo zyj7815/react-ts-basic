@@ -10,7 +10,7 @@ import {
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import HeaderSearch from './header-search'
-import { MySelfProps } from '@/types/common'
+import { MySelfProps } from '@/model'
 
 interface HeaderProps {
     myself: MySelfProps

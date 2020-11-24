@@ -1,15 +1,15 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Button, Layout, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { useWindowSize } from '@/hooks/useWindowSzie'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
-import { DeviceProps, PastureProps } from '@/types/common'
+import { Helper } from '@/helper'
+import { DeviceProps, PastureProps } from '@/model'
 import { deviceColumns } from '@/pages/main-wrapper/device/columns'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
@@ -26,7 +26,7 @@ const DeviceAllocationPasture: React.FC<AweRouteProps> = (routeProps: AweRoutePr
     const [pastureData, setPastureData] = React.useState<PastureProps[]>([])
     const [deviceData, setDeviceData] = React.useState<DeviceProps[]>([])
     const scrollY = useWindowSize() - 245
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
 
     React.useEffect(() => {
         if (!currentPastureId) {
@@ -77,7 +77,7 @@ const DeviceAllocationPasture: React.FC<AweRouteProps> = (routeProps: AweRoutePr
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })
@@ -89,7 +89,7 @@ const DeviceAllocationPasture: React.FC<AweRouteProps> = (routeProps: AweRoutePr
      */
     const handlePasture = (id: string) => {
         if (id !== currentPastureId) {
-            Utils.pushMultiParamsToUrl({
+            Helper.pushMultiParamsToUrl({
                 pageSize,
                 pageNumber: 1,
             })

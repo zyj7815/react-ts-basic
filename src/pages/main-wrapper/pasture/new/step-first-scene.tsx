@@ -5,7 +5,7 @@ import { RadioFalse, RadioTrue } from '@/assets/images/icon'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { ObjectProps } from '@/types'
 import { NewPastureContext } from '@/pages/main-wrapper/pasture/new/context'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 
 const pastureTypes: ObjectProps[] = [
     {

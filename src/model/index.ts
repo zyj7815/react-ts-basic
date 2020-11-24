@@ -1,4 +1,4 @@
-import { FenceMessageType, FenceShapeType } from '@/enum'
+import { FenceMessageType, FenceShapeType } from '../enum'
 
 declare const RoleTypes: ['user', 'admin']
 declare type RoleType = typeof RoleTypes[number]

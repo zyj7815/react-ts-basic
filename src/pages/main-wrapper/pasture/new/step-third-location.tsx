@@ -2,7 +2,7 @@ import React from 'react'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { Button, Row, Col, Form, Input, Radio } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { formFullLayout } from '@/config'
 
 const FormItem = Form.Item

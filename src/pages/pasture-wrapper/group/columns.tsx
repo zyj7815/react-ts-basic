@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
-import { Utils } from '@/utils'
-import { GroupProps } from '@/types/common'
+import { Helper } from '@/helper'
+import { GroupProps } from '@/model'
 import { AweColumnProps } from '@/types'
 import { Button } from 'antd'
 
@@ -29,7 +29,7 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
             dataIndex: 'updated_at',
             width: 220,
             render(updated_at: string) {
-                return Utils.utc2Time(updated_at)
+                return Helper.utc2Time(updated_at)
             },
         },
         {

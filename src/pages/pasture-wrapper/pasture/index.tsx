@@ -1,5 +1,5 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Row, Col } from 'antd'
 import PastureInfo from '@/pages/pasture-wrapper/pasture/info'
 import PastureMap from '@/pages/pasture-wrapper/pasture/map'

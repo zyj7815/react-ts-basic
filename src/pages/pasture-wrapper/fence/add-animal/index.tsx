@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { AweRouteProps } from '@/types/route'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { Breadcrumb, Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import AwePage from '@/pages/components/awe-page'
-import './index.less'
+import AwePage from '@/components/awe-page'
 import { animalColumns } from '@/pages/pasture-wrapper/animal.list/columns'
+import './index.less'
 
 const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
@@ -20,8 +20,8 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [currentId, setCurrentId] = React.useState('')
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
     const scrollY = useWindowSize() - 240
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
 
     React.useEffect(() => {
         fetchData()
@@ -49,15 +49,11 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })
         setForceUpdate(!forceUpdate)
-    }
-
-    const onSearch = (value: string) => {
-        console.log(value)
     }
 
     const back = () => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Input } from 'antd'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { useLanguage } from '@/language/useLanguage'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-import { PastureProps } from '@/types/common'
+import { PastureProps } from '@/model'
 import './index.less'
 
 const PastureMapOverview: React.FC = props => {

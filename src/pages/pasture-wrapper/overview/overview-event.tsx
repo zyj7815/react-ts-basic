@@ -5,7 +5,7 @@ import { errorMessage } from '@/server/error'
 import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import dayjs from 'dayjs'
 
 const OverviewEvent: React.FC = props => {
@@ -39,7 +39,7 @@ const OverviewEvent: React.FC = props => {
                         <div key={event.id} className="pasture-event__item">
                             <span className="pasture-event__item--content">
                                 {event.biological_name}
-                                {ServiceTool.getAbnormalEvent(event.type)},{' '}
+                                {ServiceTip.getAbnormalEvent(event.type)},{' '}
                                 {useLanguage.please_focus}
                             </span>
                             <span className="pasture-event__item--date">

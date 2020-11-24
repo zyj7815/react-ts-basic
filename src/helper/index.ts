@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 dayjs.extend(require('dayjs/plugin/utc'))
 
-export const Utils = {
+export const Helper = {
     /**
      * 判断参数是否存在
      * @param params

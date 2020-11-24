@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Table, Button, message, Select } from 'antd'
 import { errorMessage } from '@/server/error'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
-import { MessageProps } from '@/types/common'
+import { MessageProps } from '@/model'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { messageColumns } from '@/pages/pasture-wrapper/message/columns'
 import { useLanguage } from '@/language/useLanguage'
 import AweConfirm from '@/components/awe-confirm'
 import AwePagination from '@/components/awe-pagination'
 import dayjs from 'dayjs'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import './index.less'
 
 const Option = Select.Option
@@ -37,16 +37,16 @@ const PastureMessage: React.FC = props => {
     const fetchData = async () => {
         setLoading(true)
 
-        let { pageTag, pageSort, pageSize } = Utils.getUrlMultiParam([
+        let { pageTag, pageSort, pageSize } = Helper.getUrlMultiParam([
             'pageTag',
             'pageSort',
             'pageNumber',
             'pageSize',
         ])
 
-        pageSort = Utils.hasExist(pageSort) ? pageSort : '-timestamp'
-        pageSize = Utils.hasExist(pageSize) ? pageSize : defaultPageSize
-        pageTag = Utils.hasExist(pageTag) ? pageTag : ''
+        pageSort = Helper.hasExist(pageSort) ? pageSort : '-timestamp'
+        pageSize = Helper.hasExist(pageSize) ? pageSize : defaultPageSize
+        pageTag = Helper.hasExist(pageTag) ? pageTag : ''
 
         try {
             const res = await axios.get(
@@ -69,7 +69,7 @@ const PastureMessage: React.FC = props => {
      */
     const onPageChange = (direction: string, pageNumber: number, pageSort: string) => {
         if (pageNumber === 1) {
-            Utils.deleteUrlMultiParams(['pageTag', 'pageSort', 'pageNumber'])
+            Helper.deleteUrlMultiParams(['pageTag', 'pageSort', 'pageNumber'])
             setForceUpdate(!forceUpdate)
         } else {
             let pageTag = ''
@@ -79,7 +79,7 @@ const PastureMessage: React.FC = props => {
                 pageTag = dataSource[dataSource.length - 1][sortKey]
             }
 
-            Utils.pushMultiParamsToUrl({
+            Helper.pushMultiParamsToUrl({
                 pageTag,
                 pageSort,
                 pageNumber: pageNumber,
@@ -94,7 +94,7 @@ const PastureMessage: React.FC = props => {
      * @param pageSize
      */
     const onShowSizeChange = (pageSize: number) => {
-        Utils.pushParamsToUrl('pageSize', pageSize)
+        Helper.pushParamsToUrl('pageSize', pageSize)
         setForceUpdate(!forceUpdate)
     }
 
@@ -202,9 +202,9 @@ const PastureMessage: React.FC = props => {
     )
 
     const footer = () => {
-        let { pageNumber, pageSize } = Utils.getUrlMultiParam(['pageNumber', 'pageSize'])
-        pageNumber = Utils.hasExist(pageNumber) ? pageNumber : 1
-        pageSize = Utils.hasExist(pageSize) ? pageSize : defaultPageSize
+        let { pageNumber, pageSize } = Helper.getUrlMultiParam(['pageNumber', 'pageSize'])
+        pageNumber = Helper.hasExist(pageNumber) ? pageNumber : 1
+        pageSize = Helper.hasExist(pageSize) ? pageSize : defaultPageSize
 
         return (
             <AwePagination

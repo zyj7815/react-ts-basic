@@ -6,7 +6,7 @@ import { useLanguage } from '@/language/useLanguage'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { GroupProps } from '@/types/common'
+import { GroupProps } from '@/model'
 
 const FormItem = Form.Item
 

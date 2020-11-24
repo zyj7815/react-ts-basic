@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { currentOpenKey, currentSubOpenKey } from './utils'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { useRootStore } from '@/provider'
 import { observer } from 'mobx-react'
 import {
@@ -43,7 +43,7 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
         setOpenSubKey(currentSubOpenKey(menuNav))
 
         // 取出菜单所有route
-        const tmpMenu = Utils.tree2Arr(menuNav).map(val => val.uri)
+        const tmpMenu = Helper.tree2Arr(menuNav).map(val => val.uri)
 
         // 定位到菜单选项
         setOpenKey(currentOpenKey(tmpMenu))

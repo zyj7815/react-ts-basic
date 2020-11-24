@@ -1,18 +1,18 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Button, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { RouteUris } from '@/router/config'
 import { AweRouteProps } from '@/types/route'
 import { useWindowSize } from '@/hooks/useWindowSzie'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { animalColumns } from '@/pages/pasture-wrapper/animal.list/columns'
 import axios from 'axios'
-import { AnimalProps } from '@/types/common'
+import { AnimalProps } from '@/model'
 
 const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId } = routeProps.match.params
@@ -20,7 +20,7 @@ const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [dataSource, setDataSource] = React.useState<AnimalProps[]>([])
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -53,7 +53,7 @@ const AnimalList: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

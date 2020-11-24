@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts'
 import ChartModuleMore from 'highcharts/highcharts-more.js'
 import HCSoldGauge from 'highcharts/modules/solid-gauge'
-import { useLanguage } from '@/language/useLanguage'
+import { useLanguage } from '../language/useLanguage'
 
 ChartModuleMore(Highcharts)
 HCSoldGauge(Highcharts)
@@ -264,13 +264,14 @@ export class PieChart extends AweChart {
             }
         }
 
-        console.log(colors)
-
         let chart = Highcharts.chart(
             this.container,
             {
+                credits: {
+                    enabled: false, // 禁用版权信息
+                },
                 chart: {
-                    spacing: [40, 0, 40, 0],
+                    spacing: [0, 0, 0, 0],
                 },
                 legend: this.legend
                     ? this.legend
@@ -290,7 +291,7 @@ export class PieChart extends AweChart {
                           floating: true,
                           text: this.subTitle,
                           align: 'center',
-                          y: 150,
+                          y: 100,
                       }
                     : undefined,
                 title: {

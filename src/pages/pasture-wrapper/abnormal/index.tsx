@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { AbnormalProps } from '@/types/common'
-import { ServiceTool } from '@/utils/service-tool'
+import { AbnormalProps } from '@/model'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { Pagination, Table, Input } from 'antd'
 import { abnormalColumns } from '@/pages/pasture-wrapper/abnormal/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { DeviceAbnForm } from './device-abn-form'
 import { OdbaAbnForm } from './odba-abn-form'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
@@ -28,7 +28,7 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const [currentId, setCurrentId] = React.useState('')
     const [radioValue, setRadioValue] = useState('a')
     const [nextModal, setNextModal] = useState(false)
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -57,7 +57,7 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

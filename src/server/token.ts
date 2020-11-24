@@ -1,24 +1,24 @@
-import { storageKey } from '@/config/channel'
+import { STORAGE_KEY } from '@/config/constants'
 
 export const Token = {
-    auth: window.localStorage.getItem(storageKey) || window.sessionStorage.getItem(storageKey),
+    auth: window.localStorage.getItem(STORAGE_KEY) || window.sessionStorage.getItem(STORAGE_KEY),
 
     data: {
         headers: {
-            'x-druid-authentication': window.localStorage.getItem(storageKey),
+            'x-druid-authentication': window.localStorage.getItem(STORAGE_KEY),
         },
     },
 
     setToken: (auth: string | number, remember: boolean) => {
         if (remember) {
-            window.localStorage.setItem(storageKey, `${auth}`)
+            window.localStorage.setItem(STORAGE_KEY, `${auth}`)
         } else {
-            window.sessionStorage.setItem(storageKey, `${auth}`)
+            window.sessionStorage.setItem(STORAGE_KEY, `${auth}`)
         }
     },
 
     cleanAuth: () => {
-        window.localStorage.setItem(storageKey, '')
+        window.localStorage.setItem(STORAGE_KEY, '')
         window.location.reload()
     },
 

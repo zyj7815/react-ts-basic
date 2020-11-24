@@ -1,17 +1,17 @@
 import React from 'react'
 import { AweRouteProps } from '@/types/route'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
-import { FenceProps } from '@/types/common'
+import { Helper } from '@/helper'
+import { FenceProps } from '@/model'
 import { RouteUris } from '@/router/config'
 import { Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { fenceColumns } from '@/pages/pasture-wrapper/fence/columns'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import './index.less'
@@ -23,7 +23,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
     const [currentId, setCurrentId] = React.useState('')
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -52,7 +52,7 @@ const PastureFence: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

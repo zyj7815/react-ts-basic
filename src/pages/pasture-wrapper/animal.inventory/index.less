@@ -7,7 +7,59 @@
     }
     
     .animal-inventorying__main {
-        border: 1px solid;
-        width: 50%;
+        border: 1px solid #fefefe;
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        
+        .inventorying-main__item {
+            flex: 1;
+            position: relative;
+            
+            #inventory-pie {
+                height: 280px;
+            }
+            
+            #inventory-loading {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+            }
+        }
+        
+        
+        
+        .inventory-detail {
+            
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 10px;
+            margin: 10px 0;
+            
+            .inventory-detail__content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+    
+                .inventory-detail__icon {
+                    display: inline-block;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 6px;
+                    margin-right: 6px;
+                }
+    
+                .inventory-detail__icon-inside {
+                    background: #3EC6AD;
+                }
+    
+                .inventory-detail__icon-outside {
+                    background: #ccc;
+                }
+            }
+        }
+        
     }
 }

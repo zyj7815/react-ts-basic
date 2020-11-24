@@ -11,7 +11,7 @@ import {
     PastureLocationProps,
 } from '@/pages/main-wrapper/pasture/new/context'
 import { AweRouteProps } from '@/types/route'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import './index.less'
 
 export interface PastureStepProps {

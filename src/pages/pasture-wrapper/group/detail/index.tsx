@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Breadcrumb, Button, Input, message, Pagination, Radio, Table } from 'antd'
 import { AweRouteProps } from '@/types/route'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { useLanguage } from '@/language/useLanguage'
-import { AnimalProps, DeviceProps, GroupProps } from '@/types/common'
-import AwePage from '@/pages/components/awe-page'
-import { ServiceTool } from '@/utils/service-tool'
+import { AnimalProps, DeviceProps, GroupProps } from '@/model'
+import AwePage from '@/components/awe-page'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
 import { Api } from '@/server/api'
@@ -34,7 +34,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [delBio, setDelBio] = useState(false)
     const [editVisible, setEditVisible] = useState(false)
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const [addAll, setAddAll] = useState(0)
     const [failedAnimals, setFailedAnimals] = useState(0)
     let failedAnimalsLength = []
@@ -80,7 +80,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

@@ -15,6 +15,7 @@ interface AwePageProps {
     header?: React.ReactNode
     footer?: React.ReactNode
     children: React.ReactNode
+    mainClass?: string
     className?: string
     id?: string
 }
@@ -28,7 +29,7 @@ const AwePage: React.FC<AwePageProps> = (props: AwePageProps) => {
         >
             <nav className="awe-page__nav">{props.nav}</nav>
             <main
-                className="awe-page__main"
+                className={`awe-page__main ${props.mainClass}`}
                 style={{ backgroundColor: props.bgColor ? '#fff' : '' }}
             >
                 {props.header && (

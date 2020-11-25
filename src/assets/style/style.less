@@ -42,22 +42,6 @@ h1,h2,h3,h4,h5,h6 {
 
 
 
-// 列表右边操作列
-.awe-table-action {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.awe-action-item {
-    cursor: pointer;
-    transition: all 400ms;
-    
-    &:hover {
-        color: @primary-color;
-    }
-}
-
 
 
 .awe-row-reverse {
@@ -107,6 +91,18 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+
+.awe-action-item {
+    cursor: pointer;
+    color: @primary-color;
+    font-weight: 600;
+    //transition: all 400ms;
+    //
+    //&:hover {
+    //    color: @primary-color;
+    //}
+}
+
 .awe-action-box {
     display: flex;
     justify-content: space-between;
@@ -117,6 +113,17 @@ h1,h2,h3,h4,h5,h6 {
     
     span:hover {
         color: @primary-color;
+    }
+}
+
+
+
+.awe-border-box {
+    & > * {
+        border-radius: 8px;
+        border: 1px solid #979797;
+        padding: 2px 6px;
+        margin-right: 5px;
     }
 }
 

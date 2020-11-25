@@ -3,7 +3,7 @@ import { batteryIcons } from '@/assets/images/battery'
 import { useLanguage } from '@/language/useLanguage'
 import { Utils } from '@/utils/index'
 import { AnimalProps } from '@/types/common'
-import { AbnormalType, BindingStatus, MessageType } from '@/enum'
+import { AbnormalType, BindingStatus, GenderType, MessageType } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 import { rootStore } from '@/provider'
 
@@ -11,6 +11,20 @@ import { rootStore } from '@/provider'
  * 业务相关的事务
  */
 export const ServiceTool = {
+    /**
+     * 获取性别
+     */
+    getGender(gender: GenderType) {
+        switch (gender) {
+            case GenderType.Male:
+                return useLanguage.male
+            case GenderType.Female:
+                return useLanguage.female
+            default:
+                return useLanguage.unknown
+        }
+    },
+
     /**
      * 获取设备的信号图标
      * @param device

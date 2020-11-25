@@ -11,8 +11,8 @@ import { AweProgress } from '@/components/awe-progress'
 import { RouteUris } from '@/router/config'
 import AnimalSuccessModal from './success-modal'
 import axios from 'axios'
-import './index.less'
 import AwePage from '@/pages/components/awe-page'
+import './index.less'
 
 const FormItem = Form.Item
 const Option = Select.Option

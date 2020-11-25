@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Modal, Select } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 const { Option } = Select
@@ -16,7 +16,7 @@ export const DeviceAbnForm: React.FC<CollectionCreateFormProps> = (event: any) =
             visible={event.visible}
             title={useLanguage.device_abnormal}
             bodyStyle={{ paddingBottom: 10, margin: '0 auto', width: 338 }}
-            className={'DeviceAbnModal'}
+            className="device-abnormal-modal"
             width={350}
             closable={false}
             footer={[

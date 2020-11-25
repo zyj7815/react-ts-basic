@@ -7,14 +7,11 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
-import { KeyProps } from '@/types/common'
-import { RouteUris } from '@/router/config'
 import { Breadcrumb, Button, Input, Pagination, Table } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import AwePage from '@/pages/components/awe-page'
-import { bioColumns } from '@/pages/pasture-wrapper/fence/bio-columns'
 import './index.less'
-const { Search } = Input
+import { animalColumns } from '@/pages/pasture-wrapper/animal.list/columns'
 
 const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState([])
@@ -59,14 +56,6 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
         setForceUpdate(!forceUpdate)
     }
 
-    const handleKeyDetail = (device: KeyProps) => {
-        routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
-    }
-
-    const onAddBio = (device: any) => {
-        console.log(device)
-    }
-
     const onSearch = (value: string) => {
         console.log(value)
     }
@@ -76,7 +65,6 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
     }
 
     const onSelectChange = (selectedRowKeys: any) => {
-        // console.log(selectedRowKeys)
         setSelectedRowKeys(selectedRowKeys)
     }
 
@@ -133,19 +121,9 @@ const FenceAddBiological: React.FC<AweRouteProps> = (routeProps: AweRouteProps) 
                 loading={loading}
                 dataSource={dataSource}
                 pagination={false}
-                scroll={{ x: 900, y: scrollY }}
-                columns={bioColumns({
-                    onCheckKey: handleKeyDetail,
-                    currentId: currentId,
-                    onAddBio: onAddBio,
-                })}
                 rowSelection={rowSelection}
-                // onRow={(record, index) => {
-                //     return {
-                //         onMouseEnter: () => setCurrentId(record.id),
-                //         onMouseLeave: () => setCurrentId(''),
-                //     }
-                // }}
+                scroll={{ x: 900, y: scrollY }}
+                columns={animalColumns({})}
             />
         </AwePage>
     )

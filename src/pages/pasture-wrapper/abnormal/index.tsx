@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { DeviceProps, KeyProps } from '@/types/common'
+import { AbnormalProps } from '@/types/common'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
@@ -8,18 +8,18 @@ import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { Utils } from '@/utils'
 import { Pagination, Table, Input } from 'antd'
-import { keyColumns } from '@/pages/pasture-wrapper/abnormal/columns'
+import { abnormalColumns } from '@/pages/pasture-wrapper/abnormal/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
 import { DeviceAbnForm } from './device-abn-form'
 import { OdbaAbnForm } from './odba-abn-form'
-import './index.less'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
+import './index.less'
 
 const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
-    const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
+    const [dataSource, setDataSource] = React.useState<AbnormalProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
@@ -67,7 +67,7 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
     const onSearch = (value: string) => {
         console.log(value)
     }
-    const handleKeyDetail = (device: KeyProps) => {
+    const handleKeyDetail = (device: any) => {
         routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
     }
 
@@ -104,16 +104,6 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
         setCheckValue(e.target.checked)
     }
 
-    const footer = (
-        <Pagination
-            showSizeChanger
-            pageSize={parseInt(pageSize, 10)}
-            current={parseInt(pageNumber, 10)}
-            showTotal={total => useLanguage.total_number(total)}
-            onChange={onPageChange}
-            total={total}
-        />
-    )
     const header = (
         <>
             <Input
@@ -123,6 +113,17 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
                 prefix={<AweIcon type={aweIconType['icon-search2']} />}
             />
         </>
+    )
+
+    const footer = (
+        <Pagination
+            showSizeChanger
+            pageSize={parseInt(pageSize, 10)}
+            current={parseInt(pageNumber, 10)}
+            showTotal={total => useLanguage.total_number(total)}
+            onChange={onPageChange}
+            total={total}
+        />
     )
 
     return (
@@ -141,12 +142,12 @@ const PastureAbnormal: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => 
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
-                columns={keyColumns({
-                    onCheckKey: handleKeyDetail,
+                columns={abnormalColumns({
                     currentId: currentId,
-                    onCheckProcess: onCheckProcess,
+                    onCheckDetailEvent: handleKeyDetail,
+                    onResolveAbnormal: onCheckProcess,
                 })}
-                onRow={(record, index) => {
+                onRow={record => {
                     return {
                         onMouseEnter: () => setCurrentId(record.id),
                         onMouseLeave: () => setCurrentId(''),

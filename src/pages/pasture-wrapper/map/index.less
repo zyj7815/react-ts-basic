@@ -4,15 +4,23 @@
     width: 100%;
     height: 100%;
     
+    .ant-tabs-nav-wrap {
+        flex-direction: row-reverse;
+    }
+    
     .pasture-map__map {
         width: 100%;
         height: 100%;
-        background: #fff;
     }
     
     .pasture-map__info {
+        background: #fff;
         position: absolute;
         right: 20px;
         top: 20px;
+        
+        .pasture-map__info--item {
+            padding: 10px 20px;
+        }
     }
 }

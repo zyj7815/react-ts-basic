@@ -1,6 +1,10 @@
-export enum TabType {
-    List = 'list',
-    Card = 'card',
+export enum GenderType {
+    // 雄性
+    Male = 1,
+    // 雌性
+    Female,
+    // 未知
+    Unknown,
 }
 
 // 设备绑定状态
@@ -31,4 +35,19 @@ export enum MessageType {
     FenceInfo = 6,
     // 设备信息
     DeviceInfo = 3,
+}
+
+// 围栏形状
+export enum FenceShapeType {
+    // 多边形
+    FencePolygon = 'Polygon',
+    // 圆形
+    FenceRound = 'Round',
+}
+
+export enum FenceMessageType {
+    // 进入围栏
+    EnterFence = 1,
+    // 离开围栏
+    OutFence,
 }

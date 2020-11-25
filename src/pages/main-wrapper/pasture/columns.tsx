@@ -45,7 +45,7 @@ export const pastureColumns = (events: AweColumnProps<PastureProps>) => {
         {
             title: '',
             dataIndex: 'id',
-            width: 100,
+            width: 110,
             render(id: string, record: PastureProps) {
                 return events.currentId === id ? (
                     <Button

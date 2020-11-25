@@ -1,6 +1,8 @@
 export const PASTURE_ID = ':pastureId'
 export const GROUP_ID = ':groupId'
 export const FENCE_ID = ':fenceId'
+export const ANIMAL_ID = ':animalId'
+export const DEVICE_ID = ':deviceId'
 
 export const RouteUris = {
     Login: '/login',
@@ -58,6 +60,11 @@ export const RouteUris = {
     // 牧场设备
     PastureDevice: (id = PASTURE_ID) => `/root/pasture-detail/${id}/device`,
 
+    // 牧场设备详情
+    PastureDeviceDetail: (id = PASTURE_ID, deviceId = DEVICE_ID) => {
+        return `/root/pasture-detail/${id}/device/${deviceId}`
+    },
+
     // 牧场 - 牧场管理
     PastureDetail: (id = PASTURE_ID) => `/root/pasture-detail/${id}/pasture`,
 
@@ -67,26 +74,30 @@ export const RouteUris = {
     // 牧场总览
     PastureOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/overview`,
 
+    // 生物管理
+    PastureAnimalManager: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal`,
+
+    // 生物总览
+    PastureAnimalOverview: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/overview`,
+
     // 生物列表
-    PastureAnimal: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal`,
+    PastureAnimalList: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/list`,
+
+    // 生物盘点
+    PastureAnimalInventory: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/inventory`,
 
     // 生物 - 新建
     PastureAnimalNew: (id = PASTURE_ID) => `/root/pasture-detail/${id}/animal/new`,
 
-    // 分组列表
+    // 牧场分组列表
     PastureGroup: (id = PASTURE_ID) => `/root/pasture-detail/${id}/group`,
 
-    // 分组 - 详情
+    // 牧场分组 - 详情
     PastureGroupDetail: (id = PASTURE_ID, groupId = GROUP_ID) => {
         return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
-    // 分组 - 编辑
-    PastureGroupEdit: (id = PASTURE_ID, groupId = GROUP_ID) => {
-        return `/root/pasture-detail/${id}/group/${groupId}/edit`
-    },
-
-    // 围栏列表
+    // 牧场围栏列表
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 
     // 围栏添加生物
@@ -95,4 +106,24 @@ export const RouteUris = {
 
     // 消息通知
     PastureMessage: (id = PASTURE_ID) => `/root/pasture-detail/${id}/message`,
+
+    // 生物详情
+    AnimalWrapper: (id = ANIMAL_ID, pastureId = PASTURE_ID) => {
+        return `/root/animal-detail/${id}/pasture/${pastureId}`
+    },
+
+    // 生物详情
+    AnimalDetail: (id = ANIMAL_ID, pastureId = PASTURE_ID) => {
+        return `/root/animal-detail/${id}/pasture/${pastureId}/detail`
+    },
+
+    // 生物管理设备
+    AnimalDevice: (id = ANIMAL_ID, pastureId = PASTURE_ID) => {
+        return `/root/animal-detail/${id}/pasture/${pastureId}/device`
+    },
+
+    // 生物记录
+    AnimalRecord: (id = ANIMAL_ID, pastureId = PASTURE_ID) => {
+        return `/root/animal-detail/${id}/pasture/${pastureId}/record`
+    },
 }

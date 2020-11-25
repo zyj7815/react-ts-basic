@@ -13,12 +13,13 @@ import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
 import AwePage from '@/pages/components/awe-page'
-import './index.less'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-const { Search } = Input
+import './index.less'
+
 const { Option } = Select
 
 const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
+    const { pastureId } = routeProps.match.params
     const [dataSource, setDataSource] = React.useState<DeviceProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
@@ -34,7 +35,7 @@ const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setLoading(true)
         try {
             const res = await axios.get(
-                Api.biological.list,
+                Api.device.basic,
                 Token.pageToken(pageSize, (pageNumber - 1) * pageSize)
             )
             setTotal(parseInt(res.headers['x-result-count']))
@@ -59,8 +60,12 @@ const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
 
+    /**
+     * 查看设备详情
+     * @param device
+     */
     const handleDeviceDetail = (device: DeviceProps) => {
-        routeProps.history.push(RouteUris.MainDeviceDetail(device.id))
+        routeProps.history.push(RouteUris.PastureDeviceDetail(pastureId, device.id))
     }
 
     const onSearch = (value: string) => {
@@ -88,6 +93,7 @@ const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     className="awe-row-reverse"
                     placeholder={useLanguage.search_device}
                     prefix={<AweIcon type={aweIconType['icon-search2']} />}
+                    onChange={e => onSearch(e.target.value)}
                 />
             </div>
             <div>
@@ -126,9 +132,9 @@ const PastureDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 loading={loading}
                 dataSource={dataSource}
                 pagination={false}
-                scroll={{ x: 900, y: scrollY }}
+                scroll={{ x: 1000, y: scrollY }}
                 columns={deviceColumns({
-                    onCheckDevice: handleDeviceDetail,
+                    onCheckDetailEvent: handleDeviceDetail,
                 })}
             />
         </AwePage>

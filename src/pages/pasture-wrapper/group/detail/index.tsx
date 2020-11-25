@@ -3,8 +3,7 @@ import { Breadcrumb, Button, Input, message, Pagination, Radio, Table } from 'an
 import { AweRouteProps } from '@/types/route'
 import { Utils } from '@/utils'
 import { useLanguage } from '@/language/useLanguage'
-import { DeviceProps, GroupProps } from '@/types/common'
-import { groupColumns } from './columns'
+import { AnimalProps, DeviceProps, GroupProps } from '@/types/common'
 import AwePage from '@/pages/components/awe-page'
 import { ServiceTool } from '@/utils/service-tool'
 import { useWindowSize } from '@/hooks/useWindowSzie'
@@ -13,15 +12,16 @@ import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
 import { RouteUris } from '@/router/config'
-import { DeleteModal } from './deleteModal'
-import './index.less'
 import { AweProgress } from '@/components/awe-progress'
 import AddAnimalSuccessModal from '@/pages/pasture-wrapper/group/detail/success-modal'
 import EditGroupModal from '@/pages/pasture-wrapper/group/detail/edit-group'
+import AweConfirm from '@/components/awe-confirm'
+import { animalColumns } from '@/pages/pasture-wrapper/animal.list/columns'
+import './index.less'
 
 const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const { pastureId, groupId } = routeProps.match.params
-    const [dataSource, setDataSource] = React.useState<any[]>([])
+    const [dataSource, setDataSource] = React.useState<AnimalProps[]>([])
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
@@ -32,7 +32,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [currentRoleId, setCurrentRoleId] = React.useState('')
     const [addBio, setAddBio] = useState(false)
     const [delBio, setDelBio] = useState(false)
-    const [radioValue, setRadioValue] = useState(false)
     const [editVisible, setEditVisible] = useState(false)
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
@@ -88,24 +87,15 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
         setForceUpdate(!forceUpdate)
     }
     /**
-     * 查看分组详情
-     * @param group
+     * 查看分组详情？？？
+     * @param animal
      */
-    const onCheckDetailEvent = (group: GroupProps) => {
+    const onCheckDetailEvent = (animal: AnimalProps) => {
         // console.log(group)
-        routeProps.history.push(RouteUris.PastureGroupDetail(pastureId, group.id))
     }
 
-    /**
-     * 编辑分组
-     * @param group
-     */
-    const onEditEvent = (group: GroupProps) => {
-        routeProps.history.push(RouteUris.PastureGroupEdit(pastureId, group.id))
-    }
-
-    const onDeleteEvent = (group: GroupProps) => {
-        console.log(group)
+    const onDeleteEvent = (animal: AnimalProps) => {
+        console.log(animal)
     }
 
     const addBiological = () => {
@@ -205,11 +195,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
 
     const handleCancel = () => {
         setVisible(false)
-        setRadioValue(false)
-    }
-
-    const onChangeRadio = (e: any) => {
-        setRadioValue(e.target.checked)
     }
 
     const backGroup = () => {
@@ -253,7 +238,6 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                             setAddBio(false)
                             setDelBio(false)
                             setSelectedRowKeys([])
-                            setForceUpdate(!forceUpdate)
                         }}
                     >
                         {useLanguage.cancel}
@@ -320,38 +304,32 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                 dataSource={dataSource}
                 pagination={false}
                 scroll={{ x: 900, y: scrollY }}
-                columns={groupColumns({
+                rowSelection={addBio || delBio ? rowSelection : undefined}
+                columns={animalColumns({
                     onCheckDetailEvent: onCheckDetailEvent,
-                    onEditEvent: onEditEvent,
+                    onEditEvent: onCheckDetailEvent,
                     onDeleteEvent: onDeleteEvent,
                     currentId: currentRoleId,
                 })}
-                rowSelection={addBio || delBio ? rowSelection : undefined}
             />
-            <DeleteModal
-                visible={visible}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
-                onChangeRadio={onChangeRadio}
-                radioValue={radioValue}
-            />
+
+            <AweConfirm visible={visible} onConfirm={handleOk} onCancel={handleCancel} />
+
+            <AweProgress percent={percent} visible={percentVisible} />
+
             <EditGroupModal
+                argument={group}
                 visible={editVisible}
                 onMainEvent={onEditGroupSuccess}
-                group={group}
                 onClose={() => setEditVisible(false)}
             />
-            <AweProgress percent={percent} visible={percentVisible} />
+
             <AddAnimalSuccessModal
                 visible={successVisible}
                 addAll={addAll}
                 failedAnimals={failedAnimals}
-                onMainEvent={() => {
-                    setSuccessVisible(false)
-                }}
-                onClose={() => {
-                    setForceUpdate(!forceUpdate)
-                }}
+                onMainEvent={() => setSuccessVisible(false)}
+                onClose={() => setForceUpdate(!forceUpdate)}
             />
         </AwePage>
     )

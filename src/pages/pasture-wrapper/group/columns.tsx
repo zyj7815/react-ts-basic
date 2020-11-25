@@ -40,29 +40,29 @@ export const groupColumns = (events: AweColumnProps<GroupProps>) => {
         {
             title: useLanguage.remark,
             dataIndex: 'description',
-            render(name: any, record: GroupProps) {
+        },
+        {
+            title: '',
+            dataIndex: 'id',
+            width: 170,
+            render(id: string, record: GroupProps) {
                 return (
-                    <div className={'description-box'}>
-                        <span className={'description-text'}>{name}</span>
-                        {events.currentId === record.id && (
-                            <div>
-                                <Button
-                                    className={'edit-btn'}
-                                    onClick={() => events.onEditEvent && events.onEditEvent(record)}
-                                >
-                                    {useLanguage.edit}
-                                </Button>
-                                <Button
-                                    danger={true}
-                                    onClick={() =>
-                                        events.onDeleteEvent && events.onDeleteEvent(record)
-                                    }
-                                >
-                                    {useLanguage.delete}
-                                </Button>
-                            </div>
-                        )}
-                    </div>
+                    events.currentId === record.id && (
+                        <div className="awe-btn-box">
+                            <Button
+                                className="awe-primary-btn"
+                                onClick={() => events.onEditEvent && events.onEditEvent(record)}
+                            >
+                                {useLanguage.edit}
+                            </Button>
+                            <Button
+                                danger={true}
+                                onClick={() => events.onDeleteEvent && events.onDeleteEvent(record)}
+                            >
+                                {useLanguage.delete}
+                            </Button>
+                        </div>
+                    )
                 )
             },
         },

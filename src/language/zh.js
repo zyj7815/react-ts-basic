@@ -428,7 +428,6 @@ const zh = {
     percentage: '百分比',
     animal_group: '生物分组',
     remarks_should_characters: '备注应小于50个字符',
-    animal_list: '生物列表',
     all_group: '全部分组',
     all_fence: '全部围栏',
     request_error: '请求失败',
@@ -671,6 +670,15 @@ const zh = {
     allocation_pasture: '分配牧场',
 
     pasture_info: '牧场资料',
+    format_err: '格式不正确',
+    animal_inventory: '生物盘点',
+    animal_overview: '生物概览',
+    animal_list: '生物列表',
+    animal_detail: '生物详情',
+    animal_device: '关联设备',
+    animal_record: '生物记录',
+    belong_group: '所属分组',
+    inventory_history: '历史盘点',
 
     months: [
         '一月',

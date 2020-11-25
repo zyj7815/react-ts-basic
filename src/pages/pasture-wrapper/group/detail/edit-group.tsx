@@ -1,11 +1,12 @@
 import React from 'react'
+import axios from 'axios'
 import { Modal, Form, Input, message } from 'antd'
 import { SimpleModalProps } from '@/types'
 import { useLanguage } from '@/language/useLanguage'
-import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
+import { GroupProps } from '@/types/common'
 
 const FormItem = Form.Item
 
@@ -14,26 +15,15 @@ const layout = {
     wrapperCol: { span: 17 },
 }
 
-interface ModalProps {
-    group: any
-    visible: boolean
-    loading?: boolean
-
-    // 主按的事件
-    onMainEvent: (ary?: any) => void
-    // 次要的事件
-    onSubEvent?: (arg?: any) => void
-    // 关闭
-    onClose: () => void
-}
-
-const EditGroupModal: React.FC<ModalProps> = (props: ModalProps) => {
+const EditGroupModal: React.FC<SimpleModalProps<GroupProps>> = (
+    props: SimpleModalProps<GroupProps>
+) => {
     const [form] = Form.useForm()
     const [loading, setLoading] = React.useState(false)
 
     React.useEffect(() => {
-        if (props.group) {
-            form.setFieldsValue(props.group)
+        if (props.argument) {
+            form.setFieldsValue(props.argument)
         }
     }, [props.visible])
 
@@ -43,7 +33,11 @@ const EditGroupModal: React.FC<ModalProps> = (props: ModalProps) => {
 
             setLoading(true)
             try {
-                const res = await axios.put(Api.group.detail(props.group.id), values, Token.data)
+                const res = await axios.put(
+                    Api.group.detail(props.argument ? props.argument.id : ''),
+                    values,
+                    Token.data
+                )
                 message.success(useLanguage.success_common(useLanguage.add_new))
                 setLoading(false)
                 props.onMainEvent(res.data)

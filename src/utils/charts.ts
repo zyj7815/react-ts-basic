@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts'
 import ChartModuleMore from 'highcharts/highcharts-more.js'
 import HCSoldGauge from 'highcharts/modules/solid-gauge'
+import { useLanguage } from '@/language/useLanguage'
 
 ChartModuleMore(Highcharts)
 HCSoldGauge(Highcharts)
@@ -18,7 +19,7 @@ class AweChart {
 
     public title: string = ''
 
-    public color: string[] = []
+    public colors: string[] = []
 
     public subTitle: string = ''
 
@@ -58,7 +59,7 @@ export class LineChart extends AweChart {
                     shared: true,
                     headerFormat: '{point.x: %m-%d %H:%M:%S}<br>',
                 },
-                colors: this.color || ['#80bdec'],
+                colors: this.colors || ['#80bdec'],
                 legend: {
                     enabled: false,
                     itemStyle: {},
@@ -235,5 +236,123 @@ export class MultiPieChart extends AweChart {
             },
             series: series,
         })
+    }
+}
+
+export class PieChart extends AweChart {
+    // 色值： 绿 3EC6AD, 黄 F2E43C，蓝 556BE0，
+    private chartColors = ['#3EC6AD', '#F2E43C', '#556BE0']
+
+    public onDraw(title: string) {
+        let colors: any[] = []
+
+        if (this.colors.length) {
+            colors = this.colors
+        } else {
+            try {
+                let index = 0
+                this.seriesData.forEach(data => {
+                    if (data[1] === 0) {
+                        colors.push('#aaa')
+                    } else {
+                        colors.push(this.chartColors[index])
+                        index++
+                    }
+                })
+            } catch (e) {
+                colors = this.chartColors
+            }
+        }
+
+        console.log(colors)
+
+        let chart = Highcharts.chart(
+            this.container,
+            {
+                chart: {
+                    spacing: [40, 0, 40, 0],
+                },
+                legend: this.legend
+                    ? this.legend
+                    : {
+                          floating: true,
+                          layout: 'vartical',
+                          itemStyle: {
+                              fontSize: '14px',
+                          },
+                          itemMarginBottom: 10,
+                          align: 'right',
+                          verticalAlign: 'middle',
+                      },
+                colors: colors,
+                subtitle: this.subTitle
+                    ? {
+                          floating: true,
+                          text: this.subTitle,
+                          align: 'center',
+                          y: 150,
+                      }
+                    : undefined,
+                title: {
+                    floating: true,
+                    text: this.title,
+                    style: {
+                        fontSize: '30px',
+                    },
+                },
+                tooltip: {
+                    // @ts-ignore
+                    text: ' ',
+                },
+                plotOptions: {
+                    pie: {
+                        showInLegend: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                        },
+                        point: {
+                            events: {
+                                mouseOver: function(e: any) {
+                                    // 鼠标滑过时动态更新标题
+                                    // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                    chart.setTitle({
+                                        text: title ? title : e.target.y,
+                                    })
+                                },
+                                legendItemClick: function(e: any) {
+                                    // 图例事件
+
+                                    setTimeout(function() {
+                                        chart.setTitle({
+                                            text: e.target.total,
+                                        })
+                                    }, 100)
+
+                                    return false //图例屏蔽点击事件
+                                },
+                            },
+                        },
+                    },
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        innerSize: '60%',
+                        name: useLanguage.amount,
+                        data: this.seriesData,
+                    },
+                ],
+            },
+            (c: any) => {
+                // 环形图圆心
+                const centerY = c.series[0].center[1],
+                    titleHeight = parseInt(c.title.styles.fontSize, 10)
+                // 动态设置标题位置
+                c.setTitle({
+                    y: centerY + titleHeight / 2 - 5,
+                })
+            }
+        )
     }
 }

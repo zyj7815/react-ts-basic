@@ -5,20 +5,23 @@ export type ObjectProps = {
 }
 
 // 简单的modal
-export type SimpleModalProps = {
+export interface SimpleModalProps<T> {
+    argument?: T | null
+
     visible: boolean
+
     loading?: boolean
 
     // 主按的事件
-    onMainEvent: (ary?: any) => void
+    onMainEvent: (ary?: T) => void
     // 次要的事件
-    onSubEvent?: (arg?: any) => void
+    onSubEvent?: (arg?: T) => void
     // 关闭
     onClose: () => void
 }
 
 // column通用的type接口
-export type AweColumnProps<T> = {
+export interface AweColumnProps<T> {
     // 当前鼠标停留的行
     currentId?: string
     // 查看详情

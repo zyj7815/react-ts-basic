@@ -14,10 +14,10 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
 } from '@ant-design/icons'
-import './index.less'
 import { AweIcon } from '@/assets/iconfont'
 import { IMenuNav } from '@/types/route'
 import { RouteUris } from '@/router/config'
+import './index.less'
 
 const { Sider, Header, Content } = Layout
 const SubMenu = Menu.SubMenu
@@ -56,14 +56,14 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
     }, [])
 
     const onCheckMap = () => {
-        // // 如果是在最外层牧场管理页面，就跳转到牧场列表
-        // if (props.history.location.pathname.indexOf('main') > -1) {
-        //     props.history.push(RouteUris.MainPastureMap)
-        // }
-        // // 如果进入牧场详情后，就跳转到单个牧场地图
-        // else {
-        //     props.history.push(RouteUris.PastureMapDetail(props.pastureId))
-        // }
+        // 如果是在最外层牧场管理页面，就跳转到牧场列表
+        if (props.history.location.pathname.indexOf('main') > -1) {
+            props.history.push(RouteUris.MainPastureMap)
+        }
+        // 如果进入牧场详情后，就跳转到单个牧场地图
+        else {
+            props.history.push(RouteUris.PastureMapDetail(props.pastureId))
+        }
     }
 
     const menuRoute = (menu: IMenuNav[]) => {
@@ -133,7 +133,6 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                         <Menu
                             mode="inline"
                             theme="light"
-                            defaultSelectedKeys={[]}
                             selectedKeys={[openKey]}
                             openKeys={openSubKey}
                             onOpenChange={(menu: any) => setOpenSubKey(menu)}

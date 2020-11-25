@@ -1,7 +1,7 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { useLanguage } from '@/language/useLanguage'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 
 const DeviceInfo: React.FC = props => {
     const header = (
@@ -18,7 +18,7 @@ const DeviceInfo: React.FC = props => {
                     <span>33 ℃</span>
                 </span>
             </article>
-            <img className="device-info__detail--icon" src={ServiceTool.getSignalIcon(13)} alt="" />
+            <img className="device-info__detail--icon" src={ServiceTip.getSignalIcon(13)} alt="" />
         </header>
     )
 

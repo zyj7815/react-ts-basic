@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, message, Radio, Menu, Avatar } from 'antd'
+import { Dropdown, message, Radio, Menu, Avatar, Row, Col } from 'antd'
 import { Token } from '@/server/token'
 import {
     MenuFoldOutlined,
@@ -10,7 +10,7 @@ import {
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { useLanguage } from '@/language/useLanguage'
 import HeaderSearch from './header-search'
-import { MySelfProps } from '@/types/common'
+import { MySelfProps } from '@/model'
 
 interface HeaderProps {
     myself: MySelfProps
@@ -25,10 +25,10 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
     React.useEffect(() => {
         getGrid()
 
-        window.onresize = () => getGrid()
+        document.body.onresize = () => getGrid()
 
         return () => {
-            window.onresize = null
+            document.body.onresize = null
         }
     }, [])
 
@@ -82,7 +82,9 @@ const LayoutHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
 
                 <AweIcon type={aweIconType['icon-logo-druid-fullname']} className="header-logo" />
 
-                {grid}
+                <Row>
+                    <Col>{grid}</Col>
+                </Row>
             </div>
 
             <nav className="layout-header-content">

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useLanguage } from '@/language/useLanguage'
 import { Button } from 'antd'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { AweColumnProps } from '@/types'
-import { AbnormalProps } from '@/types/common'
+import { AbnormalProps } from '@/model'
 
 interface AbnormalColumnsProps extends AweColumnProps<AbnormalProps> {
     onResolveAbnormal: (record: AbnormalProps) => void
@@ -32,7 +32,7 @@ export const abnormalColumns = (events: AbnormalColumnsProps) => {
             dataIndex: 'updated_at',
             width: 210,
             render(updated_at: string, record: AbnormalProps): any {
-                return Utils.utc2Time(updated_at)
+                return Helper.utc2Time(updated_at)
             },
         },
         {

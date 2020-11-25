@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Row, Col, Input, Radio, Button } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { formFullLayout } from '@/config'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 
 const FormItem = Form.Item
 

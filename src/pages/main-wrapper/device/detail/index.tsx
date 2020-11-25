@@ -4,7 +4,7 @@ import DeviceInfo from '@/pages/main-wrapper/device/detail/device-info'
 import DeviceAnimal from '@/pages/main-wrapper/device/detail/device-animal'
 import DevicePasture from '@/pages/main-wrapper/device/detail/device-pasture'
 import DeviceMap from '@/pages/main-wrapper/device/detail/device-map'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import './index.less'
 
 const DeviceDetail: React.FC = props => {

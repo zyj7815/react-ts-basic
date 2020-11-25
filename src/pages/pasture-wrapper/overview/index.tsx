@@ -6,7 +6,7 @@ import OverviewWeather from '@/pages/pasture-wrapper/overview/overview-weather'
 import OverviewEvent from '@/pages/pasture-wrapper/overview/overview-event'
 import OverviewMessage from '@/pages/pasture-wrapper/overview/overview-message'
 import './index.less'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 
 const PastureOver: React.FC = props => {
     return (

@@ -1,8 +1,8 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Row, Col } from 'antd'
-import Inventorying from '@/pages/pasture-wrapper/animal.inventory/Inventorying'
-import Inventoried from '@/pages/pasture-wrapper/animal.inventory/Inventoried'
+import Inventorying from '@/pages/pasture-wrapper/animal.inventory/inventorying'
+import Inventoried from '@/pages/pasture-wrapper/animal.inventory/inventoried'
 import './index.less'
 
 const AnimalInventory: React.FC = props => {

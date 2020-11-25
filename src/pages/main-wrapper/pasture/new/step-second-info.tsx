@@ -4,7 +4,7 @@ import { useLanguage } from '@/language/useLanguage'
 import { PastureStepProps } from '@/pages/main-wrapper/pasture/new/index'
 import { NewPastureContext, PastureInfoProps } from '@/pages/main-wrapper/pasture/new/context'
 import { formFullLayout } from '@/config'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 
 const FormItem = Form.Item
 

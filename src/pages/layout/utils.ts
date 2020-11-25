@@ -1,5 +1,5 @@
-import { IMenuNav } from '../../types/route'
-import { Utils } from '../../utils'
+import { IMenuNav } from '@/types/route'
+import { Helper } from '@/helper'
 
 /**
  * 检查Menu当前打开项
@@ -19,7 +19,7 @@ export function currentOpenKey(uriArr: string[]): string {
     let maxIndex: number = 0
 
     uriArr.forEach((val, index) => {
-        const tmpMax = Utils.compareStrSimilar(uri, val)
+        const tmpMax = Helper.compareStrSimilar(uri, val)
         if (tmpMax > max) {
             max = tmpMax
             maxIndex = index

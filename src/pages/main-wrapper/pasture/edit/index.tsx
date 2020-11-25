@@ -1,5 +1,5 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { Breadcrumb, Button, Row, Col } from 'antd'
 import { useLanguage } from '@/language/useLanguage'
 import { EditPastureInfo } from '@/pages/main-wrapper/pasture/edit/edit-info'

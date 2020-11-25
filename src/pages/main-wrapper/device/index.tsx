@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
-import { DeviceProps, DeviceTypeProps } from '@/types/common'
-import { ServiceTool } from '@/utils/service-tool'
+import { DeviceProps, DeviceTypeProps } from '@/model'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { Pagination, Table, Input, Button, Select } from 'antd'
 import { deviceColumns } from '@/pages/main-wrapper/device/columns'
 import { useLanguage } from '@/language/useLanguage'
 import { AweRouteProps } from '@/types/route'
 import { RouteUris } from '@/router/config'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
 import { rootStore } from '@/provider'
 
@@ -21,7 +21,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [loading, setLoading] = React.useState(false)
     const [total, setTotal] = React.useState(0)
     const [forceUpdate, setForceUpdate] = React.useState(false)
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -50,7 +50,7 @@ const MainDevice: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

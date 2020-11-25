@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { RenderRoutes } from '@/router/RenderRoutes'
 import { currentOpenKey, currentSubOpenKey } from './utils'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { useRootStore } from '@/provider'
 import { observer } from 'mobx-react'
 import {
@@ -17,6 +17,7 @@ import {
 import { AweIcon } from '@/assets/iconfont'
 import { IMenuNav } from '@/types/route'
 import { RouteUris } from '@/router/config'
+import { debounce } from 'lodash'
 import './index.less'
 
 const { Sider, Header, Content } = Layout
@@ -43,7 +44,7 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
         setOpenSubKey(currentSubOpenKey(menuNav))
 
         // 取出菜单所有route
-        const tmpMenu = Utils.tree2Arr(menuNav).map(val => val.uri)
+        const tmpMenu = Helper.tree2Arr(menuNav).map(val => val.uri)
 
         // 定位到菜单选项
         setOpenKey(currentOpenKey(tmpMenu))
@@ -53,7 +54,18 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
             history.listen(() => {
                 setOpenKey(currentOpenKey(tmpMenu))
             })
+
+        // 算了不移除了，影响大不
+        window.addEventListener('resize', () => {
+            updateSize()
+        })
     }, [])
+
+    const updateSize = debounce(() => {
+        if (document.body.offsetWidth < 600 && !collapsed) {
+            setCollapsed(true)
+        }
+    }, 300)
 
     const onCheckMap = () => {
         // 如果是在最外层牧场管理页面，就跳转到牧场列表

@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Input, Pagination, Table } from 'antd'
 import { AweRouteProps } from '@/types/route'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import { useLanguage } from '@/language/useLanguage'
-import { GroupProps } from '@/types/common'
+import { GroupProps } from '@/model'
 import { groupColumns } from './columns'
-import AwePage from '@/pages/components/awe-page'
-import NewGroupModal from '@/pages/pasture-wrapper/group/new-group'
+import AwePage from '@/components/awe-page'
+import GroupInfoModal from '@/pages/pasture-wrapper/group/group-info-modal'
 import { AweIcon, aweIconType } from '@/assets/iconfont'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { useWindowSize } from '@/hooks/useWindowSzie'
 import axios from 'axios'
 import { Api } from '@/server/api'
@@ -26,7 +26,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [visible, setVisible] = React.useState(false)
     const [currentId, setCurrentId] = React.useState('')
     const scrollY = useWindowSize() - 240
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
 
     React.useEffect(() => {
         fetchData()
@@ -54,7 +54,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })
@@ -64,8 +64,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     /**
      * 新建分组成功
      */
-    const onNewGroupSuccess = (group: GroupProps) => {
-        setVisible(false)
+    const onNewGroupSuccess = () => {
         setForceUpdate(!forceUpdate)
     }
     /**
@@ -138,7 +137,7 @@ const PastureGroup: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     }
                 }}
             />
-            <NewGroupModal
+            <GroupInfoModal
                 visible={visible}
                 onMainEvent={onNewGroupSuccess}
                 onClose={() => setVisible(false)}

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
+import { GroupProps } from '@/model'
 
 const FormItem = Form.Item
 
@@ -14,15 +15,41 @@ const layout = {
     wrapperCol: { span: 17 },
 }
 
-const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
+const GroupInfoModal: React.FC<SimpleModalProps<any>> = (props: SimpleModalProps<any>) => {
     const [form] = Form.useForm()
     const [loading, setLoading] = React.useState(false)
+    const [groupInfo, setGroupInfo] = React.useState<GroupProps | null>(null)
 
     React.useEffect(() => {
-        if (props.visible) {
-            form.resetFields()
+        // 当有分组id时，获取分组详情
+        if (props.argument) {
+            if (groupInfo) {
+                form.setFieldsValue({
+                    room_name: groupInfo.room_name,
+                    description: groupInfo.description,
+                })
+            } else {
+                fetchGroup()
+            }
+        } else {
+            if (!props.visible) {
+                form.resetFields()
+            }
         }
     }, [props.visible])
+
+    const fetchGroup = async () => {
+        try {
+            const res = await axios.get(Api.group.detail(props.argument), Token.data)
+            setGroupInfo(res.data)
+            form.setFieldsValue({
+                room_name: res.data.room_name,
+                description: res.data.description,
+            })
+        } catch (e) {
+            errorMessage.alert(e)
+        }
+    }
 
     const onSubmit = async () => {
         try {
@@ -30,10 +57,23 @@ const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
 
             setLoading(true)
             try {
-                const res = await axios.post(Api.group.list, values, Token.data)
-                message.success(useLanguage.success_common(useLanguage.add_new))
+                if (props.argument) {
+                    // 编辑
+                    const res = await axios.put(
+                        Api.group.detail(props.argument),
+                        values,
+                        Token.data
+                    )
+                    message.success(useLanguage.success_common(useLanguage.edit_group))
+                    setGroupInfo(res.data)
+                } else {
+                    // 新增
+                    await axios.post(Api.group.list, values, Token.data)
+                    message.success(useLanguage.success_common(useLanguage.add_new))
+                }
+                props.onClose()
+                props.onMainEvent()
                 setLoading(false)
-                props.onMainEvent(res.data)
             } catch (err) {
                 setLoading(false)
                 errorMessage.alert(err)
@@ -73,4 +113,4 @@ const NewGroupModal: React.FC<SimpleModalProps> = (props: SimpleModalProps) => {
     )
 }
 
-export default NewGroupModal
+export default GroupInfoModal

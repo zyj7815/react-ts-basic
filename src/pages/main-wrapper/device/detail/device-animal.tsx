@@ -1,5 +1,5 @@
 import React from 'react'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 import { useLanguage } from '@/language/useLanguage'
 
 const DeviceAnimal: React.FC = props => {

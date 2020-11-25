@@ -1,18 +1,14 @@
-const host = window.location.host
-const origin = window.location.origin
-
-const test = 'https://cattle.coolhei.com/api/v1/' // 测试
-const develop = 'http://cattle.test.druidtech.net/api/v1/' // 开发
-const production = 'https://cattle.druidtech.cn/api/v1/' // 线上
+import { API_HOST, ORIGIN } from '@/config/constants'
 
 let base: string = ''
-
 // 开发环境，从配置文件中读取环境变量
 // 此配置在webpack.config中配置了 REACT_APP_ENV
 if (process.env.REACT_APP_ENV === 'dev') {
-    base = test
+    // 测试环境
+    base = API_HOST.TEST_HOST
 } else {
-    base = `${origin}/api/v1/`
+    // 线上环境
+    base = `${ORIGIN}/api/v1/`
 }
 
 // 使用v2的接口
@@ -32,6 +28,11 @@ export const Api = {
         list: base + 'biological/',
         searchName: (nickname: string) => `${base2}biological/search/nickname/${nickname}`,
         event: (id: string) => `${base2}biological_event/biological/${id}`,
+        inventory: {
+            pandian: base2 + 'command/pandian',
+            pandian_result: `${base2}command/pandian/result`,
+            break_off: (id: string) => `${base2}command/id/${id}/finish`,
+        },
     },
     geofence: {
         list: base + 'geofence/',

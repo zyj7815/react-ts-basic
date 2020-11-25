@@ -5,15 +5,15 @@ import { RouteUris } from '@/router/config'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import { pastureColumns } from '@/pages/main-wrapper/pasture/columns'
 import { useLanguage } from '@/language/useLanguage'
-import { PastureProps } from '@/types/common'
+import { PastureProps } from '@/model'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { useWindowSize } from '@/hooks/useWindowSzie'
-import { ServiceTool } from '@/utils/service-tool'
+import { ServiceTip } from '@/service'
 import { errorMessage } from '@/server/error'
-import { Utils } from '@/utils'
+import { Helper } from '@/helper'
 import axios from 'axios'
-import AwePage from '@/pages/components/awe-page'
+import AwePage from '@/components/awe-page'
 
 const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [dataSource, setDataSource] = React.useState<PastureProps[]>([])
@@ -23,7 +23,7 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
     const [currentId, setCurrentId] = React.useState('')
     // 将【页码】和【条数】放到url中，pageSize=10&pageNumber=1，这样在返回页面时可以直接请求上一次的url
     // 在url中获取页码和条数
-    let { pageNumber, pageSize } = ServiceTool.getPageFromUrl()
+    let { pageNumber, pageSize } = ServiceTip.getPageFromUrl()
     const scrollY = useWindowSize() - 240
 
     React.useEffect(() => {
@@ -52,7 +52,7 @@ const MainPasture: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
      * @param pageSize
      */
     const onPageChange = (pageNumber: number, pageSize?: number) => {
-        Utils.pushMultiParamsToUrl({
+        Helper.pushMultiParamsToUrl({
             pageSize,
             pageNumber,
         })

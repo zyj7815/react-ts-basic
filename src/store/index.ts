@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { AweGlobal } from '@/global'
-import { DeviceTypeProps, MySelfProps } from '@/types/common'
+import { DeviceTypeProps, MySelfProps } from '@/model'
 
 const initMyself: MySelfProps = {
     id: '',

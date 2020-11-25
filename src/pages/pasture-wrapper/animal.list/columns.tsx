@@ -9,6 +9,7 @@ interface AnimalColumnProps extends AweColumnProps<AnimalProps> {
     onCheckAbnormal: (record: AnimalProps) => void
     onCheckGroup: (record: AnimalProps) => void
     onCheckDevice: (record: AnimalProps) => void
+    type?: string
 }
 
 export const animalColumns = (events: AnimalColumnProps) => {
@@ -48,9 +49,11 @@ export const animalColumns = (events: AnimalColumnProps) => {
             dataIndex: 'abnormal',
             width: 100,
             render(abnormal: number, record: AnimalProps): any {
-                return (
+                return events.type === 'add-animal' ? (
+                    <span>12</span>
+                ) : (
                     <span
-                        className="awe-action-item"
+                        className={'awe-action-item'}
                         onClick={() => events.onCheckAbnormal(record)}
                     >
                         12
@@ -73,14 +76,27 @@ export const animalColumns = (events: AnimalColumnProps) => {
             render: (gender: number) => ServiceTool.getGender(gender),
         },
         {
+            title: useLanguage.age,
+            dataIndex: 'age',
+            width: 120,
+            render: (age: number, record: any) => ServiceTool.getAge(record.beh_timestamp),
+        },
+        {
             title: useLanguage.belong_group,
             dataIndex: 'room_name',
             width: 150,
             render(room_name: string, record: AnimalProps) {
                 return room_name ? (
-                    <span className="awe-action-item" onClick={() => events.onCheckGroup(record)}>
-                        {room_name}
-                    </span>
+                    events.type === 'add-animal' ? (
+                        <span>{room_name}</span>
+                    ) : (
+                        <span
+                            className="awe-action-item"
+                            onClick={() => events.onCheckGroup(record)}
+                        >
+                            {room_name}
+                        </span>
+                    )
                 ) : (
                     '-'
                 )
@@ -91,7 +107,9 @@ export const animalColumns = (events: AnimalColumnProps) => {
             dataIndex: 'mark',
             width: 100,
             render(mark: string, record: AnimalProps) {
-                return (
+                return events.type === 'add-animal' ? (
+                    <span>{mark}</span>
+                ) : (
                     <span className="awe-action-item" onClick={() => events.onCheckDevice(record)}>
                         {mark || <PlusCircleOutlined />}
                     </span>

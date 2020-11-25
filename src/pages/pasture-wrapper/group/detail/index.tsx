@@ -310,6 +310,7 @@ const GroupDetail: React.FC<AweRouteProps> = (routeProps: AweRouteProps) => {
                     onEditEvent: onCheckDetailEvent,
                     onDeleteEvent: onDeleteEvent,
                     currentId: currentRoleId,
+                    type: addBio ? 'add-animal' : '',
                 })}
             />
 

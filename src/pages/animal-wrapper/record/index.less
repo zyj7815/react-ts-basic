@@ -1,0 +1,60 @@
+@import "../../../assets/style/variable";
+
+.animal-record-wrapper {
+    
+    .animal-record-main {
+        margin: 40px 0;
+        width: 50%;
+        border: 1px solid #fefefe;
+        position: relative;
+        left: 50%;
+        
+        .animal-record__item {
+            //border: 1px solid #f1f1f1;
+            
+            .animal-record__item--title {
+                padding-left: 30px;
+                position: relative;
+                padding-top: 4px;
+                
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 32px;
+                    background: @primary-color;
+                    transform: translateX(-50%);
+                }
+            }
+            
+            .animal-record__item--remark {
+                margin-top: 10px;
+                padding-left: 30px;
+                max-width: 380px;
+                position: relative;
+                
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: -4px;
+                    bottom: 0px;
+                    width: 2px;
+                    background: #ccc;
+                }
+                
+                p {
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    border: 1px solid @light-grey-color;
+                    width: auto;
+                    display: inline-block;
+                }
+              
+            }
+        }
+    }
+}

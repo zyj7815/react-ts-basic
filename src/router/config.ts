@@ -97,6 +97,16 @@ export const RouteUris = {
         return `/root/pasture-detail/${id}/group/${groupId}/detail`
     },
 
+    // 牧场分组 - 详情 - 分配生物
+    PastureGroupDetailAllocation: (id = PASTURE_ID, groupId = GROUP_ID) => {
+        return `/root/pasture-detail/${id}/group/${groupId}/detail/allocation`
+    },
+
+    // 牧场分组 - 详情 - 移除生物
+    PastureGroupDetailRemove: (id = PASTURE_ID, groupId = GROUP_ID) => {
+        return `/root/pasture-detail/${id}/group/${groupId}/detail/remove`
+    },
+
     // 牧场围栏列表
     PastureFence: (id = PASTURE_ID) => `/root/pasture-detail/${id}/fence`,
 

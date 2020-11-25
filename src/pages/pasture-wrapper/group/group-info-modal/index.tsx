@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 import { Modal, Form, Input, message } from 'antd'
 import { SimpleModalProps } from '@/types'
 import { useLanguage } from '@/language/useLanguage'
+import axios from 'axios'
 import { Api } from '@/server/api'
 import { Token } from '@/server/token'
 import { errorMessage } from '@/server/error'
@@ -15,17 +15,41 @@ const layout = {
     wrapperCol: { span: 17 },
 }
 
-const EditGroupModal: React.FC<SimpleModalProps<GroupProps>> = (
-    props: SimpleModalProps<GroupProps>
-) => {
+const GroupInfoModal: React.FC<SimpleModalProps<any>> = (props: SimpleModalProps<any>) => {
     const [form] = Form.useForm()
     const [loading, setLoading] = React.useState(false)
+    const [groupInfo, setGroupInfo] = React.useState<GroupProps | null>(null)
 
     React.useEffect(() => {
+        // 当有分组id时，获取分组详情
         if (props.argument) {
-            form.setFieldsValue(props.argument)
+            if (groupInfo) {
+                form.setFieldsValue({
+                    room_name: groupInfo.room_name,
+                    description: groupInfo.description,
+                })
+            } else {
+                fetchGroup()
+            }
+        } else {
+            if (!props.visible) {
+                form.resetFields()
+            }
         }
     }, [props.visible])
+
+    const fetchGroup = async () => {
+        try {
+            const res = await axios.get(Api.group.detail(props.argument), Token.data)
+            setGroupInfo(res.data)
+            form.setFieldsValue({
+                room_name: res.data.room_name,
+                description: res.data.description,
+            })
+        } catch (e) {
+            errorMessage.alert(e)
+        }
+    }
 
     const onSubmit = async () => {
         try {
@@ -33,14 +57,23 @@ const EditGroupModal: React.FC<SimpleModalProps<GroupProps>> = (
 
             setLoading(true)
             try {
-                const res = await axios.put(
-                    Api.group.detail(props.argument ? props.argument.id : ''),
-                    values,
-                    Token.data
-                )
-                message.success(useLanguage.success_common(useLanguage.add_new))
+                if (props.argument) {
+                    // 编辑
+                    const res = await axios.put(
+                        Api.group.detail(props.argument),
+                        values,
+                        Token.data
+                    )
+                    message.success(useLanguage.success_common(useLanguage.edit_group))
+                    setGroupInfo(res.data)
+                } else {
+                    // 新增
+                    await axios.post(Api.group.list, values, Token.data)
+                    message.success(useLanguage.success_common(useLanguage.add_new))
+                }
+                props.onClose()
+                props.onMainEvent()
                 setLoading(false)
-                props.onMainEvent(res.data)
             } catch (err) {
                 setLoading(false)
                 errorMessage.alert(err)
@@ -80,4 +113,4 @@ const EditGroupModal: React.FC<SimpleModalProps<GroupProps>> = (
     )
 }
 
-export default EditGroupModal
+export default GroupInfoModal

@@ -73,6 +73,22 @@ export const routes: RouteInterface[] = [
                         exact: true,
                     },
                     {
+                        path: RouteUris.PastureGroupDetailAllocation(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/group/detail/allocate-animal')
+                        ),
+                        name: 'pasture-wrapper-group-detail-allocation',
+                        exact: true,
+                    },
+                    {
+                        path: RouteUris.PastureGroupDetailRemove(),
+                        component: loadable(() =>
+                            import('@/pages/pasture-wrapper/group/detail/remove-animal')
+                        ),
+                        name: 'pasture-wrapper-group-detail-remove',
+                        exact: true,
+                    },
+                    {
                         path: RouteUris.PastureFence(),
                         component: loadable(() => import('@/pages/pasture-wrapper/fence')),
                         name: 'pasture-wrapper-fence',

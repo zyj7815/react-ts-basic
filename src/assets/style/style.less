@@ -96,6 +96,11 @@ h1,h2,h3,h4,h5,h6 {
     cursor: pointer;
     color: @primary-color;
     font-weight: 600;
+    
+    &[data-click=false] {
+        cursor: auto;
+    }
+    
     //transition: all 400ms;
     //
     //&:hover {

@@ -17,6 +17,7 @@ import {
 import { AweIcon } from '@/assets/iconfont'
 import { IMenuNav } from '@/types/route'
 import { RouteUris } from '@/router/config'
+import { debounce } from 'lodash'
 import './index.less'
 
 const { Sider, Header, Content } = Layout
@@ -53,7 +54,18 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
             history.listen(() => {
                 setOpenKey(currentOpenKey(tmpMenu))
             })
+
+        // 算了不移除了，影响大不
+        window.addEventListener('resize', () => {
+            updateSize()
+        })
     }, [])
+
+    const updateSize = debounce(() => {
+        if (document.body.offsetWidth < 600 && !collapsed) {
+            setCollapsed(true)
+        }
+    }, 300)
 
     const onCheckMap = () => {
         // 如果是在最外层牧场管理页面，就跳转到牧场列表

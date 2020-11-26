@@ -6,6 +6,9 @@ import { AnimalProps } from '@/model'
 import { AbnormalType, BindingStatus, GenderType, MessageType } from '@/enum'
 import { _URL_DEFAULT_PAGE_SIZE_, _URL_PAGE_NUMBER_, _URL_PAGE_SIZE_ } from '@/types/url'
 import { rootStore } from '@/provider'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
 
 /**
  * 业务相关的事务
@@ -95,6 +98,29 @@ export const ServiceTip = {
                 return useLanguage.donkey
             default:
                 return useLanguage.other
+        }
+    },
+
+    /**
+     * 获取生物的年龄
+     * @param beh_time
+     */
+
+    getAge(beh_time: string): any {
+        if (beh_time) {
+            const then = dayjs(beh_time)
+            const now = dayjs(Date.now())
+            const years = dayjs(now, 'DD/MM/YYYY HH:mm:ss').diff(
+                dayjs(then, 'DD/MM/YYYY HH:mm:ss').utc(),
+                'year'
+            )
+
+            if (years === 0) {
+                return `0 ${useLanguage.year_old}`
+            }
+            return `${years} ${useLanguage.years_old}`
+        } else {
+            return '-'
         }
     },
 

@@ -55,14 +55,14 @@ const AweLayout: React.FC<IProps> = (props: IProps) => {
                 setOpenKey(currentOpenKey(tmpMenu))
             })
 
-        // 算了不移除了，影响大不
+        // 算了，这个监听就不移除了，影响大不
         window.addEventListener('resize', () => {
             updateSize()
         })
     }, [])
 
     const updateSize = debounce(() => {
-        if (document.body.offsetWidth < 600 && !collapsed) {
+        if (document.body.offsetWidth < 720 && !collapsed) {
             setCollapsed(true)
         }
     }, 300)

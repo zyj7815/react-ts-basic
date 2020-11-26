@@ -7,6 +7,7 @@ import { Helper } from '@/helper'
  */
 export function currentOpenKey(uriArr: string[]): string {
     let uri: string = window.location.hash
+
     if (uri.indexOf('?') > -1) {
         uri = uri.substr(0, uri.indexOf('?'))
     }
@@ -19,7 +20,12 @@ export function currentOpenKey(uriArr: string[]): string {
     let maxIndex: number = 0
 
     uriArr.forEach((val, index) => {
-        const tmpMax = Helper.compareStrSimilar(uri, val)
+        // 截取长短相等的url再对比
+        const minLength = Math.min(uri.length, val.length)
+        const tmpMax = Helper.compareStrSimilar(
+            uri.substring(0, minLength),
+            val.substring(0, minLength)
+        )
         if (tmpMax > max) {
             max = tmpMax
             maxIndex = index

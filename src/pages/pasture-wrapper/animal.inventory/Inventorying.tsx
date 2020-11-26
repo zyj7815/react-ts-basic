@@ -329,6 +329,10 @@ export default class Inventorying extends React.Component {
             [useLanguage.outside_fence, outside_fence],
         ]
 
+        if (inside_fence === 0 && outside_fence === 0) {
+            return
+        }
+
         const chart = new PieChart('inventory-pie')
         chart.title = titleText
         chart.colors = colors
@@ -466,7 +470,7 @@ export default class Inventorying extends React.Component {
                                         danger
                                         block={true}
                                         loading={this.state.loading}
-                                        onClick={this.handleBreakOffInventory}
+                                        onClick={() => this.handleBreakOffInventory()}
                                     >
                                         {useLanguage.break_off_inventory}
                                     </Button>
@@ -475,7 +479,7 @@ export default class Inventorying extends React.Component {
                                         danger
                                         block={true}
                                         loading={this.state.loading}
-                                        onClick={this.handleBreakOffInventory}
+                                        onClick={() => this.handleBreakOffInventory()}
                                     >
                                         {useLanguage.break_off_inventory}
                                     </Button>

@@ -5,6 +5,14 @@ dayjs.extend(require('dayjs/plugin/utc'))
 
 export const Helper = {
     /**
+     * 生成n个长度的数组
+     * @param num
+     */
+    generateArr: function(num: number) {
+        return Array.from(new Array(num).keys())
+    },
+
+    /**
      * 判断参数是否存在
      * @param params
      */
